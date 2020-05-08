@@ -1,0 +1,15 @@
+/*Animations*/
+@keyframes bouncing {
+    	0% { bottom: 0; }
+    	50% { bottom: 15px; }
+    	100% { bottom: 0; }
+}
+
+.fade-in {
+	animation: fadeIn 3s;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}

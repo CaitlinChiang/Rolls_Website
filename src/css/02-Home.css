@@ -1,0 +1,31 @@
+/*Home*/
+#homeIntro {
+	background: #FFE2E2;
+	min-height: 100vh;
+	text-align: center;
+	color: #ffffff;
+}
+
+#homeIntro h1 {
+	color: #FF7676;
+	font-size: 50px;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
+#homeIntro h4 {
+	color: #FFA4A4;
+	font-size: 20px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
+
+
+@media(max-width: 768px) {
+
+}

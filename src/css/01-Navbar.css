@@ -1,0 +1,52 @@
+/*Navigation Bar*/
+header {
+	background: #FFFFB3;
+	min-height: 15px;
+	overflow: hidden;
+  	position: fixed;
+  	top: 0;
+  	width: 100%; 
+  	z-index: 9999;
+}
+
+#navbar_buttons {
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#navbar_buttons button {
+	margin-left: 20px;
+	margin-right: 20px;
+	background: transparent;
+}
+
+#navbar_buttons button:hover::before {
+	transform: scaleX(1);
+	transform-origin: center;
+}
+
+#navbar_buttons button::before {
+	content: '';
+	position: absolute;
+	width: 100%;
+	transform: scaleX(0);
+	background-color: #FFCACA;
+	height: 2px;
+	bottom: 0;
+	left: 0;
+	transform-origin: center;
+	transition: transform 0.4s ease-out;
+}
+
+
+
+@media(max-width: 768px) {
+	#navbar_buttons button {
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	header {
+		position: absolute;
+	}
+}

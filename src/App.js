@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 
+import Navbar from './pages/01-Navbar'
+import DisplayHome from './pages/02-Home'
+
 
 class App extends Component {
     state = {}
 
     render() {
         return (
-            <h1>Hi</h1>
+            <div>
+                <Navbar />
+                <DisplayHome />
+            </div>
         )
     }
 }

@@ -9,3 +9,29 @@ body {
 	margin: auto;
 	overflow: hidden;
 }
+
+button {
+	letter-spacing: 1px;
+	font-size: 17px;
+	border: none;
+	border-radius: 10px;
+	color: #FF7676;
+	font-weight: bold;
+	outline: none;
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+	padding: 7px;
+	background: #FCEAEA;
+}
+
+.downArrow {
+    animation: bouncing 1s infinite ease-in-out;
+    bottom: 0;
+    height: 30px;
+    left: 50%;
+    margin-left: -25px;
+    position: absolute;
+    width: 50px;
+    overflow: hidden;
+}
