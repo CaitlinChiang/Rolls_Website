@@ -5,6 +5,11 @@
 	text-align: center;
 }
 
+#home h1 {
+	color: #ffffff;
+	letter-spacing: 5px;
+}
+
 #home h1, #about h1 {
 	font-size: 50px;
 	top: 40%;
@@ -20,6 +25,13 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	position: absolute;
+}
+
+#slider figure img {
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	object-fit: cover;
 }
 
 
