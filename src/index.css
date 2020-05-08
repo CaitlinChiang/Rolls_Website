@@ -33,14 +33,3 @@ button {
 	padding: 7px;
 	background: #FCEAEA;
 }
-
-.downArrow {
-    animation: bouncing 1s infinite ease-in-out;
-    bottom: 0;
-    height: 30px;
-    left: 50%;
-    margin-left: -25px;
-    position: absolute;
-    width: 50px;
-    overflow: hidden;
-}

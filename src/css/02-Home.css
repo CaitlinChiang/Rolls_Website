@@ -27,6 +27,17 @@
 	position: absolute;
 }
 
+.downArrow {
+    animation: bouncing 1s infinite ease-in-out;
+    bottom: 0;
+    height: 30px;
+    left: 50%;
+    margin-left: -25px;
+    position: absolute;
+    width: 50px;
+    overflow: hidden;
+}
+
 
 
 /*Background Slider*/
@@ -62,7 +73,6 @@
 	95% { left: -300%; }
 	100% { left: -400%; }
 }
-
 
 
 
