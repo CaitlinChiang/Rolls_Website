@@ -13,3 +13,15 @@
 	from { opacity: 0; }
 	to { opacity: 1; }
 }
+
+
+
+/*Scrollbar*/
+html::-webkit-scrollbar {
+    	width: 8px;
+}
+
+html::-webkit-scrollbar-thumb {
+    	background: linear-gradient(#FF7C7C, #FF9494);
+    	border-radius: 6px;
+}

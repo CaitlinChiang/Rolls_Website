@@ -21,12 +21,12 @@ header {
 	background: transparent;
 }
 
-#navbar_buttons button:hover::before {
+#navbar_buttons button:hover::before, #navbar_buttons button a:hover::before {
 	transform: scaleX(1);
 	transform-origin: center;
 }
 
-#navbar_buttons button::before {
+#navbar_buttons button::before, #navbar_buttons button a::before {
 	content: '';
 	position: absolute;
 	width: 100%;
@@ -37,6 +37,13 @@ header {
 	left: 0;
 	transform-origin: center;
 	transition: transform 0.4s ease-out;
+}
+
+#navbar_buttons button a {
+	color: #FF7676;
+	background: transparent;
+	text-decoration: none;
+	margin-bottom: 0px;
 }
 
 

@@ -1,17 +1,25 @@
 import React, { Component } from 'react'
 
 import Navbar from './pages/01-Navbar'
-import DisplayHome from './pages/02-Home'
+import Home from './pages/02-Home'
 
 
 class App extends Component {
-    state = {}
+    state = {
+        DisplayHome: true
+    }
+
+    goHome = () => {
+        this.setState({
+            DisplayHome: true
+        })
+    }
 
     render() {
         return (
             <div>
-                <Navbar />
-                <DisplayHome />
+                <Navbar goHome={this.goHome} />
+                {this.state.DisplayHome ? <Home /> : null}
             </div>
         )
     }

@@ -1,13 +1,11 @@
 /*Home*/
-#homeIntro {
-	background: #FFE2E2;
+#home {
+	background: #ffffff;
 	min-height: 100vh;
 	text-align: center;
-	color: #ffffff;
 }
 
-#homeIntro h1 {
-	color: #FF7676;
+#home h1, #about h1 {
 	font-size: 50px;
 	top: 40%;
 	left: 50%;
@@ -15,7 +13,7 @@
 	position: absolute;
 }
 
-#homeIntro h4 {
+#home h4, #about h4 {
 	color: #FFA4A4;
 	font-size: 20px;
 	top: 50%;
@@ -26,6 +24,61 @@
 
 
 
+/*About*/
+#about {
+	background: #FFE6E6;
+	min-height: 100vh;
+	text-align: center;
+}
+
+#about h1 {
+	font-size: 40px;
+	top: 110%;
+}
+
+#about h4 {
+	top: 125%;
+	margin: auto;
+}
+
+#inquiries {
+	top: 180%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
+#inquiries h5 {
+	font-size: 30px;
+	margin-bottom: 5px;
+}
+
+#inquiries h6 {
+	color: #FFA4A4;
+	font-size: 20px;
+	margin: 0px;
+}
+
+#inquiries h6 a {
+	color: #C49076;
+}
+
+#inquiries h6 a:hover {
+	font-weight: bold;
+	color: #D7B2B1;
+}
+
+
+
 @media(max-width: 768px) {
+	#about h1 {
+		top: 100%;
+		width: 100%;
+	}
+	#about h4 {
+		top: 115%;
+		width: 100%;
+		margin: auto;
+	}
 
 }
