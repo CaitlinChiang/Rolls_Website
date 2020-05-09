@@ -15,8 +15,15 @@ body {
 
 .container {
 	width: 85%;
+	min-height: 100%;
 	margin: auto;
 	overflow: hidden;
+}
+
+.overflow-container {
+    flex: 1;
+    overflow-y: scroll;
+    max-height: 90vh;
 }
 
 button {

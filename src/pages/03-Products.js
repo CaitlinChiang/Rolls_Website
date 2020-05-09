@@ -6,6 +6,7 @@ function Products() {
 	return ( 
 		<div>
 			<section id="products">
+				<h1>PRODUCTS</h1>
 				<Slider />
 			</section>
 		</div>

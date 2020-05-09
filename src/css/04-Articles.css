@@ -1,0 +1,30 @@
+#articles {
+	background: #FFE6E6;
+	min-height: 100vh;
+	text-align: center;
+	padding-bottom: 50px;
+}
+
+.headline {
+	margin-top: 8%;
+	display: flex;
+}
+
+.headline img {
+	height: auto;
+	width: 600px;
+}
+
+.headlineText {
+	margin-left: 10px;
+	width: 40%;
+}
+
+.headline a {
+	color: #C49076;
+}
+
+.headline a:hover {
+	color: #FF7676;
+}
+

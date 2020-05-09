@@ -4,6 +4,14 @@
 	text-align: center;
 }
 
+#products h1 {
+	font-size: 40px;
+	top: 3%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
 
 
 /*Product Slider*/
@@ -74,6 +82,6 @@
 		width: 95%;
 	}
 	.slide {
-		margin-top: 25%;
+		margin-top: 27%;
 	}
 }

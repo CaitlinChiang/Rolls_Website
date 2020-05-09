@@ -25,3 +25,12 @@ html::-webkit-scrollbar-thumb {
     	background: linear-gradient(#FF7C7C, #FF9494);
     	border-radius: 6px;
 }
+
+#aboutRolls::-webkit-scrollbar {
+    	width: 8px;
+}
+
+#aboutRolls::-webkit-scrollbar-thumb {
+    	background: linear-gradient(#FF7C7C, #FF9494);
+    	border-radius: 6px;
+}

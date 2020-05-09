@@ -7,7 +7,7 @@ import p3 from './p3.jpg'
 
 function productImages(src) {
 	let imgStyles = {
-		width: 80 + "%",
+		width: 70 + "%",
 		height: "auto"
 	}
 	return <img src={src} style={imgStyles}></img>

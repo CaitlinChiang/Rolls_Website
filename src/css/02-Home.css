@@ -85,12 +85,29 @@
 
 #about h1 {
 	font-size: 40px;
-	top: 110%;
+	top: 100%;
 }
 
 #about h4 {
-	top: 125%;
-	margin: auto;
+	width: 90%;
+	height: 100%;
+	margin: 10px;
+	color: #ffffff;
+}
+
+#aboutRolls {
+	background-color: #C49076;
+	min-height: 60%;
+	width: 80%;
+	border-radius: 10px;
+	text-align: center;
+	display: fixed;
+	box-sizing: border-box;
+	top: 141%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	align-content: center;
 }
 
 #inquiries {
@@ -124,11 +141,9 @@
 
 @media(max-width: 768px) {
 	#about h1 {
-		top: 100%;
-		width: 100%;
+		top: 107%;
 	}
-	#about h4 {
-		top: 115%;
+	#about h4, #about h1 {
 		width: 100%;
 		margin: auto;
 	}
