@@ -10,7 +10,16 @@ function productImages(src) {
 		width: 70 + "%",
 		height: "auto"
 	}
-	return <img src={src} style={imgStyles}></img>
+	let cartButtonStyle = {
+		left: 50 + "%",
+		height: "auto" 
+	}
+	return (
+		<div>
+			<img src={src} style={imgStyles} />
+			<button style={cartButtonStyle}></button>
+		</div>
+	)
 }
 
 function Slider() {
@@ -19,12 +28,10 @@ function Slider() {
 	const [x, setX] = useState(0)
 
 	const goLeft = () => {
-		console.log(x)
 		x === 0 ? setX(-100 * (sliderContents.length - 1)) : setX(x + 100)
 	}
 
 	const goRight = () => {
-		console.log(x)
 		x === -100 * (sliderContents.length - 1) ? setX(0) : setX(x - 100)
 	}
 
