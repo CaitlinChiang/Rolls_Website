@@ -6,7 +6,7 @@
 }
 
 #home h1 {
-	color: #ffffff;
+	color: #FFBDBD;
 	letter-spacing: 5px;
 }
 
@@ -18,7 +18,7 @@
 	position: absolute;
 }
 
-#home h4, #about h4 {
+#home h4, #about h4, #about p {
 	color: #FFA4A4;
 	font-size: 20px;
 	top: 50%;
@@ -88,11 +88,12 @@
 	top: 100%;
 }
 
-#about h4 {
+#about p {
 	width: 90%;
 	height: 100%;
 	margin: 10px;
 	color: #ffffff;
+	font-size: 17px;
 }
 
 #aboutRolls {

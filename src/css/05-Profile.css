@@ -1,0 +1,39 @@
+/*Account*/
+#profile, #status {
+	background: #FFE6E6;
+	min-height: 100vh;
+	text-align: center;
+}
+
+#profile p {
+	color: #ffffff;
+	font-size: 20px;
+}
+
+#login {
+	float: left;
+	background: #C49076;
+	width: 35%;
+	min-height: 80%;
+	border-radius: 10px;
+	text-align: center;
+	top: 10%;
+	left: 10%;
+	position: absolute;
+}
+
+#register {
+	float: right;
+	background: #C49076;
+	width: 35%;
+	min-height: 80%;
+	border-radius: 10px;
+	text-align: center;
+	top: 10%;
+	right: 10%;
+	position: absolute;
+}
+
+
+
+/*Cart*/
