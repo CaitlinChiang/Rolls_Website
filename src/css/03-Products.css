@@ -1,4 +1,4 @@
-/*Products*/
+/*Products*/ 
 #products {
 	background: #FFE6E6;
 	min-height: 100vh;
@@ -51,9 +51,6 @@
 	transform: translateY(-50%);
 }
 
-
-
-/*Left and Right Arrows*/
 #products button {
 	background-color: transparent;
 }
@@ -73,6 +70,34 @@
 .left {
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
+}
+
+
+
+/*Slider Products*/
+#product_description {
+	color: #ffffff;
+	font-size: 20px;
+	float: left;
+	margin-left: 8%;
+	margin-top: 11%;
+}
+
+#productImage img {
+	float: right;
+	width: 45%;
+	height: auto;
+	margin-top: 8%;
+	margin-right: 9%;
+}
+
+#product_description button {
+	border: 3px solid lightgrey;
+	color: #ffffff;
+}
+
+#product_description button:hover {
+	background-color: #FF7979;
 }
 
 

@@ -1,4 +1,4 @@
-/*Account*/
+/*Account*/ 
 #profile, #status {
 	background: #FFE6E6;
 	min-height: 100vh;
@@ -8,6 +8,7 @@
 #profile p {
 	color: #ffffff;
 	font-size: 20px;
+	margin-bottom: 100px;
 }
 
 #login {
@@ -20,6 +21,7 @@
 	top: 10%;
 	left: 10%;
 	position: absolute;
+	display: block;
 }
 
 #register {
@@ -32,8 +34,35 @@
 	top: 10%;
 	right: 10%;
 	position: absolute;
+	display: block;
+}
+
+#login form button, #register form button {
+	display: inline-block;
+	margin-top: 10px;
+}
+
+#login form input, #register form input {
+	background: #ffffff;
+	padding: 0 20px 0 5px;
+	display: inline-block;
+	min-height: 30px;
+	font-size: 15px;
+	outline-style: none;
+	border: none;
+    width: 200px;
+    text-align: center;
+    margin: 10px;
 }
 
 
 
 /*Cart*/
+#status h1 {
+	font-size: 40px;
+	top: 3%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+

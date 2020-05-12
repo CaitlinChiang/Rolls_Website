@@ -1,30 +1,12 @@
 import React, { useState } from 'react'
+import Slider1 from './SliderP1'
+import Slider2 from './SliderP2'
+import Slider3 from './SliderP3'
 
-import p1 from './p1.jpg'
-import p2 from './p2.jpg'
-import p3 from './p3.jpg'
-
-
-function productImages(src) {
-	let imgStyles = {
-		width: 70 + "%",
-		height: "auto"
-	}
-	let cartButtonStyle = {
-		left: 50 + "%",
-		height: "auto" 
-	}
-	return (
-		<div>
-			<img src={src} style={imgStyles} />
-			<button style={cartButtonStyle}></button>
-		</div>
-	)
-}
 
 function Slider() {
 
-	let sliderContents = [productImages(p1), productImages(p2), productImages(p3)]
+	let sliderContents = [<Slider1 />, <Slider2 />, <Slider3 />]
 	const [x, setX] = useState(0)
 
 	const goLeft = () => {
