@@ -1,4 +1,4 @@
-/*Products*/ 
+/*Products*/
 #products {
 	background: #FFE6E6;
 	min-height: 100vh;
@@ -53,6 +53,10 @@
 
 #products button {
 	background-color: transparent;
+}
+
+#product_slider button {
+	background: transparent;
 }
 
 .arrow {

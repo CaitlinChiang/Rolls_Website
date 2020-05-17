@@ -1,16 +1,22 @@
-import React from 'react'
-import Slider from '../components/Slider/Slider' 
+import React, { Component } from 'react'
+import Slider from '../components/Slider' 
 
 
-function Products() {
-	return ( 
-		<div>
-			<section id="products">
-				<h1>PRODUCTS</h1>
-				<Slider />
-			</section>
-		</div>
-	)
+class Products extends Component {
+	state = {
+		consumer: this.props.consumer
+	}
+
+	render() {
+		return ( 
+			<div>
+				<section id="products">
+					<h1>PRODUCTS</h1>
+					<Slider consumer={this.props.consumer} />
+				</section>
+			</div>
+		)
+	}
 }
 
 export default Products

@@ -1,4 +1,4 @@
-/*Animations*/ 
+/*Animations*/
 @keyframes bouncing {
     	0% { bottom: 0; }
     	50% { bottom: 15px; }
