@@ -85,21 +85,24 @@
 	position: absolute;
 }
 
-#orders {
-	text-align: center;
-	margin-right: 20px;
-}
-
-#orders ul {
-	list-style: none;
-	margin-top: 100px;
-}
-
-#orders li {
+#checkoutButton {
+	background: #ffffff;
+	color: #FF7676;
 	padding: 10px;
-	height: 15px;
-	margin-bottom: 10px;
-	background-color: #ffffff;
+	border-radius: 5px;
+	transition:0.5s;
+	letter-spacing: 0px;
+	font-weight: normal;
+	font-size: 20px;
+	float: right;
+	margin-right: 180px;
+	margin-top: 10px;
+	border: 1px solid grey;
+}
+
+#checkoutButton:hover {
+	background: #C78F76;
+	color: #ffffff;
 }
 
 .orderTable {
@@ -151,4 +154,29 @@
 
 .orderTable tbody tr:last-of-type {
     border-bottom: 2px solid #FF9B70;
+}
+
+
+
+/*Order Form*/
+#orderDetails {
+	background: #FFE6E6;
+	min-height: 700px;
+	text-align: center;
+}
+
+#orderDetails h1 {
+	font-size: 40px;
+	margin-top: 15px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
+form {
+	height: 800px;
+	background-color: #C49076;
+	margin-bottom: 100px;
+	border-radius: 10px;
+	margin-top: 50px;
 }

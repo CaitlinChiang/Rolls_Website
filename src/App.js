@@ -8,10 +8,10 @@ import Profile from './pages/05-Profile'
 
 class App extends Component {
     state = {
-        consumer: '',
+        consumer: 'Caitlin',
 
-        DisplayProfile: false,
-        DisplayHome: true,
+        DisplayProfile: true,
+        DisplayHome: false,
         DisplayProducts: false,
         DisplayArticles: false
     }

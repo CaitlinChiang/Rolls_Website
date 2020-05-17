@@ -15,7 +15,7 @@ class Profile extends Component {
 
 		users: [],              consumer: this.props.consumer,
 
-		pendingOrders: [],      deliveredOrders: []
+		pendingOrders: [],      deliveredOrders: [],
 	} 
 
 	handleChange = (event) => {

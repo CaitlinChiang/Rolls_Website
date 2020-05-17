@@ -43,7 +43,7 @@ class Slider1 extends Component {
 
 	addToCart = async (event) => {
 		if (this.state.consumer.trim() !== "") {
-			firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').push('Classic Cinammon Roll - 1pc')
+			firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').push('P1')
 		}
 		else { alert("Kindly register an account before adding to cart!") }
 	}
@@ -77,7 +77,7 @@ class Slider2 extends Component {
 
 	addToCart = async (event) => {
 		if (this.state.consumer.trim() !== "") {
-			firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').push('Classic Cinammon Roll - 6pcs')
+			firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').push('P2')
 		}
 		else { alert("Kindly register an account before adding to cart!") }
 	}
@@ -111,7 +111,7 @@ class Slider3 extends Component {
 
 	addToCart = async (event) => {
 		if (this.state.consumer.trim() !== "") {
-			firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').push('Classic Cinammon Roll - 12pcs')
+			firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').push('P3')
 		}
 		else { alert("Kindly register an account before adding to cart!") }
 	}
