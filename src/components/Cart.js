@@ -64,25 +64,21 @@ class Cart extends Component {
 				<section id="status">
 					<div class="container">
 						<h1>MY CART</h1>
-					
 						<table class="orderTable">
 						  	<thead>
 							    <tr>
 							        <th>Item</th>
 							      	<th>Pieces</th>
 							      	<th>Price</th>
-							      	<th>Delete</th>
+							      	<th></th>
 							    </tr>
 						  	</thead>
-							<tbody>
-							    {Pending}
-							</tbody>
+							<tbody>{Pending}</tbody>
 						</table>
 					</div>
-					<button id="checkoutButton" onClick={this.goOrder}>Checkout</button>
+					<button onClick={this.goOrder} id="checkoutButton">Checkout</button>
 				</section>
-
-				{this.state.displayForm ? <Order />: null}
+				{this.state.displayForm ? <Order pendingOrders={this.props.pendingOrders} consumer={this.props.consumer} /> : null}
 			</div>
 		)
 	}

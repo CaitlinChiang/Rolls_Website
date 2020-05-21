@@ -2,20 +2,17 @@ import React, { Component } from 'react'
 import * as firebase from 'firebase'
 import '../services/firebaseConfig'
 import Cart from '../components/Cart' 
-import Slider from '../components/Slider'
 
 
 class Profile extends Component {
 	state = {
-		loginEmail: '',         loginPassword: '',               password: '',
+		loginEmail: '',                  loginPassword: '',
 
-		registerEmail: '',      registerPassword: '',      
+		registerEmail: '',               registerPassword: '',      
 
-		registerUsername: '',   loginUsername: '',
+		registerUsername: '',            loginUsername: '',
 
-		users: [],              consumer: this.props.consumer,
-
-		pendingOrders: [],      deliveredOrders: [],
+		consumer: this.props.consumer,   password: ''
 	} 
 
 	handleChange = (event) => {

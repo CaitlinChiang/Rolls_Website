@@ -4,6 +4,7 @@ import Home from './pages/02-Home'
 import Products from './pages/03-Products'
 import Articles from './pages/04-Articles'
 import Profile from './pages/05-Profile'
+import Controls from './pages/06-Controls'
 
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
         DisplayArticles: false
     }
 
-    setUser = (userData) =>  this.setState({ consumer: userData })
+    setUser = (userData) => this.setState({ consumer: userData })
 
     goProfile = () => {
         this.setState({
@@ -57,11 +58,15 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Navbar goHome={this.goHome} goProducts={this.goProducts} goArticles={this.goArticles} goProfile={this.goProfile} />
-                {this.state.DisplayHome ? <Home /> : null}
-                {this.state.DisplayProducts ? <Products consumer={this.state.consumer} /> : null }
-                {this.state.DisplayArticles ? <Articles /> : null}
-                {this.state.DisplayProfile ? <Profile data={{ consumer: this.state.consumer, setUser: this.setUser.bind(this) }} consumer={this.state.consumer} /> : null }
+                {this.state.consumer !== 'Raffy' ? 
+                <div>
+                    <Navbar goHome={this.goHome} goProducts={this.goProducts} goArticles={this.goArticles} goProfile={this.goProfile} />
+                    {this.state.DisplayHome ? <Home /> : null}
+                    {this.state.DisplayProducts ? <Products consumer={this.state.consumer} /> : null }
+                    {this.state.DisplayArticles ? <Articles /> : null}
+                    {this.state.DisplayProfile ? <Profile data={{ consumer: this.state.consumer, setUser: this.setUser.bind(this) }} consumer={this.state.consumer} /> : null }
+                </div>
+                : <Controls />}
             </div>
         )
     }

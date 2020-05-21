@@ -1,0 +1,56 @@
+#viewing {
+	background: #FFE6E6;
+	min-height: 100vh;
+	text-align: center;
+}
+
+.viewingTable {
+    border-collapse: collapse;
+    margin-left: 65px;
+    margin-top: 100px;
+    font-size: 0.9em;
+    min-width: 90%;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.viewingTable thead tr {
+    background-color: #FF9B70;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.viewingTable th,
+.viewingTable td {
+    padding: 12px 15px;
+}
+
+.viewingTable tr td button {
+	background: #C78F76;
+	color: #ffffff;
+	padding: 8px;
+	border-radius: 5px;
+	transition:0.5s;
+	letter-spacing: 0px;
+	font-weight: normal;
+	font-size: 15px;
+}
+
+.viewingTable tr td button:hover {
+	background: #E8ADAD;
+}
+
+.viewingTable tbody tr {
+    border-bottom: 1px solid #F08080;
+    font-size: 17px;
+}
+
+.viewingTable tbody tr:nth-of-type(even) {
+    background-color: #F2D2C4;
+}
+
+.viewingTable tbody tr:last-of-type {
+    border-bottom: 2px solid #FF9B70;
+}
