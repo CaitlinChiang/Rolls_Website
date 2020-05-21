@@ -80,7 +80,7 @@ class Cart extends Component {
 					</div>
 					<button onClick={this.goOrder} id="checkoutButton">Checkout</button>
 				</section>
-				{this.state.displayForm ? <Order pendingOrders={this.props.pendingOrders} consumer={this.props.consumer} /> : null}
+				{this.state.displayForm ? <Order consumer={this.props.consumer} /> : null}
 			</div>
 		)
 	}

@@ -4,7 +4,7 @@ import * as firebase from 'firebase'
 
 class Order extends Component {
 	state = {
-		consumer: this.props.consumer,    pendingOrders: this.props.pendingOrders,       price: 0,
+		consumer: this.props.consumer,    pendingOrders: [],       price: 0,
 
 		name: '',       number: '',       mode: '',       
 
@@ -16,6 +16,12 @@ class Order extends Component {
 	componentDidMount = async () => {
 		this.displayTotal()
 		setInterval(this.displayTotal, 500)
+
+		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').on('value', snapshot => {
+			let pendingOrders = []
+			snapshot.forEach((snap) => { pendingOrders.push(snap.val()) })
+			this.setState({ pendingOrders })
+		})
 	}
 
 	displayTotal = () => {
@@ -40,6 +46,8 @@ class Order extends Component {
 		const {name, value} = event.target
 		this.setState({ [name]: value })
 	}
+
+	//include city fee
 
 	moveOrderRecord = () => {
 		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').once('value', snapshot => {
