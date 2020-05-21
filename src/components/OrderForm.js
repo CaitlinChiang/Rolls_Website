@@ -15,10 +15,12 @@ class Order extends Component {
 
 	componentDidMount = async () => {
 		this.displayTotal()
+		setInterval(this.displayTotal, 500)
 	}
 
 	displayTotal = () => {
-		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').once('value', snapshot => {
+		this.setState({ price: 0 })
+		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').on('value', snapshot => {
 			snapshot.forEach((snap) => {
 				if (snap.val() === 'P1') {
 					this.setState(prevState => ({ price: prevState.price + 60 }))

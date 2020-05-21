@@ -19,6 +19,8 @@ class Cart extends Component {
 		})
 	}
 
+	remove = (id) => firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').child(id).remove()
+
 	goOrder = (event) => {
 		event.preventDefault()
 		this.setState({ displayForm: true })
@@ -33,7 +35,7 @@ class Cart extends Component {
 				        <td>Classic Cinammon Roll</td>
 					    <td>1</td>
 					    <td>P60.00</td>
-					    <td><button onClick={() => firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').child(item[1]).remove()}>Remove</button></td>
+					    <td><button onClick={() => this.remove(item[1])}>Remove</button></td>
 				    </tr>
 				)
 			}
@@ -43,7 +45,7 @@ class Cart extends Component {
 				        <td>Classic Cinammon Roll</td>
 					    <td>6</td>
 					    <td>P350.00</td>
-					    <td><button onClick={() => firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').child(item[1]).remove()}>Remove</button></td>
+					    <td><button onClick={() => this.remove(item[1])}>Remove</button></td>
 				    </tr>
 				)
 			}
@@ -53,7 +55,7 @@ class Cart extends Component {
 				        <td>Classic Cinammon Roll</td>
 					    <td>12</td>
 					    <td>P600.00</td>
-					    <td><button onClick={() => firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').child(item[1]).remove()}>Remove</button></td>
+					    <td><button onClick={() => this.remove(item[1])}>Remove</button></td>
 				    </tr>
 				)
 			}
