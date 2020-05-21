@@ -4,13 +4,33 @@ import * as firebase from 'firebase'
 
 class Order extends Component {
 	state = {
-		consumer: this.props.consumer,    pendingOrders: this.props.pendingOrders,       price: this.props.price,
+		consumer: this.props.consumer,    pendingOrders: this.props.pendingOrders,       price: 0,
 
 		name: '',       number: '',       mode: '',       
 
 		pDate: '',      pPayment: '',
 		
 		dPayment: '',   address: '',      city: '',       dDate: '',       route: ''
+	}
+
+	componentDidMount = async () => {
+		this.displayTotal()
+	}
+
+	displayTotal = () => {
+		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').once('value', snapshot => {
+			snapshot.forEach((snap) => {
+				if (snap.val() === 'P1') {
+					this.setState(prevState => ({ price: prevState.price + 60 }))
+				}
+				else if (snap.val() === 'P2') {
+					this.setState(prevState => ({ price: prevState.price + 350 }))
+				}
+				else if (snap.val() === 'P3') {
+					this.setState(prevState => ({ price: prevState.price + 600 }))
+				}
+			})
+		})
 	}
 
 	handleChange = (event) => {
