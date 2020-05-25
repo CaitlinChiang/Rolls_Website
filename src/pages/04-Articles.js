@@ -1,4 +1,4 @@
-import React from 'react' 
+ import React from 'react' 
 
 
 function Articles() {
@@ -6,6 +6,22 @@ function Articles() {
 		<div>
 			<section id="articles">
 				<div class="container">
+					<div class="headline">
+						<img src="https://live.staticflickr.com/65535/49261024603_e083a587a1_c.jpg" />
+						<div class="headlineText">
+							<h1><a href="https://beingjellybeans.com/2020/05/21/the-jelly-list-m-food-deliveries-for-your-party-at-home/?fbclid=IwAR3G7YAsg-WteNkbeN1KaB2BPof9dgkjUCidDFm8INxSCB0rGk04-GJaHv8">They Jelly List: Food Deliveries for Your Party at Home</a></h1>
+							<h3>By: Jellybeans in the City</h3>
+						</div>
+					</div>
+
+					<div class="headline">
+						<img src="https://mendira.net/media/2020/04/ROLLS-cinnamon%E2%80%A6-so-delicious-1.jpg" />
+						<div class="headlineText">
+							<h1><a href="https://mendira.net/food/rolls-cinnamon-so-delicious/?fbclid=IwAR2VFz9Cfk2qbXBnYdTMxT1sQnUt5Og0CYIUQ63tRDC4HPGDxKgPcR6hh1Y">ROLLS cinnamon... so delicious!</a></h1>
+							<h3>By: Mendira.net</h3>
+						</div>
+					</div>
+
 					<div class="headline">
 						<img src="https://beingjellybeans.files.wordpress.com/2019/12/img_7194.jpg?w=1024" />
 						<div class="headlineText">

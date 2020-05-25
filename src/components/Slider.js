@@ -4,12 +4,10 @@ import * as firebase from 'firebase'
 
 class Slider extends Component {
 	state = {
-		sliderContents: [<Slider1 consumer={this.props.consumer} pendingOrders={this.props.pendingOrders} />, <Slider2 consumer={this.props.consumer} 
-						pendingOrders={this.props.pendingOrders} />, <Slider3 consumer={this.props.consumer} pendingOrders={this.props.pendingOrders} />],
+		sliderContents: [<Slider1 consumer={this.props.consumer} />, <Slider2 consumer={this.props.consumer} />],
 		x: 0,
 
-		consumer: this.props.consumer,
-		pendingOrders: []
+		consumer: this.props.consumer
 	}
 
 	goLeft = () => { this.state.x === 0 ? this.setState({ x: -100 * (this.state.sliderContents.length - 1) }) : this.setState({ x: this.state.x + 100 }) }
@@ -37,23 +35,27 @@ export default Slider
 //Product 1
 class Slider1 extends Component {
 	state = {
-		inStock: true,
+		stock: true,
 		consumer: this.props.consumer
 	}
 
+	componentDidMount = async () => {
+		firebase.database().ref('products').child('P1').on('value', snapshot => {
+			this.setState({ stock: snapshot.val().Stock })
+		})
+	}
+
 	addToCart = async (event) => {
-		if (this.state.consumer.trim() !== "") {
-			firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').push('P1')
-		}
-		else { alert("Kindly register an account before adding to cart!") }
+		{this.state.consumer.trim() !== "" ? firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').push('P1')
+		: alert("Kindly register an account before adding to cart!") }
 	}
 
 	render() {
 		return (
 			<div>
 				<div id="product_description">
-					<p>Classic Cinnamon Rolls: 1pc - P60.00</p>
-					{this.state.inStock ?
+					<p>Classic Cinnamon Rolls: 6pcs - P350.00</p>
+					{this.state.stock ?
 						<div>
 							<p>(In Stock)</p>
 							<button class="ripple" onClick={this.addToCart}>Add To Cart</button>
@@ -71,23 +73,27 @@ class Slider1 extends Component {
 //Product 2
 class Slider2 extends Component {
 	state = {
-		inStock: true,
+		stock: true,
 		consumer: this.props.consumer
 	}
 
+	componentDidMount = async () => {
+		firebase.database().ref('products').child('P2').on('value', snapshot => {
+			this.setState({ stock: snapshot.val().Stock })
+		})
+	}
+
 	addToCart = async (event) => {
-		if (this.state.consumer.trim() !== "") {
-			firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').push('P2')
-		}
-		else { alert("Kindly register an account before adding to cart!") }
+		{this.state.consumer.trim() !== "" ? firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').push('P2')
+		: alert("Kindly register an account before adding to cart!") }
 	}
 
 	render() {
 		return (
 			<div>
 				<div id="product_description">
-					<p>Classic Cinnamon Rolls: 6pcs - P350.00</p>
-					{this.state.inStock ?
+					<p>Classic Cinnamon Rolls: 12pcs - P600.00</p>
+					{this.state.stock ?
 						<div>
 							<p>(In Stock)</p>
 							<button class="ripple" onClick={this.addToCart}>Add To Cart</button>
@@ -96,40 +102,6 @@ class Slider2 extends Component {
 				</div>
 				<div id="productImage">
 					<img src="/images/p2.jpg" />
-				</div>
-			</div>
-		)
-	}
-}
-
-//Product 3
-class Slider3 extends Component {
-	state = {
-		inStock: true,
-		consumer: this.props.consumer
-	}
-
-	addToCart = async (event) => {
-		if (this.state.consumer.trim() !== "") {
-			firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').push('P3')
-		}
-		else { alert("Kindly register an account before adding to cart!") }
-	}
-
-	render() {
-		return (
-			<div>
-				<div id="product_description">
-					<p>Classic Cinnamon Rolls: 12pcs - P600.00</p>
-					{this.state.inStock ?
-						<div>
-							<p>(In Stock)</p>
-							<button class="ripple" onClick={this.addToCart}>Add To Cart</button>
-						</div>
-					: <p>(Out of Stock)</p>}
-				</div>
-				<div id="productImage">
-					<img src="/images/p3.jpg" />
 				</div>
 			</div>
 		)

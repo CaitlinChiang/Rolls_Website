@@ -77,9 +77,17 @@
 	text-align: center;
 }
 
-#status h1 {
+#orderTitle {
 	font-size: 40px;
 	top: 3%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
+#cartTitle {
+	font-size: 40px;
+	top: 5%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	position: absolute;

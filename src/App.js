@@ -62,7 +62,7 @@ class App extends Component {
                 <div>
                     <Navbar goHome={this.goHome} goProducts={this.goProducts} goArticles={this.goArticles} goProfile={this.goProfile} />
                     {this.state.DisplayHome ? <Home /> : null}
-                    {this.state.DisplayProducts ? <Products consumer={this.state.consumer} /> : null }
+                    {this.state.DisplayProducts ? <Products consumer={this.state.consumer} p1Stock={this.state.p1Stock} p2Stock={this.state.p2Stock} /> : null }
                     {this.state.DisplayArticles ? <Articles /> : null}
                     {this.state.DisplayProfile ? <Profile data={{ consumer: this.state.consumer, setUser: this.setUser.bind(this) }} consumer={this.state.consumer} /> : null }
                 </div>

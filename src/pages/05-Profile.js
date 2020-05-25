@@ -20,6 +20,8 @@ class Profile extends Component {
 		this.setState({ [name]: value })
 	}
 
+	
+
 	handleRegisterSubmit = async (event) => {
 		event.preventDefault()
 		//check the database if the user and email already exists
