@@ -1,31 +1,139 @@
-/*Articles*/
+/*Articles Page*/
+#articles:before {
+	content: "";
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	display: block;
+	background-image: url('/images/bg4.jpg');
+	background-position: center;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+
+	-webkit-filter: blur(3px);
+	-moz-filter: blur(3px);
+	-o-filter: blur(3px);
+	-ms-filter: blur(3px);
+	filter: blur(3px);
+}
+
 #articles {
-	background: #FFE6E6;
-	min-height: 100vh;
+	background: rgb(255,182,193);
+	background-color: rgba(0, 0, 0, 0.3);
+	min-height: 900px;
 	text-align: center;
 	padding-bottom: 50px;
 }
 
-.headline {
-	margin-top: 8%;
-	display: flex;
+#articlesHeader {
+	padding-top: 30px;
 }
 
-.headline img {
-	height: auto;
-	width: 600px;
+#articlesHeader h1 {
+	margin: 0px;
+	top: 250px;
+	color: #ffffff;
+	font-family: 'Playball', Helvetica, sans-serif;
+	font-size: 50px;
 }
 
-.headlineText {
-	margin-left: 10px;
-	width: 40%;
+#displayArticles {
+	margin-top: 50px;
+	margin-bottom: 100px;
 }
 
-.headline a {
+#showArticles {
+	align-items: center;
+	justify-content: center;
+}
+
+#displayArticles button {
+	margin: 0px 30px 30px;
+	padding: 0px;
+	width: 650px;
+	transition: 0.5s;
+	font-weight: normal;
+}
+
+#displayArticles button:hover {
+	transform: translateY(-8px);
+	box-shadow: 0px 15px 20px #C17C37;
+}
+
+#displayArticles button img {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	object-fit: cover;
+	height: 350px;
+}
+
+.article {
+	padding: 10px 15px 0px;
+	background-color: #ffffff;
+	color: black;
+	height: 200px;
+	margin: 0px;
+	font-family: 'Sahitya', Helvetica, sans-serif;
 	color: #C49076;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 
-.headline a:hover {
-	color: #FF7676;
+.article h2 {
+	font-size: 30px;
+	color: #b87333;
 }
 
+.article p {
+	font-size: 20px;
+}
+
+
+
+/*Responsive*/
+@media(max-width: 800px) {
+	#articlesHeader h1 {
+		width: 100%;
+		text-align: center;
+		font-size: 45px;
+		margin-top: 20px;
+	}
+
+	#showArticles {
+		display: block;
+	  	align-items: center;
+	  	justify-content: center;
+	  	margin-bottom: 30px;
+	}
+
+	#showArticles button {
+		margin: 0px 0px 50px;
+		width: 90%;
+	}
+
+	.article {
+		padding: 20px;
+	}
+
+	.article h2 {
+		font-size: 30px;
+	}
+}
+
+@media(max-width: 515px) {
+	.article {
+		margin-top: -30px;
+	}
+
+	.article h2 {
+		font-size: 25px;
+	}
+}
+
+@media(max-width: 330px) {
+	.article h2 {
+		font-size: 23px;
+	}
+}

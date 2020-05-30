@@ -1,71 +1,48 @@
-import React, { Component } from 'react' 
+import React, { Component } from 'react'
+import * as firebase from 'firebase'
+import Account from './components/LoginForm'
+import Cart from './components/Cart'
 import Navbar from './pages/01-Navbar'
 import Home from './pages/02-Home'
 import Products from './pages/03-Products'
 import Articles from './pages/04-Articles'
-import Profile from './pages/05-Profile'
-import Controls from './pages/06-Controls'
+import Controls from './pages/05-Controls'
 
 
 class App extends Component {
     state = {
-        consumer: 'Caitlin',
-
-        DisplayProfile: true,
-        DisplayHome: false,
-        DisplayProducts: false,
-        DisplayArticles: false
+        user: {}, userID: '',
+        
+        DisplayCart: false, DisplayHome: true,  DisplayProducts: false, DisplayArticles: false
     }
 
-    setUser = (userData) => this.setState({ consumer: userData })
+    componentDidMount = async () => this.authListener()
 
-    goProfile = () => {
-        this.setState({
-            DisplayProfile: true,
-            DisplayHome: false,
-            DisplayProducts: false,
-            DisplayArticles: false
+    authListener = () => {
+        firebase.auth().onAuthStateChanged((user) => {
+            {user ? this.setState({ user, userID: user.uid }) : this.setState({ user: null })}
         })
     }
 
-    goHome = () => {
-        this.setState({
-            DisplayProfile: false,
-            DisplayHome: true,
-            DisplayProducts: false,
-            DisplayArticles: false
-        })
-    }
+    goCart = () => this.setState({ DisplayCart: true, DisplayHome: false, DisplayProducts: false, DisplayArticles: false })
 
-    goProducts = () => {
-        this.setState({
-            DisplayProfile: false,
-            DisplayHome: false,
-            DisplayProducts: true,
-            DisplayArticles: false
-        })
-    }
+    goHome = () => this.setState({ DisplayCart: false, DisplayHome: true, DisplayProducts: false, DisplayArticles: false })
 
-    goArticles = () => {
-        this.setState({
-            DisplayProfile: false,
-            DisplayHome: false,
-            DisplayProducts: false,
-            DisplayArticles: true
-        })
-    }
+    goProducts = () => this.setState({ DisplayCart: false, DisplayHome: false, DisplayProducts: true, DisplayArticles: false })
+
+    goArticles = () => this.setState({ DisplayCart: false, DisplayHome: false, DisplayProducts: false, DisplayArticles: true })
 
     render() {
         return (
             <div>
-                {this.state.consumer !== 'Raffy' ? 
-                <div>
-                    <Navbar goHome={this.goHome} goProducts={this.goProducts} goArticles={this.goArticles} goProfile={this.goProfile} />
-                    {this.state.DisplayHome ? <Home /> : null}
-                    {this.state.DisplayProducts ? <Products consumer={this.state.consumer} p1Stock={this.state.p1Stock} p2Stock={this.state.p2Stock} /> : null }
-                    {this.state.DisplayArticles ? <Articles /> : null}
-                    {this.state.DisplayProfile ? <Profile data={{ consumer: this.state.consumer, setUser: this.setUser.bind(this) }} consumer={this.state.consumer} /> : null }
-                </div>
+                {this.state.userID !== 'alnLJ1AokzOcSVTt1yN3ereBayr2' && this.state.userID !== 'JXw3ACHGrvQtUV50SrdCnVBkutG3' ?
+                    <div>
+                        <Navbar goHome={this.goHome} goProducts={this.goProducts} goArticles={this.goArticles} goCart={this.goCart} />
+                        {this.state.DisplayHome ? <Home /> : null}
+                        {this.state.DisplayProducts ? <Products consumer={this.state.userID} p1Stock={this.state.p1Stock} p2Stock={this.state.p2Stock} /> : null}
+                        {this.state.DisplayArticles ? <Articles /> : null}
+                        {this.state.DisplayCart ? <div>{this.state.user ? <Cart consumer={this.state.userID} /> : <Account />}</div> : null}
+                    </div>
                 : <Controls />}
             </div>
         )

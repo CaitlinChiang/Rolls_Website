@@ -1,6 +1,5 @@
-/*Home*/
+/*Home Page*/
 #home {
-	background: #ffffff;
 	min-height: 100vh;
 	text-align: center;
 }
@@ -8,23 +7,17 @@
 #home h1 {
 	color: #FFBDBD;
 	letter-spacing: 5px;
-}
-
-#home h1, #about h1 {
+	animation: fadeBrand 2s;
 	font-size: 50px;
-	top: 40%;
+	top: 250px;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	position: absolute;
 }
 
-#home h4, #about h4, #about p {
-	color: #FFA4A4;
-	font-size: 20px;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	position: absolute;
+@keyframes fadeBrand {
+	from { opacity: 0; }
+	to { opacity: 1; }
 }
 
 .downArrow {
@@ -38,8 +31,6 @@
     overflow: hidden;
 }
 
-
-
 /*Background Slider*/
 #slider {
 	overflow: hidden;
@@ -50,16 +41,7 @@
 	width: 500%;
 	margin: 0;
 	left: 0;
-	animation: 20s slider infinite;
-}
-
-#slider figure img {
-	width: 20%;
-	float: left;
-	height: 100vh;
-	margin: 0;
-	padding: 0;
-	object-fit: cover;
+	animation: 25s slider infinite;
 }
 
 @keyframes slider {
@@ -74,79 +56,82 @@
 	100% { left: -400%; }
 }
 
-
+#slider figure img {
+	width: 20%;
+	float: left;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	object-fit: cover;
+}
 
 /*About*/
 #about {
-	background: #FFE6E6;
-	min-height: 100vh;
+	background: linear-gradient(#FFE6E6, #F08080);
+	min-height: 1400px;
 	text-align: center;
 }
 
-#about h1 {
-	font-size: 40px;
-	top: 100%;
-}
-
-#about p {
-	width: 90%;
-	height: 100%;
-	margin: 10px;
-	color: #ffffff;
-	font-size: 17px;
-}
-
-#aboutRolls {
-	background-color: #C49076;
-	min-height: 60%;
-	width: 80%;
+#letter {
 	border-radius: 10px;
-	text-align: center;
+	padding: 30px;
 	display: fixed;
-	box-sizing: border-box;
-	top: 141%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	position: absolute;
-	align-content: center;
+	margin: 100px 60px 0px;
+	background: #ffffff;
+	line-height: 40px;
 }
 
-#inquiries {
-	top: 180%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	position: absolute;
-}
-
-#inquiries h5 {
-	font-size: 30px;
-	margin-bottom: 5px;
-}
-
-#inquiries h6 {
-	color: #FFA4A4;
-	font-size: 20px;
+#letter h6, #siteInfo h6 {
 	margin: 0px;
+	color: #C49076;
+	font-family: 'Playball', Helvetica, sans-serif;
+	font-size: 50px;
 }
 
-#inquiries h6 a {
+#letter p, #siteInfo p {
+	color: #FF7676;
+	font-size: 20px;
+	margin: 40px;
+}
+
+#siteInfo {
+	display: fixed;
+	border-radius: 10px;
+	margin-top: 50px;
+	background: #ffffff;
+	padding: 30px;
+	margin: 60px 60px 60px;
+	line-height: 20px;
+}
+
+#siteInfo p a {
 	color: #C49076;
 }
 
-#inquiries h6 a:hover {
+#siteInfo p a:hover {
 	font-weight: bold;
 	color: #D7B2B1;
 }
 
 
 
+/*Responsive*/
 @media(max-width: 768px) {
-	#about h1 {
-		top: 107%;
-	}
-	#about h4, #about h1 {
-		width: 100%;
-		margin: auto;
+	#letter {
+		padding: 20px 0px 10px;
+		margin: 100px 10px 0px;
 	}
 
+	#siteInfo {
+		margin: 100px 10px 60px;
+		padding: 20px 0px 10px;
+	}
+
+	#letter p, #siteInfo p {
+		font-size: 17px;
+	}
+
+	#letter h6, #siteInfo h6 {
+		font-size: 40px;
+	}
 }

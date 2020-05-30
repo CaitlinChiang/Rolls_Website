@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
-import Order from './OrderForm.js'
 import * as firebase from 'firebase'
+import Order from '../components/OrderForm'
 
 
 class Cart extends Component {
 	state = {
-		consumer: this.props.consumer,
-		pendingOrders: [],
+		consumer: this.props.consumer,       pendingOrders: [],
 
-		orders: [],
-		items: [],
+		orders: [],                          items: [],
 
 		displayForm: false
 	}
@@ -38,16 +36,16 @@ class Cart extends Component {
 						}
 						order.forEach((details) => {
 							if (details.val().Mode === 'Pickup') {
-								this.getInfo(this.state.items.map(item => {
+								this.getPickupInfo(this.state.items.map(item => {
 									if (item === 'P1') { return <p>6pcs</p> }
 									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().orderStatus, details.val().paymentStatus)
+								}), details.val().Price, details.val().orderStatus, details.val().PickupPayment, details.val().Date)
 							}
 							else if (details.val().Mode === 'Delivery') {
-								this.getInfo(this.state.items.map(item => {
+								this.getDeliveryInfo(this.state.items.map(item => {
 									if (item === 'P1') { return <p>6pcs</p> }
 									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().orderStatus, details.val().paymentStatus)
+								}), details.val().Price, details.val().orderStatus, details.val().DeliveryPayment, details.val().Address, details.val().Date)
 							}
 						})	
 					})
@@ -56,13 +54,25 @@ class Cart extends Component {
 		})	
 	}
 
-	getInfo = (products, price, orderStatus, paymentStatus) => {
+	getPickupInfo = (products, price, orderStatus, mode, date) => {
 		var row = this.state.orders.concat(
 			<tr>
-				<td>{products}</td>
+				<td>Classic Cinammon Rolls: {products}</td>
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
-				<td>{paymentStatus}</td>
+				{mode === 'P_transfer' ? <td>Payment Method: BDO Transfer <br /> Date of Pickup: {date} </td> : <td>Payment Method: Payment on Pickup <br /> Date of Pickup: {date} </td>}	
+			</tr>
+		)
+		this.setState({ orders: row })
+	}
+
+	getDeliveryInfo = (products, price, orderStatus, mode, address, date) => {
+		var row = this.state.orders.concat(
+			<tr>
+				<td>Classic Cinammon Rolls: {products}</td>
+				<td>P{price}.00</td>
+				<td>{orderStatus}</td>
+				{mode === 'D_transfer' ? <td>Payment Method: BDO Transfer <br /> Address: {address} <br /> Date of Delivery: {date} </td> : <td>Payment Method: Cash on Delivery  <br /> Address: {address} <br /> Date of Delivery: {date} </td>}
 			</tr>
 		)
 		this.setState({ orders: row })
@@ -104,35 +114,48 @@ class Cart extends Component {
 
 		return (
 			<div>
-				<section id="status">
-					<div class="container">
+				<section id="cart">
+					<div class="container slideDown">
 
-						<table class="orderTable">
-						  	<thead>
-							    <tr>
-							        <th>Order</th>
-							      	<th>Total Amount</th>
-							      	<th>Order Status</th>
-							      	<th>Payment Status</th>
-							    </tr>
-						  	</thead>
-							<tbody>{Processed}</tbody>
-						</table>
+						<div id="pendingHeader"> <h1>Pending Orders</h1> </div>
+						<div class="table">
+							<table class="customerTable">
+							  	<thead>
+								    <tr>
+								        <th>Order</th>
+								      	<th>Total Amount</th>
+								      	<th>Order Status</th>
+								      	<th>Details</th>
+								    </tr>
+							  	</thead>
+								<tbody>
+									{this.state.orders.length > 0 ? Processed : <th></th>}
+								</tbody>
+							</table>
+						</div>
 
-						<table class="orderTable">
-						  	<thead>
-							    <tr>
-							        <th>Item</th>
-							      	<th>Pieces</th>
-							      	<th>Price</th>
-							      	<th></th>
-							    </tr>
-						  	</thead>
-							<tbody>{Pending}</tbody>
-						</table>
+						<div id="cartHeader"> <h1>Cart</h1> </div>
+						<div class="table">
+							<table class="customerTable">
+							  	<thead>
+								    <tr>
+								        <th>Item</th>
+								      	<th>Pieces</th>
+								      	<th>Price</th>
+								      	<th></th>
+								    </tr>
+							  	</thead>
+								<tbody>
+									{this.state.pendingOrders.length > 0 ? Pending : <th></th>}
+								</tbody>
+							</table>
+						</div>
+
+						<button onClick={this.goOrder} id="checkoutButton">Checkout</button>
+						{this.state.displayForm ? <a href="#orderDetails"><img class="downArrow" src="https://image.flaticon.com/icons/svg/2316/2316598.svg" /></a> : null}
 					</div>
-					<button onClick={this.goOrder} id="checkoutButton">Checkout</button>
 				</section>
+				
 				{this.state.displayForm ? <Order consumer={this.props.consumer} /> : null}
 			</div>
 		)

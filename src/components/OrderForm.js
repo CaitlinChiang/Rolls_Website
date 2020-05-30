@@ -3,17 +3,20 @@ import * as firebase from 'firebase'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { addDays, addMonths, getDay } from 'date-fns'
+import moment from 'moment'
 
 
 class Order extends Component {
 	state = {
-		consumer: this.props.consumer,    pendingOrders: [],       price: 0,
+		consumer: this.props.consumer,    pendingOrders: [],     price: 0,        
+
+		dateRange: [],  maxDeliveries: 0,
 
 		name: '',       number: '',       mode: '',
 
-		pDate: '',      pPayment: '',     pInstructions: '',       pNote: '',
+		pDate: '',      pPayment: '',     pInstructions: '',     pNote: '',
 		
-		dPayment: '',   address: '',      city: '',                dDate: '',       route: '',       dInstructions: '',       dNote: '',
+		dPayment: '',   address: '',      city: '',              dDate: '',       route: '',       dInstructions: '',       dNote: '',
 
 		orderStatus: 'Not Ready',         paymentStatus: 'Payment Pending'
 	}
@@ -25,6 +28,16 @@ class Order extends Component {
 			let pendingOrders = []
 			snapshot.forEach((snap) => { pendingOrders.push(snap.val()) })
 			this.setState({ pendingOrders })
+		})
+
+		firebase.database().ref('deliveryDates').on('value', snapshot => {
+			let dateRange = []
+			snapshot.forEach((snap) => { dateRange.push(snap.val()) })
+			this.setState({ dateRange })
+		})
+
+		firebase.database().ref('products').child('Delivery Number').on('value', snapshot => {
+			this.setState({ maxDeliveries: snapshot.val().MaxDelivery })
 		})
 	}
 
@@ -44,69 +57,71 @@ class Order extends Component {
 
 	cityFee = () => {
 		if (this.state.mode === 'Delivery') {
-			if (this.state.city === '') {
-				this.setState(prevState => ({ price: prevState.price + 0 }))
-			} else if (this.state.city === 'Cainta') {
-				this.setState(prevState => ({ price: prevState.price + 220 }))
-				this.setState({ route: 'Route2'})
-			} else if (this.state.city === 'Caloocan') {
-				this.setState(prevState => ({ price: prevState.price + 212 }))
-				this.setState({ route: 'Route1'})
-			} else if (this.state.city === 'LasPinas') {
-				this.setState(prevState => ({ price: prevState.price + 268 }))
-				this.setState({ route: 'Route3'})
-			} else if (this.state.city === 'Makati') {
-				this.setState(prevState => ({ price: prevState.price + 156 }))
-				this.setState({ route: 'Route3'})
-			} else if (this.state.city === 'Malabon') {
-				this.setState(prevState => ({ price: prevState.price + 180 }))
-				this.setState({ route: 'Route1'})
-			} else if (this.state.city === 'Mandaluyong') {
-				this.setState(prevState => ({ price: prevState.price + 140 }))
-				this.setState({ route: 'Route2'})
-			} else if (this.state.city === 'Manila') {
-				this.setState(prevState => ({ price: prevState.price + 124 }))
-				this.setState({ route: 'Route1'})
-			} else if (this.state.city === 'Marikina') {
-				this.setState(prevState => ({ price: prevState.price + 156 }))
-				this.setState({ route: 'Route2'})
-			} else if (this.state.city === 'Muntinlupa') {
-				this.setState(prevState => ({ price: prevState.price + 276 }))
-				this.setState({ route: 'Route3'})
-			} else if (this.state.city === 'Navotas') {
-				this.setState(prevState => ({ price: prevState.price + 180 }))
-				this.setState({ route: 'Route1'})
-			} else if (this.state.city === 'Paranaque') {
-				this.setState(prevState => ({ price: prevState.price + 236 }))
-				this.setState({ route: 'Route3'})
-			} else if (this.state.city === 'Pasay') {
-				this.setState(prevState => ({ price: prevState.price + 164 }))
-				this.setState({ route: 'Route3'})
-			} else if (this.state.city === 'Pasig') {
-				this.setState(prevState => ({ price: prevState.price + 140 }))
-				this.setState({ route: 'Route2'})
-			} else if (this.state.city === 'Pateros') {
-				this.setState(prevState => ({ price: prevState.price + 156 }))
-				this.setState({ route: 'Route3'})
-			} else if (this.state.city === 'Quezon') {
-				this.setState(prevState => ({ price: prevState.price + 156 }))
-				this.setState({ route: 'Route1'})
-			} else if (this.state.city === 'SanJuan') {
-				this.setState(prevState => ({ price: prevState.price + 124 }))
-				this.setState({ route: 'Route2'})
-			} else if (this.state.city === 'SanMateo') {
-				this.setState(prevState => ({ price: prevState.price + 276 }))
-				this.setState({ route: 'Route2'})
-			} else if (this.state.city === 'Taguig') {
-				this.setState(prevState => ({ price: prevState.price + 180 }))
-				this.setState({ route: 'Route3'})
-			} else if (this.state.city === 'Taytay') {
-				this.setState(prevState => ({ price: prevState.price + 268 }))
-				this.setState({ route: 'Route2'})
-			} else if (this.state.city === 'Valenzuela') {
-				this.setState(prevState => ({ price: prevState.price + 180 }))
-				this.setState({ route: 'Route1'})
-			}
+			if (this.state.price < 1800) {
+				if (this.state.city === '') {
+					this.setState(prevState => ({ price: prevState.price + 0 }))
+				} else if (this.state.city === 'Cainta') {
+					this.setState(prevState => ({ price: prevState.price + 230 }))
+					this.setState({ route: 'Route2'})
+				} else if (this.state.city === 'Caloocan') {
+					this.setState(prevState => ({ price: prevState.price + 220 }))
+					this.setState({ route: 'Route1'})
+				} else if (this.state.city === 'LasPinas') {
+					this.setState(prevState => ({ price: prevState.price + 270 }))
+					this.setState({ route: 'Route3'})
+				} else if (this.state.city === 'Makati') {
+					this.setState(prevState => ({ price: prevState.price + 160 }))
+					this.setState({ route: 'Route3'})
+				} else if (this.state.city === 'Malabon') {
+					this.setState(prevState => ({ price: prevState.price + 180 }))
+					this.setState({ route: 'Route1'})
+				} else if (this.state.city === 'Mandaluyong') {
+					this.setState(prevState => ({ price: prevState.price + 140 }))
+					this.setState({ route: 'Route2'})
+				} else if (this.state.city === 'Manila') {
+					this.setState(prevState => ({ price: prevState.price + 130 }))
+					this.setState({ route: 'Route2'})
+				} else if (this.state.city === 'Marikina') {
+					this.setState(prevState => ({ price: prevState.price + 160 }))
+					this.setState({ route: 'Route1'})
+				} else if (this.state.city === 'Muntinlupa') {
+					this.setState(prevState => ({ price: prevState.price + 280 }))
+					this.setState({ route: 'Route3'})
+				} else if (this.state.city === 'Navotas') {
+					this.setState(prevState => ({ price: prevState.price + 180 }))
+					this.setState({ route: 'Route1'})
+				} else if (this.state.city === 'Paranaque') {
+					this.setState(prevState => ({ price: prevState.price + 240 }))
+					this.setState({ route: 'Route3'})
+				} else if (this.state.city === 'Pasay') {
+					this.setState(prevState => ({ price: prevState.price + 170 }))
+					this.setState({ route: 'Route3'})
+				} else if (this.state.city === 'Pasig') {
+					this.setState(prevState => ({ price: prevState.price + 140 }))
+					this.setState({ route: 'Route2'})
+				} else if (this.state.city === 'Pateros') {
+					this.setState(prevState => ({ price: prevState.price + 160 }))
+					this.setState({ route: 'Route3'})
+				} else if (this.state.city === 'Quezon') {
+					this.setState(prevState => ({ price: prevState.price + 160 }))
+					this.setState({ route: 'Route1'})
+				} else if (this.state.city === 'SanJuan') {
+					this.setState(prevState => ({ price: prevState.price + 130 }))
+					this.setState({ route: 'Route2'})
+				} else if (this.state.city === 'SanMateo') {
+					this.setState(prevState => ({ price: prevState.price + 280 }))
+					this.setState({ route: 'Route2'})
+				} else if (this.state.city === 'Taguig') {
+					this.setState(prevState => ({ price: prevState.price + 180 }))
+					this.setState({ route: 'Route3'})
+				} else if (this.state.city === 'Taytay') {
+					this.setState(prevState => ({ price: prevState.price + 270 }))
+					this.setState({ route: 'Route2'})
+				} else if (this.state.city === 'Valenzuela') {
+					this.setState(prevState => ({ price: prevState.price + 180 }))
+					this.setState({ route: 'Route1'})
+				}
+			}	
 		}
 		else if (this.state.mode === 'Pickup') {
 			this.setState({ city: '' })
@@ -131,6 +146,20 @@ class Order extends Component {
 			} else if (this.state.dInstructions === 'Frosting') {
 				this.setState(prevState => ({ price: prevState.price + 10 }))
 			}
+		}
+	}
+
+	maxDeliveries = (value) => this.state.dateRange.filter((v) => (v === value)).length
+
+	setDate = (date) => {
+		let disabled = moment(date).format('L')
+		let checkArray = this.state.dateRange.filter((v) => (v === disabled)).length
+
+		if (checkArray >= this.state.maxDeliveries) {
+			alert('We are sorry, but there is no more stock for this day.')
+		}
+		else if (checkArray < this.state.maxDeliveries) {
+			this.setState({ dDate: date })
 		}
 	}
 
@@ -185,21 +214,21 @@ class Order extends Component {
 		})
 
 		if (this.state.mode === 'Pickup') {
-			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order: ${today}`).child('Order Details').set({
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order: ${today}`).child('Order Details').update({
 				Name: this.state.name,
 				Number: this.removeSpaces(this.state.number),
 				Mode: this.state.mode,
 				Price: this.state.price,
-				PickupDate: this.state.pDate,
 				PickupPayment: this.state.pPayment,
 				Instructions: this.state.pInstructions,
 				Note: this.state.pNote,
 				orderStatus: this.state.orderStatus,
-				paymentStatus: this.state.paymentStatus 
+				paymentStatus: this.state.paymentStatus,
+				Date: moment(this.state.pDate).format('L')
 			})
 		}
-		else if (this.state.mode == 'Delivery') {
-			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order: ${today}`).child('Order Details').set({
+		else if (this.state.mode === 'Delivery') {
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order: ${today}`).child('Order Details').update({
 				Name: this.state.name,
 				Number: this.removeSpaces(this.state.number),
 				Mode: this.state.mode,
@@ -208,12 +237,16 @@ class Order extends Component {
 				Address: this.state.address,
 				City: this.state.city,
 				Route: this.state.route,
-				DeliveryDate: this.state.dDate,
 				Instructions: this.state.dInstructions,
 				Note: this.state.dNote,
 				orderStatus: this.state.orderStatus,
-				paymentStatus: this.state.paymentStatus
+				paymentStatus: this.state.paymentStatus,
+				Date: moment(this.state.dDate).format('L')
 			})
+			//save this in its own node in order to keep track of the amount of times the date was used for deliveries
+			firebase.database().ref('deliveryDates').push(
+				moment(this.state.dDate).format('L')
+			)
 		}
 	}
 
@@ -231,18 +264,48 @@ class Order extends Component {
 		event.preventDefault()
 		if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
 			if (this.state.mode === 'Pickup') {
-				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate.trim() !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.trim() !== "") {
-					const confirm = window.confirm('Confirm your purchase?')
-					if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
+				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.trim() !== "" && (this.state.pInstructions === 'Writing' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Personalized' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Candle' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'None' && this.state.pNote.trim() === '' || this.state.pInstructions === 'Frosting' && this.state.pNote.trim() === '')) {
+					//alert the pickup location && BDO Transfer number || pickup location only
+					
+					if (this.state.pPayment === 'P_transfer') {
+						const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
+						if (inform) {
+							const confirm = window.confirm('Confirm your purchase?')
+							if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
+						}
+					}
+					else if (this.state.pPayment === 'payOnPickup') {
+						const inform = window.confirm('The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
+						if (inform) {
+							const confirm = window.confirm('Confirm your purchase?')
+							if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
+						}
+					}
+
+					
 				}
 				else { alert("Please fill in all input fields.") }
 			}
 			else if (this.state.mode === 'Delivery') {
-				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate.trim() !== "" && this.state.dInstructions.trim() !== "") {
-					const confirm = window.confirm('Confirm your purchase?')
-					if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }				
+				if (this.state.pendingOrders.length < 2 && this.state.pendingOrders.includes('P1')) {
+					alert("Minimum of 2 boxes of the 6pcs Cinammon Rolls required for delivery.")
+				} 
+				else {
+					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.trim() !== "" && (this.state.dInstructions === 'Writing' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Personalized' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Candle' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'None' && this.state.dNote.trim() === '' || this.state.dInstructions === 'Frosting' && this.state.dNote.trim() === '')) {
+						if (this.state.dPayment === 'D_transfer') {
+							const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
+							if (inform) {
+								const confirm = window.confirm('Confirm your purchase?')
+								if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
+							}
+						}
+						else if (this.state.dPayment === 'cod') {
+							const confirm = window.confirm('Confirm your purchase?')
+							if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
+						}
+					}
+					else { alert("Please fill in all the input fields.") }
 				}
-				else { alert("Please fill in all the input fields.") }
 			}
 		}
 		else { alert("Your cart is empty.") }
@@ -251,12 +314,12 @@ class Order extends Component {
 	render() {
 		return (
 			<section id="orderDetails">
-				<div class="container">
-					<h1>ORDER</h1>
+				<div class="container fade-in">
+					<div id="orderHeader"> <h1>Order Form</h1> </div>
 					<form autocomplete="off">
 						<div class="identity">
-							<input onChange={this.handleChange} value={this.state.name} name="name" type="text" placeholder="Name" />
-							<input onChange={this.handleChange} value={this.state.number} name="number" type="text" placeholder="Number" />
+							<input onChange={this.handleChange} value={this.state.name} name="name" type="text" placeholder="First Name, Last Name" />
+							<input onChange={this.handleChange} value={this.state.number} name="number" type="text" placeholder="Phone Number" />
 						</div>
 
 						<div class="mode">
@@ -268,10 +331,10 @@ class Order extends Component {
 						</div>
 
 						<div class="showcase">
-							{this.state.mode === 'Pickup' ? 
-								<div id="pickupForm">
+							{this.state.mode === 'Pickup' || this.state.mode === '' ? 
+								<div id="pickupForm" class="slideRight">
 		
-									<DatePicker selected={this.state.pDate} onChange={date => this.setState({ pDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} placeholderText="dd/mm/yyyy" />
+									<DatePicker selected={this.state.pDate} onChange={date => this.setState({ pDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date of Pickup" id="pickupPicker" />
 
 									<select onChange={this.handleChange} value={this.state.pPayment} name="pPayment">
 										<option value="">--Payment Method--</option>
@@ -279,33 +342,31 @@ class Order extends Component {
 										<option value="P_transfer">BDO Bank Transfer</option>
 									</select>
 
-									<select onChange={this.handleChange} value={this.state.pInstructions} name="pInstructions">
-										<option value="">--Special Instruction--</option>
+									<select onChange={this.handleChange} value={this.state.pInstructions} name="pInstructions" id="pickupInstructions">
+										<option value="">--Additional Instructions--</option>
 										<option value="None">None</option>
 										<option value="Writing">1 Line of Writing on Box (Free)</option>
 										<option value="Personalized">Personalized Note (+ P20)</option>
 										<option value="Candle">Candles (+ P20)</option>
 										<option value="Frosting">Separate Frosting (+ P10)</option>
 									</select>
+
 									{this.state.pInstructions === 'Writing' || this.state.pInstructions === 'Personalized' || this.state.pInstructions === 'Candle' ? 
-										<div>
-											<input onChange={this.handleChange} value={this.state.pNote} name="pNote" type="text" placeholder="Description" /> 
-											<p style={{ color: 'white' }}>Boxes of 12 may not be split up into 2 boxes of 6</p> 
-										</div>
+											<input class="slideLeft" onChange={this.handleChange} value={this.state.pNote} name="pNote" type="text" placeholder="Instructions Description" /> 
 									: null}
 
 								</div>
 							: null}
 
 							{this.state.mode === 'Delivery' ?
-								<div id="deliveryForm">
+								<div id="deliveryForm" class="slideRight">
+
 									<select onChange={this.handleChange} value={this.state.dPayment} name="dPayment">
 										<option value="">--Payment Method--</option>
 										<option value="cod">Cash on Delivery</option>
 										<option value="D_transfer">BDO Bank Transfer</option>
 									</select>
-									<input onChange={this.handleChange} value={this.state.address} name="address" type="text" placeholder="Address" />
-									
+					
 									<select onChange={this.handleChange} value={this.state.city} name="city">
 										<option value="">--Select City--</option>
 										<option value="Cainta">Cainta</option>
@@ -329,43 +390,43 @@ class Order extends Component {
 										<option value="Taytay">Taytay</option>
 										<option value="Valenzuela">Valenzuela</option>
 									</select>
-									<p>We only deliver to the cities mentioned above.</p>
+									
+									<input onChange={this.handleChange} value={this.state.address} name="address" type="text" placeholder="Address" />
 
+									{this.state.route === '' ? <DatePicker disabled placeholderText="Date of Delivery" id="deliveryPicker" /> : null}
 
 									{this.state.route !== '' && this.state.route === 'Route1' ?
-										<DatePicker selected={this.state.dDate} onChange={date => this.setState({ dDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} placeholderText="dd/mm/yyyy" />
+										<DatePicker selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
 									: null}
 
 									{this.state.route !== '' && this.state.route === 'Route2' ?
-										<DatePicker selected={this.state.dDate} onChange={date => this.setState({ dDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute2} placeholderText="dd/mm/yyyy" />
+										<DatePicker selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute2} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
 									: null}
 
 									{this.state.route !== '' && this.state.route === 'Route3' ?
-										<DatePicker selected={this.state.dDate} onChange={date => this.setState({ dDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} placeholderText="dd/mm/yyyy" />
+										<DatePicker selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
 									: null}
 
-
 									<select onChange={this.handleChange} value={this.state.dInstructions} name="dInstructions">
-										<option value="">--Special Instruction--</option>
+										<option value="">--Additional Instructions--</option>
 										<option value="None">None</option>
 										<option value="Writing">1 Line of Writing on Box (Free)</option>
 										<option value="Personalized">Personalized Note (+ P20)</option>
 										<option value="Candle">Candles (+ P20)</option>
 										<option value="Frosting">Separate Frosting (+ P10)</option>
 									</select>
+
 									{this.state.dInstructions === 'Writing' || this.state.dInstructions === 'Personalized' || this.state.dInstructions === 'Candle' ? 
-										<div>
-											<input onChange={this.handleChange} value={this.state.dNote} name="dNote" type="text" placeholder="Description" /> 
-											<p style={{ color: 'white' }}>Boxes of 12 may not be split up into 2 boxes of 6</p> 
-										</div>
+											<input class="slideLeft" onChange={this.handleChange} value={this.state.dNote} name="dNote" type="text" placeholder="Instructions Description" /> 
 									: null}
 
 								</div>
 							: null}
 						</div>		
 						
-						<div>
-							<p>Total: {this.state.price} (Additional / Delivery Fees Already Included.)</p>
+						<div class="footer">
+							<p>Total: P{this.state.price}.00 (Additional / Delivery Fees Already Included.)</p>
+							<p>Note: Free delivery for purchases over P1500.00</p>
 							<button onClick={this.order}>Order</button>
 						</div>
 					</form>
