@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase'
+import DateInput from './Picker'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { addDays, addMonths, getDay } from 'date-fns'
@@ -265,8 +266,6 @@ class Order extends Component {
 		if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
 			if (this.state.mode === 'Pickup') {
 				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.trim() !== "" && (this.state.pInstructions === 'Writing' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Personalized' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Candle' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'None' && this.state.pNote.trim() === '' || this.state.pInstructions === 'Frosting' && this.state.pNote.trim() === '')) {
-					//alert the pickup location && BDO Transfer number || pickup location only
-					
 					if (this.state.pPayment === 'P_transfer') {
 						const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
 						if (inform) {
@@ -281,8 +280,6 @@ class Order extends Component {
 							if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
 						}
 					}
-
-					
 				}
 				else { alert("Please fill in all input fields.") }
 			}
@@ -334,7 +331,7 @@ class Order extends Component {
 							{this.state.mode === 'Pickup' || this.state.mode === '' ? 
 								<div id="pickupForm" class="slideRight">
 		
-									<DatePicker selected={this.state.pDate} onChange={date => this.setState({ pDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date of Pickup" id="pickupPicker" />
+									<DatePicker customInput={<DateInput />} selected={this.state.pDate} onChange={date => this.setState({ pDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date of Pickup" id="pickupPicker" />
 
 									<select onChange={this.handleChange} value={this.state.pPayment} name="pPayment">
 										<option value="">--Payment Method--</option>
@@ -396,15 +393,15 @@ class Order extends Component {
 									{this.state.route === '' ? <DatePicker disabled placeholderText="Date of Delivery" id="deliveryPicker" /> : null}
 
 									{this.state.route !== '' && this.state.route === 'Route1' ?
-										<DatePicker selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
+										<DatePicker customInput={<DateInput />} selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
 									: null}
 
 									{this.state.route !== '' && this.state.route === 'Route2' ?
-										<DatePicker selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute2} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
+										<DatePicker customInput={<DateInput />} selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute2} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
 									: null}
 
 									{this.state.route !== '' && this.state.route === 'Route3' ?
-										<DatePicker selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
+										<DatePicker customInput={<DateInput />} selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
 									: null}
 
 									<select onChange={this.handleChange} value={this.state.dInstructions} name="dInstructions">
