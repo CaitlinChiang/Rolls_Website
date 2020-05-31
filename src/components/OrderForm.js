@@ -317,6 +317,10 @@ class Order extends Component {
 		else { alert("Your cart is empty.") }
  	}
 
+//<option value="Writing">1 Line of Writing on Box (Free)</option>
+//<option value="Personalized">Personalized Note (+ P20)</option>
+//<option value="Candle">Candles (+ P20)</option>
+
 	render() {
 		return (
 			<section id="orderDetails">
@@ -354,9 +358,6 @@ class Order extends Component {
 									<select onChange={this.handleChange} value={this.state.pInstructions} name="pInstructions" id="pickupInstructions">
 										<option value="">--Additional Instructions--</option>
 										<option value="None">None</option>
-										<option value="Writing">1 Line of Writing on Box (Free)</option>
-										<option value="Personalized">Personalized Note (+ P20)</option>
-										<option value="Candle">Candles (+ P20)</option>
 										<option value="Frosting">Separate Frosting (+ P10)</option>
 										<option value="extraFrosting">Extra Frosting 100ml (+ P50)</option>
 									</select>
@@ -450,9 +451,6 @@ class Order extends Component {
 									<select onChange={this.handleChange} value={this.state.dInstructions} name="dInstructions">
 										<option value="">--Additional Instructions--</option>
 										<option value="None">None</option>
-										<option value="Writing">1 Line of Writing on Box (Free)</option>
-										<option value="Personalized">Personalized Note (+ P20)</option>
-										<option value="Candle">Candles (+ P20)</option>
 										<option value="Frosting">Separate Frosting (+ P10)</option>
 										<option value="extraFrosting">Extra Frosting 100ml (+ P50)</option>
 									</select>
