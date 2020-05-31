@@ -15,9 +15,9 @@ class Order extends Component {
 
 		name: '',       number: '',       mode: '',
 
-		pDate: '',      pPayment: '',     pInstructions: '',     pNote: '',
+		pDate: '',      pPayment: '',     pInstructions: '',     pNote: '',       pAmount: '',
 		
-		dPayment: '',   address: '',      city: '',              dDate: '',       route: '',       dInstructions: '',       dNote: '',
+		dPayment: '',   address: '',      city: '',              dDate: '',       route: '',       dInstructions: '',       dNote: '',       dAmount: '',
 
 		orderStatus: 'Not Ready',         paymentStatus: 'Payment Pending'
 	}
@@ -226,6 +226,7 @@ class Order extends Component {
 				Price: this.state.price,
 				PickupPayment: this.state.pPayment,
 				Instructions: this.state.pInstructions,
+				FrostingInstructions: this.state.pAmount,
 				Note: this.state.pNote,
 				orderStatus: this.state.orderStatus,
 				paymentStatus: this.state.paymentStatus,
@@ -243,6 +244,7 @@ class Order extends Component {
 				City: this.state.city,
 				Route: this.state.route,
 				Instructions: this.state.dInstructions,
+				FrostingInstructions: this.state.dAmount,
 				Note: this.state.dNote,
 				orderStatus: this.state.orderStatus,
 				paymentStatus: this.state.paymentStatus,
@@ -269,7 +271,7 @@ class Order extends Component {
 		event.preventDefault()
 		if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
 			if (this.state.mode === 'Pickup') {
-				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.trim() !== "" && (this.state.pInstructions === 'Writing' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Personalized' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Candle' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'None' && this.state.pNote.trim() === '' || this.state.pInstructions === 'Frosting' && this.state.pNote.trim() === '' || this.state.pInstructions === 'extraFrosting' && this.state.pNote.trim() === '' )) {
+				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.trim() !== "" && (this.state.pInstructions === 'Writing' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Personalized' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Candle' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'None' && this.state.pNote.trim() === '' || this.state.pInstructions === 'Frosting' && this.state.pNote.trim() === '' || this.state.pInstructions === 'extraFrosting' && this.state.pAmount.trim() !== '' )) {
 					if (this.state.pPayment === 'P_transfer') {
 						const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
 						if (inform) {
@@ -292,7 +294,7 @@ class Order extends Component {
 					alert("Minimum of 2 boxes of the 6pcs Cinammon Rolls required for delivery.")
 				} 
 				else {
-					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.trim() !== "" && (this.state.dInstructions === 'Writing' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Personalized' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Candle' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'None' && this.state.dNote.trim() === '' || this.state.dInstructions === 'Frosting' && this.state.dNote.trim() === '' || this.state.dInstructions === 'extraFrosting' && this.state.dNote.trim() === '' )) {
+					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.trim() !== "" && (this.state.dInstructions === 'Writing' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Personalized' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Candle' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'None' && this.state.dNote.trim() === '' || this.state.dInstructions === 'Frosting' && this.state.dNote.trim() === '' || this.state.dInstructions === 'extraFrosting' && this.state.dAmount.trim() !== '' )) {
 						if (this.state.dPayment === 'D_transfer') {
 							const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
 							if (inform) {
@@ -360,6 +362,22 @@ class Order extends Component {
 											<input class="slideLeft" onChange={this.handleChange} value={this.state.pNote} name="pNote" type="text" placeholder="Instructions Description" /> 
 									: null}
 
+									{this.state.pInstructions === 'extraFrosting' ?
+										<select class="slideLeft" onChange={this.handleChange} value={this.state.pAmount} name="pAmount">
+											<option value="Amount: 0">0</option>
+											<option value="Amount: 1">1</option>
+											<option value="Amount: 2">2</option>
+											<option value="Amount: 3">3</option>
+											<option value="Amount: 4">4</option>
+											<option value="Amount: 5">5</option>
+											<option value="Amount: 6">6</option>
+											<option value="Amount: 7">7</option>
+											<option value="Amount: 8">8</option>
+											<option value="Amount: 9">9</option>
+											<option value="Amount: 10">10</option>
+										</select>
+									: null}
+
 								</div>
 							: null}
 
@@ -398,7 +416,12 @@ class Order extends Component {
 									
 									<input onChange={this.handleChange} value={this.state.address} name="address" type="text" placeholder="Address" />
 
-									{this.state.route === '' ? <DatePicker disabled placeholderText="Date of Delivery" id="deliverPicker" /> : null}
+									{this.state.route === '' ?
+										<div class="datepicker">
+											<h1>Delivery Date</h1>
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} id="deliveryPicker" />
+										</div>
+									: null}
 
 									{this.state.route !== '' && this.state.route === 'Route1' ?
 										<div class="datepicker">
@@ -410,14 +433,14 @@ class Order extends Component {
 									{this.state.route !== '' && this.state.route === 'Route2' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} id="deliveryPicker" />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute2} id="deliveryPicker" />
 										</div>									
 									: null}
 
 									{this.state.route !== '' && this.state.route === 'Route3' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} id="deliveryPicker" />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} id="deliveryPicker" />
 										</div>
 									: null}
 
@@ -432,7 +455,23 @@ class Order extends Component {
 									</select>
 
 									{this.state.dInstructions === 'Writing' || this.state.dInstructions === 'Personalized' || this.state.dInstructions === 'Candle' ? 
-											<input class="slideLeft" onChange={this.handleChange} value={this.state.dNote} name="dNote" type="text" placeholder="Instructions Description" /> 
+										<input class="slideLeft" onChange={this.handleChange} value={this.state.dNote} name="dNote" type="text" placeholder="Instructions Description" /> 
+									: null}
+
+									{this.state.dInstructions === 'extraFrosting' ?
+										<select class="slideLeft" onChange={this.handleChange} value={this.state.dAmount} name="dAmount">
+											<option value="Amount: 0">0</option>
+											<option value="Amount: 1">1</option>
+											<option value="Amount: 2">2</option>
+											<option value="Amount: 3">3</option>
+											<option value="Amount: 4">4</option>
+											<option value="Amount: 5">5</option>
+											<option value="Amount: 6">6</option>
+											<option value="Amount: 7">7</option>
+											<option value="Amount: 8">8</option>
+											<option value="Amount: 9">9</option>
+											<option value="Amount: 10">10</option>
+										</select>
 									: null}
 
 								</div>
@@ -445,6 +484,11 @@ class Order extends Component {
 							<button onClick={this.order}>Order</button>
 						</div>
 					</form>
+				</div>
+
+				<div class="informDetails">
+					<p>Pickup Location: #25 8th St., New Manila, Mariana Quezon City</p>
+					<p>BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion</p>
 				</div>
 			</section>
 		)

@@ -185,7 +185,7 @@ form {
 	text-align: center;
 }
 
-#deliveryForm select, #deliveryForm input, #deliverPicker {
+#deliveryForm select, #deliveryForm input {
 	padding: 10px;
 	font-size: 18px;
 	color: #000000;
@@ -247,6 +247,17 @@ form {
 .footer button:hover {
 	background: #C17C37;
 	color: #ffffff;
+}
+
+.informDetails {
+	background-color: #ffffff;
+	padding: 30px 0px 30px;
+}
+
+.informDetails p {
+	color: #A47E59;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 
