@@ -130,7 +130,7 @@
 
 #modal-body {
 	padding: 10px 20px;
-	height: 500px;
+	min-height: 500px;
 	background: #ffffff;
 }
 
@@ -249,4 +249,6 @@
 		width: auto;
 		height: 40%;
 	}
+
+
 }
