@@ -211,7 +211,7 @@ class Controls extends Component {
 				<td>
 					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
 				    <button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order)} disabled={orderStat === this.state.orderStatus}>Complete</button>
-				    <button style={{background: contactStat === 'true' ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
+				    <button style={{background: contactStat === true ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
 					<button onClick={() => this.remove(person, order, object)}>Remove</button>
 				</td>
 			</tr>
@@ -239,7 +239,7 @@ class Controls extends Component {
 				<td>
 					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
 					<button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order)} disabled={orderStat === this.state.orderStatus}>Complete</button>
-					<button style={{background: contactStat === 'true' ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
+					<button style={{background: contactStat === true ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
 					<button onClick={() => this.remove(person, order, object)}>Remove</button>
 				</td>
 			</tr>
