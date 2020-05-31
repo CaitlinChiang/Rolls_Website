@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 
 class Warning extends Component {
-    state = { readOnly: false }
+    state = { }
 
     render() {
         return (

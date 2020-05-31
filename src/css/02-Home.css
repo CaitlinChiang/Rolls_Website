@@ -20,6 +20,29 @@
 	to { opacity: 1; }
 }
 
+#home button {
+	background: #ffffff;
+	color: #FF7676;
+	padding: 10px;
+	border-radius: 5px;
+	transition: 0.5s;
+	font-weight: normal;
+	font-size: 25px;
+	border: 1px solid #C79874;
+	margin: 0px;
+	display: block;
+	width: 200px;
+	top: 400px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
+#home button:hover {
+	background: #C78F76;
+	color: #ffffff;
+}
+
 .downArrow {
     animation: bouncing 1s infinite ease-in-out;
     bottom: 0;

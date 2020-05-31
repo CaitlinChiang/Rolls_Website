@@ -15,13 +15,13 @@ function Slider() {
 	)
 }
 
-function Home() {
+function Home(props) {
 	return (
 		<div>
 			<section id="home">
 
 				{Slider()}
-				<div class="fade-in"> <h1>ROLLS</h1> </div>
+				<div class="fade-in"> <h1>ROLLS</h1> <button onClick={props.goProducts}>Order Now!</button> </div>
 				<a href="#about"><img class="downArrow" src="https://image.flaticon.com/icons/svg/2316/2316598.svg" /></a>
 			
 			</section>
