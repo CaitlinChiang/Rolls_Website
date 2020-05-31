@@ -130,7 +130,7 @@
 
 #modal-body {
 	padding: 10px 20px;
-	min-height: 500px;
+	height: 500px;
 	background: #ffffff;
 }
 
@@ -244,11 +244,13 @@
 	}
 }
 
-@media(max-width: 370px) {
+@media(max-width: 380px) {
 	#modal-body img {
 		width: auto;
 		height: 40%;
 	}
-
+	#modalDescription button {
+		margin-bottom: 50px;
+	}
 
 }
