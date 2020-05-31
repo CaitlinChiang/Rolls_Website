@@ -130,13 +130,14 @@
 
 #modal-body {
 	padding: 10px 20px;
-	height: 600px;
+	height: 500px;
 	background: #ffffff;
 }
 
 #modal-body img {
 	float: left;
 	margin-top: 85px;
+	width: 400px;
 }
 
 #modalDescription {
