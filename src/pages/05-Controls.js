@@ -24,7 +24,7 @@ class Controls extends Component {
 		if (confirm) { firebase.auth().signOut() }
 	}
 
-	componentDidMount = async () => setInterval(() => this.methodFilter(), 100)
+	componentDidMount = async () => setInterval(() => this.methodFilter(), 500)
 
 	//table filters
 	handleChange = (event) => {
