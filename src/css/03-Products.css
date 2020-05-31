@@ -130,7 +130,7 @@
 
 #modal-body {
 	padding: 10px 20px;
-	height: 500px;
+	min-height: 500px;
 	background: #ffffff;
 }
 
@@ -173,7 +173,7 @@
 
 
 /*Responsive*/
-@media(max-width: 1200px) {
+@media(max-width: 1300px) {
 	#showProducts button {
 		margin: 0px 20px 0px;
 	}
@@ -185,8 +185,8 @@
 
 	#modal-content img {
 		float: none;
-		width: auto;
-		height: 40%;
+		width: 300px;
+		height: auto;
 		margin-top: 10px;
 	}
 
@@ -244,9 +244,8 @@
 	}
 }
 
-@media(max-width: 380px) {
-	#modal-body img {
-		width: auto;
-		height: 250px;
+@media(max-width: 400px) {
+	#modal-content img {
+		width: 200px;
 	}
 }
