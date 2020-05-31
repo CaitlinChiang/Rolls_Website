@@ -24,7 +24,7 @@ class Controls extends Component {
 		if (confirm) { firebase.auth().signOut() }
 	}
 
-	componentDidMount = async () => setInterval(() => this.methodFilter(), 1000)
+	componentDidMount = async () => setInterval(() => this.methodFilter(), 100)
 
 	//table filters
 	handleChange = (event) => {
@@ -44,7 +44,7 @@ class Controls extends Component {
 		}
 		else if (this.state.methodFilter === '') {
 			this.allData()
-		}	
+		}
 	}
 
 	allData = () => {
