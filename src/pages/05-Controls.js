@@ -310,7 +310,7 @@ class Controls extends Component {
 								<option value="pickup">Pickups</option>
 							</select>
 
-							<DatePicker selected={this.state.dateFilter} onChange={date => this.setState({ dateFilter: date })} minDate={new Date()} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date" id="filterPicker" />
+							<button class="datePickerButton"><DatePicker selected={this.state.dateFilter} onChange={date => this.setState({ dateFilter: date })} minDate={new Date()} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date" id="filterPicker" /></button>
 						</div>
 
 						<div class="table">
