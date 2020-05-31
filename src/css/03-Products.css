@@ -249,8 +249,7 @@
 		width: auto;
 		height: 40%;
 	}
-	#modalDescription button {
-		margin-bottom: 50px;
+	#modal-body {
+		height: 550px;
 	}
-
 }
