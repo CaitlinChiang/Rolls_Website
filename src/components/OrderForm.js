@@ -353,6 +353,7 @@ class Order extends Component {
 										<option value="Personalized">Personalized Note (+ P20)</option>
 										<option value="Candle">Candles (+ P20)</option>
 										<option value="Frosting">Separate Frosting (+ P10)</option>
+										<option value="extraFrosting">Extra Frosting 100ml (+ P50)</option>
 									</select>
 
 									{this.state.pInstructions === 'Writing' || this.state.pInstructions === 'Personalized' || this.state.pInstructions === 'Candle' ? 
