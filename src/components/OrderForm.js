@@ -264,6 +264,8 @@ class Order extends Component {
 		
 		    dPayment: '',   address: '',      city: '',                dDate: '',       route: '',       dInstructions: '',       dNote: ''
 		})
+
+		alert("Thank you for ordering! Please expect an SMS regarding your order within the day.")
 	}
 
 	order = (event) => {
