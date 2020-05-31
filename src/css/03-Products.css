@@ -137,6 +137,7 @@
 #modal-body img {
 	float: left;
 	margin-top: 85px;
+	width: 40%;
 }
 
 #modalDescription {
