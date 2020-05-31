@@ -24,7 +24,7 @@ function Navbar(props) {
 			</div>
 
 			<div class="profile">
-				<img onClick={props.goCart} src="/images/cartImage.jpg" />
+				<img onClick={props.goCart} src="/images/cart.png" />
 			</div>
 
 		</header>

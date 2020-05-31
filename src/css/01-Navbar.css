@@ -93,4 +93,5 @@ header {
 	float: right;
 	cursor: pointer;
 	border-radius: 50%;
+	transform: scaleX(-1);
 }
