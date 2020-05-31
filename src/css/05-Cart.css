@@ -197,11 +197,6 @@ form {
 	display: inline-block;
 }
 
-#pickupPicker {
-	display: block;
-	z-index: 10;
-}
-
 #deliveryForm select, .mode select, #pickupForm select {
 	color: #707070;
 }
