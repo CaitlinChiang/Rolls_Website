@@ -492,6 +492,7 @@ class Order extends Component {
 				<div class="informDetails">
 					<p>Pickup Location: #25 8th St., New Manila, Mariana Quezon City</p>
 					<p>BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion</p>
+					<p>Send Your Proof of Payment To: 0917 535 0923</p>
 				</div>
 			</section>
 		)
