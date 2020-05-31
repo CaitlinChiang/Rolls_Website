@@ -101,3 +101,24 @@ html::-webkit-scrollbar {
 html::-webkit-scrollbar-thumb {
     	background: #FF7C7C;
 }
+
+
+
+/*Warning*/
+#warning {
+    min-height: 100vh;
+    background: #FFBE98;
+}
+
+.warning {
+    padding-top: 100px;
+    text-align: center;
+}
+
+.warning h1 {
+    margin: 0px;
+    top: 250px;
+    color: #ffffff;
+    font-size: 30px;
+    margin: 0px 20px 0px;
+}

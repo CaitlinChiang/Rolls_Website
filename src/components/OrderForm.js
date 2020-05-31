@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase'
-import DateInput from './Picker'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { addDays, addMonths, getDay } from 'date-fns'

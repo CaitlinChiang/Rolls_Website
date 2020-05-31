@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import * as firebase from 'firebase'
 import Account from './components/LoginForm'
 import Cart from './components/Cart'
+import Warning from './components/WarningPage'
 import Navbar from './pages/01-Navbar'
 import Home from './pages/02-Home'
 import Products from './pages/03-Products'
@@ -42,9 +43,9 @@ class App extends Component {
                     <div>
                         <Navbar goHome={this.goHome} goProducts={this.goProducts} goArticles={this.goArticles} goCart={this.goCart} />
                         {this.state.DisplayHome ? <Home /> : null}
-                        {this.state.DisplayProducts ? <Products consumer={this.state.userID} p1Stock={this.state.p1Stock} p2Stock={this.state.p2Stock} /> : null}
+                        {this.state.DisplayProducts ? <div>{this.state.user ? <Products consumer={this.state.userID} p1Stock={this.state.p1Stock} p2Stock={this.state.p2Stock} /> : <Account />}</div> : null}
                         {this.state.DisplayArticles ? <Articles /> : null}
-                        {this.state.DisplayCart ? <div>{this.state.user ? <Cart consumer={this.state.userID} /> : <Account />}</div> : null}
+                        {this.state.DisplayCart ? <div>{this.state.user ? <Cart consumer={this.state.userID} /> : <Warning />}</div> : null}
                     </div>
                 : <Controls />}
             </div>
