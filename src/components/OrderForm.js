@@ -18,7 +18,7 @@ class Order extends Component {
 		
 		dPayment: '',   address: '',      city: '',              dDate: '',       route: '',       dInstructions: '',       dNote: '',       dAmount: '',
 
-		orderStatus: 'Not Ready',         paymentStatus: 'Payment Pending'
+		orderStatus: 'Not Ready',         paymentStatus: 'Payment Pending',       contacted: false
 	}
 
 	componentDidMount = async () => {
@@ -229,6 +229,7 @@ class Order extends Component {
 				Note: this.state.pNote,
 				orderStatus: this.state.orderStatus,
 				paymentStatus: this.state.paymentStatus,
+				contacted: this.state.contacted,
 				Date: moment(this.state.pDate).format('L')
 			})
 		}
@@ -247,6 +248,7 @@ class Order extends Component {
 				Note: this.state.dNote,
 				orderStatus: this.state.orderStatus,
 				paymentStatus: this.state.paymentStatus,
+				contacted: this.state.contacted,
 				Date: moment(this.state.dDate).format('L')
 			})
 			//save this in its own node in order to keep track of the amount of times the date was used for deliveries

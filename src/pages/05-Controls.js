@@ -12,7 +12,7 @@ class Controls extends Component {
 
 		items: [],                    person: '',
 
-		orderStatus: 'Ready',         paymentStatus: 'Payment Confirmed',
+		orderStatus: 'Ready',         paymentStatus: 'Payment Confirmed',       contacted: true,
 
 		methodFilter: '',             dateFilter: '',
 
@@ -68,13 +68,13 @@ class Controls extends Component {
 								this.addPickupInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
 									if (item === 'P1') { return <p>6pcs</p> }
 									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus)
+								}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted)
 							}
 							else if (details.val().Mode === 'Delivery') {
 								this.addDeliveryInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
 									if (item === 'P1') { return <p>6pcs</p> }
 									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus)
+								}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted)
 							}
 						}
 						else if (this.state.dateFilter !== '') {
@@ -83,13 +83,13 @@ class Controls extends Component {
 									this.addPickupInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus)
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted)
 								}
 								else if (details.val().Mode === 'Delivery') {
 									this.addDeliveryInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus)
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted)
 								}
 							}
 							else if (details.val().Date !== moment(this.state.dateFilter).format('L')) {
@@ -121,7 +121,7 @@ class Controls extends Component {
 								this.addPickupInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
 									if (item === 'P1') { return <p>6pcs</p> }
 									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus)
+								}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted)
 							}
 							else if (details.val().Mode === 'Delivery') {
 								return
@@ -133,7 +133,7 @@ class Controls extends Component {
 									this.addPickupInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus)
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted)
 								}
 								else if (details.val().Mode === 'Delivery') {
 									return
@@ -168,7 +168,7 @@ class Controls extends Component {
 								this.addDeliveryInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
 									if (item === 'P1') { return <p>6pcs</p> }
 									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus)
+								}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted)
 							}
 							else if (details.val().Mode === 'Pickup') {
 								return
@@ -180,7 +180,7 @@ class Controls extends Component {
 									this.addDeliveryInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus)
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted)
 								}
 								else if (details.val().Mode === 'Pickup') {
 									return
@@ -196,7 +196,7 @@ class Controls extends Component {
 		})	
 	}
 
-	addPickupInfo = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat) => {
+	addPickupInfo = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat) => {
 		let object = order
 		var row = this.state.orders.concat(
 			<tr id={object}>
@@ -211,6 +211,7 @@ class Controls extends Component {
 				<td>
 					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
 				    <button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order)} disabled={orderStat === this.state.orderStatus}>Complete</button>
+				    <button style={{background: contactStat === 'true' ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
 					<button onClick={() => this.remove(person, order, object)}>Remove</button>
 				</td>
 			</tr>
@@ -218,7 +219,7 @@ class Controls extends Component {
 		this.setState({ orders: row })
 	}
 
-	addDeliveryInfo = (name, number, products, amount, mode, date, address, city, route, instruction, description, person, order,  paymentStat, orderStat) => {
+	addDeliveryInfo = (name, number, products, amount, mode, date, address, city, route, instruction, description, person, order,  paymentStat, orderStat, contactStat) => {
 		let object = order
 		var row = this.state.orders.concat(
 			<tr id={object}>
@@ -238,6 +239,7 @@ class Controls extends Component {
 				<td>
 					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
 					<button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order)} disabled={orderStat === this.state.orderStatus}>Complete</button>
+					<button style={{background: contactStat === 'true' ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
 					<button onClick={() => this.remove(person, order, object)}>Remove</button>
 				</td>
 			</tr>
@@ -254,6 +256,11 @@ class Controls extends Component {
 	done = (customer, order) => { 
 		firebase.database().ref('rolls').child(customer).child(order).child('Order Details').update({ orderStatus: this.state.orderStatus })
 		document.getElementById(order).querySelector('#done').style.backgroundColor = "#B2773C"
+	}
+
+	contact = (customer, order) => {
+		firebase.database().ref('rolls').child(customer).child(order).child('Order Details').update({ contacted: this.state.contacted })
+		document.getElementById(order).querySelector('#contact').style.backgroundColor = "#B2773C"
 	}
 
 	remove = (customer, order, item) => {
