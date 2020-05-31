@@ -125,7 +125,7 @@
 	color: #ffffff;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	min-height: 20px;
+	height: 20px;
 }
 
 #modal-body {
@@ -167,7 +167,7 @@
 	color: #ffffff;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
-	min-height: 20px;
+	height: 20px;
 }
 
 
@@ -247,9 +247,9 @@
 @media(max-width: 380px) {
 	#modal-body img {
 		width: auto;
-		height: 40%;
+		height: 300px;
 	}
 	#modal-body {
-		height: 550px;
+		height: 600px;
 	}
 }
