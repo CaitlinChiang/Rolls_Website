@@ -20,13 +20,23 @@ class Products extends Component {
 	}
 
 	addP1ToCart = async (event) => {
-		{this.props.consumer.trim() !== "" ? firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').push('P1')
-		: alert("Kindly register an account before adding to cart!") }
+		if (this.props.consumer.trim() !== "") {
+			firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').push('P1')
+			alert("This item has been added to your cart!")
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
 	}
 
 	addP2ToCart = async (event) => {
-		{this.props.consumer.trim() !== "" ? firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').push('P2')
-		: alert("Kindly register an account before adding to cart!") }
+		if (this.props.consumer.trim() !== "") {
+			firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').push('P2')
+			alert("This item has been added to your cart!")
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
 	}
 
 	stopPropagation = (event) => event.stopPropagation()

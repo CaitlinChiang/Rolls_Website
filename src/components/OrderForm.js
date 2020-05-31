@@ -137,6 +137,8 @@ class Order extends Component {
 				this.setState(prevState => ({ price: prevState.price + 20 }))
 			} else if (this.state.pInstructions === 'Frosting') {
 				this.setState(prevState => ({ price: prevState.price + 10 }))
+			} else if (this.state.pInstructions === 'extraFrosting') {
+				this.setState(prevState => ({ price: prevState.price + 50 }))
 			}
 		}
 		else if (this.state.mode === 'Delivery') {
@@ -146,6 +148,8 @@ class Order extends Component {
 				this.setState(prevState => ({ price: prevState.price + 20 }))
 			} else if (this.state.dInstructions === 'Frosting') {
 				this.setState(prevState => ({ price: prevState.price + 10 }))
+			} else if (this.state.dInstructions === 'extraFrosting') {
+				this.setState(prevState => ({ price: prevState.price + 50 }))
 			}
 		}
 	}
@@ -265,7 +269,7 @@ class Order extends Component {
 		event.preventDefault()
 		if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
 			if (this.state.mode === 'Pickup') {
-				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.trim() !== "" && (this.state.pInstructions === 'Writing' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Personalized' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Candle' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'None' && this.state.pNote.trim() === '' || this.state.pInstructions === 'Frosting' && this.state.pNote.trim() === '')) {
+				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.trim() !== "" && (this.state.pInstructions === 'Writing' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Personalized' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Candle' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'None' && this.state.pNote.trim() === '' || this.state.pInstructions === 'Frosting' && this.state.pNote.trim() === '' || this.state.pInstructions === 'extraFrosting' && this.state.pNote.trim() === '' )) {
 					if (this.state.pPayment === 'P_transfer') {
 						const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
 						if (inform) {
@@ -288,7 +292,7 @@ class Order extends Component {
 					alert("Minimum of 2 boxes of the 6pcs Cinammon Rolls required for delivery.")
 				} 
 				else {
-					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.trim() !== "" && (this.state.dInstructions === 'Writing' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Personalized' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Candle' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'None' && this.state.dNote.trim() === '' || this.state.dInstructions === 'Frosting' && this.state.dNote.trim() === '')) {
+					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.trim() !== "" && (this.state.dInstructions === 'Writing' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Personalized' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Candle' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'None' && this.state.dNote.trim() === '' || this.state.dInstructions === 'Frosting' && this.state.dNote.trim() === '' || this.state.dInstructions === 'extraFrosting' && this.state.dNote.trim() === '' )) {
 						if (this.state.dPayment === 'D_transfer') {
 							const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
 							if (inform) {
@@ -423,6 +427,7 @@ class Order extends Component {
 										<option value="Personalized">Personalized Note (+ P20)</option>
 										<option value="Candle">Candles (+ P20)</option>
 										<option value="Frosting">Separate Frosting (+ P10)</option>
+										<option value="extraFrosting">Extra Frosting 100ml (+ P50)</option>
 									</select>
 
 									{this.state.dInstructions === 'Writing' || this.state.dInstructions === 'Personalized' || this.state.dInstructions === 'Candle' ? 
