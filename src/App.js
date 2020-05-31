@@ -17,10 +17,7 @@ class App extends Component {
         DisplayCart: false, DisplayHome: true,  DisplayProducts: false, DisplayArticles: false
     }
 
-    componentDidMount = async () => {
-        this.authListener()
-        alert("In order to place orders, please login.")
-    } 
+    componentDidMount = async () => this.authListener()
 
     authListener = () => {
         firebase.auth().onAuthStateChanged((user) => {
