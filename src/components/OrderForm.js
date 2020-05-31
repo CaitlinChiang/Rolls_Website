@@ -330,8 +330,11 @@ class Order extends Component {
 						<div class="showcase">
 							{this.state.mode === 'Pickup' || this.state.mode === '' ? 
 								<div id="pickupForm" class="slideRight">
-		
-									<DatePicker inline selected={this.state.pDate} onChange={date => this.setState({ pDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date of Pickup" id="pickupPicker" />
+									
+									<div class="datepicker">
+										<h1>Pickup Date</h1>
+										<DatePicker inline selected={this.state.pDate} onChange={date => this.setState({ pDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date of Pickup" id="pickupPicker" />
+									</div>
 
 									<select onChange={this.handleChange} value={this.state.pPayment} name="pPayment">
 										<option value="">--Payment Method--</option>
@@ -390,18 +393,27 @@ class Order extends Component {
 									
 									<input onChange={this.handleChange} value={this.state.address} name="address" type="text" placeholder="Address" />
 
-									{this.state.route === '' ? <DatePicker disabled placeholderText="Date of Delivery" id="deliveryPicker" /> : null}
+									{this.state.route === '' ? <DatePicker disabled placeholderText="Date of Delivery" id="deliverPicker" /> : null}
 
 									{this.state.route !== '' && this.state.route === 'Route1' ?
-										<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
+										<div class="datepicker">
+											<h1>Delivery Date</h1>
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} id="deliveryPicker" />
+										</div>
 									: null}
 
 									{this.state.route !== '' && this.state.route === 'Route2' ?
-										<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute2} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
+										<div class="datepicker">
+											<h1>Delivery Date</h1>
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} id="deliveryPicker" />
+										</div>									
 									: null}
 
 									{this.state.route !== '' && this.state.route === 'Route3' ?
-										<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
+										<div class="datepicker">
+											<h1>Delivery Date</h1>
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} id="deliveryPicker" />
+										</div>
 									: null}
 
 									<select onChange={this.handleChange} value={this.state.dInstructions} name="dInstructions">
