@@ -35,7 +35,8 @@
 	margin: 0px 0px 30px;
 	top: 250px;
 	color: #ffffff;
-	font-family: 'Playball', Helvetica, sans-serif;
+	font-family: 'Playball', serif;
+	font-style: oblique;
 	font-size: 50px;
 }
 
@@ -125,7 +126,8 @@
 	margin: 0px 0px 30px;
 	top: 250px;
 	color: #ffffff;
-	font-family: 'Playball', Helvetica, sans-serif;
+	font-family: 'Playball', serif;
+	font-style: oblique;
 	font-size: 50px;
 }
 
