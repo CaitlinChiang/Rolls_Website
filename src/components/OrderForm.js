@@ -393,15 +393,15 @@ class Order extends Component {
 									{this.state.route === '' ? <DatePicker disabled placeholderText="Date of Delivery" id="deliveryPicker" /> : null}
 
 									{this.state.route !== '' && this.state.route === 'Route1' ?
-										<DatePicker inline onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
+										<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
 									: null}
 
 									{this.state.route !== '' && this.state.route === 'Route2' ?
-										<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute2} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
+										<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute2} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
 									: null}
 
 									{this.state.route !== '' && this.state.route === 'Route3' ?
-										<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
+										<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 2)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} format='MM-dd-yyyy' placeholderText="Date of Delivery" id="deliveryPicker" />
 									: null}
 
 									<select onChange={this.handleChange} value={this.state.dInstructions} name="dInstructions">
