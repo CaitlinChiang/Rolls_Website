@@ -331,7 +331,7 @@ class Order extends Component {
 							{this.state.mode === 'Pickup' || this.state.mode === '' ? 
 								<div id="pickupForm" class="slideRight">
 		
-									<DatePicker popperModifiers={{preventOverflow: { enabled: true }}} selected={this.state.pDate} onChange={date => this.setState({ pDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date of Pickup" id="pickupPicker" />
+									<DatePicker withPortal selected={this.state.pDate} onChange={date => this.setState({ pDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date of Pickup" id="pickupPicker" />
 
 									<select onChange={this.handleChange} value={this.state.pPayment} name="pPayment">
 										<option value="">--Payment Method--</option>
