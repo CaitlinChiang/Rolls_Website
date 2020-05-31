@@ -246,6 +246,7 @@
 
 @media(max-width: 370px) {
 	#modal-body img {
-		height: 150px;
+		width: auto;
+		height: 40%;
 	}
 }
