@@ -60,17 +60,22 @@ class Controls extends Component {
 					//append all the details from 'Order Details' to the specified functions
 					order.forEach((details) => {
 						if (this.state.dateFilter === '') {
-							if (details.val().Mode === 'Pickup') {
-								this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
-									if (item === 'P1') { return <p>6pcs</p> }
-									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+							if (details.val().orderStatus === 'Not Ready') {
+								if (details.val().Mode === 'Pickup') {
+									this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+										if (item === 'P1') { return <p>6pcs</p> }
+										else if (item === 'P2') { return <p>12pcs</p> }
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+								}
+								else if (details.val().Mode === 'Delivery') {
+									this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+										if (item === 'P1') { return <p>6pcs</p> }
+										else if (item === 'P2') { return <p>12pcs</p> }
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+								}
 							}
-							else if (details.val().Mode === 'Delivery') {
-								this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
-									if (item === 'P1') { return <p>6pcs</p> }
-									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+							else if (details.val().orderStatus === 'Ready') {
+								return
 							}
 						}
 						else if (this.state.dateFilter !== '') {
@@ -165,14 +170,19 @@ class Controls extends Component {
 					}
 					order.forEach((details) => {
 						if (this.state.dateFilter === '') {
-							if (details.val().Mode === 'Pickup') {
-								this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
-									if (item === 'P1') { return <p>6pcs</p> }
-									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+							if (details.val().orderStatus === 'Not Ready') {
+								if (details.val().Mode === 'Pickup') {
+									this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
+										if (item === 'P1') { return <p>6pcs</p> }
+										else if (item === 'P2') { return <p>12pcs</p> }
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+								}
+								else if (details.val().Mode === 'Delivery') {
+									return
+								}
 							}
-							else if (details.val().Mode === 'Delivery') {
-								return
+							else if (details.val().orderStatus === 'Ready') {
+								return 
 							}
 						}
 						else if (this.state.dateFilter !== '') {
@@ -236,13 +246,18 @@ class Controls extends Component {
 					}
 					order.forEach((details) => {
 						if (this.state.dateFilter === '') {
-							if (details.val().Mode === 'Delivery') {
-								this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
-									if (item === 'P1') { return <p>6pcs</p> }
-									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+							if (details.val().orderStatus === 'Not Ready') {
+								if (details.val().Mode === 'Delivery') {
+									this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
+										if (item === 'P1') { return <p>6pcs</p> }
+										else if (item === 'P2') { return <p>12pcs</p> }
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+								}
+								else if (details.val().Mode === 'Pickup') {
+									return
+								}
 							}
-							else if (details.val().Mode === 'Pickup') {
+							else if (details.val().orderStatus === 'Ready') {
 								return
 							}
 						}
