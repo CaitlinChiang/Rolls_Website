@@ -22,7 +22,7 @@ class Order extends Component {
 	}
 
 	componentDidMount = async () => {
-		setInterval(() => { this.displayTotal(); this.cityFee(); this.instructionFee() }, 100)
+		setInterval(() => { this.displayTotal(); this.cityFee(); this.instructionFee(); }, 100)
 
 		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').on('value', snapshot => {
 			let pendingOrders = []
@@ -137,7 +137,7 @@ class Order extends Component {
 			} else if (this.state.pInstructions === 'Frosting') {
 				this.setState(prevState => ({ price: prevState.price + 10 }))
 			} else if (this.state.pInstructions === 'extraFrosting') {
-				this.setState(prevState => ({ price: prevState.price + 50 }))
+				this.extraFrostingFeePickup()
 			}
 		}
 		else if (this.state.mode === 'Delivery') {
@@ -148,8 +148,60 @@ class Order extends Component {
 			} else if (this.state.dInstructions === 'Frosting') {
 				this.setState(prevState => ({ price: prevState.price + 10 }))
 			} else if (this.state.dInstructions === 'extraFrosting') {
-				this.setState(prevState => ({ price: prevState.price + 50 }))
+				this.extraFrostingFeeDelivery()
 			}
+		}
+	}
+
+	extraFrostingFeePickup = () => {
+		if (this.state.pAmount === '') {
+			this.setState(prevState => ({ price: prevState.price + 0 }))
+		} else if (this.state.pAmount === 'Amount: 1') {
+			this.setState(prevState => ({ price: prevState.price + 50 }))
+		} else if (this.state.pAmount === 'Amount: 2') {
+			this.setState(prevState => ({ price: prevState.price + 100 }))
+		} else if (this.state.pAmount === 'Amount: 3') {
+			this.setState(prevState => ({ price: prevState.price + 150 }))
+		} else if (this.state.pAmount === 'Amount: 4') {
+			this.setState(prevState => ({ price: prevState.price + 200 }))
+		} else if (this.state.pAmount === 'Amount: 5') {
+			this.setState(prevState => ({ price: prevState.price + 250 }))
+		} else if (this.state.pAmount === 'Amount: 6') {
+			this.setState(prevState => ({ price: prevState.price + 300 }))
+		} else if (this.state.pAmount === 'Amount: 7') {
+			this.setState(prevState => ({ price: prevState.price + 350 }))
+		} else if (this.state.pAmount === 'Amount: 8') {
+			this.setState(prevState => ({ price: prevState.price + 400 }))
+		} else if (this.state.pAmount === 'Amount: 9') {
+			this.setState(prevState => ({ price: prevState.price + 450 }))
+		} else if (this.state.pAmount === 'Amount: 10') {
+			this.setState(prevState => ({ price: prevState.price + 500 }))
+		}
+	}
+
+	extraFrostingFeeDelivery = () => {
+		if (this.state.dAmount === '') {
+			this.setState(prevState => ({ price: prevState.price + 0 }))
+		} else if (this.state.dAmount === 'Amount: 1') {
+			this.setState(prevState => ({ price: prevState.price + 50 }))
+		} else if (this.state.dAmount === 'Amount: 2') {
+			this.setState(prevState => ({ price: prevState.price + 100 }))
+		} else if (this.state.dAmount === 'Amount: 3') {
+			this.setState(prevState => ({ price: prevState.price + 150 }))
+		} else if (this.state.dAmount === 'Amount: 4') {
+			this.setState(prevState => ({ price: prevState.price + 200 }))
+		} else if (this.state.dAmount === 'Amount: 5') {
+			this.setState(prevState => ({ price: prevState.price + 250 }))
+		} else if (this.state.dAmount === 'Amount: 6') {
+			this.setState(prevState => ({ price: prevState.price + 300 }))
+		} else if (this.state.dAmount === 'Amount: 7') {
+			this.setState(prevState => ({ price: prevState.price + 350 }))
+		} else if (this.state.dAmount === 'Amount: 8') {
+			this.setState(prevState => ({ price: prevState.price + 400 }))
+		} else if (this.state.dAmount === 'Amount: 9') {
+			this.setState(prevState => ({ price: prevState.price + 450 }))
+		} else if (this.state.dAmount === 'Amount: 10') {
+			this.setState(prevState => ({ price: prevState.price + 500 }))
 		}
 	}
 
@@ -368,7 +420,7 @@ class Order extends Component {
 
 									{this.state.pInstructions === 'extraFrosting' ?
 										<select class="slideLeft" onChange={this.handleChange} value={this.state.pAmount} name="pAmount">
-											<option value="Amount: 0">0</option>
+											<option value="">0</option>
 											<option value="Amount: 1">1</option>
 											<option value="Amount: 2">2</option>
 											<option value="Amount: 3">3</option>
@@ -461,7 +513,7 @@ class Order extends Component {
 
 									{this.state.dInstructions === 'extraFrosting' ?
 										<select class="slideLeft" onChange={this.handleChange} value={this.state.dAmount} name="dAmount">
-											<option value="Amount: 0">0</option>
+											<option value="">0</option>
 											<option value="Amount: 1">1</option>
 											<option value="Amount: 2">2</option>
 											<option value="Amount: 3">3</option>
