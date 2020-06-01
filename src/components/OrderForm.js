@@ -57,70 +57,68 @@ class Order extends Component {
 
 	cityFee = () => {
 		if (this.state.mode === 'Delivery') {
-			this.setState(prevState => ({ price: prevState.price + 20 }))
-
 			if (this.state.price < 1800) {
 				if (this.state.city === '') {
 					this.setState(prevState => ({ price: prevState.price + 0 }))
 				} else if (this.state.city === 'Cainta') {
-					this.setState(prevState => ({ price: prevState.price + 230 }))
+					this.setState(prevState => ({ price: prevState.price + 210 }))
 					this.setState({ route: 'Route2'})
 				} else if (this.state.city === 'Caloocan') {
-					this.setState(prevState => ({ price: prevState.price + 220 }))
+					this.setState(prevState => ({ price: prevState.price + 200 }))
 					this.setState({ route: 'Route1'})
 				} else if (this.state.city === 'LasPinas') {
-					this.setState(prevState => ({ price: prevState.price + 270 }))
+					this.setState(prevState => ({ price: prevState.price + 250 }))
 					this.setState({ route: 'Route3'})
 				} else if (this.state.city === 'Makati') {
-					this.setState(prevState => ({ price: prevState.price + 160 }))
+					this.setState(prevState => ({ price: prevState.price + 140 }))
 					this.setState({ route: 'Route3'})
 				} else if (this.state.city === 'Malabon') {
-					this.setState(prevState => ({ price: prevState.price + 180 }))
+					this.setState(prevState => ({ price: prevState.price + 160 }))
 					this.setState({ route: 'Route1'})
 				} else if (this.state.city === 'Mandaluyong') {
-					this.setState(prevState => ({ price: prevState.price + 140 }))
+					this.setState(prevState => ({ price: prevState.price + 120 }))
 					this.setState({ route: 'Route2'})
 				} else if (this.state.city === 'Manila') {
-					this.setState(prevState => ({ price: prevState.price + 130 }))
+					this.setState(prevState => ({ price: prevState.price + 110 }))
 					this.setState({ route: 'Route2'})
 				} else if (this.state.city === 'Marikina') {
-					this.setState(prevState => ({ price: prevState.price + 160 }))
+					this.setState(prevState => ({ price: prevState.price + 140 }))
 					this.setState({ route: 'Route1'})
 				} else if (this.state.city === 'Muntinlupa') {
-					this.setState(prevState => ({ price: prevState.price + 280 }))
+					this.setState(prevState => ({ price: prevState.price + 260 }))
 					this.setState({ route: 'Route3'})
 				} else if (this.state.city === 'Navotas') {
-					this.setState(prevState => ({ price: prevState.price + 180 }))
+					this.setState(prevState => ({ price: prevState.price + 160 }))
 					this.setState({ route: 'Route1'})
 				} else if (this.state.city === 'Paranaque') {
-					this.setState(prevState => ({ price: prevState.price + 240 }))
+					this.setState(prevState => ({ price: prevState.price + 220 }))
 					this.setState({ route: 'Route3'})
 				} else if (this.state.city === 'Pasay') {
-					this.setState(prevState => ({ price: prevState.price + 170 }))
+					this.setState(prevState => ({ price: prevState.price + 150 }))
 					this.setState({ route: 'Route3'})
 				} else if (this.state.city === 'Pasig') {
-					this.setState(prevState => ({ price: prevState.price + 140 }))
+					this.setState(prevState => ({ price: prevState.price + 120 }))
 					this.setState({ route: 'Route2'})
 				} else if (this.state.city === 'Pateros') {
-					this.setState(prevState => ({ price: prevState.price + 160 }))
+					this.setState(prevState => ({ price: prevState.price + 140 }))
 					this.setState({ route: 'Route3'})
 				} else if (this.state.city === 'Quezon') {
-					this.setState(prevState => ({ price: prevState.price + 160 }))
+					this.setState(prevState => ({ price: prevState.price + 140 }))
 					this.setState({ route: 'Route1'})
 				} else if (this.state.city === 'SanJuan') {
-					this.setState(prevState => ({ price: prevState.price + 130 }))
+					this.setState(prevState => ({ price: prevState.price + 110 }))
 					this.setState({ route: 'Route2'})
 				} else if (this.state.city === 'SanMateo') {
-					this.setState(prevState => ({ price: prevState.price + 280 }))
+					this.setState(prevState => ({ price: prevState.price + 260 }))
 					this.setState({ route: 'Route2'})
 				} else if (this.state.city === 'Taguig') {
-					this.setState(prevState => ({ price: prevState.price + 180 }))
+					this.setState(prevState => ({ price: prevState.price + 160 }))
 					this.setState({ route: 'Route3'})
 				} else if (this.state.city === 'Taytay') {
-					this.setState(prevState => ({ price: prevState.price + 270 }))
+					this.setState(prevState => ({ price: prevState.price + 250 }))
 					this.setState({ route: 'Route2'})
 				} else if (this.state.city === 'Valenzuela') {
-					this.setState(prevState => ({ price: prevState.price + 180 }))
+					this.setState(prevState => ({ price: prevState.price + 160 }))
 					this.setState({ route: 'Route1'})
 				}
 			}	
