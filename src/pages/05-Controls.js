@@ -10,15 +10,11 @@ class Controls extends Component {
 	state = {
 		allOrders: [],                pickupOrders: [],                         deliveryOrders: [],
 
-		purchase: '',
-
-		items: [],                    person: '',
+		purchase: '',                 items: [],                                person: '',
 
 		orderStatus: 'Ready',         paymentStatus: 'Payment Confirmed',       contacted: true,
 
-		methodFilter: '',             dateFilter: '',
-
-		maxDeliveries: 0
+		methodFilter: '',             dateFilter: '',                           maxDeliveries: 0
 	}
 
 	logout = (event) => {
