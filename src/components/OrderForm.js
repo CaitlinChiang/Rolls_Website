@@ -57,6 +57,8 @@ class Order extends Component {
 
 	cityFee = () => {
 		if (this.state.mode === 'Delivery') {
+			this.setState(prevState => ({ price: prevState.price + 20 }))
+
 			if (this.state.price < 1800) {
 				if (this.state.city === '') {
 					this.setState(prevState => ({ price: prevState.price + 0 }))
