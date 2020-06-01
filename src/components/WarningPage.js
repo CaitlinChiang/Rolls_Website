@@ -8,7 +8,7 @@ class Warning extends Component {
         return (
             <section id="warning">
                 <div class="conatiner warning">
-                    <h1>To see your shopping cart, kindly login to your account!</h1>
+                    <h1>To see your shopping cart, kindly login to your account!<br />Simply click "Order" to see the login / signup form.</h1>
                 </div>
             </section>
         )

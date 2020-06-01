@@ -8,7 +8,9 @@ import moment from 'moment'
 
 class Controls extends Component {
 	state = {
-		orders: [],                   purchase: '',
+		allOrders: [],                pickupOrders: [],                         deliveryOrders: [],   
+
+		purchase: '',
 
 		items: [],                    person: '',
 
@@ -24,31 +26,21 @@ class Controls extends Component {
 		if (confirm) { firebase.auth().signOut() }
 	}
 
-	componentDidMount = async () => setInterval(() => this.methodFilter(), 500)
+	componentDidMount = async () => {
+		this.allData()
+		this.pickup()
+		this.delivery()
+	}
 
-	//table filters
 	handleChange = (event) => {
 		event.preventDefault()
 		const {name, value} = event.target
 		this.setState({ [name]: value })
 	}
 
-	methodFilter = () => {
-		this.setState({ orders: [] })
-
-		if (this.state.methodFilter === 'pickup') {
-			this.pickup()
-		}
-		else if (this.state.methodFilter === 'delivery') {
-			this.delivery()
-		}
-		else if (this.state.methodFilter === '') {
-			this.allData()
-		}
-	}
-
+	//display all the data 
 	allData = () => {
-		firebase.database().ref('rolls').on('value', snapshot => {
+		firebase.database().ref('rolls').once('value', snapshot => {
 			snapshot.forEach((snap) => {
 				this.setState({ person: snap.key })
 				snap.forEach((order) => {
@@ -65,13 +57,13 @@ class Controls extends Component {
 					order.forEach((details) => {
 						if (this.state.dateFilter === '') {
 							if (details.val().Mode === 'Pickup') {
-								this.addPickupInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
+								this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 									if (item === 'P1') { return <p>6pcs</p> }
 									else if (item === 'P2') { return <p>12pcs</p> }
 								}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
 							}
 							else if (details.val().Mode === 'Delivery') {
-								this.addDeliveryInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
+								this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 									if (item === 'P1') { return <p>6pcs</p> }
 									else if (item === 'P2') { return <p>12pcs</p> }
 								}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
@@ -80,13 +72,13 @@ class Controls extends Component {
 						else if (this.state.dateFilter !== '') {
 							if (details.val().Date === moment(this.state.dateFilter).format('L')) {
 								if (details.val().Mode === 'Pickup') {
-									this.addPickupInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
 									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
 								}
 								else if (details.val().Mode === 'Delivery') {
-									this.addDeliveryInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
 									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
@@ -102,103 +94,9 @@ class Controls extends Component {
 		})	
 	}
 
-	pickup = () => {
-		firebase.database().ref('rolls').on('value', snapshot => {
-			snapshot.forEach((snap) => {
-				this.setState({ person: snap.key })
-				snap.forEach((order) => {
-					this.setState({ purchase: order.key })
-					if (order.hasChild('Order Items')) {
-						order.forEach((details) => {
-							let items = []
-							details.forEach((product) => { items.push(product.val()) })
-							this.setState({ items })
-						})
-					}
-					order.forEach((details) => {
-						if (this.state.dateFilter === '') {
-							if (details.val().Mode === 'Pickup') {
-								this.addPickupInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
-									if (item === 'P1') { return <p>6pcs</p> }
-									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
-							}
-							else if (details.val().Mode === 'Delivery') {
-								return
-							}
-						}
-						else if (this.state.dateFilter !== '') {
-							if (details.val().Date === moment(this.state.dateFilter).format('L')) {
-								if (details.val().Mode === 'Pickup') {
-									this.addPickupInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
-										if (item === 'P1') { return <p>6pcs</p> }
-										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
-								}
-								else if (details.val().Mode === 'Delivery') {
-									return
-								}
-							}
-							else if (details.val().Date !== moment(this.state.dateFilter).format('L')) {
-								return
-							}
-						}	
-					})	
-				})
-			})
-		})	
-	}
-
-	delivery = () => {
-		firebase.database().ref('rolls').on('value', snapshot => {
-			snapshot.forEach((snap) => {
-				this.setState({ person: snap.key })
-				snap.forEach((order) => {
-					this.setState({ purchase: order.key })
-					if (order.hasChild('Order Items')) {
-						order.forEach((details) => {
-							let items = []
-							details.forEach((product) => { items.push(product.val()) })
-							this.setState({ items })
-						})
-					}
-					order.forEach((details) => {
-						if (this.state.dateFilter === '') {
-							if (details.val().Mode === 'Delivery') {
-								this.addDeliveryInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
-									if (item === 'P1') { return <p>6pcs</p> }
-									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
-							}
-							else if (details.val().Mode === 'Pickup') {
-								return
-							}
-						}
-						else if (this.state.dateFilter !== '') {
-							if (details.val().Date === moment(this.state.dateFilter).format('L')) {
-								if (details.val().Mode === 'Delivery') {
-									this.addDeliveryInfo(details.val().Name, details.val().Number, this.state.items.map(item => {
-										if (item === 'P1') { return <p>6pcs</p> }
-										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
-								}
-								else if (details.val().Mode === 'Pickup') {
-									return
-								}
-							}
-							else if (details.val().Date !== moment(this.state.dateFilter).format('L')) {
-								return
-							}
-						}	
-					})	
-				})
-			})
-		})	
-	}
-
-	addPickupInfo = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct) => {
+	addPickupInfo_All = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct) => {
 		let object = order
-		var row = this.state.orders.concat(
+		var row = this.state.allOrders.concat(
 			<tr id={object}>
 				<td>{name}<br />{number}</td>
 				<td>{products}</td>
@@ -216,12 +114,12 @@ class Controls extends Component {
 				</td>
 			</tr>
 		)
-		this.setState({ orders: row })
+		this.setState({ allOrders: row })
 	}
 
-	addDeliveryInfo = (name, number, products, amount, mode, date, address, city, route, instruction, description, person, order,  paymentStat, orderStat, contactStat, frostingInstruct) => {
+	addDeliveryInfo_All = (name, number, products, amount, mode, date, address, city, route, instruction, description, person, order,  paymentStat, orderStat, contactStat, frostingInstruct) => {
 		let object = order
-		var row = this.state.orders.concat(
+		var row = this.state.allOrders.concat(
 			<tr id={object}>
 				<td>{name}<br />{number}</td>
 				<td>{products}</td>
@@ -244,7 +142,154 @@ class Controls extends Component {
 				</td>
 			</tr>
 		)
-		this.setState({ orders: row })
+		this.setState({ allOrders: row })
+	}
+
+	//display pickup orders 
+	pickup = () => {
+		firebase.database().ref('rolls').once('value', snapshot => {
+			snapshot.forEach((snap) => {
+				this.setState({ person: snap.key })
+				snap.forEach((order) => {
+					this.setState({ purchase: order.key })
+					if (order.hasChild('Order Items')) {
+						order.forEach((details) => {
+							let items = []
+							details.forEach((product) => { items.push(product.val()) })
+							this.setState({ items })
+						})
+					}
+					order.forEach((details) => {
+						if (this.state.dateFilter === '') {
+							if (details.val().Mode === 'Pickup') {
+								this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
+									if (item === 'P1') { return <p>6pcs</p> }
+									else if (item === 'P2') { return <p>12pcs</p> }
+								}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+							}
+							else if (details.val().Mode === 'Delivery') {
+								return
+							}
+						}
+						else if (this.state.dateFilter !== '') {
+							if (details.val().Date === moment(this.state.dateFilter).format('L')) {
+								if (details.val().Mode === 'Pickup') {
+									this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
+										if (item === 'P1') { return <p>6pcs</p> }
+										else if (item === 'P2') { return <p>12pcs</p> }
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+								}
+								else if (details.val().Mode === 'Delivery') {
+									return
+								}
+							}
+							else if (details.val().Date !== moment(this.state.dateFilter).format('L')) {
+								return
+							}
+						}	
+					})	
+				})
+			})
+		})	
+	}
+
+	addPickupInfo_Pickup = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct) => {
+		let object = order
+		var row = this.state.pickupOrders.concat(
+			<tr id={object}>
+				<td>{name}<br />{number}</td>
+				<td>{products}</td>
+				<td>P{amount}.00</td>
+				{mode === 'P_transfer' ? <td>BDO Transfer</td> : <td>Payment on Pickup</td>}
+				<td>{date}</td>
+				<td>-</td>
+				<td>-</td>
+				<td>{instruction}<br />{description}<br />{frostingInstruct}</td>
+				<td>
+					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
+				    <button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order)} disabled={orderStat === this.state.orderStatus}>Complete</button>
+				    <button style={{background: contactStat === true ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
+					<button onClick={() => this.remove(person, order, object)}>Remove</button>
+				</td>
+			</tr>
+		)
+		this.setState({ pickupOrders: row })
+	}
+
+	//display delivery orders
+	delivery = () => {
+		firebase.database().ref('rolls').once('value', snapshot => {
+			snapshot.forEach((snap) => {
+				this.setState({ person: snap.key })
+				snap.forEach((order) => {
+					this.setState({ purchase: order.key })
+					if (order.hasChild('Order Items')) {
+						order.forEach((details) => {
+							let items = []
+							details.forEach((product) => { items.push(product.val()) })
+							this.setState({ items })
+						})
+					}
+					order.forEach((details) => {
+						if (this.state.dateFilter === '') {
+							if (details.val().Mode === 'Delivery') {
+								this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
+									if (item === 'P1') { return <p>6pcs</p> }
+									else if (item === 'P2') { return <p>12pcs</p> }
+								}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+							}
+							else if (details.val().Mode === 'Pickup') {
+								return
+							}
+						}
+						else if (this.state.dateFilter !== '') {
+							if (details.val().Date === moment(this.state.dateFilter).format('L')) {
+								if (details.val().Mode === 'Delivery') {
+									this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
+										if (item === 'P1') { return <p>6pcs</p> }
+										else if (item === 'P2') { return <p>12pcs</p> }
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+								}
+								else if (details.val().Mode === 'Pickup') {
+									return
+								}
+							}
+							else if (details.val().Date !== moment(this.state.dateFilter).format('L')) {
+								return
+							}
+						}	
+					})	
+				})
+			})
+		})	
+	}
+
+	addDeliveryInfo_Delivery = (name, number, products, amount, mode, date, address, city, route, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct) => {
+		let object = order
+		var row = this.state.deliveryOrders.concat(
+			<tr id={object}>
+				<td>{name}<br />{number}</td>
+				<td>{products}</td>
+				<td>P{amount}.00</td>
+				{mode === 'D_transfer' ? <td>BDO Transfer</td> : <td>Cash on Delivery</td>}
+				<td>
+					{date}<br />
+					{route === 'Route1' ? <td>Route1</td> : null}
+					{route === 'Route2' ? <td>Route2</td> : null}
+					{route === 'Route3' ? <td>Route3</td> : null}
+				</td>
+				<td>{address}</td>
+				<td>{city}</td>
+				<td>{instruction}<br />{description}<br />{frostingInstruct}</td>
+				<td>
+					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
+					<button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order)} disabled={orderStat === this.state.orderStatus}>Complete</button>
+					<button style={{background: contactStat === true ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
+					<button onClick={() => this.remove(person, order, object)}>Remove</button>
+				</td>
+			</tr>
+		)
+		this.setState({ deliveryOrders: row })
 	}
 
 	//table button functions
@@ -286,7 +331,9 @@ class Controls extends Component {
 	}
 
 	render() {
-		const Orders = this.state.orders.map(item => item)
+		const All = this.state.allOrders.map(item => item)
+		const Pickup = this.state.pickupOrders.map(item => item)
+		const Delivery = this.state.deliveryOrders.map(item => item)
 
 		return (
 			<div>
@@ -335,7 +382,13 @@ class Controls extends Component {
 								      	<th></th>
 								    </tr>
 							  	</thead>
-								<tbody id="dataTable">{Orders}</tbody>
+
+							  	<tbody id="dataTable">
+							  		{this.state.methodFilter === '' ? All : null}
+							  		{this.state.methodFilter === 'pickup' ? Pickup : null}
+							  		{this.state.methodFilter === 'delivery' ? Delivery : null}
+							  	</tbody>
+									
 							</table>
 						</div>
 

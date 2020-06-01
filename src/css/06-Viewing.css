@@ -137,6 +137,10 @@
     width: 200px;
 }
 
+.viewingTable tr td button:hover {
+    background: #B2773C
+}
+
 .viewingTable tbody tr:last-of-type {
     border-bottom: 5px solid #C79874;
 }
