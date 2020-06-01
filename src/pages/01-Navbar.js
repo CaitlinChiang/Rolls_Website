@@ -11,7 +11,10 @@ function Navbar(props) {
 	return (
 		<header>
 			<div class="navbar_buttons">
-				<div class="logo"> <img src="/images/logo_navbar.jpg" /> </div>
+				<div class="logo"> 
+					<img src="/images/logo_navbar.jpg" /> 
+					<p>ROLLS</p>
+				</div>
 
 				<button onClick={props.goHome}><a href="#home">Home</a></button>
 				<button onClick={props.goHome}><a href="#about">About</a></button>

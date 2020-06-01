@@ -1,6 +1,6 @@
 /*Navigation Bar*/
 header {
-	background: #ffffff;
+	background: #F6DAD6;
 	min-height: 15px;
   	position: relative;
   	overflow: hidden;
@@ -48,7 +48,22 @@ header {
 
 .navbar_buttons img {
 	height: 50px;
+}
+
+.logo {
 	float: left;
+}
+
+.logo img {
+	vertical-align: middle;
+}
+
+.logo p {
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: bold;
+	display: inline;
+	vertical-align: middle;
 }
 
 .profile {
@@ -98,5 +113,8 @@ header {
 
 	.logo {
 		margin-top: 10px;
+		display: block;
+		width: 100%;
+		text-align: center;
 	}
 }

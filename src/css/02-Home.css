@@ -5,7 +5,9 @@
 }
 
 #home h1 {
-	color: #FFBDBD;
+	color: #ffffff;
+	font-family: serif;
+	font-style: oblique;
 	letter-spacing: 5px;
 	animation: fadeBrand 2s;
 	font-size: 50px;
