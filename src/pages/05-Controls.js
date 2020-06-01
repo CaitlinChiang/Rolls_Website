@@ -8,7 +8,7 @@ import moment from 'moment'
 
 class Controls extends Component {
 	state = {
-		allOrders: [],                pickupOrders: [],                         deliveryOrders: [],   
+		allOrders: [],                pickupOrders: [],                         deliveryOrders: [],
 
 		purchase: '',
 
@@ -36,6 +36,14 @@ class Controls extends Component {
 		event.preventDefault()
 		const {name, value} = event.target
 		this.setState({ [name]: value })
+	}
+
+	handleDateChange = (date) => {
+		this.setState({ allOrders: [], pickupOrders: [], deliveryOrders: [], dateFilter: date })
+
+		this.allData()
+		this.pickup()
+		this.delivery()
 	}
 
 	//display all the data 
@@ -364,7 +372,7 @@ class Controls extends Component {
 								<option value="pickup">Pickups</option>
 							</select>
 
-							<DatePicker inline selected={this.state.dateFilter} onChange={date => this.setState({ dateFilter: date })} minDate={new Date()} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date" id="filterPicker" />
+							<DatePicker inline selected={this.state.dateFilter} onChange={date => this.handleDateChange(date)} minDate={new Date()} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date" id="filterPicker" />
 						</div>
 
 						<div class="table">
