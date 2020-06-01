@@ -1,76 +1,44 @@
 /*Navigation Bar*/
 header {
-	background: transparent;
-	min-height: 15px;
-  	position: fixed;
-  	top: 0;
-  	width: 100%;
-  	z-index: 2;
-}
-
-/*Menu*/
-.menu {
-	float: left;
-}
-
-#menu-button {
-	margin: 10px;
-	border-radius: 50%;
-	display: inline-block;
-	width: 80%;
-	border: 2px solid #C49076;
 	background: #ffffff;
+	min-height: 15px;
+  	position: relative;
+  	overflow: hidden;
+  	top: 0;
+  	width: 100%; 
+  	z-index: 2;
+  	text-align: center;
 }
 
-.menu img {
-	height: 20px;
+.navbar_buttons {
+	margin: 10px;
 }
 
-.menu:hover .menu-options {
-	display: block;
-}
-
-/*Menu Options*/
-.menu-options {
-	display: none;
-	position: absolute;
-	background-color: #C49076;
-	width: 150px;
-	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	z-index: 1;
-	padding-bottom: 10px;
-	left: 10px;
-	animation: fadeMenu 1s;
-}
-
-@keyframes fadeMenu {
-	from { opacity: 0; }
-	to { opacity: 1; }
-}
-
-.menu-options button {
-	padding: 12px 15px;
+.navbar_buttons button {
+	padding: 12px;
 	background: transparent;
+	color: #C78F76;
+	font-size: 20px;
+	margin: 0px 30px 0px;
 }
 
-.menu-options button a {
-	color: #ffffff;
+.navbar_buttons button a {
 	background: transparent;
 	text-decoration: none;
-	margin-bottom: 0px;
+	color: #C78F76;
 }
 
-.menu-options button:hover::before, .menu-options button a:hover::before {
+.navbar_buttons button:hover::before, .navbar_buttons button a:hover::before {
 	transform: scaleX(1);
 	transform-origin: left;
 }
 
-.menu-options button::before, .menu-options button a::before {
+.navbar_buttons button::before, .navbar_buttons button a::before {
 	content: '';
 	position: absolute;
 	width: 100%;
 	transform: scaleX(0);
-	background-color: #FFCACA;
+	background-color: #FF7676;
 	height: 2px;
 	bottom: 0;
 	left: 0;
@@ -78,20 +46,57 @@ header {
 	transition: transform 0.4s ease-out;
 }
 
-.menu-options img {
-	display: block;
-	height: 60px;
-	text-align: center;
-	padding: 12px 15px;
-	margin: auto;
+.navbar_buttons img {
+	height: 50px;
+	float: left;
 }
 
-.profile img {
+.profile {
 	height: 50px;
-	margin-top: 10px;
-	margin-right: 10px;
 	float: right;
 	cursor: pointer;
 	border-radius: 50%;
 	transform: scaleX(-1);
+	z-index: 3;
+}
+
+
+
+/*Responsive*/
+@media(max-width: 1030px) {
+	.navbar_buttons button {
+		margin: 0px 10px 0px;
+	}
+}
+
+@media(max-width: 800px) {
+	.navbar_buttons button {
+		margin: 0px 0px 0px;
+		font-size: 18px;
+	}
+}
+
+@media(max-width: 700px) {
+	.navbar_buttons {
+		width: 100%;
+		margin: 0px 0px 10px;
+	}
+
+	.profile {
+		height: 40px;
+		float: none;
+		text-align: center;
+		width: 100%;
+		display: block;
+	}
+
+	.navbar_buttons img {
+		float: none;
+		text-align: center;
+		display: inline;
+	}
+
+	.logo {
+		margin-top: 10px;
+	}
 }

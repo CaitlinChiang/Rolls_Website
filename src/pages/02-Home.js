@@ -43,10 +43,10 @@ function Home(props) {
 					<div id="siteInfo">
 						<h6>Contact Us:</h6>
 						<p>Facebook: <a href="https://www.facebook.com/officialrolls.ph/">Rolls</a>
+						
 						<br /><br />Phone: 0917 535 0923
 						<br /><br />Email: officialrolls.ph@gmail.com</p>
 					</div>
-
 				</div>
 			</section>
 		</div>

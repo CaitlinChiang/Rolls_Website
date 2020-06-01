@@ -39,13 +39,13 @@ class Cart extends Component {
 								this.getPickupInfo(this.state.items.map(item => {
 									if (item === 'P1') { return <p>6pcs</p> }
 									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().orderStatus, details.val().PickupPayment, details.val().Date)
+								}), details.val().Price, details.val().orderStatus, details.val().PickupPayment, details.val().Date, details.val().paymentStatus)
 							}
 							else if (details.val().Mode === 'Delivery') {
 								this.getDeliveryInfo(this.state.items.map(item => {
 									if (item === 'P1') { return <p>6pcs</p> }
 									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().orderStatus, details.val().DeliveryPayment, details.val().Address, details.val().Date)
+								}), details.val().Price, details.val().orderStatus, details.val().DeliveryPayment, details.val().Address, details.val().Date, details.val().paymentStatus)
 							}
 						})	
 					})
@@ -54,24 +54,26 @@ class Cart extends Component {
 		})	
 	}
 
-	getPickupInfo = (products, price, orderStatus, mode, date) => {
+	getPickupInfo = (products, price, orderStatus, mode, date, paymentStat) => {
 		var row = this.state.orders.concat(
 			<tr>
 				<td>Classic Cinammon Rolls: {products}</td>
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
+				{paymentStat === 'Payment Pending' ? <td>Not Paid</td> : <td>Paid</td>}
 				{mode === 'P_transfer' ? <td>Payment Method: BDO Transfer <br /> Date of Pickup: {date} </td> : <td>Payment Method: Payment on Pickup <br /> Date of Pickup: {date} </td>}	
 			</tr>
 		)
 		this.setState({ orders: row })
 	}
 
-	getDeliveryInfo = (products, price, orderStatus, mode, address, date) => {
+	getDeliveryInfo = (products, price, orderStatus, mode, address, date, paymentStat) => {
 		var row = this.state.orders.concat(
 			<tr>
 				<td>Classic Cinammon Rolls: {products}</td>
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
+				{paymentStat === 'Payment Pending' ? <td>Not Paid</td> : <td>Paid</td>}
 				{mode === 'D_transfer' ? <td>Payment Method: BDO Transfer <br /> Address: {address} <br /> Date of Delivery: {date} </td> : <td>Payment Method: Cash on Delivery  <br /> Address: {address} <br /> Date of Delivery: {date} </td>}
 			</tr>
 		)
@@ -125,6 +127,7 @@ class Cart extends Component {
 								        <th>Order</th>
 								      	<th>Total Amount</th>
 								      	<th>Order Status</th>
+								      	<th>Payment Status</th>
 								      	<th>Details</th>
 								    </tr>
 							  	</thead>
