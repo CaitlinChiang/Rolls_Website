@@ -8,9 +8,8 @@
 	color: #ffffff;
 	font-family: serif;
 	font-style: oblique;
-	letter-spacing: 5px;
 	animation: fadeBrand 2s;
-	font-size: 50px;
+	font-size: 80px;
 	top: 250px;
 	left: 50%;
 	transform: translate(-50%, -50%);
