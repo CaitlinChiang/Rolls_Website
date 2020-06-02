@@ -8,6 +8,7 @@ import Home from './pages/02-Home'
 import Products from './pages/03-Products'
 import Articles from './pages/04-Articles'
 import Controls from './pages/05-Controls'
+import AuthorizedControls from './components/SelectedControls'
 
 
 class App extends Component {
@@ -35,8 +36,8 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                {this.state.userID !== 'alnLJ1AokzOcSVTt1yN3ereBayr2' && this.state.userID !== 'JXw3ACHGrvQtUV50SrdCnVBkutG3' ?
+             <div>
+                {this.state.userID !== 'alnLJ1AokzOcSVTt1yN3ereBayr2' && this.state.userID !== 'JXw3ACHGrvQtUV50SrdCnVBkutG3' && this.state.userID !== 'gff7aamicCS7pFx6pEPlw7TY2RP2' ?
                     <div>
                         <Navbar goHome={this.goHome} goProducts={this.goProducts} goArticles={this.goArticles} goCart={this.goCart} />
                         {this.state.DisplayHome ? <Home goProducts={this.goProducts} /> : null}
@@ -44,7 +45,10 @@ class App extends Component {
                         {this.state.DisplayArticles ? <Articles /> : null}
                         {this.state.DisplayCart ? <div>{this.state.user ? <Cart consumer={this.state.userID} /> : <Warning />}</div> : null}
                     </div>
-                : <Controls />}
+                : 
+                <div>
+                    {this.state.userID === 'alnLJ1AokzOcSVTt1yN3ereBayr2' || this.state.userID == 'JXw3ACHGrvQtUV50SrdCnVBkutG3' ? <Controls /> : <AuthorizedControls />}
+                </div>}
             </div>
         )
     }
