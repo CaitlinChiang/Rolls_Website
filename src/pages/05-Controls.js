@@ -117,7 +117,7 @@ class Controls extends Component {
 				<td>{instruction}<br />{description}<br />{frostingInstruct}</td>
 				<td>
 					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
-				    <button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order)} disabled={orderStat === this.state.orderStatus}>Complete</button>
+				    <button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order, object)} disabled={orderStat === this.state.orderStatus}>Complete</button>
 				    <button style={{background: contactStat === true ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
 					<button onClick={() => this.remove(person, order, object)}>Remove</button>
 				</td>
@@ -145,7 +145,7 @@ class Controls extends Component {
 				<td>{instruction}<br />{description}<br />{frostingInstruct}</td>
 				<td>
 					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
-					<button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order)} disabled={orderStat === this.state.orderStatus}>Complete</button>
+					<button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order, object)} disabled={orderStat === this.state.orderStatus}>Complete</button>
 					<button style={{background: contactStat === true ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
 					<button onClick={() => this.remove(person, order, object)}>Remove</button>
 				</td>
@@ -221,7 +221,7 @@ class Controls extends Component {
 				<td>{instruction}<br />{description}<br />{frostingInstruct}</td>
 				<td>
 					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
-				    <button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order)} disabled={orderStat === this.state.orderStatus}>Complete</button>
+				    <button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order, object)} disabled={orderStat === this.state.orderStatus}>Complete</button>
 				    <button style={{background: contactStat === true ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
 					<button onClick={() => this.remove(person, order, object)}>Remove</button>
 				</td>
@@ -302,7 +302,7 @@ class Controls extends Component {
 				<td>{instruction}<br />{description}<br />{frostingInstruct}</td>
 				<td>
 					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
-					<button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order)} disabled={orderStat === this.state.orderStatus}>Complete</button>
+					<button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order, object)} disabled={orderStat === this.state.orderStatus}>Complete</button>
 					<button style={{background: contactStat === true ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
 					<button onClick={() => this.remove(person, order, object)}>Remove</button>
 				</td>
@@ -317,8 +317,9 @@ class Controls extends Component {
 		document.getElementById(order).querySelector('#paid').style.backgroundColor = "#B2773C"
 	}
 
-	done = (customer, order) => { 
+	done = (customer, order, item) => { 
 		firebase.database().ref('rolls').child(customer).child(order).child('Order Details').update({ orderStatus: this.state.orderStatus })
+		document.getElementById(item).style.display = 'none'
 		document.getElementById(order).querySelector('#done').style.backgroundColor = "#B2773C"
 	}
 
