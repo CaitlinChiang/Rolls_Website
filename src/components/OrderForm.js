@@ -148,7 +148,7 @@ class Order extends Component {
 
 	instructionFee = () => {
 		if (this.state.mode === 'Pickup') {
-			if (this.state.pInstructions === '' || this.state.pInstructions === 'None' || this.state.pInstructions === 'Writing') {
+			if (this.state.pInstructions === '' || this.state.pInstructions === 'None') {
 				this.setState(prevState => ({ price: prevState.price + 0 }))
 			} else if (this.state.pInstructions === 'Personalized' || this.state.dInstructions === 'Candle') {
 				this.setState(prevState => ({ price: prevState.price + 20 }))
@@ -159,7 +159,7 @@ class Order extends Component {
 			}
 		}
 		else if (this.state.mode === 'Delivery') {
-			if (this.state.dInstructions === '' || this.state.dInstructions === 'None' || this.state.dInstructions === 'Writing') {
+			if (this.state.dInstructions === '' || this.state.dInstructions === 'None') {
 				this.setState(prevState => ({ price: prevState.price + 0 }))
 			} else if (this.state.dInstructions === 'Personalized' || this.state.dInstructions === 'Candle') {
 				this.setState(prevState => ({ price: prevState.price + 20 }))
