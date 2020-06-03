@@ -13,7 +13,8 @@ import AuthorizedControls from './components/SelectedControls'
 
 class App extends Component {
     state = {
-        user: {}, userID: '',
+        user: {},
+        userID: '',
         
         DisplayCart: false, DisplayHome: true,  DisplayProducts: false, DisplayArticles: false
     }

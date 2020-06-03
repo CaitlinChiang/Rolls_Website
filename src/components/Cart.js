@@ -5,9 +5,11 @@ import Order from '../components/OrderForm'
 
 class Cart extends Component {
 	state = {
-		consumer: this.props.consumer,       pendingOrders: [],
+		consumer: this.props.consumer,
+		pendingOrders: [],
 
-		orders: [],                          items: [],
+		orders: [],
+		items: [],
 
 		displayForm: false
 	}

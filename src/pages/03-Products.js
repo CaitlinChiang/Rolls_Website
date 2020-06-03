@@ -5,8 +5,12 @@ import * as firebase from 'firebase'
 class Products extends Component {
 	state = {
 		consumer: this.props.consumer,
-		modal1: false,       stock1: true,
-		modal2: false,       stock2: true
+		
+		modal1: false,       
+		stock1: true,
+
+		modal2: false,
+		stock2: true
 	}
 
 	componentDidMount = async () => {

@@ -6,7 +6,8 @@ import Cart from '../components/Cart'
 
 class Account extends Component {
 	state = {
-		userEmail: '',       userPassword: ''
+		userEmail: '',
+		userPassword: ''
 	} 
 
 	handleChange = (event) => {

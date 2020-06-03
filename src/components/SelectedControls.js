@@ -8,11 +8,17 @@ import moment from 'moment'
 
 class AuthorizedControls extends Component {
 	state = {
-		allOrders: [],                pickupOrders: [],                         deliveryOrders: [],
+		allOrders: [],
+		pickupOrders: [],
+		deliveryOrders: [],
 
-		purchase: '',                 items: [],                                person: '',
+		person: '',
+		purchase: '',
+		items: [],
 
-		methodFilter: '',             dateFilter: '',                           maxDeliveries: 0
+		methodFilter: '',
+		dateFilter: '',
+		maxDeliveries: 0
 	}
 
 	logout = (event) => {

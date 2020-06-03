@@ -8,17 +8,35 @@ import moment from 'moment'
 
 class Order extends Component {
 	state = {
-		consumer: this.props.consumer,    pendingOrders: [],     price: 0,        
+		consumer: this.props.consumer,
+		pendingOrders: [],
+		price: 0,
 
-		dateRange: [],  maxDeliveries: 0,
+		dateRange: [],
+		maxDeliveries: 0,
 
-		name: '',       number: '',       mode: '',
+		name: '',
+		number: '',
+		mode: '',
 
-		pDate: '',      pPayment: '',     pInstructions: '',     pNote: '',       pAmount: '',
+		pDate: '',
+		pPayment: '',
+		pInstructions: '',
+		pNote: '',
+		pAmount: '',
 		
-		dPayment: '',   address: '',      city: '',              dDate: '',       route: '',       dInstructions: '',       dNote: '',       dAmount: '',
+		dPayment: '',
+		address: '',
+		city: '',
+		dDate: '',
+		route: '',
+		dInstructions: '',
+		dNote: '',
+		dAmount: '',
 
-		orderStatus: 'Not Ready',         paymentStatus: 'Payment Pending',       contacted: false
+		orderStatus: 'Not Ready',
+		paymentStatus: 'Payment Pending',
+		contacted: false
 	}
 
 	componentDidMount = async () => {

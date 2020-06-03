@@ -8,13 +8,21 @@ import moment from 'moment'
 
 class Controls extends Component {
 	state = {
-		allOrders: [],                pickupOrders: [],                         deliveryOrders: [],
+		allOrders: [],
+		pickupOrders: [],
+		deliveryOrders: [],
 
-		purchase: '',                 items: [],                                person: '',
+		person: '',
+		purchase: '',
+		items: [],
 
-		orderStatus: 'Ready',         paymentStatus: 'Payment Confirmed',       contacted: true,
+		paymentStatus: 'Payment Confirmed',
+		orderStatus: 'Ready',
+		contacted: true,
 
-		methodFilter: '',             dateFilter: '',                           maxDeliveries: 0
+		methodFilter: '',
+		dateFilter: '',
+		maxDeliveries: 0
 	}
 
 	logout = (event) => {
