@@ -314,7 +314,7 @@ class AuthorizedControls extends Component {
 								<option value="pickup">Pickups</option>
 							</select>
 
-							<DatePicker inline selected={this.state.dateFilter} onChange={date => this.handleDateChange(date)} minDate={new Date()} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date" id="filterPicker" />
+							<DatePicker inline selected={this.state.dateFilter} onChange={date => this.handleDateChange(date)} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date" id="filterPicker" />
 						</div>
 
 						<div class="table">

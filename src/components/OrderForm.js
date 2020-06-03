@@ -344,7 +344,7 @@ class Order extends Component {
 		event.preventDefault()
 		if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
 			if (this.state.mode === 'Pickup') {
-				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.trim() !== "" && (this.state.pInstructions === 'Writing' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Personalized' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Candle' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'None' && this.state.pNote.trim() === '' || this.state.pInstructions === 'Frosting' && this.state.pNote.trim() === '' || this.state.pInstructions === 'extraFrosting' && this.state.pAmount.trim() !== '' )) {
+				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.trim() !== "" && (this.state.pInstructions === 'Personalized' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Candle' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'None' && this.state.pNote.trim() === '' || this.state.pInstructions === 'Frosting' && this.state.pNote.trim() === '' || this.state.pInstructions === 'extraFrosting' && this.state.pAmount.trim() !== '' )) {
 					if (this.state.pPayment === 'P_transfer') {
 						const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
 						if (inform) {
@@ -367,7 +367,7 @@ class Order extends Component {
 					alert("Minimum of 2 boxes of the 6pcs Cinammon Rolls required for delivery.")
 				} 
 				else {
-					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.trim() !== "" && (this.state.dInstructions === 'Writing' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Personalized' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Candle' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'None' && this.state.dNote.trim() === '' || this.state.dInstructions === 'Frosting' && this.state.dNote.trim() === '' || this.state.dInstructions === 'extraFrosting' && this.state.dAmount.trim() !== '' )) {
+					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.trim() !== "" && (this.state.dInstructions === 'Personalized' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Candle' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'None' && this.state.dNote.trim() === '' || this.state.dInstructions === 'Frosting' && this.state.dNote.trim() === '' || this.state.dInstructions === 'extraFrosting' && this.state.dAmount.trim() !== '' )) {
 						if (this.state.dPayment === 'D_transfer') {
 							const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
 							if (inform) {
@@ -426,13 +426,12 @@ class Order extends Component {
 									<select onChange={this.handleChange} value={this.state.pInstructions} name="pInstructions" id="pickupInstructions">
 										<option value="">--Additional Instructions--</option>
 										<option value="None">None</option>
-										<option value="Writing">1 Line of Writing on Box (Free)</option>
 										<option value="Personalized">Personalized Note (+ P20)</option>
 										<option value="Frosting">Separate Frosting (+ P10)</option>
 										<option value="extraFrosting">Extra Frosting 100ml (+ P50)</option>
 									</select>
 
-									{this.state.pInstructions === 'Writing' || this.state.pInstructions === 'Personalized' || this.state.pInstructions === 'Candle' ? 
+									{this.state.pInstructions === 'Personalized' || this.state.pInstructions === 'Candle' ? 
 											<input class="slideLeft" onChange={this.handleChange} value={this.state.pNote} name="pNote" type="text" placeholder="Instructions Description" /> 
 									: null}
 
@@ -521,13 +520,12 @@ class Order extends Component {
 									<select onChange={this.handleChange} value={this.state.dInstructions} name="dInstructions">
 										<option value="">--Additional Instructions--</option>
 										<option value="None">None</option>
-										<option value="Writing">1 Line of Writing on Box (Free)</option>
 										<option value="Personalized">Personalized Note (+ P20)</option>
 										<option value="Frosting">Separate Frosting (+ P10)</option>
 										<option value="extraFrosting">Extra Frosting 100ml (+ P50)</option>
 									</select>
 
-									{this.state.dInstructions === 'Writing' || this.state.dInstructions === 'Personalized' || this.state.dInstructions === 'Candle' ? 
+									{this.state.dInstructions === 'Personalized' || this.state.dInstructions === 'Candle' ? 
 										<input class="slideLeft" onChange={this.handleChange} value={this.state.dNote} name="dNote" type="text" placeholder="Instructions Description" /> 
 									: null}
 
