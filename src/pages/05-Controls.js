@@ -93,6 +93,7 @@ class Controls extends Component {
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+										else if (item === 'None') { return <p>None</p> }
 									}))
 								}
 								else if (details.val().Mode === 'Delivery') {
@@ -104,6 +105,7 @@ class Controls extends Component {
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+										else if (item === 'None') { return <p>None</p> }
 									}))
 								}
 							}
@@ -122,6 +124,7 @@ class Controls extends Component {
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+										else if (item === 'None') { return <p>None</p> }
 									}))
 								}
 								else if (details.val().Mode === 'Delivery') {
@@ -133,6 +136,7 @@ class Controls extends Component {
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+										else if (item === 'None') { return <p>None</p> }
 									}))
 								}
 							}
@@ -237,6 +241,7 @@ class Controls extends Component {
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+										else if (item === 'None') { return <p>None</p> }
 									}))
 								}
 								else if (details.val().Mode === 'Delivery') {
@@ -258,6 +263,7 @@ class Controls extends Component {
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+										else if (item === 'None') { return <p>None</p> }
 									}))
 								}
 								else if (details.val().Mode === 'Delivery') {
@@ -337,6 +343,7 @@ class Controls extends Component {
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+										else if (item === 'None') { return <p>None</p> }
 									}))
 								}
 								else if (details.val().Mode === 'Pickup') {
@@ -358,6 +365,7 @@ class Controls extends Component {
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+										else if (item === 'None') { return <p>None</p> }
 									}))
 								}
 								else if (details.val().Mode === 'Pickup') {
