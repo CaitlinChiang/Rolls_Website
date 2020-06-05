@@ -9,13 +9,17 @@ class Cart extends Component {
 		pendingOrders: [],
 
 		orders: [],
+		doneOrders: [],
 		items: [],
 
+		showPending: true,
+		showPurchased: false,
 		displayForm: false
 	}
 
 	componentDidMount = async () => {
-		this.displayOrder()
+		this.displayPendingOrders()
+		this.displayFinishedOrders()
 
 		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').on('value', snapshot => {
 			let pendingOrders = []
@@ -24,7 +28,7 @@ class Cart extends Component {
 		})
 	}
 
-	displayOrder = () => {
+	displayPendingOrders = () => {
 		firebase.database().ref('rolls').once('value', snapshot => {
 			snapshot.forEach((snap) => {
 				if (snap.key === this.state.consumer) {
@@ -37,18 +41,21 @@ class Cart extends Component {
 							})
 						}
 						order.forEach((details) => {
-							if (details.val().Mode === 'Pickup') {
-								this.getPickupInfo(this.state.items.map(item => {
-									if (item === 'P1') { return <p>6pcs</p> }
-									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().orderStatus, details.val().PickupPayment, details.val().Date, details.val().paymentStatus)
+							if (details.val().orderStatus === 'Not Ready') {
+								if (details.val().Mode === 'Pickup') {
+									this.getPendingPickupInfo(this.state.items.map(item => {
+										if (item === 'P1') { return <p>6pcs</p> }
+										else if (item === 'P2') { return <p>12pcs</p> }
+									}), details.val().Price, details.val().orderStatus, details.val().PickupPayment, details.val().Date, details.val().paymentStatus)
+								}
+								else if (details.val().Mode === 'Delivery') {
+									this.getPendingDeliveryInfo(this.state.items.map(item => {
+										if (item === 'P1') { return <p>6pcs</p> }
+										else if (item === 'P2') { return <p>12pcs</p> }
+									}), details.val().Price, details.val().orderStatus, details.val().DeliveryPayment, details.val().Address, details.val().Date, details.val().paymentStatus)
+								}
 							}
-							else if (details.val().Mode === 'Delivery') {
-								this.getDeliveryInfo(this.state.items.map(item => {
-									if (item === 'P1') { return <p>6pcs</p> }
-									else if (item === 'P2') { return <p>12pcs</p> }
-								}), details.val().Price, details.val().orderStatus, details.val().DeliveryPayment, details.val().Address, details.val().Date, details.val().paymentStatus)
-							}
+							else { return }
 						})	
 					})
 				}
@@ -56,7 +63,7 @@ class Cart extends Component {
 		})	
 	}
 
-	getPickupInfo = (products, price, orderStatus, mode, date, paymentStat) => {
+	getPendingPickupInfo = (products, price, orderStatus, mode, date, paymentStat) => {
 		var row = this.state.orders.concat(
 			<tr>
 				<td>Classic Cinammon Rolls: {products}</td>
@@ -69,7 +76,7 @@ class Cart extends Component {
 		this.setState({ orders: row })
 	}
 
-	getDeliveryInfo = (products, price, orderStatus, mode, address, date, paymentStat) => {
+	getPendingDeliveryInfo = (products, price, orderStatus, mode, address, date, paymentStat) => {
 		var row = this.state.orders.concat(
 			<tr>
 				<td>Classic Cinammon Rolls: {products}</td>
@@ -82,6 +89,68 @@ class Cart extends Component {
 		this.setState({ orders: row })
 	}
 
+	//display finished orders
+	displayFinishedOrders = () => {
+		firebase.database().ref('rolls').once('value', snapshot => {
+			snapshot.forEach((snap) => {
+				if (snap.key === this.state.consumer) {
+					snap.forEach((order) => {
+						if (order.hasChild('Order Items')) {
+							order.forEach((details) => {
+								let items = []
+								details.forEach((product) => { items.push(product.val()) })
+								this.setState({ items })
+							})
+						}
+						order.forEach((details) => {
+							if (details.val().orderStatus === 'Ready') {
+								if (details.val().Mode === 'Pickup') {
+									this.getFinishedPickupInfo(this.state.items.map(item => {
+										if (item === 'P1') { return <p>6pcs</p> }
+										else if (item === 'P2') { return <p>12pcs</p> }
+									}), details.val().Price, details.val().orderStatus, details.val().PickupPayment, details.val().Date, details.val().paymentStatus)
+								}
+								else if (details.val().Mode === 'Delivery') {
+									this.getFinishedDeliveryInfo(this.state.items.map(item => {
+										if (item === 'P1') { return <p>6pcs</p> }
+										else if (item === 'P2') { return <p>12pcs</p> }
+									}), details.val().Price, details.val().orderStatus, details.val().DeliveryPayment, details.val().Address, details.val().Date, details.val().paymentStatus)
+								}
+							}
+							else { return }
+						})	
+					})
+				}
+			})
+		})	
+	}
+
+	getFinishedPickupInfo = (products, price, orderStatus, mode, date, paymentStat) => {
+		var row = this.state.doneOrders.concat(
+			<tr>
+				<td>Classic Cinammon Rolls: {products}</td>
+				<td>P{price}.00</td>
+				<td>{orderStatus}</td>
+				{paymentStat === 'Payment Pending' ? <td>Not Paid</td> : <td>Paid</td>}
+				{mode === 'P_transfer' ? <td>Payment Method: BDO Transfer <br /> Date of Pickup: {date} </td> : <td>Payment Method: Payment on Pickup <br /> Date of Pickup: {date} </td>}	
+			</tr>
+		)
+		this.setState({ doneOrders: row })
+	}
+
+	getFinishedDeliveryInfo = (products, price, orderStatus, mode, address, date, paymentStat) => {
+		var row = this.state.doneOrders.concat(
+			<tr>
+				<td>Classic Cinammon Rolls: {products}</td>
+				<td>P{price}.00</td>
+				<td>{orderStatus}</td>
+				{paymentStat === 'Payment Pending' ? <td>Not Paid</td> : <td>Paid</td>}
+				{mode === 'D_transfer' ? <td>Payment Method: BDO Transfer <br /> Address: {address} <br /> Date of Delivery: {date} </td> : <td>Payment Method: Cash on Delivery  <br /> Address: {address} <br /> Date of Delivery: {date} </td>}
+			</tr>
+		)
+		this.setState({ doneOrders: row })
+	}
+
 	remove = (id) => firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').child(id).remove()
 
 	goOrder = (event) => {
@@ -90,7 +159,8 @@ class Cart extends Component {
 	}
 
 	render() {
-		const Processed = this.state.orders.map(item => item)
+		const Processed = this.state.doneOrders.map(item => item)
+		const Processing = this.state.orders.map(item => item)
 
 		const Pending = this.state.pendingOrders.map(order => {
 			let item = order.split(' ')
@@ -121,23 +191,55 @@ class Cart extends Component {
 				<section id="cart">
 					<div class="container slideDown">
 
-						<div id="pendingHeader"> <h1>Purchased Orders</h1> </div>
-						<div class="table">
-							<table class="customerTable">
-							  	<thead>
-								    <tr>
-								        <th>Order</th>
-								      	<th>Total Amount</th>
-								      	<th>Order Status</th>
-								      	<th>Payment Status</th>
-								      	<th>Details</th>
-								    </tr>
-							  	</thead>
-								<tbody>
-									{this.state.orders.length > 0 ? Processed : <th></th>}
-								</tbody>
-							</table>
-						</div>
+						{this.state.showPending ? 
+							<div class="slideRight">
+								<div id="pendingHeader"> <h1>Pending Orders</h1> </div>
+
+								<div class="table">
+									<table class="customerTable">
+									  	<thead>
+										    <tr>
+										        <th>Order</th>
+										      	<th>Total Amount</th>
+										      	<th>Order Status</th>
+										      	<th>Payment Status</th>
+										      	<th>Details</th>
+										    </tr>
+									  	</thead>
+										<tbody>
+											{this.state.orders.length > 0 ? Processing : <th></th>}
+										</tbody>
+									</table>
+								</div>
+
+								<button onClick={() => this.setState({showPending: false, showPurchased: true})} class="tableButton">Show Purchased Orders</button>
+							</div>
+						: null}
+
+						{this.state.showPurchased ? 
+							<div class="slideRight">
+								<div id="pendingHeader"> <h1>Purchased Orders</h1> </div>
+
+								<div class="table">
+									<table class="customerTable">
+									  	<thead>
+										    <tr>
+										        <th>Order</th>
+										      	<th>Total Amount</th>
+										      	<th>Order Status</th>
+										      	<th>Payment Status</th>
+										      	<th>Details</th>
+										    </tr>
+									  	</thead>
+										<tbody>
+											{this.state.doneOrders.length > 0 ? Processed : <th></th>}
+										</tbody>
+									</table>
+								</div>
+
+								<button onClick={() => this.setState({showPending: true, showPurchased: false})} class="tableButton">Show Pending Orders</button>
+							</div>
+						: null}
 
 						<div id="cartHeader"> <h1>Cart</h1> </div>
 						<div class="table">

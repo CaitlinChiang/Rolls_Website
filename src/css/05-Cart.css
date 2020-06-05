@@ -95,7 +95,7 @@
     border-bottom: 5px solid #C79874;
 }
 
-#checkoutButton {
+#checkoutButton, .tableButton {
 	background: #ffffff;
 	color: #FF7676;
 	padding: 10px;
@@ -107,7 +107,7 @@
 	margin-bottom: 100px;
 }
 
-#checkoutButton:hover {
+#checkoutButton:hover, .tableButton:hover {
 	background: #C78F76;
 	color: #ffffff;
 }
