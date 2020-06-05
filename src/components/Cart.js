@@ -121,7 +121,7 @@ class Cart extends Component {
 				<section id="cart">
 					<div class="container slideDown">
 
-						<div id="pendingHeader"> <h1>Pending Orders</h1> </div>
+						<div id="pendingHeader"> <h1>Purchased Orders</h1> </div>
 						<div class="table">
 							<table class="customerTable">
 							  	<thead>
