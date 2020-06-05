@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { addDays, addMonths, getDay } from 'date-fns'
 import moment from 'moment'
+import Select from 'react-select'
 
 
 class Order extends Component {
@@ -19,9 +20,16 @@ class Order extends Component {
 		number: '',
 		mode: '',
 
+		options: [
+		 	{ value: 'None', label: 'None' },
+		  	{ value: 'Personalized', label: 'Personalized Note (+ P20)' },
+		  	{ value: 'Frosting', label: 'Separate Frosting (+ P10)' },
+		  	{ value: 'extraFrosting', label: 'Extra Frosting 100ml (+ P50)' }
+		],
+
 		pDate: '',
 		pPayment: '',
-		pInstructions: '',
+		pInstructions: [],
 		pNote: '',
 		pAmount: '',
 		
@@ -148,24 +156,36 @@ class Order extends Component {
 
 	instructionFee = () => {
 		if (this.state.mode === 'Pickup') {
-			if (this.state.pInstructions === '' || this.state.pInstructions === 'None') {
+			if (this.state.pInstructions.length < 1 || this.state.pInstructions.length === 1 && this.state.pInstructions.includes('None')) {
 				this.setState(prevState => ({ price: prevState.price + 0 }))
-			} else if (this.state.pInstructions === 'Personalized' || this.state.dInstructions === 'Candle') {
+			}
+
+			if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle')) {
 				this.setState(prevState => ({ price: prevState.price + 20 }))
-			} else if (this.state.pInstructions === 'Frosting') {
+			}
+
+			if (this.state.pInstructions.includes('Frosting')) {
 				this.setState(prevState => ({ price: prevState.price + 10 }))
-			} else if (this.state.pInstructions === 'extraFrosting') {
+			} 
+
+			if (this.state.pInstructions.includes('extraFrosting')) {
 				this.extraFrostingFeePickup()
 			}
 		}
 		else if (this.state.mode === 'Delivery') {
-			if (this.state.dInstructions === '' || this.state.dInstructions === 'None') {
+			if (this.state.dInstructions.length < 1 || this.state.dInstructions.length === 1 && this.state.dInstructions.includes('None')) {
 				this.setState(prevState => ({ price: prevState.price + 0 }))
-			} else if (this.state.dInstructions === 'Personalized' || this.state.dInstructions === 'Candle') {
+			}
+
+			if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle')) {
 				this.setState(prevState => ({ price: prevState.price + 20 }))
-			} else if (this.state.dInstructions === 'Frosting') {
+			}
+
+			if (this.state.dInstructions.includes('Frosting')) {
 				this.setState(prevState => ({ price: prevState.price + 10 }))
-			} else if (this.state.dInstructions === 'extraFrosting') {
+			}
+
+			if (this.state.dInstructions.includes('extraFrosting')) {
 				this.extraFrostingFeeDelivery()
 			}
 		}
@@ -258,6 +278,28 @@ class Order extends Component {
 		this.setState({ [name]: value })
 	}
 
+	handlePickupSelectChange = (pInstructions) => {
+		this.setState({ pInstructions })
+		firebase.database().ref('rules').child(`${this.state.consumer}`).set(pInstructions)
+
+		firebase.database().ref('rules').child(`${this.state.consumer}`).once('value', snapshot => {
+			let pInstructions = []
+			snapshot.forEach((snap) => { pInstructions.push(snap.val().value) })
+			this.setState({ pInstructions })
+		})
+	}
+
+	handleDeliverySelectChange = (dInstructions) => {
+		this.setState({ dInstructions })
+		firebase.database().ref('rules').child(`${this.state.consumer}`).set(dInstructions)
+
+		firebase.database().ref('rules').child(`${this.state.consumer}`).once('value', snapshot => {
+			let dInstructions = []
+			snapshot.forEach((snap) => { dInstructions.push(snap.val().value) })
+			this.setState({ dInstructions })
+		})
+	}
+
 	removeSpaces = (string) => string.split(' ').join('')
 
 	moveOrderRecord = () => {
@@ -293,14 +335,16 @@ class Order extends Component {
 				Number: this.removeSpaces(this.state.number),
 				Mode: this.state.mode,
 				Price: this.state.price,
-				PickupPayment: this.state.pPayment,
-				Instructions: this.state.pInstructions,
+				PickupPayment: this.state.pPayment,	
 				FrostingInstructions: this.state.pAmount,
 				Note: this.state.pNote,
 				orderStatus: this.state.orderStatus,
 				paymentStatus: this.state.paymentStatus,
 				contacted: this.state.contacted,
 				Date: moment(this.state.pDate).format('L')
+			})
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order: ${today}`).child('Order Instructions').update({
+				Instructions: this.state.pInstructions
 			})
 		}
 		else if (this.state.mode === 'Delivery') {
@@ -313,13 +357,15 @@ class Order extends Component {
 				Address: this.state.address,
 				City: this.state.city,
 				Route: this.state.route,
-				Instructions: this.state.dInstructions,
 				FrostingInstructions: this.state.dAmount,
 				Note: this.state.dNote,
 				orderStatus: this.state.orderStatus,
 				paymentStatus: this.state.paymentStatus,
 				contacted: this.state.contacted,
 				Date: moment(this.state.dDate).format('L')
+			})
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order: ${today}`).child('Order Instructions').update({
+				Instructions: this.state.dInstructions
 			})
 			//save this in its own node in order to keep track of the amount of times the date was used for deliveries
 			firebase.database().ref('deliveryDates').push(
@@ -332,9 +378,9 @@ class Order extends Component {
 		this.setState({
 			name: '',       number: '',       mode: '',                price: 0,
 
-		    pDate: '',      pPayment: '',     pInstructions: '',       pNote: '',
+		    pDate: '',      pPayment: '',     pInstructions: [],       pNote: '',
 		
-		    dPayment: '',   address: '',      city: '',                dDate: '',       route: '',       dInstructions: '',       dNote: ''
+		    dPayment: '',   address: '',      city: '',                dDate: '',       route: '',       dInstructions: [],       dNote: ''
 		})
 
 		alert("Thank you for ordering! Please expect an SMS regarding your order within the day.")
@@ -344,19 +390,40 @@ class Order extends Component {
 		event.preventDefault()
 		if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
 			if (this.state.mode === 'Pickup') {
-				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.trim() !== "" && (this.state.pInstructions === 'Personalized' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'Candle' && this.state.pNote.trim() !== "" || this.state.pInstructions === 'None' && this.state.pNote.trim() === '' || this.state.pInstructions === 'Frosting' && this.state.pNote.trim() === '' || this.state.pInstructions === 'extraFrosting' && this.state.pAmount.trim() !== '' )) {
-					if (this.state.pPayment === 'P_transfer') {
-						const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
-						if (inform) {
-							const confirm = window.confirm('Confirm your purchase?')
-							if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
+				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.length > 0) {
+					if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') || this.state.pInstructions.includes('Frosting') || this.state.pInstructions.includes('extraFrosting')) {
+						if (this.state.pNote.trim() !== '') {
+							if (this.state.pPayment === 'P_transfer') {
+								const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
+								if (inform) {
+									const confirm = window.confirm('Confirm your purchase?')
+									if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
+								}
+							}
+							else if (this.state.pPayment === 'payOnPickup') {
+								const inform = window.confirm('The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
+								if (inform) {
+									const confirm = window.confirm('Confirm your purchase?')
+									if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
+								}
+							}
 						}
+						else { alert("Please fill in all the input fields.") }
 					}
-					else if (this.state.pPayment === 'payOnPickup') {
-						const inform = window.confirm('The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
-						if (inform) {
-							const confirm = window.confirm('Confirm your purchase?')
-							if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
+					else if (this.state.pInstructions.includes('None') && this.state.pInstructions.length === 1) {
+						if (this.state.pPayment === 'P_transfer') {
+							const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
+							if (inform) {
+								const confirm = window.confirm('Confirm your purchase?')
+								if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
+							}
+						}
+						else if (this.state.pPayment === 'payOnPickup') {
+							const inform = window.confirm('The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
+							if (inform) {
+								const confirm = window.confirm('Confirm your purchase?')
+								if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
+							}
 						}
 					}
 				}
@@ -367,17 +434,35 @@ class Order extends Component {
 					alert("Minimum of 2 boxes of the 6pcs Cinammon Rolls required for delivery.")
 				} 
 				else {
-					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.trim() !== "" && (this.state.dInstructions === 'Personalized' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'Candle' && this.state.dNote.trim() !== "" || this.state.dInstructions === 'None' && this.state.dNote.trim() === '' || this.state.dInstructions === 'Frosting' && this.state.dNote.trim() === '' || this.state.dInstructions === 'extraFrosting' && this.state.dAmount.trim() !== '' )) {
-						if (this.state.dPayment === 'D_transfer') {
-							const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
-							if (inform) {
+					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.length > 0) {
+						if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('Frosting') || this.state.dInstructions.includes('extraFrosting')) {
+							if (this.state.dNote.trim() !== '') {
+								if (this.state.dPayment === 'D_transfer') {
+									const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
+									if (inform) {
+										const confirm = window.confirm('Confirm your purchase?')
+										if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
+									}
+								}
+								else if (this.state.dPayment === 'cod') {
+									const confirm = window.confirm('Confirm your purchase?')
+									if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
+								}
+							}
+							else { alert("Please fill in all the input fields.") }
+						}
+						else if (this.state.dInstructions.includes('None') && this.state.dInstructions.length === 1) {
+							if (this.state.dPayment === 'D_transfer') {
+								const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
+								if (inform) {
+									const confirm = window.confirm('Confirm your purchase?')
+									if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
+								}
+							}
+							else if (this.state.dPayment === 'cod') {
 								const confirm = window.confirm('Confirm your purchase?')
 								if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
 							}
-						}
-						else if (this.state.dPayment === 'cod') {
-							const confirm = window.confirm('Confirm your purchase?')
-							if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
 						}
 					}
 					else { alert("Please fill in all the input fields.") }
@@ -386,8 +471,6 @@ class Order extends Component {
 		}
 		else { alert("Your cart is empty.") }
  	}
-
-//<option value="Candle">Candles (+ P20)</option>
 
 	render() {
 		return (
@@ -422,20 +505,14 @@ class Order extends Component {
 										<option value="payOnPickup">Pay on Pickup</option>
 										<option value="P_transfer">BDO Bank Transfer</option>
 									</select>
+	
+									<Select isMulti options={this.state.options} onChange={this.handlePickupSelectChange} id="instructions" placeholder="Additional Instructions" isSearchable={ false } inputProps={{readOnly:true}} />
 
-									<select onChange={this.handleChange} value={this.state.pInstructions} name="pInstructions" id="pickupInstructions">
-										<option value="">--Additional Instructions--</option>
-										<option value="None">None</option>
-										<option value="Personalized">Personalized Note (+ P20)</option>
-										<option value="Frosting">Separate Frosting (+ P10)</option>
-										<option value="extraFrosting">Extra Frosting 100ml (+ P50)</option>
-									</select>
-
-									{this.state.pInstructions === 'Personalized' || this.state.pInstructions === 'Candle' ? 
+									{this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') ? 
 											<input class="slideLeft" onChange={this.handleChange} value={this.state.pNote} name="pNote" type="text" placeholder="Instructions Description" /> 
 									: null}
 
-									{this.state.pInstructions === 'extraFrosting' ?
+									{this.state.pInstructions.includes('extraFrosting') ?
 										<select class="slideLeft" onChange={this.handleChange} value={this.state.pAmount} name="pAmount">
 											<option value="">0</option>
 											<option value="Amount: 1">1</option>
@@ -517,19 +594,13 @@ class Order extends Component {
 										</div>
 									: null}
 
-									<select onChange={this.handleChange} value={this.state.dInstructions} name="dInstructions">
-										<option value="">--Additional Instructions--</option>
-										<option value="None">None</option>
-										<option value="Personalized">Personalized Note (+ P20)</option>
-										<option value="Frosting">Separate Frosting (+ P10)</option>
-										<option value="extraFrosting">Extra Frosting 100ml (+ P50)</option>
-									</select>
+									<Select isMulti options={this.state.options} onChange={this.handleDeliverySelectChange} id="instructions" placeholder="Additional Instructions" isSearchable={ false } inputProps={{readOnly:true}} />
 
-									{this.state.dInstructions === 'Personalized' || this.state.dInstructions === 'Candle' ? 
+									{this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') ? 
 										<input class="slideLeft" onChange={this.handleChange} value={this.state.dNote} name="dNote" type="text" placeholder="Instructions Description" /> 
 									: null}
 
-									{this.state.dInstructions === 'extraFrosting' ?
+									{this.state.dInstructions.includes('extraFrosting') ?
 										<select class="slideLeft" onChange={this.handleChange} value={this.state.dAmount} name="dAmount">
 											<option value="">0</option>
 											<option value="Amount: 1">1</option>

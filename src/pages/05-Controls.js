@@ -15,6 +15,7 @@ class Controls extends Component {
 		person: '',
 		purchase: '',
 		items: [],
+		instructions: [],
 
 		paymentStatus: 'Payment Confirmed',
 		orderStatus: 'Ready',
@@ -57,6 +58,7 @@ class Controls extends Component {
 				this.setState({ person: snap.key })
 				snap.forEach((order) => {
 					this.setState({ purchase: order.key })
+
 					//append the products from 'Order Items' into the items array state
 					if (order.hasChild('Order Items')) {
 						order.forEach((details) => {
@@ -65,6 +67,19 @@ class Controls extends Component {
 							this.setState({ items })
 						})
 					}
+
+					if (order.hasChild('Order Instructions')) {
+						order.child('Order Instructions').forEach((information) => {
+							let instructions = []
+							information.forEach((info) => { instructions.push(info.val()) })
+							this.setState({ instructions })
+						})
+					}
+					else if (!order.hasChild('Order Instructions')) {
+						let instructions = []
+						this.setState({ instructions })
+					}
+
 					//append all the details from 'Order Details' to the specified functions
 					order.forEach((details) => {
 						if (this.state.dateFilter === '') {
@@ -73,13 +88,23 @@ class Controls extends Component {
 									this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
+										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
+										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+									}))
 								}
 								else if (details.val().Mode === 'Delivery') {
 									this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
+										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
+										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+									}))
 								}
 							}
 							else if (details.val().orderStatus === 'Ready') {
@@ -92,13 +117,23 @@ class Controls extends Component {
 									this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
+										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
+										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+									}))
 								}
 								else if (details.val().Mode === 'Delivery') {
 									this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
+										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
+										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+									}))
 								}
 							}
 							else if (details.val().Date !== moment(this.state.dateFilter).format('L')) {
@@ -111,7 +146,7 @@ class Controls extends Component {
 		})	
 	}
 
-	addPickupInfo_All = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct) => {
+	addPickupInfo_All = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
 			<tr id={object}>
@@ -122,7 +157,7 @@ class Controls extends Component {
 				<td>{date}</td>
 				<td>-</td>
 				<td>-</td>
-				<td>{instruction}<br />{description}<br />{frostingInstruct}</td>
+				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
 				<td>
 					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
 				    <button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order, object)} disabled={orderStat === this.state.orderStatus}>Complete</button>
@@ -134,7 +169,7 @@ class Controls extends Component {
 		this.setState({ allOrders: row })
 	}
 
-	addDeliveryInfo_All = (name, number, products, amount, mode, date, address, city, route, instruction, description, person, order,  paymentStat, orderStat, contactStat, frostingInstruct) => {
+	addDeliveryInfo_All = (name, number, products, amount, mode, date, address, city, route, instruction, description, person, order,  paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
 			<tr id={object}>
@@ -150,7 +185,7 @@ class Controls extends Component {
 				</td>
 				<td>{address}</td>
 				<td>{city}</td>
-				<td>{instruction}<br />{description}<br />{frostingInstruct}</td>
+				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
 				<td>
 					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
 					<button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order, object)} disabled={orderStat === this.state.orderStatus}>Complete</button>
@@ -169,6 +204,7 @@ class Controls extends Component {
 				this.setState({ person: snap.key })
 				snap.forEach((order) => {
 					this.setState({ purchase: order.key })
+
 					if (order.hasChild('Order Items')) {
 						order.forEach((details) => {
 							let items = []
@@ -176,6 +212,19 @@ class Controls extends Component {
 							this.setState({ items })
 						})
 					}
+
+					if (order.hasChild('Order Instructions')) {
+						order.child('Order Instructions').forEach((information) => {
+							let instructions = []
+							information.forEach((info) => { instructions.push(info.val()) })
+							this.setState({ instructions })
+						})
+					}
+					else if (!order.hasChild('Order Instructions')) {
+						let instructions = []
+						this.setState({ instructions })
+					}
+
 					order.forEach((details) => {
 						if (this.state.dateFilter === '') {
 							if (details.val().orderStatus === 'Not Ready') {
@@ -183,7 +232,12 @@ class Controls extends Component {
 									this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
+										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
+										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+									}))
 								}
 								else if (details.val().Mode === 'Delivery') {
 									return
@@ -199,7 +253,12 @@ class Controls extends Component {
 									this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
+										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
+										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+									}))
 								}
 								else if (details.val().Mode === 'Delivery') {
 									return
@@ -215,7 +274,7 @@ class Controls extends Component {
 		})	
 	}
 
-	addPickupInfo_Pickup = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct) => {
+	addPickupInfo_Pickup = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.pickupOrders.concat(
 			<tr id={object}>
@@ -226,7 +285,7 @@ class Controls extends Component {
 				<td>{date}</td>
 				<td>-</td>
 				<td>-</td>
-				<td>{instruction}<br />{description}<br />{frostingInstruct}</td>
+				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
 				<td>
 					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
 				    <button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order, object)} disabled={orderStat === this.state.orderStatus}>Complete</button>
@@ -245,6 +304,7 @@ class Controls extends Component {
 				this.setState({ person: snap.key })
 				snap.forEach((order) => {
 					this.setState({ purchase: order.key })
+
 					if (order.hasChild('Order Items')) {
 						order.forEach((details) => {
 							let items = []
@@ -252,6 +312,19 @@ class Controls extends Component {
 							this.setState({ items })
 						})
 					}
+
+					if (order.hasChild('Order Instructions')) {
+						order.child('Order Instructions').forEach((information) => {
+							let instructions = []
+							information.forEach((info) => { instructions.push(info.val()) })
+							this.setState({ instructions })
+						})
+					}
+					else if (!order.hasChild('Order Instructions')) {
+						let instructions = []
+						this.setState({ instructions })
+					}
+					
 					order.forEach((details) => {
 						if (this.state.dateFilter === '') {
 							if (details.val().orderStatus === 'Not Ready') {
@@ -259,7 +332,12 @@ class Controls extends Component {
 									this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
+										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
+										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+									}))
 								}
 								else if (details.val().Mode === 'Pickup') {
 									return
@@ -275,7 +353,12 @@ class Controls extends Component {
 									this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions)
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
+										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
+										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+									}))
 								}
 								else if (details.val().Mode === 'Pickup') {
 									return
@@ -291,7 +374,7 @@ class Controls extends Component {
 		})	
 	}
 
-	addDeliveryInfo_Delivery = (name, number, products, amount, mode, date, address, city, route, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct) => {
+	addDeliveryInfo_Delivery = (name, number, products, amount, mode, date, address, city, route, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.deliveryOrders.concat(
 			<tr id={object}>
@@ -307,7 +390,7 @@ class Controls extends Component {
 				</td>
 				<td>{address}</td>
 				<td>{city}</td>
-				<td>{instruction}<br />{description}<br />{frostingInstruct}</td>
+				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
 				<td>
 					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
 					<button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order, object)} disabled={orderStat === this.state.orderStatus}>Complete</button>
