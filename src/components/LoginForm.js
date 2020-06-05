@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase'
 import '../services/firebaseConfig'
-import Cart from '../components/Cart' 
 
 
 class Account extends Component {
@@ -33,6 +32,11 @@ class Account extends Component {
 		})
 	}
 
+	reset = (event) => {
+		event.preventDefault()
+		firebase.auth().sendPasswordResetEmail(this.state.userEmail)
+		.then((user) => { alert("Please check your email!") })
+	}
 
 	render() {
 		return (
@@ -46,6 +50,7 @@ class Account extends Component {
 								<br /><button onClick={this.singup}>Register</button>
 								<button onClick={this.signin}>Login</button>
 
+								<button onClick={this.reset} id="forgot">Forgot Password?</button>
 							</form>
 						</div>
 					</div>
@@ -56,5 +61,3 @@ class Account extends Component {
 }
 
 export default Account
-
-//<button id="forgot">Forgot Password?</button>

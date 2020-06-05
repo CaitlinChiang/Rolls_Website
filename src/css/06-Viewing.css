@@ -1,6 +1,6 @@
 /*Viewing Table*/
 #viewing {
-	background: linear-gradient(#FFE6E6, #F08080);
+	background: #FFE6E6;
 	min-height: 100vh;
 	text-align: center;
 }
@@ -63,7 +63,7 @@
     margin-top: 50px;
 }
 
-.filter select, .filter #filterPicker, .maxDel input {
+.filter select, .filter #filterPicker, .filter input, .maxDel input {
     padding: 10px;
     font-size: 18px;
     color: #707070;
@@ -75,7 +75,7 @@
     display: inline-block;
 }
 
-.maxDel button {
+.maxDel button, #searchOrder {
     background: #ffffff;
     color: #FF7676;
     padding: 10px;
@@ -87,7 +87,7 @@
     margin: 0px 20px 10px;
 }
 
-.maxDel button:hover {
+.maxDel button:hover, #searchOrder:hover {
     background: #C78F76;
     color: #ffffff;
 }

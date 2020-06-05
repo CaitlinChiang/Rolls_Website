@@ -23,7 +23,8 @@ class Controls extends Component {
 
 		methodFilter: '',
 		dateFilter: '',
-		maxDeliveries: 0
+		maxDeliveries: 0,
+		searchOrder: ''
 	}
 
 	logout = (event) => {
@@ -41,6 +42,16 @@ class Controls extends Component {
 		event.preventDefault()
 		const {name, value} = event.target
 		this.setState({ [name]: value })
+	}
+
+	handleOrderChange = (event) => {
+		event.preventDefault()
+		const {name, value} = event.target
+		this.setState({ [name]: value })
+
+		this.setState({ allOrders: [] })
+
+		this.allData()
 	}
 
 	handleDateChange = (date) => {
@@ -82,39 +93,68 @@ class Controls extends Component {
 
 					//append all the details from 'Order Details' to the specified functions
 					order.forEach((details) => {
-						if (this.state.dateFilter === '') {
-							if (details.val().orderStatus === 'Not Ready') {
-								if (details.val().Mode === 'Pickup') {
-									this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
-										if (item === 'P1') { return <p>6pcs</p> }
-										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
-										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
-										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
-										else if (item === 'Candle') { return <p>Candle</p> }
-										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
-										else if (item === 'None') { return <p>None</p> }
-									}))
+						if (this.state.searchOrder.trim() === '') {
+							if (this.state.dateFilter === '') {
+								if (details.val().orderStatus === 'Not Ready') {
+									if (details.val().Mode === 'Pickup') {
+										this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+											if (item === 'P1') { return <p>6pcs</p> }
+											else if (item === 'P2') { return <p>12pcs</p> }
+										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
+											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
+											else if (item === 'Candle') { return <p>Candle</p> }
+											else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+											else if (item === 'None') { return <p>None</p> }
+										}))
+									}
+									else if (details.val().Mode === 'Delivery') {
+										this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+											if (item === 'P1') { return <p>6pcs</p> }
+											else if (item === 'P2') { return <p>12pcs</p> }
+										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
+											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
+											else if (item === 'Candle') { return <p>Candle</p> }
+											else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+											else if (item === 'None') { return <p>None</p> }
+										}))
+									}
 								}
-								else if (details.val().Mode === 'Delivery') {
-									this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
-										if (item === 'P1') { return <p>6pcs</p> }
-										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
-										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
-										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
-										else if (item === 'Candle') { return <p>Candle</p> }
-										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
-										else if (item === 'None') { return <p>None</p> }
-									}))
-								}
+								else if (details.val().orderStatus === 'Ready') { return }
 							}
-							else if (details.val().orderStatus === 'Ready') {
-								return
+							else if (this.state.dateFilter !== '') {
+								if (details.val().Date === moment(this.state.dateFilter).format('L')) {
+									if (details.val().Mode === 'Pickup') {
+										this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+											if (item === 'P1') { return <p>6pcs</p> }
+											else if (item === 'P2') { return <p>12pcs</p> }
+										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
+											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
+											else if (item === 'Candle') { return <p>Candle</p> }
+											else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+											else if (item === 'None') { return <p>None</p> }
+										}))
+									}
+									else if (details.val().Mode === 'Delivery') {
+										this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+											if (item === 'P1') { return <p>6pcs</p> }
+											else if (item === 'P2') { return <p>12pcs</p> }
+										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
+											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
+											else if (item === 'Candle') { return <p>Candle</p> }
+											else if (item === 'Frosting') { return <p>Separate Frosting</p> }
+											else if (item === 'None') { return <p>None</p> }
+										}))
+									}
+								}
+								else if (details.val().Date !== moment(this.state.dateFilter).format('L')) { return }
 							}
 						}
-						else if (this.state.dateFilter !== '') {
-							if (details.val().Date === moment(this.state.dateFilter).format('L')) {
+						else if (this.state.searchOrder.trim() !== '') {
+							if (this.state.purchase === this.state.searchOrder) {
 								if (details.val().Mode === 'Pickup') {
 									this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
@@ -140,10 +180,8 @@ class Controls extends Component {
 									}))
 								}
 							}
-							else if (details.val().Date !== moment(this.state.dateFilter).format('L')) {
-								return
-							}
-						}	
+							else if (this.state.purchase !== this.state.searchOrder) { return }
+						}
 					})	
 				})
 			})
@@ -154,7 +192,7 @@ class Controls extends Component {
 		let object = order
 		var row = this.state.allOrders.concat(
 			<tr id={object}>
-				<td>{name}<br />{number}</td>
+				<td>{name}<br />{number}<br /><br />{order}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'P_transfer' ? <td>BDO Transfer</td> : <td>Payment on Pickup</td>}
@@ -177,7 +215,7 @@ class Controls extends Component {
 		let object = order
 		var row = this.state.allOrders.concat(
 			<tr id={object}>
-				<td>{name}<br />{number}</td>
+				<td>{name}<br />{number}<br /><br />{order}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'D_transfer' ? <td>BDO Transfer</td> : <td>Cash on Delivery</td>}
@@ -284,7 +322,7 @@ class Controls extends Component {
 		let object = order
 		var row = this.state.pickupOrders.concat(
 			<tr id={object}>
-				<td>{name}<br />{number}</td>
+				<td>{name}<br />{number}<br /><br />{order}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'P_transfer' ? <td>BDO Transfer</td> : <td>Payment on Pickup</td>}
@@ -386,7 +424,7 @@ class Controls extends Component {
 		let object = order
 		var row = this.state.deliveryOrders.concat(
 			<tr id={object}>
-				<td>{name}<br />{number}</td>
+				<td>{name}<br />{number}<br /><br />{order}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'D_transfer' ? <td>BDO Transfer</td> : <td>Cash on Delivery</td>}
@@ -441,7 +479,7 @@ class Controls extends Component {
 
 	//change maximum delivery number
 	changeDeliveryNumber = (event) => {
-		if (this.state.maxDeliveries.trim() !== "" && this.state.maxDeliveries >= 0) {
+		if (this.state.maxDeliveries >= 0) {
 			firebase.database().ref('products').child('Delivery Number').update({ MaxDelivery: this.state.maxDeliveries })
 		}
 		else {
@@ -482,6 +520,8 @@ class Controls extends Component {
 								<option value="delivery">Deliveries</option>
 								<option value="pickup">Pickups</option>
 							</select>
+
+							<input onChange={this.handleOrderChange} value={this.state.searchOrder} name="searchOrder" type="text" placeholder="Search Order" autocomplete="off" />
 
 							<DatePicker inline selected={this.state.dateFilter} onChange={date => this.handleDateChange(date)} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date" id="filterPicker" />
 						</div>

@@ -71,10 +71,11 @@
 	display: block;
 	background: #FF7676;
 	color: #ffffff;
+	font-size: 17px;
 }
 
 #forgot:hover {
-	background: #000000;
+	background: #BF7070;
 	color: #ffffff;
 }
 
