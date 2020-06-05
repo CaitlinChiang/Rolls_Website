@@ -13,6 +13,8 @@ class Order extends Component {
 		pendingOrders: [],
 		price: 0,
 
+		orderTracker: [],
+
 		dateRange: [],
 		maxDeliveries: 0,
 
@@ -47,7 +49,7 @@ class Order extends Component {
 	}
 
 	componentDidMount = async () => {
-		setInterval(() => { this.displayTotal(); this.cityFee(); this.instructionFee(); }, 100)
+		setInterval(() => { this.displayTotal(); this.cityFee(); this.instructionFee(); this.getOrderNumber() }, 100)
 
 		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').on('value', snapshot => {
 			let pendingOrders = []
@@ -63,6 +65,18 @@ class Order extends Component {
 
 		firebase.database().ref('products').child('Delivery Number').on('value', snapshot => {
 			this.setState({ maxDeliveries: snapshot.val().MaxDelivery })
+		})
+	}
+
+	getOrderNumber = () => {
+		firebase.database().ref('rolls').on('value', snapshot => {
+			let orderTracker = []
+			snapshot.forEach((user) => {
+				user.forEach((order) => {
+					orderTracker.push(order.key)
+				})
+			})
+			this.setState({ orderTracker })
 		})
 	}
 
@@ -301,27 +315,15 @@ class Order extends Component {
 		})
 	}
 
-	getDate = () => {
-		let newDate = new Date()
-
-		let dateToday = newDate.getDate();
-		let month = newDate.getMonth() + 1;
-		let year = newDate.getFullYear();
-		let hour = newDate.getHours();
-		let min = newDate.getMinutes();
-		let sec = newDate.getSeconds();
-
-		return month + "-" + dateToday + "-" + year + "||" + hour + ":" + min + ":" + sec
-	}
-
 	updateRolls = () => {
-		let today = this.getDate()
+		let orderNumber = this.state.orderTracker.length + 1
+
 		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').once('value', snapshot => {
-			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order: ${today}`).child('Order Items').set( snapshot.val() )
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Items').set( snapshot.val() )
 		})
 
 		if (this.state.mode === 'Pickup') {
-			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order: ${today}`).child('Order Details').update({
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Details').update({
 				Name: this.state.name,
 				Number: this.removeSpaces(this.state.number),
 				Mode: this.state.mode,
@@ -334,12 +336,12 @@ class Order extends Component {
 				contacted: this.state.contacted,
 				Date: moment(this.state.pDate).format('L')
 			})
-			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order: ${today}`).child('Order Instructions').update({
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Instructions').update({
 				Instructions: this.state.pInstructions
 			})
 		}
 		else if (this.state.mode === 'Delivery') {
-			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order: ${today}`).child('Order Details').update({
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Details').update({
 				Name: this.state.name,
 				Number: this.removeSpaces(this.state.number),
 				Mode: this.state.mode,
@@ -355,13 +357,11 @@ class Order extends Component {
 				contacted: this.state.contacted,
 				Date: moment(this.state.dDate).format('L')
 			})
-			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order: ${today}`).child('Order Instructions').update({
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Instructions').update({
 				Instructions: this.state.dInstructions
 			})
 			//save this in its own node in order to keep track of the amount of times the date was used for deliveries
-			firebase.database().ref('deliveryDates').push(
-				moment(this.state.dDate).format('L')
-			)
+			firebase.database().ref('deliveryDates').push( moment(this.state.dDate).format('L') )
 		}
 	}
 
@@ -379,6 +379,7 @@ class Order extends Component {
 
 	order = (event) => {
 		event.preventDefault()
+
 		if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
 			if (this.state.mode === 'Pickup') {
 				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.length > 0) {

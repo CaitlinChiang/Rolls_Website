@@ -7,6 +7,7 @@ class Cart extends Component {
 	state = {
 		consumer: this.props.consumer,
 		pendingOrders: [],
+		orderNumber: '',
 
 		orders: [],
 		doneOrders: [],
@@ -33,6 +34,8 @@ class Cart extends Component {
 			snapshot.forEach((snap) => {
 				if (snap.key === this.state.consumer) {
 					snap.forEach((order) => {
+					this.setState({ orderNumber: order.key })
+
 						if (order.hasChild('Order Items')) {
 							order.forEach((details) => {
 								let items = []
@@ -46,13 +49,13 @@ class Cart extends Component {
 									this.getPendingPickupInfo(this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().orderStatus, details.val().PickupPayment, details.val().Date, details.val().paymentStatus)
+									}), details.val().Price, details.val().orderStatus, details.val().PickupPayment, details.val().Date, details.val().paymentStatus, this.state.orderNumber)
 								}
 								else if (details.val().Mode === 'Delivery') {
 									this.getPendingDeliveryInfo(this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().orderStatus, details.val().DeliveryPayment, details.val().Address, details.val().Date, details.val().paymentStatus)
+									}), details.val().Price, details.val().orderStatus, details.val().DeliveryPayment, details.val().Address, details.val().Date, details.val().paymentStatus, this.state.orderNumber)
 								}
 							}
 							else { return }
@@ -63,9 +66,10 @@ class Cart extends Component {
 		})	
 	}
 
-	getPendingPickupInfo = (products, price, orderStatus, mode, date, paymentStat) => {
+	getPendingPickupInfo = (products, price, orderStatus, mode, date, paymentStat, order) => {
 		var row = this.state.orders.concat(
 			<tr>
+				<td>{order}</td>
 				<td>Classic Cinammon Rolls: {products}</td>
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
@@ -76,9 +80,10 @@ class Cart extends Component {
 		this.setState({ orders: row })
 	}
 
-	getPendingDeliveryInfo = (products, price, orderStatus, mode, address, date, paymentStat) => {
+	getPendingDeliveryInfo = (products, price, orderStatus, mode, address, date, paymentStat, order) => {
 		var row = this.state.orders.concat(
 			<tr>
+				<td>{order}</td>
 				<td>Classic Cinammon Rolls: {products}</td>
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
@@ -95,6 +100,8 @@ class Cart extends Component {
 			snapshot.forEach((snap) => {
 				if (snap.key === this.state.consumer) {
 					snap.forEach((order) => {
+					this.setState({ orderNumber: order.key })
+
 						if (order.hasChild('Order Items')) {
 							order.forEach((details) => {
 								let items = []
@@ -108,13 +115,13 @@ class Cart extends Component {
 									this.getFinishedPickupInfo(this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().orderStatus, details.val().PickupPayment, details.val().Date, details.val().paymentStatus)
+									}), details.val().Price, details.val().orderStatus, details.val().PickupPayment, details.val().Date, details.val().paymentStatus, this.state.orderNumber)
 								}
 								else if (details.val().Mode === 'Delivery') {
 									this.getFinishedDeliveryInfo(this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().orderStatus, details.val().DeliveryPayment, details.val().Address, details.val().Date, details.val().paymentStatus)
+									}), details.val().Price, details.val().orderStatus, details.val().DeliveryPayment, details.val().Address, details.val().Date, details.val().paymentStatus, this.state.orderNumber)
 								}
 							}
 							else { return }
@@ -125,9 +132,10 @@ class Cart extends Component {
 		})	
 	}
 
-	getFinishedPickupInfo = (products, price, orderStatus, mode, date, paymentStat) => {
+	getFinishedPickupInfo = (products, price, orderStatus, mode, date, paymentStat, order) => {
 		var row = this.state.doneOrders.concat(
 			<tr>
+				<td>{order}</td>
 				<td>Classic Cinammon Rolls: {products}</td>
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
@@ -138,9 +146,10 @@ class Cart extends Component {
 		this.setState({ doneOrders: row })
 	}
 
-	getFinishedDeliveryInfo = (products, price, orderStatus, mode, address, date, paymentStat) => {
+	getFinishedDeliveryInfo = (products, price, orderStatus, mode, address, date, paymentStat, order) => {
 		var row = this.state.doneOrders.concat(
 			<tr>
+				<td>{order}</td>
 				<td>Classic Cinammon Rolls: {products}</td>
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
@@ -199,6 +208,7 @@ class Cart extends Component {
 									<table class="customerTable">
 									  	<thead>
 										    <tr>
+										    	<th>Order Number</th>
 										        <th>Order</th>
 										      	<th>Total Amount</th>
 										      	<th>Order Status</th>
@@ -224,6 +234,7 @@ class Cart extends Component {
 									<table class="customerTable">
 									  	<thead>
 										    <tr>
+										    	<th>Order Number</th>
 										        <th>Order</th>
 										      	<th>Total Amount</th>
 										      	<th>Order Status</th>
