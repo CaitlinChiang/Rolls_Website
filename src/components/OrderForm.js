@@ -23,7 +23,6 @@ class Order extends Component {
 		options: [
 		 	{ value: 'None', label: 'None' },
 		  	{ value: 'Personalized', label: 'Personalized Note (+ P20)' },
-		  	{ value: 'Frosting', label: 'Separate Frosting (+ P10)' },
 		  	{ value: 'extraFrosting', label: 'Extra Frosting 100ml (+ P50)' }
 		],
 
@@ -164,10 +163,6 @@ class Order extends Component {
 				this.setState(prevState => ({ price: prevState.price + 20 }))
 			}
 
-			if (this.state.pInstructions.includes('Frosting')) {
-				this.setState(prevState => ({ price: prevState.price + 10 }))
-			} 
-
 			if (this.state.pInstructions.includes('extraFrosting')) {
 				this.extraFrostingFeePickup()
 			}
@@ -179,10 +174,6 @@ class Order extends Component {
 
 			if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle')) {
 				this.setState(prevState => ({ price: prevState.price + 20 }))
-			}
-
-			if (this.state.dInstructions.includes('Frosting')) {
-				this.setState(prevState => ({ price: prevState.price + 10 }))
 			}
 
 			if (this.state.dInstructions.includes('extraFrosting')) {
@@ -391,7 +382,7 @@ class Order extends Component {
 		if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
 			if (this.state.mode === 'Pickup') {
 				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.length > 0) {
-					if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') || this.state.pInstructions.includes('Frosting') || this.state.pInstructions.includes('extraFrosting')) {
+					if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') || this.state.pInstructions.includes('extraFrosting')) {
 						if (this.state.pNote.trim() !== '') {
 							if (this.state.pPayment === 'P_transfer') {
 								const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
@@ -435,7 +426,7 @@ class Order extends Component {
 				} 
 				else {
 					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.length > 0) {
-						if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('Frosting') || this.state.dInstructions.includes('extraFrosting')) {
+						if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('extraFrosting')) {
 							if (this.state.dNote.trim() !== '') {
 								if (this.state.dPayment === 'D_transfer') {
 									const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')

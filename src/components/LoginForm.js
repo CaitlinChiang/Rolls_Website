@@ -33,6 +33,7 @@ class Account extends Component {
 		})
 	}
 
+
 	render() {
 		return (
 			<div>
@@ -44,6 +45,7 @@ class Account extends Component {
 								<input onChange={this.handleChange} value={this.state.userPassword} name="userPassword" type="text" placeholder="Password" />
 								<br /><button onClick={this.singup}>Register</button>
 								<button onClick={this.signin}>Login</button>
+
 							</form>
 						</div>
 					</div>
@@ -54,3 +56,5 @@ class Account extends Component {
 }
 
 export default Account
+
+//<button id="forgot">Forgot Password?</button>

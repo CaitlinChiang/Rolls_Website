@@ -66,6 +66,18 @@
 	color: #ffffff;
 }
 
+#forgot {
+	margin: 150px auto 0px;
+	display: block;
+	background: #FF7676;
+	color: #ffffff;
+}
+
+#forgot:hover {
+	background: #000000;
+	color: #ffffff;
+}
+
 
 
 /*Responsive*/
