@@ -445,8 +445,8 @@ class Order extends Component {
 				} 
 				else {
 					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.length > 0) {
-						if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('extraFrosting')) {
-							
+						if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle')) {
+							if (this.state.dNote.trim() !== '') {
 								if (this.state.dPayment === 'D_transfer') {
 									const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
 									if (inform) {
@@ -458,7 +458,7 @@ class Order extends Component {
 									const confirm = window.confirm('Confirm your purchase?')
 									if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
 								}
-							
+							}
 							else { alert("Please fill in all the input fields.") }
 						}
 						else if (this.state.dInstructions.includes('None') && this.state.dInstructions.length === 1) {
