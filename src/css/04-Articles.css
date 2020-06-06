@@ -36,7 +36,7 @@
 	margin: 0px;
 	top: 250px;
 	color: #ffffff;
-	font-family: 'Playball', serif;
+	font-family: serif;
 	font-style: oblique;
 	font-size: 50px;
 }
@@ -77,7 +77,7 @@
 	color: black;
 	height: 200px;
 	margin: 0px;
-	font-family: 'Sahitya', Helvetica, sans-serif;
+	font-family: Helvetica, sans-serif;
 	color: #C49076;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
