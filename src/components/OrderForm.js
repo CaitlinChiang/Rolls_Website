@@ -275,7 +275,7 @@ class Order extends Component {
 
 	dateFilterRoute3 = (date) => {
 		const day = getDay(date)
-		return day !== 1 && day !== 2 && day !== 3 && day !== 5 && day !== 6
+		return day !== 0 && day !== 1 && day !== 2 && day !== 3 && day !== 5 && day !== 6
 	}
 
 	QC_dateFilterRoute4 = (date) => {
