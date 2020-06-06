@@ -110,7 +110,7 @@ class Order extends Component {
 					this.setState({ route: 'Route3'})
 				} else if (this.state.city === 'Makati') {
 					this.setState(prevState => ({ price: prevState.price + 140 }))
-					this.setState({ route: 'Route3'})
+					this.setState({ route: 'Route4_Makati'})
 				} else if (this.state.city === 'Malabon') {
 					this.setState(prevState => ({ price: prevState.price + 160 }))
 					this.setState({ route: 'Route1'})
@@ -119,7 +119,7 @@ class Order extends Component {
 					this.setState({ route: 'Route2'})
 				} else if (this.state.city === 'Manila') {
 					this.setState(prevState => ({ price: prevState.price + 110 }))
-					this.setState({ route: 'Route2'})
+					this.setState({ route: 'Route4_Manila'})
 				} else if (this.state.city === 'Marikina') {
 					this.setState(prevState => ({ price: prevState.price + 140 }))
 					this.setState({ route: 'Route1'})
@@ -143,7 +143,7 @@ class Order extends Component {
 					this.setState({ route: 'Route3'})
 				} else if (this.state.city === 'Quezon') {
 					this.setState(prevState => ({ price: prevState.price + 140 }))
-					this.setState({ route: 'Route1'})
+					this.setState({ route: 'Route4_QC'})
 				} else if (this.state.city === 'SanJuan') {
 					this.setState(prevState => ({ price: prevState.price + 110 }))
 					this.setState({ route: 'Route2'})
@@ -262,21 +262,38 @@ class Order extends Component {
 		}
 	}
 
+	//route filters
 	dateFilterRoute1 = (date) => {
 		const day = getDay(date)
-		return day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 6 && day !== 7
+		return day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 6
 	}
 
 	dateFilterRoute2 = (date) => {
 		const day = getDay(date)
-		return day !== 0 && day !== 1 && day !== 2 && day !== 4 && day !== 5 && day !== 7
+		return day !== 0 && day !== 1 && day !== 2 && day !== 4 && day !== 5
 	}
 
 	dateFilterRoute3 = (date) => {
 		const day = getDay(date)
-		return day !== 1 && day !== 2 && day !== 3 && day !== 5 && day !== 6 && day !== 7
+		return day !== 1 && day !== 2 && day !== 3 && day !== 5 && day !== 6
 	}
 
+	QC_dateFilterRoute4 = (date) => {
+		const day = getDay(date)
+		return day !== 1 && day !== 3 && day !== 4 && day !== 6
+	}
+
+	Makati_dateFilterRoute4 = (date) => {
+		const day = getDay(date)
+		return day !== 1 && day !== 2 && day !== 3 && day !== 5 && day !== 6
+	}
+
+	Manila_dateFilterRoute4 = (date) => {
+		const day = getDay(date)
+		return day !== 1 && day !== 2 && day !== 4 && day !== 5
+	}
+
+	//handle changes
 	handleChange = (event) => {
 		event.preventDefault()
 		const {name, value} = event.target
@@ -307,6 +324,7 @@ class Order extends Component {
 
 	removeSpaces = (string) => string.split(' ').join('')
 
+	//update data in database
 	moveOrderRecord = () => {
 		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').once('value', snapshot => {
 			firebase.database().ref(`users/${this.state.consumer}`).child('Delivered Orders').update( snapshot.val(), () => {
@@ -583,6 +601,27 @@ class Order extends Component {
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
 											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} id="deliveryPicker" />
+										</div>
+									: null}
+
+									{this.state.route !== '' && this.state.route === 'Route4_QC' ?
+										<div class="datepicker">
+											<h1>Delivery Date</h1>
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.QC_dateFilterRoute4} id="deliveryPicker" />
+										</div>
+									: null}
+
+									{this.state.route !== '' && this.state.route === 'Route4_Manila' ?
+										<div class="datepicker">
+											<h1>Delivery Date</h1>
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.Manila_dateFilterRoute4} id="deliveryPicker" />
+										</div>
+									: null}
+
+									{this.state.route !== '' && this.state.route === 'Route4_Makati' ?
+										<div class="datepicker">
+											<h1>Delivery Date</h1>
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.Makati_dateFilterRoute4} id="deliveryPicker" />
 										</div>
 									: null}
 
