@@ -17,9 +17,7 @@ class Account extends Component {
 	singup = (event) => {
 		event.preventDefault()
 		firebase.auth().createUserWithEmailAndPassword(this.state.userEmail, this.state.userPassword).then((u) => {
-		}).catch((error) => {
-			alert(error)
-		})
+		}).catch((error) => { alert(error) })
 
 		firebase.auth().signInWithEmailAndPassword(this.state.userEmail, this.state.userPassword)
 	}
@@ -27,9 +25,7 @@ class Account extends Component {
 	signin = (event) => {
 		event.preventDefault()
 		firebase.auth().signInWithEmailAndPassword(this.state.userEmail, this.state.userPassword).then((u) => {
-		}).catch((error) => {
-			alert(error)
-		})
+		}).catch((error) => { alert(error) })
 	}
 
 	reset = (event) => {
