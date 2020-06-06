@@ -112,7 +112,7 @@ class Controls extends Component {
 										this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
-										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
@@ -141,7 +141,7 @@ class Controls extends Component {
 										this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
-										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
@@ -171,7 +171,7 @@ class Controls extends Component {
 									this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Route, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -211,7 +211,7 @@ class Controls extends Component {
 		this.setState({ allOrders: row })
 	}
 
-	addDeliveryInfo_All = (name, number, products, amount, mode, date, address, city, route, instruction, description, person, order,  paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
+	addDeliveryInfo_All = (name, number, products, amount, mode, date, address, city, instruction, description, person, order,  paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
 			<tr id={object}>
@@ -219,12 +219,7 @@ class Controls extends Component {
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'D_transfer' ? <td>BDO Transfer</td> : <td>Cash on Delivery</td>}
-				<td>
-					{date}<br />
-					{route === 'Route1' ? <td>Route1</td> : null}
-					{route === 'Route2' ? <td>Route2</td> : null}
-					{route === 'Route3' ? <td>Route3</td> : null}
-				</td>
+				<td>{date}</td>
 				<td>{address}</td>
 				<td>{city}</td>
 				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
