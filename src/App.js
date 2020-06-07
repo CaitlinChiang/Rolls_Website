@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase'
+
 import Account from './components/LoginForm'
 import Cart from './components/Cart'
 import Warning from './components/WarningPage'
@@ -7,8 +8,9 @@ import Navbar from './pages/01-Navbar'
 import Home from './pages/02-Home'
 import Products from './pages/03-Products'
 import Articles from './pages/04-Articles'
-import Controls from './pages/05-Controls'
-import AuthorizedControls from './components/SelectedControls'
+
+import Admin from './pages_admin/01-Admin'
+import AuthorizedControls from './pages_admin/05-SelectedControls'
 
 
 class App extends Component {
@@ -28,11 +30,8 @@ class App extends Component {
     }
 
     goCart = () => this.setState({ DisplayCart: true, DisplayHome: false, DisplayProducts: false, DisplayArticles: false })
-
     goHome = () => this.setState({ DisplayCart: false, DisplayHome: true, DisplayProducts: false, DisplayArticles: false })
-
     goProducts = () => this.setState({ DisplayCart: false, DisplayHome: false, DisplayProducts: true, DisplayArticles: false })
-
     goArticles = () => this.setState({ DisplayCart: false, DisplayHome: false, DisplayProducts: false, DisplayArticles: true })
 
     render() {
@@ -48,7 +47,7 @@ class App extends Component {
                     </div>
                 : 
                 <div>
-                    {this.state.userID === 'alnLJ1AokzOcSVTt1yN3ereBayr2' || this.state.userID == 'JXw3ACHGrvQtUV50SrdCnVBkutG3' ? <Controls /> : <AuthorizedControls />}
+                    {this.state.userID === 'alnLJ1AokzOcSVTt1yN3ereBayr2' || this.state.userID == 'JXw3ACHGrvQtUV50SrdCnVBkutG3' ? <Admin /> : <AuthorizedControls />}
                 </div>}
             </div>
         )

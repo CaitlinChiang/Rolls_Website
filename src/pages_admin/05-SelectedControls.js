@@ -6,7 +6,7 @@ import { addMonths, getDay } from 'date-fns'
 import moment from 'moment'
 
 
-class Controls extends Component {
+class AuthorizedControls extends Component {
 	state = {
 		allOrders: [],
 		pickupOrders: [],
@@ -17,13 +17,8 @@ class Controls extends Component {
 		items: [],
 		instructions: [],
 
-		paymentStatus: 'Payment Confirmed',
-		orderStatus: 'Ready',
-		contacted: true,
-
 		methodFilter: '',
 		dateFilter: '',
-		maxDeliveries: 0,
 		searchOrder: ''
 	}
 
@@ -200,12 +195,7 @@ class Controls extends Component {
 				<td>-</td>
 				<td>-</td>
 				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
-				<td>
-					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
-				    <button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order, object)} disabled={orderStat === this.state.orderStatus}>Complete</button>
-				    <button style={{background: contactStat === true ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
-					<button onClick={() => this.remove(person, order, object)}>Remove</button>
-				</td>
+				{contactStat === true ? <td>Yes</td> : <td>No</td>}
 			</tr>
 		)
 		this.setState({ allOrders: row })
@@ -223,12 +213,7 @@ class Controls extends Component {
 				<td>{address}</td>
 				<td>{city}</td>
 				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
-				<td>
-					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
-					<button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order, object)} disabled={orderStat === this.state.orderStatus}>Complete</button>
-					<button style={{background: contactStat === true ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
-					<button onClick={() => this.remove(person, order, object)}>Remove</button>
-				</td>
+				{contactStat === true ? <td>Yes</td> : <td>No</td>}
 			</tr>
 		)
 		this.setState({ allOrders: row })
@@ -317,12 +302,7 @@ class Controls extends Component {
 				<td>-</td>
 				<td>-</td>
 				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
-				<td>
-					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
-				    <button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order, object)} disabled={orderStat === this.state.orderStatus}>Complete</button>
-				    <button style={{background: contactStat === true ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
-					<button onClick={() => this.remove(person, order, object)}>Remove</button>
-				</td>
+				{contactStat === true ? <td>Yes</td> : <td>No</td>}
 			</tr>
 		)
 		this.setState({ pickupOrders: row })
@@ -411,12 +391,7 @@ class Controls extends Component {
 				<td>{address}</td>
 				<td>{city}</td>
 				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
-				<td>
-					<button style={{background: paymentStat === 'Payment Confirmed' ? '#B2773C' : null}} id="paid" onClick={() => this.paid(person, order)} disabled={paymentStat === this.state.paymentStatus}>Confirm</button>
-					<button style={{background: orderStat === 'Ready' ? '#B2773C' : null}} id="done" onClick={() => this.done(person, order, object)} disabled={orderStat === this.state.orderStatus}>Complete</button>
-					<button style={{background: contactStat === true ? '#B2773C' : null}} id="contact" onClick={() => this.contact(person, order)} disabled={contactStat === this.state.contacted}>Contacted</button>
-					<button onClick={() => this.remove(person, order, object)}>Remove</button>
-				</td>
+				{contactStat === true ? <td>Yes</td> : <td>No</td>}
 			</tr>
 		)
 		this.setState({ deliveryOrders: row })
@@ -444,23 +419,6 @@ class Controls extends Component {
 		firebase.database().ref('rolls').child(customer).child(order).remove()
 	}
 
-	//stock toggle functions
-	p1Stock = (event) => firebase.database().ref('products').child('P1').update({ Stock: true })
-	p1NoStock = (event) => firebase.database().ref('products').child('P1').update({ Stock: false })
-
-	p2Stock = (event) => firebase.database().ref('products').child('P2').update({ Stock: true })
-	p2NoStock = (event) => firebase.database().ref('products').child('P2').update({ Stock: false })
-
-	//change maximum delivery number
-	changeDeliveryNumber = (event) => {
-		if (this.state.maxDeliveries >= 0) {
-			firebase.database().ref('products').child('Delivery Number').update({ MaxDelivery: this.state.maxDeliveries })
-		}
-		else {
-			alert("Please input an integer greater or equal to 0.")
-		}
-	}
-
 	//sort table
 	sortByKey = (array) => {
 	    return array.sort((a, b) => {
@@ -480,22 +438,7 @@ class Controls extends Component {
 				<section id="viewing">
 					<div class="container slideDown">
 
-						<div id="adminHeader"> <h1>Admin Panel</h1> </div>
-
-						<div class="maxDel">
-							<input onChange={this.handleChange} value={this.state.maxDeliveries} name="maxDeliveries" type="number" placeholder="Max Deliveries" />
-							<button onClick={this.changeDeliveryNumber}>Change Maximum Deliveries</button>
-						</div>
-
-						<div class="toggle">
-							<p>Cinammon Rolls - 6pcs</p>
-							<button onClick={this.p1Stock}>In Stock</button>
-							<button onClick={this.p1NoStock}>Out of Stock</button>
-
-							<p>Cinammon Rolls - 12pcs</p>
-							<button onClick={this.p2Stock}>In Stock</button>
-							<button onClick={this.p2NoStock}>Out of Stock</button>
-						</div>
+						<div id="adminHeader"> <h1>Viewing Panel</h1> </div>
 
 						<div class="filter">
 							<select onChange={this.handleChange} value={this.state.methodFilter} name="methodFilter">
@@ -521,7 +464,7 @@ class Controls extends Component {
 								      	<th>Address</th>
 								      	<th>City</th>
 								      	<th>Instructions</th>
-								      	<th></th>
+								      	<th>Contacted</th>
 								    </tr>
 							  	</thead>
 
@@ -542,4 +485,4 @@ class Controls extends Component {
 	}
 }
 
-export default Controls
+export default AuthorizedControls
