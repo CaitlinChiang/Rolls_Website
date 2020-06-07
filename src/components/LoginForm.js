@@ -41,8 +41,8 @@ class Account extends Component {
 					<div class="container">
 						<div class="signin">
 							<form onSubmit={this.handleLoginSubmit} autocomplete="off" id="loginSubmit">
-								<input onChange={this.handleChange} value={this.state.userEmail} name="userEmail" type="text" placeholder="Email" />
-								<input onChange={this.handleChange} value={this.state.userPassword} name="userPassword" type="text" placeholder="Password" />
+								<input onChange={this.handleChange} value={this.state.userEmail.trim()} name="userEmail" type="text" placeholder="Email" />
+								<input onChange={this.handleChange} value={this.state.userPassword.trim()} name="userPassword" type="text" placeholder="Password" />
 								<br /><button onClick={this.singup}>Register</button>
 								<button onClick={this.signin}>Login</button>
 
