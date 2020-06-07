@@ -145,7 +145,7 @@ class AuthorizedControls extends Component {
 	addPickupInfo_All = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
-			<tr id={object}>
+			<tr id={object} key={object}>
 				<td>{name}<br />{number}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
@@ -168,7 +168,7 @@ class AuthorizedControls extends Component {
 	addDeliveryInfo_All = (name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
-			<tr id={object}>
+			<tr id={object} key={object}>
 				<td>{name}<br />{number}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
@@ -254,7 +254,7 @@ class AuthorizedControls extends Component {
 	addPickupInfo_Pickup = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.pickupOrders.concat(
-			<tr id={object}>
+			<tr id={object} key={object}>
 				<td>{name}<br />{number}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
@@ -344,7 +344,7 @@ class AuthorizedControls extends Component {
 	addDeliveryInfo_Delivery = (name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.deliveryOrders.concat(
-			<tr id={object}>
+			<tr id={object} key={object}>
 				<td>{name}<br />{number}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
@@ -358,10 +358,18 @@ class AuthorizedControls extends Component {
 		this.setState({ deliveryOrders: row })
 	}
 
+	sortByKey = (array) => {
+	    return array.sort((a, b) => {
+	        var x = a.key
+	        var y = b.key
+	        return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+	    });
+	}
+
 	render() {
-		const All = this.state.allOrders.map(item => item)
-		const Pickup = this.state.pickupOrders.map(item => item)
-		const Delivery = this.state.deliveryOrders.map(item => item)
+		const All = this.sortByKey(this.state.allOrders)
+		const Pickup = this.sortByKey(this.state.pickupOrders)
+		const Delivery = this.sortByKey(this.state.deliveryOrders)
 
 		return (
 			<div>
