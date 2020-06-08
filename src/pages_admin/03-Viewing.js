@@ -485,8 +485,8 @@ class View extends Component {
 
 							  	<tbody id="dataTable">
 							  		{this.state.methodFilter === '' ? this.sortByKey(this.state.allOrders) : null}
-							  		{this.state.methodFilter === 'pickup' ? this.state.pickupOrders : null}
-							  		{this.state.methodFilter === 'delivery' ? this.state.deliveryOrders : null}
+							  		{this.state.methodFilter === 'pickup' ? this.sortByKey(this.state.pickupOrders) : null}
+							  		{this.state.methodFilter === 'delivery' ? this.sortByKey(this.state.deliveryOrders) : null}
 							  	</tbody>
 									
 							</table>

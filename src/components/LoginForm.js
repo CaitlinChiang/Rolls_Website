@@ -14,7 +14,6 @@ class Account extends Component {
 		signInFlow: 'popup',
 		signInOptions: [
 			firebase.auth.GoogleAuthProvider.PROVIDER_ID
-			
 		],
 		callbacks: {
 			signInSuccess: () => false		
