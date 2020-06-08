@@ -408,92 +408,63 @@ class Order extends Component {
 
 		alert("Thank you for ordering! Please expect an SMS regarding your order within the day.")
 	}
+	
+	orderPickup = () => {
+		if (this.state.pPayment === 'P_transfer') {
+			const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
+			if (inform) {
+				const confirm = window.confirm('Confirm your purchase?')
+				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
+			}
+		}
+		else if (this.state.pPayment === 'payOnPickup') {
+			const inform = window.confirm('The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
+			if (inform) {
+				const confirm = window.confirm('Confirm your purchase?')
+				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
+			}
+		}
+	}
+
+	orderDelivery = () => {
+		if (this.state.dPayment === 'D_transfer') {
+			const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
+			if (inform) {
+				const confirm = window.confirm('Confirm your purchase?')
+				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
+			}
+		}
+		else if (this.state.dPayment === 'cod') {
+			const confirm = window.confirm('Confirm your purchase?')
+			if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
+		}
+	}
 
 	order = (event) => {
 		event.preventDefault()
 
 		if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
-			if (this.state.mode === 'Pickup') {
-				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.length > 0) {
+			if (this.state.mode === '') { 
+				alert("Kindly select a receive method — whether that be pickup or delivery.")
+			}
+			else if (this.state.mode === 'Pickup') {
+				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.length > 0) {
 					if (this.state.pInstructions.length > 1 && this.state.pInstructions.includes('None')) {
 						alert("Kindly remove any other additional instruction if you wish to proceed with None.")
 					}
 					else {
 						if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') || this.state.pInstructions.includes('extraFrosting')) {
 							if (this.state.pInstructions.includes('extraFrosting') && this.state.pInstructions.length === 1) {
-								if (this.state.pAmount.trim() !== '') {
-									if (this.state.pPayment === 'P_transfer') {
-										const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
-										if (inform) {
-											const confirm = window.confirm('Confirm your purchase?')
-											if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
-										}
-									}
-									else if (this.state.pPayment === 'payOnPickup') {
-										const inform = window.confirm('The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
-										if (inform) {
-											const confirm = window.confirm('Confirm your purchase?')
-											if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
-										}
-									}
-								}
-								else if (this.state.pAmount.trim() === '') { alert("Please fill in all input fields.") }
+								{ this.state.pAmount.trim() !== '' ? this.orderPickup() : alert("Please fill in all input fields.") }
 							}
 							else if (this.state.pInstructions.includes('extraFrosting') && this.state.pInstructions.length > 1) {
-								if (this.state.pNote.trim() !== '' && this.state.pAmount.trim() !== '') {
-									if (this.state.pPayment === 'P_transfer') {
-										const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
-										if (inform) {
-											const confirm = window.confirm('Confirm your purchase?')
-											if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
-										}
-									}
-									else if (this.state.pPayment === 'payOnPickup') {
-										const inform = window.confirm('The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
-										if (inform) {
-											const confirm = window.confirm('Confirm your purchase?')
-											if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
-										}
-									}
-								}
-								else { alert("Please fill in all the input fields.") }
+								{ this.state.pNote.trim() !== '' && this.state.pAmount.trim() !== '' ? this.orderPickup() : alert("Please fill in all the input fields.") }
 							}
 							else if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle')) {
-								if (this.state.pNote.trim() !== '') {
-									if (this.state.pPayment === 'P_transfer') {
-										const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
-										if (inform) {
-											const confirm = window.confirm('Confirm your purchase?')
-											if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
-										}
-									}
-									else if (this.state.pPayment === 'payOnPickup') {
-										const inform = window.confirm('The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
-										if (inform) {
-											const confirm = window.confirm('Confirm your purchase?')
-											if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
-										}
-									}
-								}
-								else { alert("Please fill in all the input fields.") }
+								{ this.state.pNote.trim() !== '' ? this.orderPickup() : alert("Please fill in all the input fields.") }
 							}
 						}
-						else if (this.state.pInstructions.includes('None') && this.state.pInstructions.length === 1) {
-							if (this.state.pPayment === 'P_transfer') {
-								const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
-								if (inform) {
-									const confirm = window.confirm('Confirm your purchase?')
-									if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
-								}
-							}
-							else if (this.state.pPayment === 'payOnPickup') {
-								const inform = window.confirm('The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
-								if (inform) {
-									const confirm = window.confirm('Confirm your purchase?')
-									if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
-								}
-							}
-						}
+						else if (this.state.pInstructions.includes('None') && this.state.pInstructions.length === 1) { this.orderPickup() }
 					}
 				}
 				else { alert("Please fill in all input fields.") }
@@ -503,74 +474,23 @@ class Order extends Component {
 					alert("Minimum of 2 boxes of the 6pcs Cinammon Rolls required for delivery.")
 				} 
 				else {
-					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.mode.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.length > 0) {
+					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.length > 0) {
 						if (this.state.dInstructions.length > 1 && this.state.dInstructions.includes('None')) {
 							alert("Kindly remove any other additional instruction if you wish to proceed with None.")
 						}
 						else {
 							if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('extraFrosting')) {
 								if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length === 1) {
-									if (this.state.dAmount.trim() !== '') {
-										if (this.state.dPayment === 'D_transfer') {
-											const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
-											if (inform) {
-												const confirm = window.confirm('Confirm your purchase?')
-												if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
-											}
-										}
-										else if (this.state.dPayment === 'cod') {
-											const confirm = window.confirm('Confirm your purchase?')
-											if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
-										}
-									}
-									else if (this.state.dAmount.trim() === '') { alert("Please fill in all input fields.") }
+									{ this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all input fields.") }
 								}
 								else if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length > 1) {
-									if (this.state.dNote.trim() !== '' && this.state.dAmount.trim() !== '') {
-										if (this.state.dPayment === 'D_transfer') {
-											const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
-											if (inform) {
-												const confirm = window.confirm('Confirm your purchase?')
-												if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
-											}
-										}
-										else if (this.state.dPayment === 'cod') {
-											const confirm = window.confirm('Confirm your purchase?')
-											if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
-										}
-									}
-									else { alert("Please fill in all the input fields.") }
+									{ this.state.dNote.trim() !== '' && this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
 								}
 								else if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle')) {
-									if (this.state.dNote.trim() !== '') {
-										if (this.state.dPayment === 'D_transfer') {
-											const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
-											if (inform) {
-												const confirm = window.confirm('Confirm your purchase?')
-												if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
-											}
-										}
-										else if (this.state.dPayment === 'cod') {
-											const confirm = window.confirm('Confirm your purchase?')
-											if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
-										}
-									}
-									else { alert("Please fill in all the input fields.") }
+									{ this.state.dNote.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
 								}						
 							}
-							else if (this.state.dInstructions.includes('None') && this.state.dInstructions.length === 1) {
-								if (this.state.dPayment === 'D_transfer') {
-									const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
-									if (inform) {
-										const confirm = window.confirm('Confirm your purchase?')
-										if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
-									}
-								}
-								else if (this.state.dPayment === 'cod') {
-									const confirm = window.confirm('Confirm your purchase?')
-									if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
-								}
-							}
+							else if (this.state.dInstructions.includes('None') && this.state.dInstructions.length === 1) { this.orderDelivery() }
 						}
 					}
 					else { alert("Please fill in all the input fields.") }

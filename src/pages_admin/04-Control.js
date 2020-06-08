@@ -4,7 +4,9 @@ import * as firebase from 'firebase'
 
 class Controls extends Component {
 	state = {
-		maxDeliveries: 0
+		maxDeliveries: 0,
+		discount: 0,
+		discountCode: ''
 	}
 
 	handleChange = (event) => {
@@ -28,6 +30,28 @@ class Controls extends Component {
 		else { alert("Please input an integer greater or equal to 0.") }
 	}
 
+	//promo codes
+	setDiscount = (event) => {
+		if (this.state.discount >= 0) {
+			firebase.database().ref('products').child('Discount Amount').update({ Discount: this.state.discount })
+		}
+		else { alert("Please input an integer greater or equal to 0.") }
+	}
+
+	generateCode = (length) => {
+		var result = ''
+		var characters = 'ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz123456789'
+		var charactersLength = characters.length
+		for ( var i = 0; i < length; i++ ) {
+		  result += characters.charAt(Math.floor(Math.random() * charactersLength))
+		}
+
+		this.setState({ discountCode: result })
+
+		firebase.database().ref('discounts').child('Generated').push(result)
+		.then(() => alert("This voucher code has been registered."))
+	}
+
 	render() {
 		return (
 			<div>
@@ -37,7 +61,7 @@ class Controls extends Component {
 						<div id="adminHeader"> <h1>Control Panel</h1> </div>
 
 						<div class="maxDel">
-							<input onChange={this.handleChange} value={this.state.maxDeliveries} name="maxDeliveries" type="number" placeholder="Max Deliveries" />
+							<input onChange={this.handleChange} value={this.state.maxDeliveries} name="maxDeliveries" type="number" />
 							<button onClick={this.changeDeliveryNumber}>Change Maximum Deliveries</button>
 						</div>
 
@@ -50,6 +74,8 @@ class Controls extends Component {
 							<button onClick={this.p2Stock}>In Stock</button>
 							<button onClick={this.p2NoStock}>Out of Stock</button>
 						</div>
+
+						
 
 					</div>
 				</section>

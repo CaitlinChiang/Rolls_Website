@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import * as firebase from 'firebase'
 import ControlsNavbar from './02-ControlsNav'
 import View from './03-Viewing'
 import Controls from './04-Control'

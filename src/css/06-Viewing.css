@@ -19,7 +19,25 @@
     font-size: 50px;
 }
 
-/*Product Stock Display + Logout Button*/
+/*Logout Button*/
+#logoutBtn {
+    background: #ffffff;
+    color: #FF7676;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.5s;
+    font-weight: normal;
+    font-size: 20px;
+    border: 1px solid #C79874;
+    margin: 0px 20px 100px;
+}
+
+#logoutBtn:hover {
+    background: #C78F76;
+    color: #ffffff;
+}
+
+/*Controls*/
 .toggle {
     margin-top: 50px;
 }
@@ -29,41 +47,21 @@
     font-size: 20px;
 }
 
-.toggle button, #logoutBtn {
-    background: #ffffff;
-    color: #FF7676;
-    padding: 10px;
-    border-radius: 5px;
-    transition: 0.5s;
-    font-weight: normal;
+.generateCode {
+    margin-top: 100px;
+}
+
+.generateCode p {
+    color: #C79874;
     font-size: 20px;
-    border: 1px solid #C79874;
-    margin: 0px 20px 10px;
+    display: inline;
 }
 
-.toggle button:hover {
-    background: #C78F76;
-    color: #ffffff;
+.discount {
+    margin: 50px auto 100px;
 }
 
-#logoutBtn {
-    margin-bottom: 100px;
-    background: #ffffff;
-    color: #FF7676;
-}
-
-#logoutBtn:hover {
-    background: #C78F76;
-    color: #ffffff;
-}
-
-/*Table Filters*/
-.filter {
-    margin-bottom: 0px;
-    margin-top: 50px;
-}
-
-.filter select, .filter #filterPicker, .filter input, .maxDel input {
+.maxDel input, .discount input, .generateCode input {
     padding: 10px;
     font-size: 18px;
     color: #707070;
@@ -75,7 +73,7 @@
     display: inline-block;
 }
 
-.maxDel button, #searchOrder {
+.toggle button, .maxDel button, .discount button, .generateCode button {
     background: #ffffff;
     color: #FF7676;
     padding: 10px;
@@ -87,7 +85,42 @@
     margin: 0px 20px 10px;
 }
 
-.maxDel button:hover, #searchOrder:hover {
+.toggle button:hover, .maxDel button:hover, .discount button:hover, .generateCode button:hover {
+    background: #C78F76;
+    color: #ffffff;
+}
+
+/*Table Filters*/
+.filter {
+    margin-bottom: 0px;
+    margin-top: 50px;
+}
+
+.filter select, .filter #filterPicker, .filter input {
+    padding: 10px;
+    font-size: 18px;
+    color: #707070;
+    border-radius: 5px;
+    border: 1px solid #CECECE;
+    outline-style: none;
+    text-align: center;
+    margin: 20px 20px 10px;
+    display: inline-block;
+}
+
+#searchOrder {
+    background: #ffffff;
+    color: #FF7676;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.5s;
+    font-weight: normal;
+    font-size: 20px;
+    border: 1px solid #C79874;
+    margin: 0px 20px 10px;
+}
+
+#searchOrder:hover {
     background: #C78F76;
     color: #ffffff;
 }
