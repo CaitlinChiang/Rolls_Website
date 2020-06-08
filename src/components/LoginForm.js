@@ -1,19 +1,32 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase'
 import '../services/firebaseConfig'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 
 
 class Account extends Component {
 	state = {
 		userEmail: '',
 		userPassword: ''
-	} 
+	}
+
+	uiConfig = {
+		signInFlow: 'popup',
+		signInOptions: [
+			firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+			firebase.auth.FacebookAuthProvider.PROVIDER_ID
+		],
+		callbacks: {
+			signInSuccess: () => false		
+		}
+	}
 
 	handleChange = (event) => {
 		const {name, value} = event.target
 		this.setState({ [name]: value })
 	}
 
+	//email and password sign up
 	singup = (event) => {
 		event.preventDefault()
 		firebase.auth().createUserWithEmailAndPassword(this.state.userEmail, this.state.userPassword).then((u) => {
@@ -40,15 +53,13 @@ class Account extends Component {
 				<section id="profile">
 					<div class="container">
 						<div class="signin">
-							<form onSubmit={this.handleLoginSubmit} autocomplete="off" id="loginSubmit">
-								<input onChange={this.handleChange} value={this.state.userEmail.trim()} name="userEmail" type="text" placeholder="Email" />
-								<input onChange={this.handleChange} value={this.state.userPassword.trim()} name="userPassword" type="text" placeholder="Password" />
-								<br /><button onClick={this.singup}>Register</button>
-								<button onClick={this.signin}>Login</button>
-
-								<button onClick={this.reset} id="forgot">Forgot Password?</button>
-							</form>
-						</div>
+							<input onChange={this.handleChange} value={this.state.userEmail.trim()} name="userEmail" type="text" placeholder="Email" autocomplete="off" />
+							<input onChange={this.handleChange} value={this.state.userPassword.trim()} name="userPassword" type="text" placeholder="Password" autocomplete="off" />
+							<br /><button onClick={this.singup}>Register</button>
+							<button onClick={this.signin}>Login</button>
+							<button onClick={this.reset} id="forgot">Forgot Password?</button>
+						</div>	
+						<StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
 					</div>
 				</section>
 			</div>

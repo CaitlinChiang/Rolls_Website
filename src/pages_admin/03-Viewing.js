@@ -94,7 +94,7 @@ class View extends Component {
 										this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
-										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
@@ -106,7 +106,7 @@ class View extends Component {
 										this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
-										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
@@ -123,7 +123,7 @@ class View extends Component {
 										this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
-										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
@@ -135,7 +135,7 @@ class View extends Component {
 										this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
-										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
@@ -153,7 +153,7 @@ class View extends Component {
 									this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -165,7 +165,7 @@ class View extends Component {
 									this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -182,7 +182,7 @@ class View extends Component {
 		})
 	}
 
-	addPickupInfo_All = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
+	addPickupInfo_All = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
 			<tr id={object} key={object}>
@@ -205,7 +205,7 @@ class View extends Component {
 		this.setState({ allOrders: row })
 	}
 
-	addDeliveryInfo_All = (name, number, products, amount, mode, date, address, city, instruction, description, person, order,  paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
+	addDeliveryInfo_All = (name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
 			<tr id={object} key={object}>
@@ -263,7 +263,7 @@ class View extends Component {
 									this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -281,7 +281,7 @@ class View extends Component {
 									this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -299,7 +299,7 @@ class View extends Component {
 		})	
 	}
 
-	addPickupInfo_Pickup = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
+	addPickupInfo_Pickup = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.pickupOrders.concat(
 			<tr id={object} key={object}>
@@ -357,7 +357,7 @@ class View extends Component {
 									this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -375,7 +375,7 @@ class View extends Component {
 									this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -393,7 +393,7 @@ class View extends Component {
 		})	
 	}
 
-	addDeliveryInfo_Delivery = (name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
+	addDeliveryInfo_Delivery = (name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.deliveryOrders.concat(
 			<tr id={object} key={object}>
@@ -448,10 +448,6 @@ class View extends Component {
 	}
 
 	render() {
-		const All = this.sortByKey(this.state.allOrders)
-		const Pickup = this.sortByKey(this.state.pickupOrders)
-		const Delivery = this.sortByKey(this.state.deliveryOrders)
-
 		return (
 			<div>
 				<section id="viewing">
@@ -488,9 +484,9 @@ class View extends Component {
 							  	</thead>
 
 							  	<tbody id="dataTable">
-							  		{this.state.methodFilter === '' ? All : null}
-							  		{this.state.methodFilter === 'pickup' ? Pickup : null}
-							  		{this.state.methodFilter === 'delivery' ? Delivery : null}
+							  		{this.state.methodFilter === '' ? this.sortByKey(this.state.allOrders) : null}
+							  		{this.state.methodFilter === 'pickup' ? this.state.pickupOrders : null}
+							  		{this.state.methodFilter === 'delivery' ? this.state.deliveryOrders : null}
 							  	</tbody>
 									
 							</table>

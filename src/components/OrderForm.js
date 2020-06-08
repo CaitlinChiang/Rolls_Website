@@ -43,13 +43,18 @@ class Order extends Component {
 		dNote: '',
 		dAmount: '',
 
+		discount: 0,
+		voucherCode: '',
+		generatedVouchers: [],
+		consumedVouchers: [],
+
 		orderStatus: 'Not Ready',
 		paymentStatus: 'Payment Pending',
 		contacted: false
 	}
 
 	componentDidMount = async () => {
-		setInterval(() => { this.displayTotal(); this.cityFee(); this.instructionFee(); this.getOrderNumber() }, 100)
+		setInterval(() => { this.displayTotal(); this.cityFee(); this.instructionFee(); this.getOrderNumber(); this.discount() }, 100)
 
 		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').on('value', snapshot => {
 			let pendingOrders = []
@@ -65,6 +70,22 @@ class Order extends Component {
 
 		firebase.database().ref('products').child('Delivery Number').on('value', snapshot => {
 			this.setState({ maxDeliveries: snapshot.val().MaxDelivery })
+		})
+
+		firebase.database().ref('discounts').child('Generated').on('value', snapshot => {
+			let generatedVouchers = []
+			snapshot.forEach((snap) => { generatedVouchers.push(snap.val()) })
+			this.setState({ generatedVouchers })
+		})
+
+		firebase.database().ref('discounts').child('Consumed').on('value', snapshot => {
+			let consumedVouchers = []
+			snapshot.forEach((snap) => { consumedVouchers.push(snap.val()) })
+			this.setState({ consumedVouchers })
+		})
+
+		firebase.database().ref('products').child('Discount Amount').on('value', snapshot => {
+			this.setState({ discount: snapshot.val().Discount })
 		})
 	}
 
@@ -248,6 +269,13 @@ class Order extends Component {
 		}
 	}
 
+	discount = () => {
+		if (this.state.voucherCode !== '' && !this.state.consumedVouchers.includes(this.state.voucherCode) && this.state.generatedVouchers.includes(this.state.voucherCode)) {
+			var discountAmount = (100 - this.state.discount) / 100
+			this.setState(prevState => ({ price: prevState.price * discountAmount }))
+		}
+	}
+
 	maxDeliveries = (value) => this.state.dateRange.filter((v) => (v === value)).length
 
 	setDate = (date) => {
@@ -333,6 +361,18 @@ class Order extends Component {
 		})
 	}
 
+	timestamp = () => {
+		let newDate = new Date()
+		let dateToday = newDate.getDate();
+		let month = newDate.getMonth() + 1;
+		let year = newDate.getFullYear();
+		let hour = newDate.getHours();
+		let mins = newDate.getMinutes();
+		let sec = newDate.getSeconds();
+
+		return month + "/" + dateToday + "/" + year + "/" + hour + "/" + mins + "/" + sec
+	}
+
 	updateRolls = () => {
 		let orderNumber = this.state.orderTracker.length + 1
 
@@ -352,11 +392,13 @@ class Order extends Component {
 				orderStatus: this.state.orderStatus,
 				paymentStatus: this.state.paymentStatus,
 				contacted: this.state.contacted,
-				Date: moment(this.state.pDate).format('L')
+				Date: moment(this.state.pDate).format('L'),
+				Created: this.timestamp()
 			})
 			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Instructions').update({
 				Instructions: this.state.pInstructions
 			})
+			firebase.database().ref('discounts').child('Consumed').push(this.state.voucherCode)
 		}
 		else if (this.state.mode === 'Delivery') {
 			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Details').update({
@@ -373,11 +415,13 @@ class Order extends Component {
 				orderStatus: this.state.orderStatus,
 				paymentStatus: this.state.paymentStatus,
 				contacted: this.state.contacted,
-				Date: moment(this.state.dDate).format('L')
+				Date: moment(this.state.dDate).format('L'),
+				Created: this.timestamp()
 			})
 			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Instructions').update({
 				Instructions: this.state.dInstructions
 			})
+			firebase.database().ref('discounts').child('Consumed').push(this.state.voucherCode)
 			//save this in its own node in order to keep track of the amount of times the date was used for deliveries
 			firebase.database().ref('deliveryDates').push( moment(this.state.dDate).format('L') )
 		}
@@ -404,6 +448,8 @@ class Order extends Component {
 			dInstructions: [],
 			dNote: '',
 			dAmount: '',
+
+			voucherCode: ''
 		})
 
 		alert("Thank you for ordering! Please expect an SMS regarding your order within the day.")
@@ -443,61 +489,69 @@ class Order extends Component {
 	order = (event) => {
 		event.preventDefault()
 
-		if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
-			if (this.state.mode === '') { 
-				alert("Kindly select a receive method — whether that be pickup or delivery.")
-			}
-			else if (this.state.mode === 'Pickup') {
-				if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.length > 0) {
-					if (this.state.pInstructions.length > 1 && this.state.pInstructions.includes('None')) {
-						alert("Kindly remove any other additional instruction if you wish to proceed with None.")
-					}
-					else {
-						if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') || this.state.pInstructions.includes('extraFrosting')) {
-							if (this.state.pInstructions.includes('extraFrosting') && this.state.pInstructions.length === 1) {
-								{ this.state.pAmount.trim() !== '' ? this.orderPickup() : alert("Please fill in all input fields.") }
-							}
-							else if (this.state.pInstructions.includes('extraFrosting') && this.state.pInstructions.length > 1) {
-								{ this.state.pNote.trim() !== '' && this.state.pAmount.trim() !== '' ? this.orderPickup() : alert("Please fill in all the input fields.") }
-							}
-							else if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle')) {
-								{ this.state.pNote.trim() !== '' ? this.orderPickup() : alert("Please fill in all the input fields.") }
-							}
-						}
-						else if (this.state.pInstructions.includes('None') && this.state.pInstructions.length === 1) { this.orderPickup() }
-					}
+		if (this.state.voucherCode !== '' && this.state.generatedVouchers.includes(this.state.voucherCode) && !this.state.consumedVouchers.includes(this.state.voucherCode) || this.state.voucherCode === '') {
+			if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
+				if (this.state.mode === '') { 
+					alert("Kindly select a receive method — whether that be pickup or delivery.")
 				}
-				else { alert("Please fill in all input fields.") }
-			}
-			else if (this.state.mode === 'Delivery') {
-				if (this.state.pendingOrders.length < 2 && this.state.pendingOrders.includes('P1')) {
-					alert("Minimum of 2 boxes of the 6pcs Cinammon Rolls required for delivery.")
-				} 
-				else {
-					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.length > 0) {
-						if (this.state.dInstructions.length > 1 && this.state.dInstructions.includes('None')) {
+				else if (this.state.mode === 'Pickup') {
+					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.length > 0) {
+						if (this.state.pInstructions.length > 1 && this.state.pInstructions.includes('None')) {
 							alert("Kindly remove any other additional instruction if you wish to proceed with None.")
 						}
 						else {
-							if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('extraFrosting')) {
-								if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length === 1) {
-									{ this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all input fields.") }
+							if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') || this.state.pInstructions.includes('extraFrosting')) {
+								if (this.state.pInstructions.includes('extraFrosting') && this.state.pInstructions.length === 1) {
+									{ this.state.pAmount.trim() !== '' ? this.orderPickup() : alert("Please fill in all input fields.") }
 								}
-								else if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length > 1) {
-									{ this.state.dNote.trim() !== '' && this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
+								else if (this.state.pInstructions.includes('extraFrosting') && this.state.pInstructions.length > 1) {
+									{ this.state.pNote.trim() !== '' && this.state.pAmount.trim() !== '' ? this.orderPickup() : alert("Please fill in all the input fields.") }
 								}
-								else if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle')) {
-									{ this.state.dNote.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
-								}						
+								else if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle')) {
+									{ this.state.pNote.trim() !== '' ? this.orderPickup() : alert("Please fill in all the input fields.") }
+								}
 							}
-							else if (this.state.dInstructions.includes('None') && this.state.dInstructions.length === 1) { this.orderDelivery() }
+							else if (this.state.pInstructions.includes('None') && this.state.pInstructions.length === 1) { this.orderPickup() }
 						}
 					}
-					else { alert("Please fill in all the input fields.") }
+					else { alert("Please fill in all input fields.") }
+				}
+				else if (this.state.mode === 'Delivery') {
+					if (this.state.pendingOrders.length < 2 && this.state.pendingOrders.includes('P1')) {
+						alert("Minimum of 2 boxes of the 6pcs Cinammon Rolls required for delivery.")
+					} 
+					else {
+						if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.length > 0) {
+							if (this.state.dInstructions.length > 1 && this.state.dInstructions.includes('None')) {
+								alert("Kindly remove any other additional instruction if you wish to proceed with None.")
+							}
+							else {
+								if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('extraFrosting')) {
+									if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length === 1) {
+										{ this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all input fields.") }
+									}
+									else if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length > 1) {
+										{ this.state.dNote.trim() !== '' && this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
+									}
+									else if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle')) {
+										{ this.state.dNote.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
+									}						
+								}
+								else if (this.state.dInstructions.includes('None') && this.state.dInstructions.length === 1) { this.orderDelivery() }
+							}
+						}
+						else { alert("Please fill in all the input fields.") }
+					}
 				}
 			}
+			else { alert("Your cart is empty.") }
 		}
-		else { alert("Your cart is empty.") }
+		else if (this.state.voucherCode !== '' && !this.state.generatedVouchers.includes(this.state.voucherCode)) { 
+			alert("This voucher code is invalid.")
+		}
+		else if (this.state.voucherCode !== '' && this.state.generatedVouchers.includes(this.state.voucherCode) && this.state.consumedVouchers.includes(this.state.voucherCode)) { 
+			alert("This voucher code has already been consumed.")
+		}
  	}
 
 	render() {
@@ -664,8 +718,9 @@ class Order extends Component {
 						</div>		
 						
 						<div class="footer">
-							<p>Total: P{this.state.price}.00 (Additional / Delivery Fees Already Included.)</p>
+							<p>Total: P{this.state.price.toFixed(2)} (Additional / Delivery / Discount Fees Already Included.)</p>
 							<p>Note: Free delivery for purchases over P1500.00</p>
+							<input onChange={this.handleChange} value={this.state.voucherCode.trim()} name="voucherCode" placeholder="Voucher Code (if any)"></input>
 							<button onClick={this.order}>Order</button>
 						</div>
 					</form>

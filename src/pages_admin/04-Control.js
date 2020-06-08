@@ -49,7 +49,7 @@ class Controls extends Component {
 		this.setState({ discountCode: result })
 
 		firebase.database().ref('discounts').child('Generated').push(result)
-		.then(() => alert("This voucher code has been registered."))
+		.then(() => alert("This voucher code is now registered."))
 	}
 
 	render() {
@@ -75,7 +75,15 @@ class Controls extends Component {
 							<button onClick={this.p2NoStock}>Out of Stock</button>
 						</div>
 
-						
+						<div class="generateCode">
+							<button onClick={() => this.generateCode(10)}>Generate Voucher Code</button>
+							<input value={this.state.discountCode} name="discountCode" type="text" placeholder="Generated Code" disable />
+						</div>
+
+						<div class="discount">
+							<input onChange={this.handleChange} value={this.state.discount} name="discount" type="number" />
+							<button onClick={this.setDiscount}>Change Discount Amount</button>
+						</div>
 
 					</div>
 				</section>
