@@ -59,7 +59,7 @@ class Account extends Component {
 							<button onClick={this.signin}>Login</button>
 							<button onClick={this.reset} id="forgot">Forgot Password?</button>
 						</div>	
-						
+						<StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
 					</div>
 				</section>
 			</div>
