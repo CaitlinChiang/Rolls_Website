@@ -282,12 +282,8 @@ class Order extends Component {
 		let disabled = moment(date).format('L')
 		let checkArray = this.state.dateRange.filter((v) => (v === disabled)).length
 
-		if (checkArray >= this.state.maxDeliveries) {
-			alert('We are sorry, but there is no more stock for this day.')
-		}
-		else if (checkArray < this.state.maxDeliveries) {
-			this.setState({ dDate: date })
-		}
+		if (checkArray >= this.state.maxDeliveries) { alert('We are sorry, but there is no more stock for this day.') }
+		else if (checkArray < this.state.maxDeliveries) { this.setState({ dDate: date }) }
 	}
 
 	//route filters
@@ -328,6 +324,14 @@ class Order extends Component {
 		this.setState({ [name]: value })
 	}
 
+	handleCityChange = (event) => {
+		event.preventDefault()
+		const {name, value} = event.target
+		this.setState({ [name]: value })
+		
+		this.setState({ dDate: '' })
+	}
+
 	handlePickupSelectChange = (pInstructions) => {
 		this.setState({ pInstructions })
 		firebase.database().ref('rules').child(`${this.state.consumer}`).set(pInstructions)
@@ -363,14 +367,15 @@ class Order extends Component {
 
 	timestamp = () => {
 		let newDate = new Date()
-		let dateToday = newDate.getDate();
+		
 		let month = newDate.getMonth() + 1;
+		let dateToday = newDate.getDate();
 		let year = newDate.getFullYear();
 		let hour = newDate.getHours();
 		let mins = newDate.getMinutes();
 		let sec = newDate.getSeconds();
 
-		return month + "/" + dateToday + "/" + year + "/" + hour + "/" + mins + "/" + sec
+		return (month < 10 ? ('0' + month) : month) + "-" + (dateToday < 10 ? ('0' + dateToday) : dateToday) + "-" + year + "||" + (hour < 10 ? ('0' + hour) : hour) + ":" + (mins < 10 ? ('0' + mins) : mins) + ":" + (sec < 10 ? ('0' + sec) : sec)
 	}
 
 	updateRolls = () => {
@@ -517,31 +522,26 @@ class Order extends Component {
 					else { alert("Please fill in all input fields.") }
 				}
 				else if (this.state.mode === 'Delivery') {
-					if (this.state.pendingOrders.length < 2 && this.state.pendingOrders.includes('P1')) {
-						alert("Minimum of 2 boxes of the 6pcs Cinammon Rolls required for delivery.")
-					} 
-					else {
-						if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.length > 0) {
-							if (this.state.dInstructions.length > 1 && this.state.dInstructions.includes('None')) {
-								alert("Kindly remove any other additional instruction if you wish to proceed with None.")
-							}
-							else {
-								if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('extraFrosting')) {
-									if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length === 1) {
-										{ this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all input fields.") }
-									}
-									else if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length > 1) {
-										{ this.state.dNote.trim() !== '' && this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
-									}
-									else if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle')) {
-										{ this.state.dNote.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
-									}						
-								}
-								else if (this.state.dInstructions.includes('None') && this.state.dInstructions.length === 1) { this.orderDelivery() }
-							}
+					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.length > 0) {
+						if (this.state.dInstructions.length > 1 && this.state.dInstructions.includes('None')) {
+							alert("Kindly remove any other additional instruction if you wish to proceed with None.")
 						}
-						else { alert("Please fill in all the input fields.") }
+						else {
+							if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('extraFrosting')) {
+								if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length === 1) {
+									{ this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all input fields.") }
+								}
+								else if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length > 1) {
+									{ this.state.dNote.trim() !== '' && this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
+								}
+								else if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle')) {
+									{ this.state.dNote.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
+								}						
+							}
+							else if (this.state.dInstructions.includes('None') && this.state.dInstructions.length === 1) { this.orderDelivery() }
+						}
 					}
+					else { alert("Please fill in all the input fields.") }
 				}
 			}
 			else { alert("Your cart is empty.") }
@@ -622,7 +622,7 @@ class Order extends Component {
 										<option value="D_transfer">BDO Bank Transfer</option>
 									</select>
 					
-									<select onChange={this.handleChange} value={this.state.city} name="city">
+									<select onChange={this.handleCityChange} value={this.state.city} name="city">
 										<option value="">--Select City--</option>
 										<option value="Cainta">Cainta</option>
 										<option value="Caloocan">Caloocan</option>
@@ -651,43 +651,43 @@ class Order extends Component {
 									{this.state.route === '' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} id="deliveryPicker" />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} />
 										</div>
 									: null}
 									{this.state.route !== '' && this.state.route === 'Route1' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} id="deliveryPicker" />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} />
 										</div>
 									: null}
 									{this.state.route !== '' && this.state.route === 'Route2' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute2} id="deliveryPicker" />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute2} />
 										</div>									
 									: null}
 									{this.state.route !== '' && this.state.route === 'Route3' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} id="deliveryPicker" />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} />
 										</div>
 									: null}
 									{this.state.route !== '' && this.state.route === 'Route4_QC' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.QC_dateFilterRoute4} id="deliveryPicker" />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.QC_dateFilterRoute4} />
 										</div>
 									: null}
 									{this.state.route !== '' && this.state.route === 'Route4_Manila' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.Manila_dateFilterRoute4} id="deliveryPicker" />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.Manila_dateFilterRoute4} />
 										</div>
 									: null}
 									{this.state.route !== '' && this.state.route === 'Route4_Makati' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.Makati_dateFilterRoute4} id="deliveryPicker" />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.Makati_dateFilterRoute4} />
 										</div>
 									: null}
 

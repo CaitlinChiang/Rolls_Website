@@ -5,8 +5,14 @@ import * as firebase from 'firebase'
 class Controls extends Component {
 	state = {
 		maxDeliveries: 0,
+
 		discount: 0,
-		discountCode: ''
+		discountCode: '',
+
+		price: 0,
+		priceCode: '',
+
+		freeDeliveryCode: ''
 	}
 
 	handleChange = (event) => {
@@ -24,21 +30,22 @@ class Controls extends Component {
 
 	//change maximum delivery number
 	changeDeliveryNumber = (event) => {
-		if (this.state.maxDeliveries >= 0) {
-			firebase.database().ref('products').child('Delivery Number').update({ MaxDelivery: this.state.maxDeliveries })
-		}
+		if (this.state.maxDeliveries >= 0) { firebase.database().ref('products').child('Delivery Number').update({ MaxDelivery: this.state.maxDeliveries }) }
 		else { alert("Please input an integer greater or equal to 0.") }
 	}
 
 	//promo codes
 	setDiscount = (event) => {
-		if (this.state.discount >= 0) {
-			firebase.database().ref('products').child('Discount Amount').update({ Discount: this.state.discount })
-		}
+		if (this.state.discount >= 0) { firebase.database().ref('products').child('Discount Amount').update({ Discount: this.state.discount }) }
 		else { alert("Please input an integer greater or equal to 0.") }
 	}
 
-	generateCode = (length) => {
+	setPrice = (event) => {
+		if (this.state.price >= 0) { firebase.database().ref('products').child('Discount Price').update({ AmountOff: this.state.price }) }
+		else { alert("Please input an integer greater or equal to 0.") }
+	}
+
+	generateCode = (length, code, child) => {
 		var result = ''
 		var characters = 'ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz123456789'
 		var charactersLength = characters.length
@@ -46,10 +53,9 @@ class Controls extends Component {
 		  result += characters.charAt(Math.floor(Math.random() * charactersLength))
 		}
 
-		this.setState({ discountCode: result })
+		this.setState({ [code]: result })
 
-		firebase.database().ref('discounts').child('Generated').push(result)
-		.then(() => alert("This voucher code is now registered."))
+		firebase.database().ref('discounts').child(child).push(result).then(() => alert("This voucher code is now registered."))
 	}
 
 	render() {
@@ -57,7 +63,6 @@ class Controls extends Component {
 			<div>
 				<section id="viewing">
 					<div class="container slideDown">
-
 						<div id="adminHeader"> <h1>Control Panel</h1> </div>
 
 						<div class="maxDel">
@@ -74,19 +79,17 @@ class Controls extends Component {
 							<button onClick={this.p2Stock}>In Stock</button>
 							<button onClick={this.p2NoStock}>Out of Stock</button>
 						</div>
-
-						<div class="generateCode">
-							<button onClick={() => this.generateCode(10)}>Generate Voucher Code</button>
-							<input value={this.state.discountCode} name="discountCode" type="text" placeholder="Generated Code" disable />
-						</div>
-
-						<div class="discount">
-							<input onChange={this.handleChange} value={this.state.discount} name="discount" type="number" />
-							<button onClick={this.setDiscount}>Change Discount Amount</button>
-						</div>
-
 					</div>
 				</section>
+
+				<div class="discountPercent">
+					<div id="discountHeader"> <h1>Discount Voucher by Percent</h1> </div>
+					<button onClick={() => this.generateCode(10, 'discountCode', 'Generated')}>Generate Voucher Code</button>
+					<input value={this.state.discountCode} name="discountCode" type="text" placeholder="Generated Code" disable autocomplete="off" />
+					<input onChange={this.handleChange} value={this.state.discount} name="discount" type="number" />
+					<button onClick={this.setDiscount}>Change Discount Percent</button>
+				</div>
+
 			</div>
 		)
 	}

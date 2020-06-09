@@ -47,21 +47,7 @@
     font-size: 20px;
 }
 
-.generateCode {
-    margin-top: 100px;
-}
-
-.generateCode p {
-    color: #C79874;
-    font-size: 20px;
-    display: inline;
-}
-
-.discount {
-    margin: 50px auto 100px;
-}
-
-.maxDel input, .discount input, .generateCode input {
+.maxDel input, .discount input, .discountPercent input, .discountPrice input, .discountDelivery input {
     padding: 10px;
     font-size: 18px;
     color: #707070;
@@ -73,7 +59,7 @@
     display: inline-block;
 }
 
-.toggle button, .maxDel button, .discount button, .generateCode button {
+.toggle button, .maxDel button, .discountPercent button, .discountPrice button, .discountDelivery button {
     background: #ffffff;
     color: #FF7676;
     padding: 10px;
@@ -85,9 +71,35 @@
     margin: 0px 20px 10px;
 }
 
-.toggle button:hover, .maxDel button:hover, .discount button:hover, .generateCode button:hover {
+.toggle button:hover, .maxDel button:hover, .discountPercent button:hover, .discountPrice button:hover, .discountDelivery button:hover {
     background: #C78F76;
     color: #ffffff;
+}
+
+.discountPercent {
+    padding: 30px 50px 50px;
+    background: #FFC795;
+    text-align: center;
+}
+
+.discountPrice {
+    background: #FFA172;
+    text-align: center;
+    padding: 30px 50px 50px;
+}
+
+.discountDelivery {
+    background: #FF9762;
+    text-align: center;
+    padding: 30px 50px 50px;
+}
+
+#discountHeader h1 {
+    margin: 30px 0px 30px;
+    color: #ffffff;
+    font-family: serif;
+    font-style: oblique;
+    font-size: 30px;
 }
 
 /*Table Filters*/
