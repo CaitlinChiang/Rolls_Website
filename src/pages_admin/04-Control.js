@@ -90,6 +90,19 @@ class Controls extends Component {
 					<button onClick={this.setDiscount}>Change Discount Percent</button>
 				</div>
 
+				<div class="discountPrice">
+					<div id="discountHeader"> <h1>Discount Voucher by Price</h1> </div>
+					<button onClick={() => this.generateCode(9, 'priceCode', 'PriceGenerated')}>Generate Voucher Code</button>
+					<input value={this.state.priceCode} name="priceCode" type="text" placeholder="Generated Code" disable autocomplete="off" />
+					<input onChange={this.handleChange} value={this.state.price} name="price" type="number" />
+					<button onClick={this.setPrice}>Change Discount Price</button>
+				</div>
+
+				<div class="discountDelivery">
+					<div id="discountHeader"> <h1>Discount Voucher by Delivery Fee</h1> </div>
+					<button onClick={() => this.generateCode(8, 'freeDeliveryCode', 'DeliveryGenerated')}>Generate Voucher Code</button>
+					<input value={this.state.freeDeliveryCode} name="freeDeliveryCode" type="text" placeholder="Generated Code" disable autocomplete="off" />
+				</div>
 			</div>
 		)
 	}

@@ -259,6 +259,15 @@ form {
 	color: #ffffff;
 }
 
+.footer .vouchers {
+	margin-bottom: 30px;
+}
+
+.footer .vouchers input {
+	font-size: 18px;
+	width: 300px;
+}
+
 .informDetails {
 	background-color: #ffffff;
 	padding: 30px 30px 30px;

@@ -43,9 +43,23 @@ class Order extends Component {
 		dNote: '',
 		dAmount: '',
 
-		discount: 0,
-		voucherCode: '',
-		generatedVouchers: [],
+		discountPercent: 0,
+		percentCode: '',
+		generatedPercent: [],
+		voucherPercentConsumed: false,
+		voucherPercentInvalid: false,
+
+		discountPrice: 0,
+		priceCode: '',
+		generatedPrice: [],
+		voucherPriceConsumed: false,
+		voucherPriceInvalid: false,
+
+		deliveryCode: '',
+		generatedDelivery: [],
+		voucherDeliveryConsumed: false,
+		voucherDeliveryInvalid: false,
+
 		consumedVouchers: [],
 
 		orderStatus: 'Not Ready',
@@ -54,7 +68,7 @@ class Order extends Component {
 	}
 
 	componentDidMount = async () => {
-		setInterval(() => { this.displayTotal(); this.cityFee(); this.instructionFee(); this.getOrderNumber(); this.discount() }, 100)
+		setInterval(() => { this.displayTotal(); this.cityFee(); this.instructionFee(); this.getOrderNumber(); this.discount(); this.checkValidity() }, 100)
 
 		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').on('value', snapshot => {
 			let pendingOrders = []
@@ -72,44 +86,52 @@ class Order extends Component {
 			this.setState({ maxDeliveries: snapshot.val().MaxDelivery })
 		})
 
-		firebase.database().ref('discounts').child('Generated').on('value', snapshot => {
-			let generatedVouchers = []
-			snapshot.forEach((snap) => { generatedVouchers.push(snap.val()) })
-			this.setState({ generatedVouchers })
+		//discount amounts 
+		firebase.database().ref('products').child('Discount Amount').on('value', snapshot => {
+			this.setState({ discountPercent: snapshot.val().Discount })
 		})
 
+		firebase.database().ref('products').child('Discount Price').on('value', snapshot => {
+			this.setState({ discountPrice: snapshot.val().AmountOff })
+		})
+
+		//generated voucher codes
+		firebase.database().ref('discounts').child('Generated').on('value', snapshot => {
+			let generatedPercent = []
+			snapshot.forEach((snap) => { generatedPercent.push(snap.val()) })
+			this.setState({ generatedPercent })
+		})
+
+		firebase.database().ref('discounts').child('PriceGenerated').on('value', snapshot => {
+			let generatedPrice = []
+			snapshot.forEach((snap) => { generatedPrice.push(snap.val()) })
+			this.setState({ generatedPrice })
+		})
+
+		firebase.database().ref('discounts').child('DeliveryGenerated').on('value', snapshot => {
+			let generatedDelivery = []
+			snapshot.forEach((snap) => { generatedDelivery.push(snap.val()) })
+			this.setState({ generatedDelivery })
+		})
+
+		//consumed voucher codes 
 		firebase.database().ref('discounts').child('Consumed').on('value', snapshot => {
 			let consumedVouchers = []
 			snapshot.forEach((snap) => { consumedVouchers.push(snap.val()) })
 			this.setState({ consumedVouchers })
 		})
-
-		firebase.database().ref('products').child('Discount Amount').on('value', snapshot => {
-			this.setState({ discount: snapshot.val().Discount })
-		})
 	}
 
-	getOrderNumber = () => {
-		firebase.database().ref('rolls').on('value', snapshot => {
-			let orderTracker = []
-			snapshot.forEach((user) => {
-				user.forEach((order) => {
-					orderTracker.push(order.key)
-				})
-			})
-			this.setState({ orderTracker })
-		})
-	}
-
+	//set prices
 	displayTotal = () => {
 		this.setState({ price: 0 })
 		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').on('value', snapshot => {
 			snapshot.forEach((snap) => {
-				if (snap.val() === 'P1') {
-					this.setState(prevState => ({ price: prevState.price + 350 }))
-				}
-				else if (snap.val() === 'P2') {
-					this.setState(prevState => ({ price: prevState.price + 600 }))
+				if (snap.val() === 'P1') { 
+					this.setState(prevState => ({ price: prevState.price + 350 })) 
+				} 
+				else if (snap.val() === 'P2') { 
+					this.setState(prevState => ({ price: prevState.price + 600 })) 
 				}
 			})
 		})
@@ -118,73 +140,122 @@ class Order extends Component {
 	cityFee = () => {
 		if (this.state.mode === 'Delivery') {
 			if (this.state.price < 1500) {
-				if (this.state.city === '') {
-					this.setState(prevState => ({ price: prevState.price + 0 }))
-				} else if (this.state.city === 'Cainta') {
-					this.setState(prevState => ({ price: prevState.price + 210 }))
-					this.setState({ route: 'Route2'})
-				} else if (this.state.city === 'Caloocan') {
-					this.setState(prevState => ({ price: prevState.price + 200 }))
-					this.setState({ route: 'Route1'})
-				} else if (this.state.city === 'LasPinas') {
-					this.setState(prevState => ({ price: prevState.price + 250 }))
-					this.setState({ route: 'Route3'})
-				} else if (this.state.city === 'Makati') {
-					this.setState(prevState => ({ price: prevState.price + 140 }))
-					this.setState({ route: 'Route4_Makati'})
-				} else if (this.state.city === 'Malabon') {
-					this.setState(prevState => ({ price: prevState.price + 160 }))
-					this.setState({ route: 'Route1'})
-				} else if (this.state.city === 'Mandaluyong') {
-					this.setState(prevState => ({ price: prevState.price + 120 }))
-					this.setState({ route: 'Route2'})
-				} else if (this.state.city === 'Manila') {
-					this.setState(prevState => ({ price: prevState.price + 110 }))
-					this.setState({ route: 'Route4_Manila'})
-				} else if (this.state.city === 'Marikina') {
-					this.setState(prevState => ({ price: prevState.price + 140 }))
-					this.setState({ route: 'Route1'})
-				} else if (this.state.city === 'Muntinlupa') {
-					this.setState(prevState => ({ price: prevState.price + 260 }))
-					this.setState({ route: 'Route3'})
-				} else if (this.state.city === 'Navotas') {
-					this.setState(prevState => ({ price: prevState.price + 160 }))
-					this.setState({ route: 'Route1'})
-				} else if (this.state.city === 'Paranaque') {
-					this.setState(prevState => ({ price: prevState.price + 220 }))
-					this.setState({ route: 'Route3'})
-				} else if (this.state.city === 'Pasay') {
-					this.setState(prevState => ({ price: prevState.price + 150 }))
-					this.setState({ route: 'Route3'})
-				} else if (this.state.city === 'Pasig') {
-					this.setState(prevState => ({ price: prevState.price + 120 }))
-					this.setState({ route: 'Route2'})
-				} else if (this.state.city === 'Pateros') {
-					this.setState(prevState => ({ price: prevState.price + 140 }))
-					this.setState({ route: 'Route3'})
-				} else if (this.state.city === 'Quezon') {
-					this.setState(prevState => ({ price: prevState.price + 140 }))
-					this.setState({ route: 'Route4_QC'})
-				} else if (this.state.city === 'SanJuan') {
-					this.setState(prevState => ({ price: prevState.price + 110 }))
-					this.setState({ route: 'Route2'})
-				} else if (this.state.city === 'SanMateo') {
-					this.setState(prevState => ({ price: prevState.price + 260 }))
-					this.setState({ route: 'Route2'})
-				} else if (this.state.city === 'Taguig') {
-					this.setState(prevState => ({ price: prevState.price + 160 }))
-					this.setState({ route: 'Route3'})
-				} else if (this.state.city === 'Taytay') {
-					this.setState(prevState => ({ price: prevState.price + 250 }))
-					this.setState({ route: 'Route2'})
-				} else if (this.state.city === 'Valenzuela') {
-					this.setState(prevState => ({ price: prevState.price + 160 }))
-					this.setState({ route: 'Route1'})
+				if (this.state.deliveryCode !== '' && this.state.generatedDelivery.includes(this.state.deliveryCode) && !this.state.consumedVouchers.includes(this.state.deliveryCode)) { this.freeCityFee() }
+				else {
+					if (this.state.city === '') {
+						this.setState(prevState => ({ price: prevState.price + 0 }))
+					} else if (this.state.city === 'Cainta') {
+						this.setState(prevState => ({ price: prevState.price + 210 }))
+						this.setState({ route: 'Route2'})
+					} else if (this.state.city === 'Caloocan') {
+						this.setState(prevState => ({ price: prevState.price + 200 }))
+						this.setState({ route: 'Route1'})
+					} else if (this.state.city === 'LasPinas') {
+						this.setState(prevState => ({ price: prevState.price + 250 }))
+						this.setState({ route: 'Route3'})
+					} else if (this.state.city === 'Makati') {
+						this.setState(prevState => ({ price: prevState.price + 140 }))
+						this.setState({ route: 'Route4_Makati'})
+					} else if (this.state.city === 'Malabon') {
+						this.setState(prevState => ({ price: prevState.price + 160 }))
+						this.setState({ route: 'Route1'})
+					} else if (this.state.city === 'Mandaluyong') {
+						this.setState(prevState => ({ price: prevState.price + 120 }))
+						this.setState({ route: 'Route2'})
+					} else if (this.state.city === 'Manila') {
+						this.setState(prevState => ({ price: prevState.price + 110 }))
+						this.setState({ route: 'Route4_Manila'})
+					} else if (this.state.city === 'Marikina') {
+						this.setState(prevState => ({ price: prevState.price + 140 }))
+						this.setState({ route: 'Route1'})
+					} else if (this.state.city === 'Muntinlupa') {
+						this.setState(prevState => ({ price: prevState.price + 260 }))
+						this.setState({ route: 'Route3'})
+					} else if (this.state.city === 'Navotas') {
+						this.setState(prevState => ({ price: prevState.price + 160 }))
+						this.setState({ route: 'Route1'})
+					} else if (this.state.city === 'Paranaque') {
+						this.setState(prevState => ({ price: prevState.price + 220 }))
+						this.setState({ route: 'Route3'})
+					} else if (this.state.city === 'Pasay') {
+						this.setState(prevState => ({ price: prevState.price + 150 }))
+						this.setState({ route: 'Route3'})
+					} else if (this.state.city === 'Pasig') {
+						this.setState(prevState => ({ price: prevState.price + 120 }))
+						this.setState({ route: 'Route2'})
+					} else if (this.state.city === 'Pateros') {
+						this.setState(prevState => ({ price: prevState.price + 140 }))
+						this.setState({ route: 'Route3'})
+					} else if (this.state.city === 'Quezon') {
+						this.setState(prevState => ({ price: prevState.price + 140 }))
+						this.setState({ route: 'Route4_QC'})
+					} else if (this.state.city === 'SanJuan') {
+						this.setState(prevState => ({ price: prevState.price + 110 }))
+						this.setState({ route: 'Route2'})
+					} else if (this.state.city === 'SanMateo') {
+						this.setState(prevState => ({ price: prevState.price + 260 }))
+						this.setState({ route: 'Route2'})
+					} else if (this.state.city === 'Taguig') {
+						this.setState(prevState => ({ price: prevState.price + 160 }))
+						this.setState({ route: 'Route3'})
+					} else if (this.state.city === 'Taytay') {
+						this.setState(prevState => ({ price: prevState.price + 250 }))
+						this.setState({ route: 'Route2'})
+					} else if (this.state.city === 'Valenzuela') {
+						this.setState(prevState => ({ price: prevState.price + 160 }))
+						this.setState({ route: 'Route1'})
+					}
 				}
-			}	
+			}
+			else if (this.state.price >= 1500) { this.freeCityFee() }
 		}
 		else if (this.state.mode === 'Pickup') {
 			this.setState({ city: '' })
+		}
+	}
+
+	freeCityFee = () => {
+		if (this.state.city === '') {
+		} else if (this.state.city === 'Cainta') {
+			this.setState({ route: 'Route2'})
+		} else if (this.state.city === 'Caloocan') {
+			this.setState({ route: 'Route1'})
+		} else if (this.state.city === 'LasPinas') {
+			this.setState({ route: 'Route3'})
+		} else if (this.state.city === 'Makati') {
+			this.setState({ route: 'Route4_Makati'})
+		} else if (this.state.city === 'Malabon') {
+			this.setState({ route: 'Route1'})
+		} else if (this.state.city === 'Mandaluyong') {
+			this.setState({ route: 'Route2'})
+		} else if (this.state.city === 'Manila') {
+			this.setState({ route: 'Route4_Manila'})
+		} else if (this.state.city === 'Marikina') {
+			this.setState({ route: 'Route1'})
+		} else if (this.state.city === 'Muntinlupa') {
+			this.setState({ route: 'Route3'})
+		} else if (this.state.city === 'Navotas') {
+			this.setState({ route: 'Route1'})
+		} else if (this.state.city === 'Paranaque') {
+			this.setState({ route: 'Route3'})
+		} else if (this.state.city === 'Pasay') {
+			this.setState({ route: 'Route3'})
+		} else if (this.state.city === 'Pasig') {
+			this.setState({ route: 'Route2'})
+		} else if (this.state.city === 'Pateros') {
+			this.setState({ route: 'Route3'})
+		} else if (this.state.city === 'Quezon') {
+			this.setState({ route: 'Route4_QC'})
+		} else if (this.state.city === 'SanJuan') {
+			this.setState({ route: 'Route2'})
+		} else if (this.state.city === 'SanMateo') {
+			this.setState({ route: 'Route2'})
+		} else if (this.state.city === 'Taguig') {
+			this.setState({ route: 'Route3'})
+		} else if (this.state.city === 'Taytay') {
+			this.setState({ route: 'Route2'})
+		} else if (this.state.city === 'Valenzuela') {
+			this.setState({ route: 'Route1'})
 		}
 	}
 
@@ -269,13 +340,60 @@ class Order extends Component {
 		}
 	}
 
+	//set discount vouchers
 	discount = () => {
-		if (this.state.voucherCode !== '' && !this.state.consumedVouchers.includes(this.state.voucherCode) && this.state.generatedVouchers.includes(this.state.voucherCode)) {
-			var discountAmount = (100 - this.state.discount) / 100
+		if (this.state.percentCode !== '' && this.state.generatedPercent.includes(this.state.percentCode) && !this.state.consumedVouchers.includes(this.state.percentCode)) {
+			var discountAmount = (100 - this.state.discountPercent) / 100
 			this.setState(prevState => ({ price: prevState.price * discountAmount }))
+		}
+
+		if (this.state.priceCode !== '' && this.state.generatedPrice.includes(this.state.priceCode) && !this.state.consumedVouchers.includes(this.state.priceCode)) {
+			this.setState(prevState => ({ price: prevState.price - this.state.discountPrice }))
 		}
 	}
 
+	checkValidity = () => {
+		if (this.state.percentCode !== '' && this.state.consumedVouchers.includes(this.state.percentCode)) {
+			this.setState({ voucherPercentConsumed: true })
+		}
+		else if (this.state.percentCode !== '' && !this.state.generatedPercent.includes(this.state.percentCode)) {
+			this.setState({ voucherPercentInvalid: true })
+		}
+		else if (this.state.percentCode === '') {
+			this.setState({ voucherPercentInvalid: false, voucherPercentConsumed: false })
+		}
+		else if (this.state.percentCode !== '' && this.state.generatedPercent.includes(this.state.percentCode) && !this.state.consumedVouchers.includes(this.state.percentCode)) {
+			this.setState({ voucherPercentInvalid: false, voucherPercentConsumed: false })
+		}
+
+		if (this.state.priceCode !== '' && this.state.consumedVouchers.includes(this.state.priceCode)) {
+			this.setState({ voucherPriceConsumed: true })
+		}
+		else if (this.state.priceCode !== '' && !this.state.generatedPrice.includes(this.state.priceCode)) {
+			this.setState({ voucherPriceInvalid: true })
+		}
+		else if (this.state.priceCode === '') {
+			this.setState({ voucherPriceInvalid: false, voucherPriceConsumed: false })
+		}
+		else if (this.state.priceCode !== '' && this.state.generatedPrice.includes(this.state.priceCode) && !this.state.consumedVouchers.includes(this.state.priceCode)) {
+			this.setState({ voucherPriceInvalid: false, voucherPriceConsumed: false })
+		}
+
+		if (this.state.deliveryCode !== '' && this.state.consumedVouchers.includes(this.state.deliveryCode)) {
+			this.setState({ voucherDeliveryConsumed: true })
+		}
+		else if (this.state.deliveryCode !== '' && !this.state.generatedDelivery.includes(this.state.deliveryCode)) {
+			this.setState({ voucherDeliveryInvalid: true })
+		}
+		else if (this.state.deliveryCode === '') {
+			this.setState({ voucherDeliveryInvalid: false, voucherDeliveryConsumed: false })
+		}
+		else if (this.state.deliveryCode !== '' && this.state.generatedDelivery.includes(this.state.deliveryCode) && !this.state.consumedVouchers.includes(this.state.deliveryCode)) {
+			this.setState({ voucherDeliveryInvalid: false, voucherDeliveryConsumed: false })
+		}
+	}
+
+	//filter routes based on dates
 	maxDeliveries = (value) => this.state.dateRange.filter((v) => (v === value)).length
 
 	setDate = (date) => {
@@ -286,7 +404,6 @@ class Order extends Component {
 		else if (checkArray < this.state.maxDeliveries) { this.setState({ dDate: date }) }
 	}
 
-	//route filters
 	dateFilterRoute1 = (date) => {
 		const day = getDay(date)
 		return day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 6
@@ -357,6 +474,16 @@ class Order extends Component {
 	removeSpaces = (string) => string.split(' ').join('')
 
 	//update data in database
+	getOrderNumber = () => {
+		firebase.database().ref('rolls').on('value', snapshot => {
+			let orderTracker = []
+			snapshot.forEach((user) => {
+				user.forEach((order) => { orderTracker.push(order.key) })
+			})
+			this.setState({ orderTracker })
+		})
+	}
+
 	moveOrderRecord = () => {
 		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').once('value', snapshot => {
 			firebase.database().ref(`users/${this.state.consumer}`).child('Delivered Orders').update( snapshot.val(), () => {
@@ -382,11 +509,11 @@ class Order extends Component {
 		let orderNumber = this.state.orderTracker.length + 1
 
 		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').once('value', snapshot => {
-			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Items').set( snapshot.val() )
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 100${orderNumber}`).child('Order Items').set( snapshot.val() )
 		})
 
 		if (this.state.mode === 'Pickup') {
-			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Details').update({
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 100${orderNumber}`).child('Order Details').update({
 				Name: this.state.name,
 				Number: this.removeSpaces(this.state.number),
 				Mode: this.state.mode,
@@ -400,13 +527,15 @@ class Order extends Component {
 				Date: moment(this.state.pDate).format('L'),
 				Created: this.timestamp()
 			})
-			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Instructions').update({
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 100${orderNumber}`).child('Order Instructions').update({
 				Instructions: this.state.pInstructions
 			})
-			firebase.database().ref('discounts').child('Consumed').push(this.state.voucherCode)
+			if (this.state.percentCode !== '') { firebase.database().ref('discounts').child('Consumed').push(this.state.percentCode) }
+			if (this.state.priceCode !== '') { firebase.database().ref('discounts').child('Consumed').push(this.state.priceCode) }
+			if (this.state.deliveryCode !== '') { firebase.database().ref('discounts').child('Consumed').push(this.state.deliveryCode) }
 		}
 		else if (this.state.mode === 'Delivery') {
-			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Details').update({
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 100${orderNumber}`).child('Order Details').update({
 				Name: this.state.name,
 				Number: this.removeSpaces(this.state.number),
 				Mode: this.state.mode,
@@ -423,10 +552,12 @@ class Order extends Component {
 				Date: moment(this.state.dDate).format('L'),
 				Created: this.timestamp()
 			})
-			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 1000${orderNumber}`).child('Order Instructions').update({
+			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 100${orderNumber}`).child('Order Instructions').update({
 				Instructions: this.state.dInstructions
 			})
-			firebase.database().ref('discounts').child('Consumed').push(this.state.voucherCode)
+			if (this.state.percentCode !== '') { firebase.database().ref('discounts').child('Consumed').push(this.state.percentCode) }
+			if (this.state.priceCode !== '') { firebase.database().ref('discounts').child('Consumed').push(this.state.priceCode) }
+			if (this.state.deliveryCode !== '') { firebase.database().ref('discounts').child('Consumed').push(this.state.deliveryCode) }
 			//save this in its own node in order to keep track of the amount of times the date was used for deliveries
 			firebase.database().ref('deliveryDates').push( moment(this.state.dDate).format('L') )
 		}
@@ -454,7 +585,9 @@ class Order extends Component {
 			dNote: '',
 			dAmount: '',
 
-			voucherCode: ''
+			percentCode: '',
+			priceCode: '',
+			deliveryCode: ''
 		})
 
 		alert("Thank you for ordering! Please expect an SMS regarding your order within the day.")
@@ -494,8 +627,8 @@ class Order extends Component {
 	order = (event) => {
 		event.preventDefault()
 
-		if (this.state.voucherCode !== '' && this.state.generatedVouchers.includes(this.state.voucherCode) && !this.state.consumedVouchers.includes(this.state.voucherCode) || this.state.voucherCode === '') {
-			if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
+		if (this.state.pendingOrders && this.state.pendingOrders.length > 0) {
+			if (this.state.voucherPercentInvalid === false && this.state.voucherPercentConsumed === false && this.state.voucherPriceInvalid === false && this.state.voucherPriceConsumed === false && this.state.voucherDeliveryInvalid === false && this.state.voucherDeliveryConsumed === false) {
 				if (this.state.mode === '') { 
 					alert("Kindly select a receive method — whether that be pickup or delivery.")
 				}
@@ -544,14 +677,10 @@ class Order extends Component {
 					else { alert("Please fill in all the input fields.") }
 				}
 			}
-			else { alert("Your cart is empty.") }
+			else if (this.state.voucherPercentInvalid === true || this.state.voucherPriceInvalid === true || this.state.voucherDeliveryInvalid === true) { alert("Please check the validity and accuracy of the voucher/s that you have placed.") }
+			else if (this.state.voucherPercentConsumed === true || this.state.voucherPriceConsumed === true || this.state.voucherDeliveryConsumed === true) { alert("The voucher/s that you have placed have already been consumed.") }
 		}
-		else if (this.state.voucherCode !== '' && !this.state.generatedVouchers.includes(this.state.voucherCode)) { 
-			alert("This voucher code is invalid.")
-		}
-		else if (this.state.voucherCode !== '' && this.state.generatedVouchers.includes(this.state.voucherCode) && this.state.consumedVouchers.includes(this.state.voucherCode)) { 
-			alert("This voucher code has already been consumed.")
-		}
+		else { alert("Your cart is empty.") }
  	}
 
 	render() {
@@ -720,7 +849,11 @@ class Order extends Component {
 						<div class="footer">
 							<p>Total: P{this.state.price.toFixed(2)} (Additional / Delivery / Discount Fees Already Included.)</p>
 							<p>Note: Free delivery for purchases over P1500.00</p>
-							<input onChange={this.handleChange} value={this.state.voucherCode.trim()} name="voucherCode" placeholder="Voucher Code (if any)"></input>
+							<div class="vouchers">
+								<input onChange={this.handleChange} value={this.state.percentCode.trim()} name="percentCode" placeholder="Voucher Code (ex. for 15% off)"></input>
+								<input onChange={this.handleChange} value={this.state.priceCode.trim()} name="priceCode" placeholder="Voucher Code (ex. for P50.00 off)"></input>
+								<input onChange={this.handleChange} value={this.state.deliveryCode.trim()} name="deliveryCode" placeholder="Free Delivery Voucher"></input>
+							</div>
 							<button onClick={this.order}>Order</button>
 						</div>
 					</form>
