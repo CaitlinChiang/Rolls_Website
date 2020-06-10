@@ -34,7 +34,7 @@ class Controls extends Component {
 		else { alert("Please input an integer greater or equal to 0.") }
 	}
 
-	//promo codes
+	//set discount codes
 	setDiscount = (event) => {
 		if (this.state.discount >= 0) { firebase.database().ref('products').child('Discount Amount').update({ Discount: this.state.discount }) }
 		else { alert("Please input an integer greater or equal to 0.") }

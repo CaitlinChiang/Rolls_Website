@@ -353,6 +353,7 @@ class Order extends Component {
 	}
 
 	checkValidity = () => {
+		//validity of percent vouchers
 		if (this.state.percentCode !== '' && this.state.consumedVouchers.includes(this.state.percentCode)) {
 			this.setState({ voucherPercentConsumed: true })
 		}
@@ -366,6 +367,7 @@ class Order extends Component {
 			this.setState({ voucherPercentInvalid: false, voucherPercentConsumed: false })
 		}
 
+		//validity of price vouchers
 		if (this.state.priceCode !== '' && this.state.consumedVouchers.includes(this.state.priceCode)) {
 			this.setState({ voucherPriceConsumed: true })
 		}
@@ -379,6 +381,7 @@ class Order extends Component {
 			this.setState({ voucherPriceInvalid: false, voucherPriceConsumed: false })
 		}
 
+		//validity of delivery vouchers
 		if (this.state.deliveryCode !== '' && this.state.consumedVouchers.includes(this.state.deliveryCode)) {
 			this.setState({ voucherDeliveryConsumed: true })
 		}
