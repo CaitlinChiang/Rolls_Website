@@ -636,46 +636,52 @@ class Order extends Component {
 					alert("Kindly select a receive method — whether that be pickup or delivery.")
 				}
 				else if (this.state.mode === 'Pickup') {
-					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "" && this.state.pInstructions.length > 0) {
-						if (this.state.pInstructions.length > 1 && this.state.pInstructions.includes('None')) {
-							alert("Kindly remove any other additional instruction if you wish to proceed with None.")
-						}
-						else {
-							if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') || this.state.pInstructions.includes('extraFrosting')) {
-								if (this.state.pInstructions.includes('extraFrosting') && this.state.pInstructions.length === 1) {
-									{ this.state.pAmount.trim() !== '' ? this.orderPickup() : alert("Please fill in all input fields.") }
-								}
-								else if (this.state.pInstructions.includes('extraFrosting') && this.state.pInstructions.length > 1) {
-									{ this.state.pNote.trim() !== '' && this.state.pAmount.trim() !== '' ? this.orderPickup() : alert("Please fill in all the input fields.") }
-								}
-								else if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle')) {
-									{ this.state.pNote.trim() !== '' ? this.orderPickup() : alert("Please fill in all the input fields.") }
-								}
+					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.pDate !== "" && this.state.pPayment.trim() !== "") {
+						if (this.state.pInstructions.length > 0) {
+							if (this.state.pInstructions.length > 1 && this.state.pInstructions.includes('None')) {
+								alert("Kindly remove any other additional instruction if you wish to proceed with None.")
 							}
-							else if (this.state.pInstructions.includes('None') && this.state.pInstructions.length === 1) { this.orderPickup() }
+							else {
+								if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') || this.state.pInstructions.includes('extraFrosting')) {
+									if (this.state.pInstructions.includes('extraFrosting') && this.state.pInstructions.length === 1) {
+										{ this.state.pAmount.trim() !== '' ? this.orderPickup() : alert("Please fill in all input fields.") }
+									}
+									else if (this.state.pInstructions.includes('extraFrosting') && this.state.pInstructions.length > 1) {
+										{ this.state.pNote.trim() !== '' && this.state.pAmount.trim() !== '' ? this.orderPickup() : alert("Please fill in all the input fields.") }
+									}
+									else if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle')) {
+										{ this.state.pNote.trim() !== '' ? this.orderPickup() : alert("Please fill in all the input fields.") }
+									}
+								}
+								else if (this.state.pInstructions.includes('None') && this.state.pInstructions.length === 1) { this.orderPickup() }
+							}
 						}
+						else if (this.state.pInstructions.length === 0) { alert("Kindly input 'None' in the additional instructions if you do not wish to have any.") }
 					}
 					else { alert("Please fill in all input fields.") }
 				}
 				else if (this.state.mode === 'Delivery') {
-					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "" && this.state.dInstructions.length > 0) {
-						if (this.state.dInstructions.length > 1 && this.state.dInstructions.includes('None')) {
-							alert("Kindly remove any other additional instruction if you wish to proceed with None.")
-						}
-						else {
-							if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('extraFrosting')) {
-								if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length === 1) {
-									{ this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all input fields.") }
-								}
-								else if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length > 1) {
-									{ this.state.dNote.trim() !== '' && this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
-								}
-								else if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle')) {
-									{ this.state.dNote.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
-								}						
+					if (this.state.name.trim() !== "" && this.state.number.trim() !== "" && this.state.dPayment.trim() !== "" && this.state.address.trim() !== "" && this.state.city.trim() !== "" && this.state.dDate !== "") {
+						if (this.state.dInstructions.length > 0) {	
+							if (this.state.dInstructions.length > 1 && this.state.dInstructions.includes('None')) {
+								alert("Kindly remove any other additional instruction if you wish to proceed with None.")
 							}
-							else if (this.state.dInstructions.includes('None') && this.state.dInstructions.length === 1) { this.orderDelivery() }
+							else {
+								if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('extraFrosting')) {
+									if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length === 1) {
+										{ this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all input fields.") }
+									}
+									else if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length > 1) {
+										{ this.state.dNote.trim() !== '' && this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
+									}
+									else if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle')) {
+										{ this.state.dNote.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
+									}						
+								}
+								else if (this.state.dInstructions.includes('None') && this.state.dInstructions.length === 1) { this.orderDelivery() }
+							}
 						}
+						else if (this.state.dInstructions.length === 0) { alert("Kindly input 'None' in the additional instructions if you do not wish to have any.") }
 					}
 					else { alert("Please fill in all the input fields.") }
 				}
