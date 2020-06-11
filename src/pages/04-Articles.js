@@ -10,6 +10,7 @@ function Articles() {
 
 				<div id="displayArticles">
 					<div id="showArticles" class="fade-in">	
+
 						<a href="https://beingjellybeans.com/2020/05/21/the-jelly-list-m-food-deliveries-for-your-party-at-home/?fbclid=IwAR3G7YAsg-WteNkbeN1KaB2BPof9dgkjUCidDFm8INxSCB0rGk04-GJaHv8">
 						    <button>
 						    	<img src="https://live.staticflickr.com/65535/49261024603_e083a587a1_c.jpg" width="100%" />
