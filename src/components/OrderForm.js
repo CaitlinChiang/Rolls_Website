@@ -438,13 +438,23 @@ class Order extends Component {
 	}
 
 	QC_dateFilterRoute4 = (date) => {
+		var exception = new Date('June 20, 2020')
+
 		const day = getDay(date)
-		return day !== 1 && day !== 3 && day !== 4 && day !== 6
+		const specificDate = date.getDate()
+		const specificMonth = date.getMonth()
+
+		return day !== 1 && day !== 3 && day !== 4 && (specificDate === exception.getDate() ? exception.getDay() : day !== 6)
 	}
 
 	Makati_dateFilterRoute4 = (date) => {
+		var exception = new Date('June 20, 2020')
+
 		const day = getDay(date)
-		return day !== 1 && day !== 2 && day !== 3 && day !== 5 && day !== 6
+		const specificDate = date.getDate()
+		const specificMonth = date.getMonth()
+		
+		return day !== 1 && day !== 2 && day !== 3 && day !== 5 && (specificDate === exception.getDate() ? exception.getDay() : day !== 6)
 	}
 
 	Manila_dateFilterRoute4 = (date) => {
