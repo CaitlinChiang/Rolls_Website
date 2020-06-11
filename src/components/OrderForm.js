@@ -408,18 +408,33 @@ class Order extends Component {
 	}
 
 	dateFilterRoute1 = (date) => {
+		var exception = new Date('June 20, 2020')
+
 		const day = getDay(date)
-		return day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 6
+		const specificDate = date.getDate()
+		const specificMonth = date.getMonth()
+
+		return (specificDate === exception.getDate() + 1 && specificMonth === exception.getMonth() ? exception.getDay() + 1 : day !== 0) && day !== 1 && day !== 3 && day !== 4 && (specificDate === exception.getDate() ? exception.getDay() : day !== 6)
 	}
 
 	dateFilterRoute2 = (date) => {
+		var exception = new Date('June 20, 2020')
+
 		const day = getDay(date)
-		return day !== 0 && day !== 1 && day !== 2 && day !== 4 && day !== 5
+		const specificDate = date.getDate()
+		const specificMonth = date.getMonth()
+
+		return (specificDate === exception.getDate() + 1 && specificMonth === exception.getMonth() ? exception.getDay() + 1 : day !== 0) && day !== 1 && day !== 2 && day !== 4 && day !== 5
 	}
 
 	dateFilterRoute3 = (date) => {
+		var exception = new Date('June 20, 2020')
+
 		const day = getDay(date)
-		return day !== 0 && day !== 1 && day !== 2 && day !== 3 && day !== 5 && day !== 6
+		const specificDate = date.getDate()
+		const specificMonth = date.getMonth()
+		
+		return (specificDate === exception.getDate() + 1 && specificMonth === exception.getMonth() ? exception.getDay() + 1 : day !== 0) && day !== 1 && day !== 2 && day !== 3 && day !== 5 && (specificDate === exception.getDate() ? exception.getDay() : day !== 6)
 	}
 
 	QC_dateFilterRoute4 = (date) => {
