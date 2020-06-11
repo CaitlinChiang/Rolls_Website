@@ -45,7 +45,9 @@ function Home(props) {
 						<p>Facebook: <a href="https://www.facebook.com/officialrolls.ph/">Rolls</a>
 						<br /><br />Instagram: <a href="https://www.instagram.com/rolls.ph/">rolls.ph</a>
 						<br /><br />Phone: 0917 535 0923
-						<br /><br />Email: officialrolls.ph@gmail.com</p>
+						<br /><br />Customer Support: support@therollskitchen.com
+						<br /><br />Payment Concerns: payment@therollskitchen.com
+						<br /><br />Business Inquiries: officialrolls.ph@therollskitchen.com</p>
 					</div>
 				</div>
 			</section>
