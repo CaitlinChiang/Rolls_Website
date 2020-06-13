@@ -185,8 +185,9 @@ class View extends Component {
 	addPickupInfo_All = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
-			<tr id={object} key={object}>
-				<td>{name}<br />{number}<br /><br />{order}</td>
+			<tr id={object} key={created}>
+				<td>{name}<br />{number}</td>
+				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'P_transfer' ? <td>BDO Transfer</td> : <td>Payment on Pickup</td>}
@@ -208,8 +209,9 @@ class View extends Component {
 	addDeliveryInfo_All = (name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
-			<tr id={object} key={object}>
-				<td>{name}<br />{number}<br /><br />{order}</td>
+			<tr id={object} key={created}>
+				<td>{name}<br />{number}</td>
+				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'D_transfer' ? <td>BDO Transfer</td> : <td>Cash on Delivery</td>}
@@ -302,8 +304,9 @@ class View extends Component {
 	addPickupInfo_Pickup = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.pickupOrders.concat(
-			<tr id={object} key={object}>
-				<td>{name}<br />{number}<br /><br />{order}</td>
+			<tr id={object} key={created}>
+				<td>{name}<br />{number}</td>
+				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'P_transfer' ? <td>BDO Transfer</td> : <td>Payment on Pickup</td>}
@@ -396,8 +399,9 @@ class View extends Component {
 	addDeliveryInfo_Delivery = (name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.deliveryOrders.concat(
-			<tr id={object} key={object}>
-				<td>{name}<br />{number}<br /><br />{order}</td>
+			<tr id={object} key={created}>
+				<td>{name}<br />{number}</td>
+				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'D_transfer' ? <td>BDO Transfer</td> : <td>Cash on Delivery</td>}
@@ -451,7 +455,7 @@ class View extends Component {
 		return (
 			<div>
 				<section id="viewing">
-					<div class="container slideDown">
+					<div class="containerViewing slideDown">
 
 						<div id="adminHeader"> <h1>Viewing Panel</h1> </div>
 
@@ -470,8 +474,9 @@ class View extends Component {
 						<div class="table">
 							<table class="viewingTable">
 							  	<thead>
-								    <tr> 
+								    <tr>
 								    	<th>Contact</th>
+								    	<th>Order &<br />Timestamp</th>
 								        <th>Item</th>
 								        <th>Amount</th>
 								      	<th>Mode</th>
