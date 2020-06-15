@@ -46,6 +46,27 @@ class Account extends Component {
 		.then((user) => { alert("Please check your email!") })
 	}
 
+	generateUsernamePassword = (event) => {
+		event.preventDefault()
+		const confirmation = window.confirm("Would you allow Rolls to create a custom email and password for you?")
+		if (confirmation) {
+			var characters = 'ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijklmnpqrstuvwxyz123456789'
+
+			var usernmameResult = ''
+			for ( var i = 0; i < 8; i++ ) {
+			  usernmameResult += characters.charAt(Math.floor(Math.random() * characters.length))
+			}
+			usernmameResult += '@gmail.com'
+
+			var passwordResult = ''
+			for ( var i = 0; i < 7; i++ ) {
+			  passwordResult += characters.charAt(Math.floor(Math.random() * characters.length))
+			}
+
+			this.setState({ userEmail: usernmameResult, userPassword: passwordResult })
+		}
+	}
+
 	render() {
 		return (
 			<div>
@@ -57,8 +78,9 @@ class Account extends Component {
 							<br /><button onClick={this.singup}>Register</button>
 							<button onClick={this.signin}>Login</button>
 							<button onClick={this.reset} id="forgot">Forgot Password?</button>
-						</div>	
-						<StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />
+							<button onClick={this.generateUsernamePassword} id="forgot">Trouble Registering?</button>
+						</div>
+						<StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} />	
 					</div>
 				</section>
 			</div>
