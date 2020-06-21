@@ -553,7 +553,8 @@ class Order extends Component {
 				paymentStatus: this.state.paymentStatus,
 				contacted: this.state.contacted,
 				Date: moment(this.state.pDate).format('L'),
-				Created: this.timestamp()
+				Created: this.timestamp(),
+				Consumer: this.state.consumer
 			})
 			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 100${orderNumber}`).child('Order Instructions').update({
 				Instructions: this.state.pInstructions
@@ -578,7 +579,8 @@ class Order extends Component {
 				paymentStatus: this.state.paymentStatus,
 				contacted: this.state.contacted,
 				Date: moment(this.state.dDate).format('L'),
-				Created: this.timestamp()
+				Created: this.timestamp(),
+				Consumer: this.state.consumer
 			})
 			firebase.database().ref('rolls').child(`${this.state.consumer}`).child(`Order Number: 100${orderNumber}`).child('Order Instructions').update({
 				Instructions: this.state.dInstructions

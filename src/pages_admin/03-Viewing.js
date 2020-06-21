@@ -8,6 +8,8 @@ import moment from 'moment'
 
 class View extends Component {
 	state = {
+		consumer: '',
+
 		allOrders: [],
 		pickupOrders: [],
 		deliveryOrders: [],
@@ -91,7 +93,7 @@ class View extends Component {
 							if (this.state.dateFilter === '') {
 								if (details.val().orderStatus === 'Not Ready') {
 									if (details.val().Mode === 'Pickup') {
-										this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+										this.addPickupInfo_All(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
 										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
@@ -103,7 +105,7 @@ class View extends Component {
 										}))
 									}
 									else if (details.val().Mode === 'Delivery') {
-										this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+										this.addDeliveryInfo_All(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
 										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
@@ -120,7 +122,7 @@ class View extends Component {
 							else if (this.state.dateFilter !== '') {
 								if (details.val().Date === moment(this.state.dateFilter).format('L')) {
 									if (details.val().Mode === 'Pickup') {
-										this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+										this.addPickupInfo_All(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
 										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
@@ -132,7 +134,7 @@ class View extends Component {
 										}))
 									}
 									else if (details.val().Mode === 'Delivery') {
-										this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+										this.addDeliveryInfo_All(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
 										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
@@ -150,7 +152,7 @@ class View extends Component {
 						else if (this.state.searchOrder.trim() !== '') {
 							if (this.state.purchase === this.state.searchOrder) {
 								if (details.val().Mode === 'Pickup') {
-									this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addPickupInfo_All(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
 									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
@@ -162,7 +164,7 @@ class View extends Component {
 									}))
 								}
 								else if (details.val().Mode === 'Delivery') {
-									this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addDeliveryInfo_All(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
 									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
@@ -182,11 +184,11 @@ class View extends Component {
 		})
 	}
 
-	addPickupInfo_All = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
+	addPickupInfo_All = (consumer_id, name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
 			<tr id={object} key={created}>
-				<td>{name}<br />{number}</td>
+				<td>{name}<br />{number}<br /><br />{consumer_id}</td>
 				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
@@ -206,11 +208,11 @@ class View extends Component {
 		this.setState({ allOrders: row })
 	}
 
-	addDeliveryInfo_All = (name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
+	addDeliveryInfo_All = (consumer_id, name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
 			<tr id={object} key={created}>
-				<td>{name}<br />{number}</td>
+				<td>{name}<br />{number}<br /><br />{consumer_id}</td>
 				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
@@ -262,7 +264,7 @@ class View extends Component {
 						if (this.state.dateFilter === '') {
 							if (details.val().orderStatus === 'Not Ready') {
 								if (details.val().Mode === 'Pickup') {
-									this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addPickupInfo_Pickup(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
 									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
@@ -280,7 +282,7 @@ class View extends Component {
 						else if (this.state.dateFilter !== '') {
 							if (details.val().Date === moment(this.state.dateFilter).format('L')) {
 								if (details.val().Mode === 'Pickup') {
-									this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addPickupInfo_Pickup(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
 									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
@@ -301,11 +303,11 @@ class View extends Component {
 		})	
 	}
 
-	addPickupInfo_Pickup = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
+	addPickupInfo_Pickup = (consumer_id, name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.pickupOrders.concat(
 			<tr id={object} key={created}>
-				<td>{name}<br />{number}</td>
+				<td>{name}<br />{number}<br /><br />{consumer_id}</td>
 				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
@@ -357,7 +359,7 @@ class View extends Component {
 						if (this.state.dateFilter === '') {
 							if (details.val().orderStatus === 'Not Ready') {
 								if (details.val().Mode === 'Delivery') {
-									this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addDeliveryInfo_Delivery(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
 									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
@@ -375,7 +377,7 @@ class View extends Component {
 						else if (this.state.dateFilter !== '') {
 							if (details.val().Date === moment(this.state.dateFilter).format('L')) {
 								if (details.val().Mode === 'Delivery') {
-									this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addDeliveryInfo_Delivery(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
 									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
@@ -396,11 +398,11 @@ class View extends Component {
 		})	
 	}
 
-	addDeliveryInfo_Delivery = (name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
+	addDeliveryInfo_Delivery = (consumer_id, name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.deliveryOrders.concat(
 			<tr id={object} key={created}>
-				<td>{name}<br />{number}</td>
+				<td>{name}<br />{number}<br /><br />{consumer_id}</td>
 				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
