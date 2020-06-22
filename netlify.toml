@@ -1,1 +1,3 @@
-command = "CI=true npm run build"
+[build]
+
+  command = "CI= npm run build"
