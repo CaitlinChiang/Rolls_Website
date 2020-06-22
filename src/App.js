@@ -41,7 +41,7 @@ class App extends Component {
                     <div>
                         <Navbar goHome={this.goHome} goProducts={this.goProducts} goArticles={this.goArticles} goCart={this.goCart} />
                         {this.state.DisplayHome ? <Home goProducts={this.goProducts} /> : null}
-                        {this.state.DisplayProducts ? <div>{this.state.user ? <Products consumer={this.state.userID} p1Stock={this.state.p1Stock} p2Stock={this.state.p2Stock} /> : <Account />}</div> : null}
+                        {this.state.DisplayProducts ? <div>{this.state.user ? <Products consumer={this.state.userID} p1Stock={this.state.p1Stock} p2Stock={this.state.p2Stock} goCart={this.goCart} /> : <Account />}</div> : null}
                         {this.state.DisplayArticles ? <Articles /> : null}
                         {this.state.DisplayCart ? <div>{this.state.user ? <Cart consumer={this.state.userID} /> : <Warning />}</div> : null}
                     </div>

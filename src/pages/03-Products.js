@@ -27,6 +27,9 @@ class Products extends Component {
 		if (this.props.consumer.trim() !== "") {
 			firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').push('P1')
 			alert("This item has been added to your cart!")
+
+			if (window.confirm("Go to Cart?")) { this.props.goCart() }
+			else { return }
 		}
 		else {
 			alert("Kindly register an account before adding to cart!")
@@ -37,6 +40,9 @@ class Products extends Component {
 		if (this.props.consumer.trim() !== "") {
 			firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').push('P2')
 			alert("This item has been added to your cart!")
+			
+			if (window.confirm("Go to Cart?")) { this.props.goCart() }
+			else { return }
 		}
 		else {
 			alert("Kindly register an account before adding to cart!")
