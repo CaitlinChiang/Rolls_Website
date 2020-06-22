@@ -1,1 +1,1 @@
-command = "Cl = npm run build"
+command = "CI= npm run build"
