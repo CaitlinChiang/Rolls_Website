@@ -188,7 +188,7 @@ class View extends Component {
 		let object = order
 		var row = this.state.allOrders.concat(
 			<tr id={object} key={created}>
-				<td>{name}<br />{number}<br /><br />{consumer_id}</td>
+				<td>{name}<br />{number}</td>
 				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
@@ -212,7 +212,7 @@ class View extends Component {
 		let object = order
 		var row = this.state.allOrders.concat(
 			<tr id={object} key={created}>
-				<td>{name}<br />{number}<br /><br />{consumer_id}</td>
+				<td>{name}<br />{number}</td>
 				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
@@ -307,7 +307,7 @@ class View extends Component {
 		let object = order
 		var row = this.state.pickupOrders.concat(
 			<tr id={object} key={created}>
-				<td>{name}<br />{number}<br /><br />{consumer_id}</td>
+				<td>{name}<br />{number}</td>
 				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
@@ -402,7 +402,7 @@ class View extends Component {
 		let object = order
 		var row = this.state.deliveryOrders.concat(
 			<tr id={object} key={created}>
-				<td>{name}<br />{number}<br /><br />{consumer_id}</td>
+				<td>{name}<br />{number}</td>
 				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
