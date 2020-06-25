@@ -95,6 +95,7 @@ class AuthorizedControls extends Component {
 										this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
+											else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
 										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
@@ -107,6 +108,7 @@ class AuthorizedControls extends Component {
 										this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
+											else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
 										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
@@ -124,6 +126,7 @@ class AuthorizedControls extends Component {
 										this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
+											else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
 										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
@@ -136,6 +139,7 @@ class AuthorizedControls extends Component {
 										this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
+											else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
 										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
@@ -154,6 +158,7 @@ class AuthorizedControls extends Component {
 									this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
+										else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
 									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
@@ -166,6 +171,7 @@ class AuthorizedControls extends Component {
 									this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
+										else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
 									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
@@ -254,6 +260,7 @@ class AuthorizedControls extends Component {
 									this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
+										else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
 									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
@@ -272,6 +279,7 @@ class AuthorizedControls extends Component {
 									this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
+										else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
 									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
@@ -343,6 +351,7 @@ class AuthorizedControls extends Component {
 									this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
+										else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
 									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
@@ -361,6 +370,7 @@ class AuthorizedControls extends Component {
 									this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
+										else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
 									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }

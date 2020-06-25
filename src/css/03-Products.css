@@ -50,13 +50,13 @@
 #showProducts {
 	align-items: center;
 	justify-content: center;
-	display: flex;
+	
 }
 
 #displayProducts button {
-	margin: 0px 50px 0px;
+	margin: 0px 50px 20px;
 	padding: 0px;
-	width: 450px;
+	width: 500px;
 	transition: 0.5s;
 	font-weight: normal;
 }
@@ -69,6 +69,8 @@
 #displayProducts button img {
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
+	object-fit: cover;
+	height: 350px;
 }
 
 .productItem {
@@ -147,6 +149,18 @@
 	font-family: Helvetica, sans-serif;
 	color: #C49076;
 	font-size: 25px;
+}
+
+.modalSets {
+	padding: 10px;
+    font-size: 18px;
+    color: #707070;
+    border-radius: 5px;
+    border: 1px solid #CECECE;
+    outline-style: none;
+    text-align: center;
+    margin: 20px 20px 10px;
+    display: inline-block;
 }
 
 #modalDescription button {

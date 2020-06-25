@@ -28,6 +28,12 @@ class Controls extends Component {
 	p2Stock = (event) => firebase.database().ref('products').child('P2').update({ Stock: true })
 	p2NoStock = (event) => firebase.database().ref('products').child('P2').update({ Stock: false })
 
+	p3Stock = (event) => firebase.database().ref('products').child('P3').update({ Stock: true })
+	p3NoStock = (event) => firebase.database().ref('products').child('P3').update({ Stock: false })
+
+	p4Stock = (event) => firebase.database().ref('products').child('P4').update({ Stock: true })
+	p4NoStock = (event) => firebase.database().ref('products').child('P4').update({ Stock: false })
+
 	//change maximum delivery number
 	changeDeliveryNumber = (event) => {
 		if (this.state.maxDeliveries >= 0) { firebase.database().ref('products').child('Delivery Number').update({ MaxDelivery: this.state.maxDeliveries }) }
@@ -71,14 +77,23 @@ class Controls extends Component {
 						</div>
 
 						<div class="toggle">
-							<p>Cinammon Rolls - 6pcs</p>
+							<p>Classic Cinammon Rolls - 6pcs</p>
 							<button onClick={this.p1Stock}>In Stock</button>
 							<button onClick={this.p1NoStock}>Out of Stock</button>
 
-							<p>Cinammon Rolls - 12pcs</p>
+							<p>Classic Cinammon Rolls - 12pcs</p>
 							<button onClick={this.p2Stock}>In Stock</button>
 							<button onClick={this.p2NoStock}>Out of Stock</button>
+
+							<p>Double Chocolate Cinammon Rolls - 6pcs</p>
+							<button onClick={this.p3Stock}>In Stock</button>
+							<button onClick={this.p3NoStock}>Out of Stock</button>
+
+							<p>Double Chocolate Cinammon Rolls - 12pcs</p>
+							<button onClick={this.p4Stock}>In Stock</button>
+							<button onClick={this.p4NoStock}>Out of Stock</button>
 						</div>
+						
 					</div>
 				</section>
 

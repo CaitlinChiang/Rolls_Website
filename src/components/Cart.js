@@ -6,9 +6,9 @@ import Order from '../components/OrderForm'
 class Cart extends Component {
 	state = {
 		consumer: this.props.consumer,
-		pendingOrders: [],
 		orderNumber: '',
 
+		pendingOrders: [],
 		orders: [],
 		doneOrders: [],
 		items: [],
@@ -19,18 +19,50 @@ class Cart extends Component {
 	}
 
 	componentDidMount = async () => {
+		this.displayCartOrders()
 		this.displayPendingOrders()
 		this.displayFinishedOrders()
 
-		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').on('value', snapshot => {
-			let pendingOrders = []
-			snapshot.forEach((snap) => { pendingOrders.push(snap.val() + ' ' + snap.key) })
-			this.setState({ pendingOrders })
+		setInterval(() => { this.displayPendingOrders() }, 100)
+	}
+
+	//display cart orders
+	displayCartOrders = () => {
+		this.setState({ pendingOrders: [] })
+
+		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').once('value', snapshot => {
+			snapshot.forEach((snap) => {
+				this.getCartOrderInfo(snap.key, snap.val().Product, snap.val().Sets, snap.val().Price)
+			})
 		})
 	}
 
+	getCartOrderInfo = (id_Num, products, quantity, price) => {
+		var row = this.state.pendingOrders.concat(
+			<tr id={id_Num}>
+				{products === 'P1' ? <td>6pcs Classic Cinammon Rolls</td> : null}
+				{products === 'P2' ? <td>12pcs Classic Cinammon Rolls</td> : null}
+				{products === 'P3' ? <td>6pcs Double Chocolate Cinammon Rolls</td> : null}
+				{products === 'P4' ? <td>12pcs Double Chocolate Cinammon Rolls</td> : null}
+				<td>{quantity}</td>
+				<td>P{price}.00</td>
+				<td><button onClick={() => this.remove(id_Num)}>Remove</button></td>
+			</tr>
+		)
+		this.setState({ pendingOrders: row })
+	}
+
+	remove = (id) => {
+		document.getElementById(id).style.display = 'none'
+		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').child(id).remove()
+		this.displayCartOrders()
+	}
+
+	//display pending orders
 	displayPendingOrders = () => {
-		firebase.database().ref('rolls').once('value', snapshot => {
+		this.setState({ orders: [] })
+
+		firebase.database().ref('rolls').on('value', snapshot => {
 			snapshot.forEach((snap) => {
 				if (snap.key === this.state.consumer) {
 					snap.forEach((order) => {
@@ -49,12 +81,32 @@ class Cart extends Component {
 									this.getPendingPickupInfo(this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
+										else if (item !== 'P1' || item !== 'P2') { 
+											return (
+												<div>
+													{item.Product === 'P1' ? <p>6pcs Classic Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P2' ? <p>12pcs Classic Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P3' ? <p>6pcs Double Chocolate Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P4' ? <p>12pcs Double Chocolate Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+												</div>
+											)
+										}
 									}), details.val().Price, details.val().orderStatus, details.val().PickupPayment, details.val().Date, details.val().paymentStatus, this.state.orderNumber)
 								}
 								else if (details.val().Mode === 'Delivery') {
 									this.getPendingDeliveryInfo(this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
+										else if (item !== 'P1' || item !== 'P2') { 
+											return (
+												<div>
+													{item.Product === 'P1' ? <p>6pcs Classic Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P2' ? <p>12pcs Classic Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P3' ? <p>6pcs Double Chocolate Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P4' ? <p>12pcs Double Chocolate Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+												</div>
+											)
+										}
 									}), details.val().Price, details.val().orderStatus, details.val().DeliveryPayment, details.val().Address, details.val().Date, details.val().paymentStatus, this.state.orderNumber)
 								}
 							}
@@ -70,7 +122,7 @@ class Cart extends Component {
 		var row = this.state.orders.concat(
 			<tr>
 				<td>{order}</td>
-				<td>Classic Cinammon Rolls: {products}</td>
+				<td>{products}</td>
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
 				{paymentStat === 'Payment Pending' ? <td>Not Paid</td> : <td>Paid</td>}
@@ -84,7 +136,7 @@ class Cart extends Component {
 		var row = this.state.orders.concat(
 			<tr>
 				<td>{order}</td>
-				<td>Classic Cinammon Rolls: {products}</td>
+				<td>{products}</td>
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
 				{paymentStat === 'Payment Pending' ? <td>Not Paid</td> : <td>Paid</td>}
@@ -115,12 +167,32 @@ class Cart extends Component {
 									this.getFinishedPickupInfo(this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
+										else if (item !== 'P1' || item !== 'P2') { 
+											return (
+												<div>
+													{item.Product === 'P1' ? <p>6pcs Classic Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P2' ? <p>12pcs Classic Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P3' ? <p>6pcs Double Chocolate Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P4' ? <p>12pcs Double Chocolate Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+												</div>
+											)
+										}
 									}), details.val().Price, details.val().orderStatus, details.val().PickupPayment, details.val().Date, details.val().paymentStatus, this.state.orderNumber)
 								}
 								else if (details.val().Mode === 'Delivery') {
 									this.getFinishedDeliveryInfo(this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
+										else if (item !== 'P1' || item !== 'P2') { 
+											return (
+												<div>
+													{item.Product === 'P1' ? <p>6pcs Classic Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P2' ? <p>12pcs Classic Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P3' ? <p>6pcs Double Chocolate Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P4' ? <p>12pcs Double Chocolate Cinammon Rolls (Quantity: {item.Sets})</p> : null}
+												</div>
+											)
+										}
 									}), details.val().Price, details.val().orderStatus, details.val().DeliveryPayment, details.val().Address, details.val().Date, details.val().paymentStatus, this.state.orderNumber)
 								}
 							}
@@ -136,7 +208,7 @@ class Cart extends Component {
 		var row = this.state.doneOrders.concat(
 			<tr>
 				<td>{order}</td>
-				<td>Classic Cinammon Rolls: {products}</td>
+				<td>{products}</td>
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
 				{paymentStat === 'Payment Pending' ? <td>Not Paid</td> : <td>Paid</td>}
@@ -150,7 +222,7 @@ class Cart extends Component {
 		var row = this.state.doneOrders.concat(
 			<tr>
 				<td>{order}</td>
-				<td>Classic Cinammon Rolls: {products}</td>
+				<td>{products}</td>
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
 				{paymentStat === 'Payment Pending' ? <td>Not Paid</td> : <td>Paid</td>}
@@ -160,40 +232,15 @@ class Cart extends Component {
 		this.setState({ doneOrders: row })
 	}
 
-	remove = (id) => firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').child(id).remove()
-
 	goOrder = (event) => {
 		event.preventDefault()
 		this.setState({ displayForm: true })
 	}
 
 	render() {
-		const Processed = this.state.doneOrders.map(item => item)
+		const Process    = this.state.pendingOrders.map(item => item)
+		const Processed  = this.state.doneOrders.map(item => item)
 		const Processing = this.state.orders.map(item => item)
-
-		const Pending = this.state.pendingOrders.map(order => {
-			let item = order.split(' ')
-			if (item[0].includes('P1')) {
-				return (
-					<tr>
-				        <td>Classic Cinammon Roll</td>
-					    <td>6</td>
-					    <td>P350.00</td>
-					    <td><button onClick={() => this.remove(item[1])}>Remove</button></td>
-				    </tr>
-				)
-			}
-			else if (item[0].includes('P2')) {
-				return (
-					<tr>
-				        <td>Classic Cinammon Roll</td>
-					    <td>12</td>
-					    <td>P600.00</td>
-					    <td><button onClick={() => this.remove(item[1])}>Remove</button></td>
-				    </tr>
-				)
-			}
-		})
 
 		return (
 			<div>
@@ -257,14 +304,14 @@ class Cart extends Component {
 							<table class="customerTable">
 							  	<thead>
 								    <tr>
-								        <th>Item</th>
-								      	<th>Pieces</th>
+								        <th>Order</th>
+								      	<th>Order Quantity</th>
 								      	<th>Price</th>
 								      	<th></th>
 								    </tr>
 							  	</thead>
 								<tbody>
-									{this.state.pendingOrders.length > 0 ? Pending : <th></th>}
+									{this.state.pendingOrders.length > 0 ? Process : <th></th>}
 								</tbody>
 							</table>
 						</div>
@@ -273,8 +320,12 @@ class Cart extends Component {
 						{this.state.displayForm ? <a href="#orderDetails"><img class="downArrow" src="https://image.flaticon.com/icons/svg/2316/2316598.svg" /></a> : null}
 					</div>
 				</section>
+
+				<div class="warning">
+					<p>**When running into issues or glitches, kindly refresh the page.**</p>
+				</div>
 				
-				{this.state.displayForm ? <Order consumer={this.props.consumer} /> : null}
+				{this.state.displayForm ? <Order consumer={this.props.consumer} displayPendingOrders={this.displayPendingOrders} /> : null}
 			</div>
 		)
 	}

@@ -112,6 +112,18 @@
 	color: #ffffff;
 }
 
+.warning {
+	background-color: #ffffff;
+	padding: 10px;
+	text-align: center;
+}
+
+.warning p {
+	color: #A47E59;
+	font-size: 15px;
+	font-weight: bold;
+}
+
 /*Order Form*/
 #orderDetails {
 	background: linear-gradient(#FFDB90, #FFBE98);

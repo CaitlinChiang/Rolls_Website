@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import * as firebase from 'firebase'
+
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { addDays, addMonths, getDay } from 'date-fns'
@@ -7,12 +8,100 @@ import moment from 'moment'
 import Select from 'react-select'
 
 
-class Order extends Component {
+class NoAccount extends Component {
+	state = {
+		consumer: this.props.consumer,
+
+		pendingOrders: [],
+		items: [],
+
+		displayForm: false
+	}
+
+	componentDidMount = async () => {
+		this.displayCartOrders()
+	}
+
+	displayCartOrders = () => {
+		this.setState({ pendingOrders: [] })
+
+		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').once('value', snapshot => {
+			snapshot.forEach((snap) => {
+				this.getCartOrderInfo(snap.key, snap.val().Product, snap.val().Sets, snap.val().Price)
+			})
+		})
+	}
+
+	getCartOrderInfo = (id_Num, products, quantity, price) => {
+		var row = this.state.pendingOrders.concat(
+			<tr id={id_Num}>
+				{products === 'P1' ? <td>6pcs Classic Cinammon Rolls</td> : null}
+				{products === 'P2' ? <td>12pcs Classic Cinammon Rolls</td> : null}
+				{products === 'P3' ? <td>6pcs Double Chocolate Cinammon Rolls</td> : null}
+				{products === 'P4' ? <td>12pcs Double Chocolate Cinammon Rolls</td> : null}
+				<td>{quantity}</td>
+				<td>P{price}.00</td>
+				<td><button onClick={() => this.remove(id_Num)}>Remove</button></td>
+			</tr>
+		)
+		this.setState({ pendingOrders: row })
+	}
+
+	remove = (id) => {
+		document.getElementById(id).style.display = 'none'
+		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').child(id).remove()
+		this.displayCartOrders()
+	}
+
+	goOrder = (event) => {
+		event.preventDefault()
+		this.setState({ displayForm: true })
+	}
+
+	render() {
+		const Process = this.state.pendingOrders.map(item => item)
+
+		return (
+			<div>
+				<section id="cart">
+					<div class="container slideDown">
+
+						<div id="cartHeader"> <h1>Cart</h1> </div>
+						<div class="table">
+							<table class="customerTable">
+							  	<thead>
+								    <tr>
+								        <th>Order</th>
+								      	<th>Order Quantity</th>
+								      	<th>Price</th>
+								      	<th></th>
+								    </tr>
+							  	</thead>
+								<tbody>
+									{this.state.pendingOrders.length > 0 ? Process : <th></th>}
+								</tbody>
+							</table>
+						</div>
+
+						<button onClick={this.goOrder} id="checkoutButton">Checkout</button>
+						{this.state.displayForm ? <a href="#orderDetails"><img class="downArrow" src="https://image.flaticon.com/icons/svg/2316/2316598.svg" /></a> : null}
+					</div>
+				</section>
+				
+				{this.state.displayForm ? <Order_NoAccount consumer={this.props.consumer} /> : null}
+			</div>
+		)
+	}
+}
+
+export default NoAccount
+
+
+class Order_NoAccount extends Component {
 	state = {
 		consumer: this.props.consumer,
 		pendingOrders: [],
 		price: 0,
-		orderContent: [],
 
 		orderTracker: [],
 
@@ -75,12 +164,6 @@ class Order extends Component {
 			let pendingOrders = []
 			snapshot.forEach((snap) => { pendingOrders.push(snap.key) })
 			this.setState({ pendingOrders })
-		})
-
-		firebase.database().ref(`users/${this.state.consumer}`).child('Pending Orders').on('value', snapshot => {
-			let orderContent = []
-			snapshot.forEach((snap) => { orderContent.push(snap.val().Product) })
-			this.setState({ orderContent })
 		})
 
 
@@ -414,65 +497,58 @@ class Order extends Component {
 		else if (checkArray < this.state.maxDeliveries) { this.setState({ dDate: date }) }
 	}
 
-	datePickupFilter = (date) => {
-		var exception = new Date('June 26, 2020')
-
-		const day = getDay(date)
-		const specificDate = date.getDate()
-		const specificMonth = date.getMonth()
-
-		return (specificDate === exception.getDate() && specificMonth === exception.getMonth() && (this.state.orderContent.includes('P3') || this.state.orderContent.includes('P4')) ? day !== 5 : exception.getDay() + 1)
-	}
-
 	dateFilterRoute1 = (date) => {
-		var exception = new Date('June 26, 2020')
+		var exception = new Date('June 20, 2020')
 
 		const day = getDay(date)
 		const specificDate = date.getDate()
 		const specificMonth = date.getMonth()
 
-		return day !== 0 && day !== 1 && day !== 3 && day !== 4 && (specificDate === exception.getDate() && specificMonth === exception.getMonth() && (this.state.orderContent.includes('P3') || this.state.orderContent.includes('P4')) ? day !== 5 : exception.getDay() + 1) && day !== 6
+		return (specificDate === exception.getDate() + 1 && specificMonth === exception.getMonth() ? exception.getDay() + 1 : day !== 0) && day !== 1 && day !== 3 && day !== 4 && (specificDate === exception.getDate() ? exception.getDay() : day !== 6)
 	}
 
 	dateFilterRoute2 = (date) => {
+		var exception = new Date('June 20, 2020')
+
 		const day = getDay(date)
 		const specificDate = date.getDate()
 		const specificMonth = date.getMonth()
 
-		return day !== 0 && day !== 1 && day !== 2 && day !== 4 && day !== 5
+		return (specificDate === exception.getDate() + 1 && specificMonth === exception.getMonth() ? exception.getDay() + 1 : day !== 0) && day !== 1 && day !== 2 && day !== 4 && day !== 5
 	}
 
 	dateFilterRoute3 = (date) => {
+		var exception = new Date('June 20, 2020')
+
 		const day = getDay(date)
 		const specificDate = date.getDate()
 		const specificMonth = date.getMonth()
 		
-		return day !== 0 && day !== 1 && day !== 2 && day !== 3 && day !== 5 && day !== 6
+		return (specificDate === exception.getDate() + 1 && specificMonth === exception.getMonth() ? exception.getDay() + 1 : day !== 0) && day !== 1 && day !== 2 && day !== 3 && day !== 5 && (specificDate === exception.getDate() ? exception.getDay() : day !== 6)
 	}
 
 	QC_dateFilterRoute4 = (date) => {
-		var exception = new Date('June 26, 2020')
+		var exception = new Date('June 20, 2020')
 
 		const day = getDay(date)
 		const specificDate = date.getDate()
 		const specificMonth = date.getMonth()
 
-		return day !== 1 && day !== 3 && day !== 4 && (specificDate === exception.getDate() && specificMonth === exception.getMonth() && (this.state.orderContent.includes('P3') || this.state.orderContent.includes('P4')) ? day !== 5 : exception.getDay() + 1) && day !== 6
+		return day !== 1 && day !== 3 && day !== 4 && (specificDate === exception.getDate() ? exception.getDay() : day !== 6)
 	}
 
 	Makati_dateFilterRoute4 = (date) => {
+		var exception = new Date('June 20, 2020')
+
 		const day = getDay(date)
 		const specificDate = date.getDate()
 		const specificMonth = date.getMonth()
 		
-		return day !== 1 && day !== 2 && day !== 3 && day !== 5 && day !== 6
+		return day !== 1 && day !== 2 && day !== 3 && day !== 5 && (specificDate === exception.getDate() ? exception.getDay() : day !== 6)
 	}
 
 	Manila_dateFilterRoute4 = (date) => {
 		const day = getDay(date)
-		const specificDate = date.getDate()
-		const specificMonth = date.getMonth()
-
 		return day !== 1 && day !== 2 && day !== 4 && day !== 5
 	}
 
@@ -642,14 +718,14 @@ class Order extends Component {
 			const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
 			if (inform) {
 				const confirm = window.confirm('Confirm your purchase?')
-				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }
+				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
 			}
 		}
 		else if (this.state.pPayment === 'payOnPickup') {
 			const inform = window.confirm('The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
 			if (inform) {
 				const confirm = window.confirm('Confirm your purchase?')
-				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }
+				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }
 			}
 		}
 	}
@@ -659,12 +735,12 @@ class Order extends Component {
 			const inform = window.confirm('BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion. Proceed?')
 			if (inform) {
 				const confirm = window.confirm('Confirm your purchase?')
-				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }		
+				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
 			}
 		}
 		else if (this.state.dPayment === 'cod') {
 			const confirm = window.confirm('Confirm your purchase?')
-			if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }		
+			if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
 		}
 	}
 
@@ -758,7 +834,7 @@ class Order extends Component {
 									
 									<div class="datepicker">
 										<h1>Pickup Date</h1>
-										<DatePicker inline selected={this.state.pDate} onChange={date => this.setState({ pDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.datePickupFilter} format='MM-dd-yyyy' placeholderText="Date of Pickup" id="pickupPicker" />
+										<DatePicker inline selected={this.state.pDate} onChange={date => this.setState({ pDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} format='MM-dd-yyyy' placeholderText="Date of Pickup" id="pickupPicker" />
 									</div>
 
 									<select onChange={this.handleChange} value={this.state.pPayment} name="pPayment">
@@ -918,5 +994,3 @@ class Order extends Component {
 		)
 	}
 }
-
-export default Order
