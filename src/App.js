@@ -33,7 +33,6 @@ class App extends Component {
 
     receiveUserFromChild = (userID) => this.setState({ userID })
 
-    //page viewing
     goCart     = () => this.setState({ DisplayCart: true, DisplayHome: false, DisplayProducts: false, DisplayArticles: false })
     goHome     = () => this.setState({ DisplayCart: false, DisplayHome: true, DisplayProducts: false, DisplayArticles: false })
     goProducts = () => this.setState({ DisplayCart: false, DisplayHome: false, DisplayProducts: true, DisplayArticles: false })
@@ -44,7 +43,7 @@ class App extends Component {
              <div>
                 {this.state.userID !== 'alnLJ1AokzOcSVTt1yN3ereBayr2' && this.state.userID !== 'JXw3ACHGrvQtUV50SrdCnVBkutG3' && this.state.userID !== 'gff7aamicCS7pFx6pEPlw7TY2RP2' ?
                     <div>
-                        <Navbar goHome={this.goHome} goProducts={this.goProducts} goArticles={this.goArticles} goCart={this.goCart} />
+                        <Navbar goHome={this.goHome} goProducts={this.goProducts} goArticles={this.goArticles} goCart={this.goCart} consumer={this.state.userID} />
                         
                         {this.state.DisplayHome ? <Home goProducts={this.goProducts} /> : null}
 

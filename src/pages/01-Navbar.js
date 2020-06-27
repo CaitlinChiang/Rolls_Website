@@ -1,31 +1,43 @@
-import React from 'react'
+import React, { Component } from 'react'
 import * as firebase from 'firebase'
 
 
-function logout() {
-	const confirm = window.confirm('Are you sure you would like to logout?')
-	if (confirm) { firebase.auth().signOut() }
-}
+class Navbar extends Component {
+	state = {
+		consumer: this.props.consumer
+	}
 
-function Navbar(props) {
-	return (
-		<header>
-			<div class="navbar_buttons">
-				<div class="logo"> 
-					<img src="/images/logo_navbar.jpg" /> 
-					<p>ROLLS</p>
-				</div>
+	logout = () => {
+		const confirm = window.confirm('Are you sure you would like to logout?')
+		if (confirm) { firebase.auth().signOut() }
+		window.location.reload(false)
+	}
 
-				<button onClick={props.goHome}><a href="#home">Home</a></button>
-				<button onClick={props.goHome}><a href="#about">About</a></button>
-				<button onClick={props.goProducts}>Order</button>
-				<button onClick={props.goArticles}>Articles</button>
-				<button onClick={() => logout()}>Logout</button>
-				
-				<div class="profile"> <img onClick={props.goCart} src="/images/cart.png" /> </div>
-			</div>					
-		</header>
-	)
+	goHome = () => this.props.goHome()
+	goProducts = () => this.props.goProducts()
+	goArticles = () => this.props.goArticles()
+	goCart = () => this.props.goCart()
+
+	render() {
+		return (
+			<header>
+				<div class="navbar_buttons">
+					<div class="logo"> 
+						<img src="/images/logo_navbar.jpg" /> 
+						<p>ROLLS</p>
+					</div>
+
+					<button onClick={this.goHome}><a href="#home">Home</a></button>
+					<button onClick={this.goHome}><a href="#about">About</a></button>
+					<button onClick={this.goProducts}>Order</button>
+					<button onClick={this.goArticles}>Articles</button>
+					{this.props.consumer.trim() !== "" ? <button onClick={() => this.logout()}>Logout</button> : null}
+
+					<div class="profile"> <img onClick={this.goCart} src="/images/cart.png" /> </div>
+				</div>					
+			</header>
+		)
+	}
 }
 
 export default Navbar 
