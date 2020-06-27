@@ -92,11 +92,20 @@ class AuthorizedControls extends Component {
 							if (this.state.dateFilter === '') {
 								if (details.val().orderStatus === 'Not Ready') {
 									if (details.val().Mode === 'Pickup') {
-										this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+										this.addPickupInfo_All(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
-											else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
-										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+											else if (item !== 'P1' || item !== 'P2') { 
+												return (
+													<div>
+														{item.Product === 'P1' ? <p>6pcs Classic ({item.Sets})</p> : null}
+														{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
+														{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
+														{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+													</div>
+												)
+											}
+										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
@@ -105,11 +114,20 @@ class AuthorizedControls extends Component {
 										}))
 									}
 									else if (details.val().Mode === 'Delivery') {
-										this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+										this.addDeliveryInfo_All(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
-											else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
-										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+											else if (item !== 'P1' || item !== 'P2') { 
+												return (
+													<div>
+														{item.Product === 'P1' ? <p>6pcs Classic ({item.Sets})</p> : null}
+														{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
+														{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
+														{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+													</div>
+												)
+											}
+										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
@@ -123,11 +141,20 @@ class AuthorizedControls extends Component {
 							else if (this.state.dateFilter !== '') {
 								if (details.val().Date === moment(this.state.dateFilter).format('L')) {
 									if (details.val().Mode === 'Pickup') {
-										this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+										this.addPickupInfo_All(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
-											else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
-										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+											else if (item !== 'P1' || item !== 'P2') { 
+												return (
+													<div>
+														{item.Product === 'P1' ? <p>6pcs Classic ({item.Sets})</p> : null}
+														{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
+														{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
+														{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+													</div>
+												)
+											}
+										}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
@@ -136,11 +163,20 @@ class AuthorizedControls extends Component {
 										}))
 									}
 									else if (details.val().Mode === 'Delivery') {
-										this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+										this.addDeliveryInfo_All(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 											if (item === 'P1') { return <p>6pcs</p> }
 											else if (item === 'P2') { return <p>12pcs</p> }
-											else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
-										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+											else if (item !== 'P1' || item !== 'P2') { 
+												return (
+													<div>
+														{item.Product === 'P1' ? <p>6pcs Classic ({item.Sets})</p> : null}
+														{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
+														{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
+														{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+													</div>
+												)
+											}
+										}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
@@ -155,11 +191,20 @@ class AuthorizedControls extends Component {
 						else if (this.state.searchOrder.trim() !== '') {
 							if (this.state.purchase === this.state.searchOrder) {
 								if (details.val().Mode === 'Pickup') {
-									this.addPickupInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addPickupInfo_All(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-										else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										else if (item !== 'P1' || item !== 'P2') { 
+											return (
+												<div>
+													{item.Product === 'P1' ? <p>6pcs Classic ({item.Sets})</p> : null}
+													{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
+													{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
+													{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+												</div>
+											)
+										}
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -168,11 +213,20 @@ class AuthorizedControls extends Component {
 									}))
 								}
 								else if (details.val().Mode === 'Delivery') {
-									this.addDeliveryInfo_All(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addDeliveryInfo_All(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-										else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										else if (item !== 'P1' || item !== 'P2') { 
+											return (
+												<div>
+													{item.Product === 'P1' ? <p>6pcs Classic ({item.Sets})</p> : null}
+													{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
+													{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
+													{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+												</div>
+											)
+										}
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -189,11 +243,12 @@ class AuthorizedControls extends Component {
 		})
 	}
 
-	addPickupInfo_All = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
+	addPickupInfo_All = (consumer_id, name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
-			<tr id={object} key={object}>
-				<td>{name}<br />{number}<br /><br />{order}</td>
+			<tr id={object} key={created}>
+				<td>{name}<br />{number}<br /><br />{consumer_id}</td>
+				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'P_transfer' ? <td>BDO Transfer</td> : <td>Payment on Pickup</td>}
@@ -201,17 +256,17 @@ class AuthorizedControls extends Component {
 				<td>-</td>
 				<td>-</td>
 				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
-				{contactStat === true ? <td>Yes</td> : <td>No</td>}
 			</tr>
 		)
 		this.setState({ allOrders: row })
 	}
 
-	addDeliveryInfo_All = (name, number, products, amount, mode, date, address, city, instruction, description, person, order,  paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
+	addDeliveryInfo_All = (consumer_id, name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.allOrders.concat(
-			<tr id={object} key={object}>
-				<td>{name}<br />{number}<br /><br />{order}</td>
+			<tr id={object} key={created}>
+				<td>{name}<br />{number}<br /><br />{consumer_id}</td>
+				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'D_transfer' ? <td>BDO Transfer</td> : <td>Cash on Delivery</td>}
@@ -219,7 +274,6 @@ class AuthorizedControls extends Component {
 				<td>{address}</td>
 				<td>{city}</td>
 				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
-				{contactStat === true ? <td>Yes</td> : <td>No</td>}
 			</tr>
 		)
 		this.setState({ allOrders: row })
@@ -257,11 +311,20 @@ class AuthorizedControls extends Component {
 						if (this.state.dateFilter === '') {
 							if (details.val().orderStatus === 'Not Ready') {
 								if (details.val().Mode === 'Pickup') {
-									this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addPickupInfo_Pickup(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-										else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										else if (item !== 'P1' || item !== 'P2') { 
+											return (
+												<div>
+													{item.Product === 'P1' ? <p>6pcs Classic ({item.Sets})</p> : null}
+													{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
+													{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
+													{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+												</div>
+											)
+										}
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -276,11 +339,20 @@ class AuthorizedControls extends Component {
 						else if (this.state.dateFilter !== '') {
 							if (details.val().Date === moment(this.state.dateFilter).format('L')) {
 								if (details.val().Mode === 'Pickup') {
-									this.addPickupInfo_Pickup(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addPickupInfo_Pickup(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-										else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
-									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										else if (item !== 'P1' || item !== 'P2') { 
+											return (
+												<div>
+													{item.Product === 'P1' ? <p>6pcs Classic ({item.Sets})</p> : null}
+													{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
+													{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
+													{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+												</div>
+											)
+										}
+									}), details.val().Price, details.val().PickupPayment, details.val().Date, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -298,11 +370,12 @@ class AuthorizedControls extends Component {
 		})	
 	}
 
-	addPickupInfo_Pickup = (name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
+	addPickupInfo_Pickup = (consumer_id, name, number, products, amount, mode, date, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.pickupOrders.concat(
-			<tr id={object} key={object}>
-				<td>{name}<br />{number}<br /><br />{order}</td>
+			<tr id={object} key={created}>
+				<td>{name}<br />{number}<br /><br />{consumer_id}</td>
+				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'P_transfer' ? <td>BDO Transfer</td> : <td>Payment on Pickup</td>}
@@ -310,7 +383,6 @@ class AuthorizedControls extends Component {
 				<td>-</td>
 				<td>-</td>
 				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
-				{contactStat === true ? <td>Yes</td> : <td>No</td>}
 			</tr>
 		)
 		this.setState({ pickupOrders: row })
@@ -348,11 +420,20 @@ class AuthorizedControls extends Component {
 						if (this.state.dateFilter === '') {
 							if (details.val().orderStatus === 'Not Ready') {
 								if (details.val().Mode === 'Delivery') {
-									this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addDeliveryInfo_Delivery(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-										else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										else if (item !== 'P1' || item !== 'P2') { 
+											return (
+												<div>
+													{item.Product === 'P1' ? <p>6pcs Classic ({item.Sets})</p> : null}
+													{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
+													{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
+													{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+												</div>
+											)
+										}
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -367,11 +448,20 @@ class AuthorizedControls extends Component {
 						else if (this.state.dateFilter !== '') {
 							if (details.val().Date === moment(this.state.dateFilter).format('L')) {
 								if (details.val().Mode === 'Delivery') {
-									this.addDeliveryInfo_Delivery(details.val().Name, details.val().Number, this.state.items.map(item => {
+									this.addDeliveryInfo_Delivery(details.val().Consumer, details.val().Name, details.val().Number, this.state.items.map(item => {
 										if (item === 'P1') { return <p>6pcs</p> }
 										else if (item === 'P2') { return <p>12pcs</p> }
-										else if (item !== 'P1' || item !== 'P2') { return <p>{item.Product === 'P1' ? '6pcs' : '12pcs'} ({item.Sets})</p> }
-									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().FrostingInstructions, this.state.instructions.map(item => { 
+										else if (item !== 'P1' || item !== 'P2') { 
+											return (
+												<div>
+													{item.Product === 'P1' ? <p>6pcs Classic ({item.Sets})</p> : null}
+													{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
+													{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
+													{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+												</div>
+											)
+										}
+									}), details.val().Price, details.val().DeliveryPayment, details.val().Date, details.val().Address, details.val().City, details.val().Instructions, details.val().Note, this.state.person, this.state.purchase, details.val().paymentStatus, details.val().orderStatus, details.val().contacted, details.val().Created, details.val().FrostingInstructions, this.state.instructions.map(item => { 
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
@@ -389,11 +479,12 @@ class AuthorizedControls extends Component {
 		})	
 	}
 
-	addDeliveryInfo_Delivery = (name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, frostingInstruct, multipleInstructions) => {
+	addDeliveryInfo_Delivery = (consumer_id, name, number, products, amount, mode, date, address, city, instruction, description, person, order, paymentStat, orderStat, contactStat, created, frostingInstruct, multipleInstructions) => {
 		let object = order
 		var row = this.state.deliveryOrders.concat(
-			<tr id={object} key={object}>
-				<td>{name}<br />{number}<br /><br />{order}</td>
+			<tr id={object} key={created}>
+				<td>{name}<br />{number}<br /><br />{consumer_id}</td>
+				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
 				{mode === 'D_transfer' ? <td>BDO Transfer</td> : <td>Cash on Delivery</td>}
@@ -401,32 +492,9 @@ class AuthorizedControls extends Component {
 				<td>{address}</td>
 				<td>{city}</td>
 				<td>{instruction} {multipleInstructions}<br />{description}<br />{frostingInstruct}</td>
-				{contactStat === true ? <td>Yes</td> : <td>No</td>}
 			</tr>
 		)
 		this.setState({ deliveryOrders: row })
-	}
-
-	//table button functions
-	paid = (customer, order) => {
-		firebase.database().ref('rolls').child(customer).child(order).child('Order Details').update({ paymentStatus: this.state.paymentStatus })
-		document.getElementById(order).querySelector('#paid').style.backgroundColor = "#B2773C"
-	}
-
-	done = (customer, order, item) => { 
-		firebase.database().ref('rolls').child(customer).child(order).child('Order Details').update({ orderStatus: this.state.orderStatus })
-		document.getElementById(item).style.display = 'none'
-		document.getElementById(order).querySelector('#done').style.backgroundColor = "#B2773C"
-	}
-
-	contact = (customer, order) => {
-		firebase.database().ref('rolls').child(customer).child(order).child('Order Details').update({ contacted: this.state.contacted })
-		document.getElementById(order).querySelector('#contact').style.backgroundColor = "#B2773C"
-	}
-
-	remove = (customer, order, item) => {
-		document.getElementById(item).style.display = 'none'
-		firebase.database().ref('rolls').child(customer).child(order).remove()
 	}
 
 	//sort table
@@ -439,14 +507,10 @@ class AuthorizedControls extends Component {
 	}
 
 	render() {
-		const All = this.sortByKey(this.state.allOrders)
-		const Pickup = this.sortByKey(this.state.pickupOrders)
-		const Delivery = this.sortByKey(this.state.deliveryOrders)
-
 		return (
 			<div>
 				<section id="viewing">
-					<div class="container slideDown">
+					<div class="containerViewing slideDown">
 
 						<div id="adminHeader"> <h1>Viewing Panel</h1> </div>
 
@@ -465,8 +529,9 @@ class AuthorizedControls extends Component {
 						<div class="table">
 							<table class="viewingTable">
 							  	<thead>
-								    <tr> 
+								    <tr>
 								    	<th>Contact</th>
+								    	<th>Order &<br />Timestamp</th>
 								        <th>Item</th>
 								        <th>Amount</th>
 								      	<th>Mode</th>
@@ -474,20 +539,17 @@ class AuthorizedControls extends Component {
 								      	<th>Address</th>
 								      	<th>City</th>
 								      	<th>Instructions</th>
-								      	<th>Contacted</th>
 								    </tr>
 							  	</thead>
 
 							  	<tbody id="dataTable">
-							  		{this.state.methodFilter === '' ? All : null}
-							  		{this.state.methodFilter === 'pickup' ? Pickup : null}
-							  		{this.state.methodFilter === 'delivery' ? Delivery : null}
+							  		{this.state.methodFilter === '' ? this.sortByKey(this.state.allOrders) : null}
+							  		{this.state.methodFilter === 'pickup' ? this.sortByKey(this.state.pickupOrders) : null}
+							  		{this.state.methodFilter === 'delivery' ? this.sortByKey(this.state.deliveryOrders) : null}
 							  	</tbody>
 									
 							</table>
 						</div>
-
-						<button onClick={this.logout} id="logoutBtn">Logout</button>
 					</div>
 				</section>
 			</div>
