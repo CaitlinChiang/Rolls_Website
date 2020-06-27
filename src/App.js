@@ -41,7 +41,7 @@ class App extends Component {
     render() {
         return (
              <div>
-                {this.state.userID !== 'alnLJ1AokzOcSVTt1yN3ereBayr2' && this.state.userID !== 'JXw3ACHGrvQtUV50SrdCnVBkutG3' && this.state.userID !== 'gff7aamicCS7pFx6pEPlw7TY2RP2' && this.state.userID !== '2AL13xyATEZBP0nCqeL0p5SlxcN2' ?
+                {this.state.userID !== 'alnLJ1AokzOcSVTt1yN3ereBayr2' && this.state.userID !== 'JXw3ACHGrvQtUV50SrdCnVBkutG3' && this.state.userID !== '2AL13xyATEZBP0nCqeL0p5SlxcN2' ?
                     <div>
                         <Navbar goHome={this.goHome} goProducts={this.goProducts} goArticles={this.goArticles} goCart={this.goCart} consumer={this.state.userID} />
                         
