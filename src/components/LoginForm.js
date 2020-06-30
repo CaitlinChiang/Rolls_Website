@@ -56,8 +56,13 @@ class Account extends Component {
 	reset = (event) => {
 		event.preventDefault()
 
-		firebase.auth().sendPasswordResetEmail(this.state.userEmail)
-		.then((user) => { alert("Please check your email!") })
+		if (this.state.userEmail.trim() === '') {
+			alert("Kindly input your email in the email textholder.")
+		}
+		else {
+			firebase.auth().sendPasswordResetEmail(this.state.userEmail)
+			.then((user) => { alert("Please check your email!") })
+		}
 	}
 
 	generateUsernamePassword = (event) => {
