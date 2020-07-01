@@ -375,7 +375,7 @@ class Products extends Component {
 			      					<img src="/images/p3.jpg" width="45%;"/>
 			      					<div id="modalDescription">
 			      						<h2>Double Chocolate Cinammon Rolls: 6pcs</h2>
-				        				<p>A twist on a classic, filled to the brim and topped with only quality Malagos Chocolate. Good for sharing or two meals for one hungry chocolate love.<br />(Good for 2-3 people)</p>
+				        				<p>A twist on a classic, filled to the brim and topped with only quality Malagos Chocolate. Good for sharing or two meals for one hungry chocolate lover.<br />(Good for 2-3 people)</p>
 			      						{this.state.stock3 ? 
 			      							<div>
 			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product3Sets} name="product3Sets">
