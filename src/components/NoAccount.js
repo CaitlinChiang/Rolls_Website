@@ -245,7 +245,7 @@ class Order_NoAccount extends Component {
 						this.setState({ route: 'Route3'})
 					} else if (this.state.city === 'Makati') {
 						this.setState(prevState => ({ price: prevState.price + 160 }))
-						this.setState({ route: 'Route4_Makati'})
+						this.setState({ route: 'Route3'})
 					} else if (this.state.city === 'Malabon') {
 						this.setState(prevState => ({ price: prevState.price + 180 }))
 						this.setState({ route: 'Route1'})
@@ -254,7 +254,7 @@ class Order_NoAccount extends Component {
 						this.setState({ route: 'Route2'})
 					} else if (this.state.city === 'Manila') {
 						this.setState(prevState => ({ price: prevState.price + 130 }))
-						this.setState({ route: 'Route4_Manila'})
+						this.setState({ route: 'Route2'})
 					} else if (this.state.city === 'Marikina') {
 						this.setState(prevState => ({ price: prevState.price + 160 }))
 						this.setState({ route: 'Route1'})
@@ -278,7 +278,7 @@ class Order_NoAccount extends Component {
 						this.setState({ route: 'Route3'})
 					} else if (this.state.city === 'Quezon') {
 						this.setState(prevState => ({ price: prevState.price + 160 }))
-						this.setState({ route: 'Route4_QC'})
+						this.setState({ route: 'Route1'})
 					} else if (this.state.city === 'SanJuan') {
 						this.setState(prevState => ({ price: prevState.price + 130 }))
 						this.setState({ route: 'Route2'})
@@ -489,68 +489,69 @@ class Order_NoAccount extends Component {
 	//filter routes based on dates
 	maxDeliveries = (value) => this.state.dateRange.filter((v) => (v === value)).length
 
-	setDate = (date) => {
-		let disabled = moment(date).format('L')
-		let checkArray = this.state.dateRange.filter((v) => (v === disabled)).length
+	datePickupFilter = (date) => {
+		// var exception = new Date('June 26, 2020')
 
-		if (checkArray >= this.state.maxDeliveries) { alert('We are sorry, but there is no more stock for this day.') }
-		else if (checkArray < this.state.maxDeliveries) { this.setState({ dDate: date }) }
+		const day = getDay(date)
+		const specificDate = date.getDate()
+		const specificMonth = date.getMonth()
+
+		// return (specificDate === exception.getDate() && specificMonth === exception.getMonth() && (this.state.orderContent.includes('P3') || this.state.orderContent.includes('P4')) ? day !== 5 : exception.getDay() + 1)
+		return day
 	}
 
 	dateFilterRoute1 = (date) => {
-		var exception = new Date('June 20, 2020')
+		// var exception = new Date('June 26, 2020')
 
 		const day = getDay(date)
 		const specificDate = date.getDate()
 		const specificMonth = date.getMonth()
 
-		return (specificDate === exception.getDate() + 1 && specificMonth === exception.getMonth() ? exception.getDay() + 1 : day !== 0) && day !== 1 && day !== 3 && day !== 4 && (specificDate === exception.getDate() ? exception.getDay() : day !== 6)
+		// return day !== 0 && day !== 1 && day !== 3 && day !== 4 && (specificDate === exception.getDate() && specificMonth === exception.getMonth() && (this.state.orderContent.includes('P3') || this.state.orderContent.includes('P4')) ? day !== 5 : exception.getDay() + 1) && day !== 6
+		return day !== 1 && day !== 4 && day !== 6
 	}
 
 	dateFilterRoute2 = (date) => {
-		var exception = new Date('June 20, 2020')
-
 		const day = getDay(date)
 		const specificDate = date.getDate()
 		const specificMonth = date.getMonth()
 
-		return (specificDate === exception.getDate() + 1 && specificMonth === exception.getMonth() ? exception.getDay() + 1 : day !== 0) && day !== 1 && day !== 2 && day !== 4 && day !== 5
+		return day !== 1
 	}
 
 	dateFilterRoute3 = (date) => {
-		var exception = new Date('June 20, 2020')
-
 		const day = getDay(date)
 		const specificDate = date.getDate()
 		const specificMonth = date.getMonth()
 		
-		return (specificDate === exception.getDate() + 1 && specificMonth === exception.getMonth() ? exception.getDay() + 1 : day !== 0) && day !== 1 && day !== 2 && day !== 3 && day !== 5 && (specificDate === exception.getDate() ? exception.getDay() : day !== 6)
+		return day !== 1 && day !== 2 && day !== 3 && day !== 5
 	}
+	
+	// QC_dateFilterRoute4 = (date) => {
+	// 	var exception = new Date('June 26, 2020')
 
-	QC_dateFilterRoute4 = (date) => {
-		var exception = new Date('June 20, 2020')
+	// 	const day = getDay(date)
+	// 	const specificDate = date.getDate()
+	// 	const specificMonth = date.getMonth()
 
-		const day = getDay(date)
-		const specificDate = date.getDate()
-		const specificMonth = date.getMonth()
+	// 	return day !== 1 && day !== 3 && day !== 4 && (specificDate === exception.getDate() && specificMonth === exception.getMonth() && (this.state.orderContent.includes('P3') || this.state.orderContent.includes('P4')) ? day !== 5 : exception.getDay() + 1) && day !== 6
+	// }
 
-		return day !== 1 && day !== 3 && day !== 4 && (specificDate === exception.getDate() ? exception.getDay() : day !== 6)
-	}
-
-	Makati_dateFilterRoute4 = (date) => {
-		var exception = new Date('June 20, 2020')
-
-		const day = getDay(date)
-		const specificDate = date.getDate()
-		const specificMonth = date.getMonth()
+	// Makati_dateFilterRoute4 = (date) => {
+	// 	const day = getDay(date)
+	// 	const specificDate = date.getDate()
+	// 	const specificMonth = date.getMonth()
 		
-		return day !== 1 && day !== 2 && day !== 3 && day !== 5 && (specificDate === exception.getDate() ? exception.getDay() : day !== 6)
-	}
+	// 	return day !== 1 && day !== 2 && day !== 3 && day !== 5 && day !== 6
+	// }
 
-	Manila_dateFilterRoute4 = (date) => {
-		const day = getDay(date)
-		return day !== 1 && day !== 2 && day !== 4 && day !== 5
-	}
+	// Manila_dateFilterRoute4 = (date) => {
+	// 	const day = getDay(date)
+	// 	const specificDate = date.getDate()
+	// 	const specificMonth = date.getMonth()
+
+	// 	return day !== 1 && day !== 2 && day !== 4 && day !== 5
+	// }
 
 	//handle changes
 	handleChange = (event) => {
@@ -927,6 +928,8 @@ class Order_NoAccount extends Component {
 											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} />
 										</div>
 									: null}
+
+									{/*}
 									{this.state.route !== '' && this.state.route === 'Route4_QC' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
@@ -945,6 +948,7 @@ class Order_NoAccount extends Component {
 											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.Makati_dateFilterRoute4} />
 										</div>
 									: null}
+									*/}
 
 									<Select isMulti options={this.state.options} onChange={this.handleDeliverySelectChange} id="instructions" placeholder="Additional Instructions" isSearchable={ false } inputProps={{readOnly:true}} />
 
