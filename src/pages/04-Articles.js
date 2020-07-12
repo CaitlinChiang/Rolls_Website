@@ -11,6 +11,16 @@ function Articles() {
 				<div id="displayArticles">
 					<div id="showArticles" class="fade-in">	
 
+						<a href="https://www.yummy.ph/news-trends/cinnamon-rolls-delivery-metro-manila-a3284-lfrm-a1808-20200628-src-spot-lfrm2?ref=site_search">
+						    <button>
+						    	<img src="https://images.summitmedia-digital.com/yummyph/images/2020/06/26/rolls-kitchen.jpg" width="100%" />
+								<div class="article">
+						    		<h2>10 Home-Baked Cinnamon Rolls Worth Getting Delivered</h2>
+									<p>By: yummy.ph</p>
+							    </div>
+							</button>
+						</a>
+
 						<a href="https://www.glistsocials.com/post/rolls-satisfy-your-cinnamon-roll-cravings">
 						    <button>
 						    	<img src="https://static.wixstatic.com/media/8b4d9d_f5e9a5a5db3140d8ae2ab66fc0d93d37~mv2.jpg/v1/fill/w_489,h_327,al_c,q_90,usm_0.66_1.00_0.01/8b4d9d_f5e9a5a5db3140d8ae2ab66fc0d93d37~mv2.webp" width="100%" />
