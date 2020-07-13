@@ -489,6 +489,14 @@ class Order_NoAccount extends Component {
 	//filter routes based on dates
 	maxDeliveries = (value) => this.state.dateRange.filter((v) => (v === value)).length
 
+	setDate = (date) => {
+		let disabled = moment(date).format('L')
+		let checkArray = this.state.dateRange.filter((v) => (v === disabled)).length
+
+		if (checkArray >= this.state.maxDeliveries) { alert('We are sorry, but there is no more stock for this day.') }
+		else if (checkArray < this.state.maxDeliveries) { this.setState({ dDate: date }) }
+	}
+
 	datePickupFilter = (date) => {
 		// var exception = new Date('June 26, 2020')
 
