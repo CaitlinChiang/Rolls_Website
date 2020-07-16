@@ -105,6 +105,10 @@ class Account extends Component {
 					<div class="container">
 						<div class="signin">
 
+							<div class="note">
+								<p>***For same day orders, please text us at 09174707111, or message us through our <a href="https://www.facebook.com/officialrolls.ph/">Facebook Page</a> or through <a href="https://www.instagram.com/rolls.ph/">Instagram</a>.***</p>
+							</div>
+
 							<div class="noAccount">
 								<button onClick={this.proceedWithoutAccount}>Order Without Registering?</button>
 							</div>

@@ -115,7 +115,7 @@ class Order_NoAccount extends Component {
 		options: [
 		 	{ value: 'None', label: 'None' },
 		  	{ value: 'Personalized', label: 'Personalized Note (+ P20)' },
-		  	{ value: 'extraFrosting', label: 'Extra Frosting 100ml (+ P50)' }
+		  	{ value: 'extraFrosting', label: 'Extra Cream Cheese Frosting 100ml (+ P50)' }
 		],
 
 		pDate: '',

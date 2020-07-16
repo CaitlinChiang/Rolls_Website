@@ -31,6 +31,14 @@
 	margin: 100px auto 100px;
 }
 
+.note {
+	color: #ffffff;
+	font-size: 23px;
+	margin-bottom: 50px;
+}
+
+.note p a { color: #FFB9B9; }
+
 .noAccount {
 	margin: 20px auto 50px;
 }
