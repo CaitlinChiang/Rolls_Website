@@ -304,7 +304,7 @@ class Order_NoAccount extends Component {
 		}
 	}
 
-	freeCityFee = () => {
+freeCityFee = () => {
 		if (this.state.city === '') {
 		} else if (this.state.city === 'Cainta') {
 			this.setState({ route: 'Route2'})
@@ -313,13 +313,13 @@ class Order_NoAccount extends Component {
 		} else if (this.state.city === 'LasPinas') {
 			this.setState({ route: 'Route3'})
 		} else if (this.state.city === 'Makati') {
-			this.setState({ route: 'Route4_Makati'})
+			this.setState({ route: 'Route3'})
 		} else if (this.state.city === 'Malabon') {
 			this.setState({ route: 'Route1'})
 		} else if (this.state.city === 'Mandaluyong') {
 			this.setState({ route: 'Route2'})
 		} else if (this.state.city === 'Manila') {
-			this.setState({ route: 'Route4_Manila'})
+			this.setState({ route: 'Route2'})
 		} else if (this.state.city === 'Marikina') {
 			this.setState({ route: 'Route1'})
 		} else if (this.state.city === 'Muntinlupa') {
@@ -335,7 +335,7 @@ class Order_NoAccount extends Component {
 		} else if (this.state.city === 'Pateros') {
 			this.setState({ route: 'Route3'})
 		} else if (this.state.city === 'Quezon') {
-			this.setState({ route: 'Route4_QC'})
+			this.setState({ route: 'Route1'})
 		} else if (this.state.city === 'SanJuan') {
 			this.setState({ route: 'Route2'})
 		} else if (this.state.city === 'SanMateo') {
