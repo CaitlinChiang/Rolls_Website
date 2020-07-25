@@ -19,12 +19,12 @@ class Products extends Component {
 		modal3: false,
 		stock3: true,
 		product3Sets: '',
-		price3: 0,
+		price3: 0
 
-		modal4: false,
-		stock4: true,
-		product4Sets: '',
-		price4: 0,
+		// modal4: false,
+		// stock4: true,
+		// product4Sets: '',
+		// price4: 0,
 	}
 
 	componentDidMount = async () => {
@@ -42,9 +42,9 @@ class Products extends Component {
 			this.setState({ stock3: snapshot.val().Stock })
 		})
 
-		firebase.database().ref('products').child('P4').on('value', snapshot => {
-			this.setState({ stock4: snapshot.val().Stock })
-		})
+		// firebase.database().ref('products').child('P4').on('value', snapshot => {
+		// 	this.setState({ stock4: snapshot.val().Stock })
+		// })
 	}
 
 	handleChange = (event) => {
@@ -132,27 +132,27 @@ class Products extends Component {
 		}
 	}
 
-	addP4ToCart = async (event) => {
-		if (this.props.consumer.trim() !== "") {
-			if (this.state.product4Sets.trim() !== "") {
-				let id_num = this.timestamp()
+	// addP4ToCart = async (event) => {
+	// 	if (this.props.consumer.trim() !== "") {
+	// 		if (this.state.product4Sets.trim() !== "") {
+	// 			let id_num = this.timestamp()
 
-				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P4', Sets: this.state.product4Sets, Price: this.state.price4 })
-				alert("This item has been added to your cart!")
+	// 			firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P4', Sets: this.state.product4Sets, Price: this.state.price4 })
+	// 			alert("This item has been added to your cart!")
 
-				this.setState({ product4Sets: '', price4: 0 })
+	// 			this.setState({ product4Sets: '', price4: 0 })
 				
-				if (window.confirm("Go to Cart?")) { this.props.goCart() }
-				else { return }
-			}
-			else {
-				alert("Kindly input the quantity you wish of this order.")
-			}
-		}
-		else {
-			alert("Kindly register an account before adding to cart!")
-		}
-	}
+	// 			if (window.confirm("Go to Cart?")) { this.props.goCart() }
+	// 			else { return }
+	// 		}
+	// 		else {
+	// 			alert("Kindly input the quantity you wish of this order.")
+	// 		}
+	// 	}
+	// 	else {
+	// 		alert("Kindly register an account before adding to cart!")
+	// 	}
+	// }
 
 	setPrice = () => {
 		if (this.state.product1Sets === '') {
@@ -227,29 +227,29 @@ class Products extends Component {
 			this.setState({ price3: 4500 })
 		}
 
-		if (this.state.product4Sets === '') {
-			this.setState({ price4: 0 })
-		} else if (this.state.product4Sets === '1') {
-			this.setState({ price4: 775 })
-		} else if (this.state.product4Sets === '2') {
-			this.setState({ price4: 1550 })
-		} else if (this.state.product4Sets === '3') {
-			this.setState({ price4: 2325 })
-		} else if (this.state.product4Sets === '4') {
-			this.setState({ price4: 3100 })
-		} else if (this.state.product4Sets === '5') {
-			this.setState({ price4: 3875 })
-		} else if (this.state.product4Sets === '6') {
-			this.setState({ price4: 4650 })
-		} else if (this.state.product4Sets === '7') {
-			this.setState({ price4: 5425 })
-		} else if (this.state.product4Sets === '8') {
-			this.setState({ price4: 6200 })
-		} else if (this.state.product4Sets === '9') {
-			this.setState({ price4: 6975 })
-		} else if (this.state.product4Sets === '10') {
-			this.setState({ price4: 7750 })
-		}
+		// if (this.state.product4Sets === '') {
+		// 	this.setState({ price4: 0 })
+		// } else if (this.state.product4Sets === '1') {
+		// 	this.setState({ price4: 775 })
+		// } else if (this.state.product4Sets === '2') {
+		// 	this.setState({ price4: 1550 })
+		// } else if (this.state.product4Sets === '3') {
+		// 	this.setState({ price4: 2325 })
+		// } else if (this.state.product4Sets === '4') {
+		// 	this.setState({ price4: 3100 })
+		// } else if (this.state.product4Sets === '5') {
+		// 	this.setState({ price4: 3875 })
+		// } else if (this.state.product4Sets === '6') {
+		// 	this.setState({ price4: 4650 })
+		// } else if (this.state.product4Sets === '7') {
+		// 	this.setState({ price4: 5425 })
+		// } else if (this.state.product4Sets === '8') {
+		// 	this.setState({ price4: 6200 })
+		// } else if (this.state.product4Sets === '9') {
+		// 	this.setState({ price4: 6975 })
+		// } else if (this.state.product4Sets === '10') {
+		// 	this.setState({ price4: 7750 })
+		// }
 	}
 
 	stopPropagation = (event) => event.stopPropagation()
@@ -288,13 +288,13 @@ class Products extends Component {
 								</div>
 							</button>
 
-							<button onClick={() => this.setState({ modal4: true })}>
+							{/* <button onClick={() => this.setState({ modal4: true })}>
 						    	<img src="/images/p4.jpg" width="100%;"/>
 								<div class="productItem">
 									<h2>Double Chocolate Cinammon Rolls: 12pcs</h2>
 									<p>P775.00</p>
 								</div>
-							</button>
+							</button> */}
 
 						</div>
 					</div>
@@ -401,7 +401,7 @@ class Products extends Component {
 			 			</div>
 			 		: null}
 
-			 		{this.state.modal4 ?
+			 		{/* {this.state.modal4 ?
 						<div id="modal" onClick={() => this.setState({ modal4: false })}>
 		    				<div id="modal-content" onClick={this.stopPropagation}>
 		     					<div id="modal-header"></div>
@@ -433,7 +433,7 @@ class Products extends Component {
 			      				<div id="modal-footer"></div>
 			    			</div>
 			 			</div>
-			 		: null}
+			 		: null} */}
 
 				</section>
 			</div>
