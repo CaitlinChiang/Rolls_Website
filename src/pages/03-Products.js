@@ -315,49 +315,49 @@ class Products extends Component {
 
 		if (this.state.product5Sets === '') {
 			this.setState({ price5: 0 })
-		} else if (this.state.product3Sets === '1') {
+		} else if (this.state.product5Sets === '1') {
 			this.setState({ price5: 450 })
-		} else if (this.state.product3Sets === '2') {
+		} else if (this.state.product5Sets === '2') {
 			this.setState({ price5: 900 })
-		} else if (this.state.product3Sets === '3') {
+		} else if (this.state.product5Sets === '3') {
 			this.setState({ price5: 1350 })
-		} else if (this.state.product3Sets === '4') {
+		} else if (this.state.product5Sets === '4') {
 			this.setState({ price5: 1800 })
-		} else if (this.state.product3Sets === '5') {
+		} else if (this.state.product5Sets === '5') {
 			this.setState({ price5: 2250 })
-		} else if (this.state.product3Sets === '6') {
+		} else if (this.state.product5Sets === '6') {
 			this.setState({ price5: 2700 })
-		} else if (this.state.product3Sets === '7') {
+		} else if (this.state.product5Sets === '7') {
 			this.setState({ price5: 3150 })
-		} else if (this.state.product3Sets === '8') {
+		} else if (this.state.product5Sets === '8') {
 			this.setState({ price5: 3600 })
-		} else if (this.state.product3Sets === '9') {
+		} else if (this.state.product5Sets === '9') {
 			this.setState({ price5: 4050 })
-		} else if (this.state.product3Sets === '10') {
+		} else if (this.state.product5Sets === '10') {
 			this.setState({ price5: 4500 })
 		}
 
 		if (this.state.product6Sets === '') {
 			this.setState({ price6: 0 })
-		} else if (this.state.product4Sets === '1') {
+		} else if (this.state.product6Sets === '1') {
 			this.setState({ price6: 775 })
-		} else if (this.state.product4Sets === '2') {
+		} else if (this.state.product6Sets === '2') {
 			this.setState({ price6: 1550 })
-		} else if (this.state.product4Sets === '3') {
+		} else if (this.state.product6Sets === '3') {
 			this.setState({ price6: 2325 })
-		} else if (this.state.product4Sets === '4') {
+		} else if (this.state.product6Sets === '4') {
 			this.setState({ price6: 3100 })
-		} else if (this.state.product4Sets === '5') {
+		} else if (this.state.product6Sets === '5') {
 			this.setState({ price6: 3875 })
-		} else if (this.state.product4Sets === '6') {
+		} else if (this.state.product6Sets === '6') {
 			this.setState({ price6: 4650 })
-		} else if (this.state.product4Sets === '7') {
+		} else if (this.state.product6Sets === '7') {
 			this.setState({ price6: 5425 })
-		} else if (this.state.product4Sets === '8') {
+		} else if (this.state.product6Sets === '8') {
 			this.setState({ price6: 6200 })
-		} else if (this.state.product4Sets === '9') {
+		} else if (this.state.product6Sets === '9') {
 			this.setState({ price6: 6975 })
-		} else if (this.state.product4Sets === '10') {
+		} else if (this.state.product6Sets === '10') {
 			this.setState({ price6: 7750 })
 		}
 	}
