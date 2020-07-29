@@ -19,12 +19,22 @@ class Products extends Component {
 		modal3: false,
 		stock3: true,
 		product3Sets: '',
-		price3: 0
+		price3: 0,
 
 		// modal4: false,
 		// stock4: true,
 		// product4Sets: '',
 		// price4: 0,
+
+		modal5: false,
+		stock5: true,
+		product5Sets: '',
+		price5: 0,
+
+		modal6: false,
+		stock6: true,
+		product6Sets: '',
+		price6: 0,
 	}
 
 	componentDidMount = async () => {
@@ -45,6 +55,14 @@ class Products extends Component {
 		// firebase.database().ref('products').child('P4').on('value', snapshot => {
 		// 	this.setState({ stock4: snapshot.val().Stock })
 		// })
+
+		firebase.database().ref('products').child('P5').on('value', snapshot => {
+			this.setState({ stock5: snapshot.val().Stock })
+		})
+
+		firebase.database().ref('products').child('P6').on('value', snapshot => {
+			this.setState({ stock6: snapshot.val().Stock })
+		})
 	}
 
 	handleChange = (event) => {
@@ -154,6 +172,50 @@ class Products extends Component {
 	// 	}
 	// }
 
+	addP5ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product5Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P5', Sets: this.state.product5Sets, Price: this.state.price5 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product5Sets: '', price5: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
+	addP6ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product6Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P6', Sets: this.state.product6Sets, Price: this.state.price6 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product6Sets: '', price6: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
 	setPrice = () => {
 		if (this.state.product1Sets === '') {
 			this.setState({ price1: 0 })
@@ -250,6 +312,54 @@ class Products extends Component {
 		// } else if (this.state.product4Sets === '10') {
 		// 	this.setState({ price4: 7750 })
 		// }
+
+		if (this.state.product5Sets === '') {
+			this.setState({ price5: 0 })
+		} else if (this.state.product3Sets === '1') {
+			this.setState({ price5: 450 })
+		} else if (this.state.product3Sets === '2') {
+			this.setState({ price5: 900 })
+		} else if (this.state.product3Sets === '3') {
+			this.setState({ price5: 1350 })
+		} else if (this.state.product3Sets === '4') {
+			this.setState({ price5: 1800 })
+		} else if (this.state.product3Sets === '5') {
+			this.setState({ price5: 2250 })
+		} else if (this.state.product3Sets === '6') {
+			this.setState({ price5: 2700 })
+		} else if (this.state.product3Sets === '7') {
+			this.setState({ price5: 3150 })
+		} else if (this.state.product3Sets === '8') {
+			this.setState({ price5: 3600 })
+		} else if (this.state.product3Sets === '9') {
+			this.setState({ price5: 4050 })
+		} else if (this.state.product3Sets === '10') {
+			this.setState({ price5: 4500 })
+		}
+
+		if (this.state.product6Sets === '') {
+			this.setState({ price6: 0 })
+		} else if (this.state.product4Sets === '1') {
+			this.setState({ price6: 775 })
+		} else if (this.state.product4Sets === '2') {
+			this.setState({ price6: 1550 })
+		} else if (this.state.product4Sets === '3') {
+			this.setState({ price6: 2325 })
+		} else if (this.state.product4Sets === '4') {
+			this.setState({ price6: 3100 })
+		} else if (this.state.product4Sets === '5') {
+			this.setState({ price6: 3875 })
+		} else if (this.state.product4Sets === '6') {
+			this.setState({ price6: 4650 })
+		} else if (this.state.product4Sets === '7') {
+			this.setState({ price6: 5425 })
+		} else if (this.state.product4Sets === '8') {
+			this.setState({ price6: 6200 })
+		} else if (this.state.product4Sets === '9') {
+			this.setState({ price6: 6975 })
+		} else if (this.state.product4Sets === '10') {
+			this.setState({ price6: 7750 })
+		}
 	}
 
 	stopPropagation = (event) => event.stopPropagation()
@@ -295,6 +405,22 @@ class Products extends Component {
 									<p>P775.00</p>
 								</div>
 							</button> */}
+
+							<button onClick={() => this.setState({ modal5: true })}>
+						    	<img src="/images/p5.jpg" width="100%;" />
+								<div class="productItem">
+									<h2>Caramel Pecan Rolls: 6pcs</h2>
+									<p>P450.00</p>
+								</div>
+							</button>
+
+							<button onClick={() => this.setState({ modal6: true })}>
+						    	<img src="/images/p6.jpg" width="100%;" />
+								<div class="productItem">
+									<h2>Caramel Pecan Rolls: 12pcs</h2>
+									<p>P775.00</p>
+								</div>
+							</button>
 
 						</div>
 					</div>
@@ -434,6 +560,74 @@ class Products extends Component {
 			    			</div>
 			 			</div>
 			 		: null} */}
+
+					{this.state.modal5 ?
+						<div id="modal" onClick={() => this.setState({ modal5: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p5.jpg" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>Caramel Pecan Rolls: 6pcs</h2>
+				        				<p>Ooey, gooey, and topped with toasted pecans. Our box of 6 is surely a throwback with classic flavors that remind us of unforgettable memories.<br />(Good for 2-3 people)</p>
+			      						{this.state.stock5 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product5Sets} name="product5Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP5ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
+
+					{this.state.modal6 ?
+						<div id="modal" onClick={() => this.setState({ modal6: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p6.jpg" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>Caramel Pecan Rolls: 6pcs</h2>
+				        				<p>Our box of 12 Caramael Pecan Rolls may be cinnful but who could resist the gooey caramel and chunky pecans this favorite brings?<br />(Good for 3-5 people)</p>
+			      						{this.state.stock6 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product6Sets} name="product6Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP6ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
 
 				</section>
 			</div>
