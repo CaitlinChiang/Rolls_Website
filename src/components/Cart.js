@@ -46,6 +46,9 @@ class Cart extends Component {
 				{products === 'P4' ? <td>12pcs Double Chocolate Cinammon Rolls</td> : null}
 				{products === 'P5' ? <td>6pcs Caramel Pecan Rolls</td> : null}
 				{products === 'P6' ? <td>12pcs Caramel Pecan Rolls</td> : null}
+				{products === 'P7' ? <td>Classic Cinnacake</td> : null}
+				{products === 'P8' ? <td>Chocolate Cinnacake</td> : null}
+				{products === 'P9' ? <td>Caramel Pecan Cinnacake</td> : null}
 				<td>{quantity}</td>
 				<td>P{price}.00</td>
 				<td><button onClick={() => this.remove(id_Num)}>Remove</button></td>
@@ -92,6 +95,9 @@ class Cart extends Component {
 													{item.Product === 'P4' ? <p>12pcs Double Chocolate Cinammon Rolls (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P5' ? <p>6pcs Caramel Pecan Rolls (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P6' ? <p>12pcs Caramel Pecan Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P7' ? <p>Classic Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P8' ? <p>Chocolate Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P9' ? <p>Caramel Pecan Cinnacake (Quantity: {item.Sets})</p> : null}
 												</div>
 											)
 										}
@@ -110,6 +116,9 @@ class Cart extends Component {
 													{item.Product === 'P4' ? <p>12pcs Double Chocolate Cinammon Rolls (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P5' ? <p>6pcs Caramel Pecan Rolls (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P6' ? <p>12pcs Caramel Pecan Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P7' ? <p>Classic Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P8' ? <p>Chocolate Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P9' ? <p>Caramel Pecan Cinnacake (Quantity: {item.Sets})</p> : null}
 												</div>
 											)
 										}
@@ -182,6 +191,9 @@ class Cart extends Component {
 													{item.Product === 'P4' ? <p>12pcs Double Chocolate Cinammon Rolls (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P5' ? <p>6pcs Caramel Pecan Rolls (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P6' ? <p>12pcs Caramel Pecan Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P7' ? <p>Classic Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P8' ? <p>Chocolate Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P9' ? <p>Caramel Pecan Cinnacake (Quantity: {item.Sets})</p> : null}
 												</div>
 											)
 										}
@@ -200,6 +212,9 @@ class Cart extends Component {
 													{item.Product === 'P4' ? <p>12pcs Double Chocolate Cinammon Rolls (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P5' ? <p>6pcs Caramel Pecan Rolls (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P6' ? <p>12pcs Caramel Pecan Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P7' ? <p>Classic Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P8' ? <p>Chocolate Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P9' ? <p>Caramel Pecan Cinnacake (Quantity: {item.Sets})</p> : null}
 												</div>
 											)
 										}

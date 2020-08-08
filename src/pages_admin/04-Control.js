@@ -40,6 +40,15 @@ class Controls extends Component {
 	p6Stock = (event) => firebase.database().ref('products').child('P6').update({ Stock: true })
 	p6NoStock = (event) => firebase.database().ref('products').child('P6').update({ Stock: false })
 
+	p7Stock = (event) => firebase.database().ref('products').child('P7').update({ Stock: true })
+	p7NoStock = (event) => firebase.database().ref('products').child('P7').update({ Stock: false })
+
+	p8Stock = (event) => firebase.database().ref('products').child('P8').update({ Stock: true })
+	p8NoStock = (event) => firebase.database().ref('products').child('P8').update({ Stock: false })
+
+	p9Stock = (event) => firebase.database().ref('products').child('P9').update({ Stock: true })
+	p9NoStock = (event) => firebase.database().ref('products').child('P9').update({ Stock: false })
+
 	//change maximum delivery number
 	changeDeliveryNumber = (event) => {
 		if (this.state.maxDeliveries >= 0) { firebase.database().ref('products').child('Delivery Number').update({ MaxDelivery: this.state.maxDeliveries }) }
@@ -106,6 +115,18 @@ class Controls extends Component {
 							<p>Caramel Pecan Rolls - 12pcs</p>
 							<button onClick={this.p6Stock}>In Stock</button>
 							<button onClick={this.p6NoStock}>Out of Stock</button>
+
+							<p>Classic Cinnacake</p>
+							<button onClick={this.p7Stock}>In Stock</button>
+							<button onClick={this.p7NoStock}>Out of Stock</button>
+
+							<p>Chocolate Cinnacake</p>
+							<button onClick={this.p8Stock}>In Stock</button>
+							<button onClick={this.p8NoStock}>Out of Stock</button>
+
+							<p>Caramel Pecan Cinnacake</p>
+							<button onClick={this.p9Stock}>In Stock</button>
+							<button onClick={this.p9NoStock}>Out of Stock</button>
 						</div>
 						
 					</div>

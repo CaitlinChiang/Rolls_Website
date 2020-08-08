@@ -41,6 +41,9 @@ class NoAccount extends Component {
 				{products === 'P4' ? <td>12pcs Double Chocolate Cinammon Rolls</td> : null}
 				{products === 'P5' ? <td>6pcs Caramel Pecan Rolls</td> : null}
 				{products === 'P6' ? <td>12pcs Caramel Pecan Rolls</td> : null}
+				{products === 'P7' ? <td>Classic Cinnacake</td> : null}
+				{products === 'P8' ? <td>Chocolate Cinnacake</td> : null}
+				{products === 'P9' ? <td>Caramel Pecan Cinnacake</td> : null}
 				<td>{quantity}</td>
 				<td>P{price}.00</td>
 				<td><button onClick={() => this.remove(id_Num)}>Remove</button></td>
@@ -507,62 +510,43 @@ freeCityFee = () => {
 	}
 
 	datePickupFilter = (date) => {
-		var exception = new Date('July 30, 2020')
-		var exception1 = new Date('July 31, 2020')
-		var exception2 = new Date('August 1, 2020')
+		// var exception = new Date('July 30, 2020')
 
 		const day = getDay(date)
-		const specificDate = date.getDate()
-		const specificMonth = date.getMonth()
+		// const specificDate = date.getDate()
+		// const specificMonth = date.getMonth()
 
-		return (specificDate === exception.getDate() && specificMonth === exception.getMonth() && (this.state.orderContent.includes('P5') || this.state.orderContent.includes('P6')) ? day !== 4 : exception.getDay() + 1)
-			&& (specificDate === exception1.getDate() && specificMonth === exception.getMonth() && (this.state.orderContent.includes('P5') || this.state.orderContent.includes('P6')) ? day !== 5 : exception.getDay() + 1)
-			&& (specificDate === exception2.getDate() && specificMonth === exception.getMonth() + 1 && (this.state.orderContent.includes('P5') || this.state.orderContent.includes('P6')) ? day !== 6 : exception.getDay() + 1)
+		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
 	}
 
 	dateFilterRoute1 = (date) => {
-		var exception = new Date('July 31, 2020')
+		// var exception = new Date('July 31, 2020')
 
 		const day = getDay(date)
-		const specificDate = date.getDate()
-		const specificMonth = date.getMonth()
+		// const specificDate = date.getDate()
+		// const specificMonth = date.getMonth()
 
-		return day !== 1 && day !== 4 && day !== 6
-			&& (specificDate === exception.getDate() && specificMonth === exception.getMonth() && (this.state.orderContent.includes('P5') || this.state.orderContent.includes('P6')) ? day !== 5 : exception.getDay() + 1)
-		
-		// return day !== 1 && day !== 4 && day !== 6
+		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
 	}
 
 	dateFilterRoute2 = (date) => {
-		var exception = new Date('July 30, 2020')
-		var exception1 = new Date('July 31, 2020')
-		var exception2 = new Date('August 1, 2020')
+		// var exception = new Date('July 30, 2020')
 
 		const day = getDay(date)
-		const specificDate = date.getDate()
-		const specificMonth = date.getMonth()
+		// const specificDate = date.getDate()
+		// const specificMonth = date.getMonth()
 
-		return day !== 1
-			&& (specificDate === exception.getDate() && specificMonth === exception.getMonth() && (this.state.orderContent.includes('P5') || this.state.orderContent.includes('P6')) ? day !== 4 : exception.getDay() + 1)
-			&& (specificDate === exception1.getDate() && specificMonth === exception.getMonth() && (this.state.orderContent.includes('P5') || this.state.orderContent.includes('P6')) ? day !== 5 : exception.getDay() + 1)
-			&& (specificDate === exception2.getDate() && specificMonth === exception.getMonth() + 1 && (this.state.orderContent.includes('P5') || this.state.orderContent.includes('P6')) ? day !== 6 : exception.getDay() + 1)
-
-		// return day !== 1
+		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
 	}
 
 	dateFilterRoute3 = (date) => {
-		var exception = new Date('July 30, 2020')
-		var exception1 = new Date('August 1, 2020')
+		// var exception = new Date('July 30, 2020')
 
 		const day = getDay(date)
-		const specificDate = date.getDate()
-		const specificMonth = date.getMonth()
+		// const specificDate = date.getDate()
+		// const specificMonth = date.getMonth()
 		
-		return day !== 1 && day !== 2 && day !== 3 && day !== 5
-			&& (specificDate === exception.getDate() && specificMonth === exception.getMonth() && (this.state.orderContent.includes('P5') || this.state.orderContent.includes('P6')) ? day !== 4 : exception.getDay() + 1)
-			&& (specificDate === exception1.getDate() && specificMonth === exception.getMonth() + 1 && (this.state.orderContent.includes('P5') || this.state.orderContent.includes('P6')) ? day !== 6 : exception.getDay() + 1)
-
-		// return day !== 1 && day !== 2 && day !== 3 && day !== 5
+		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
 	}
 
 	//handle changes

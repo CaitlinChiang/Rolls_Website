@@ -35,6 +35,21 @@ class Products extends Component {
 		stock6: true,
 		product6Sets: '',
 		price6: 0,
+
+		modal7: false,
+		stock7: true,
+		product7Sets: '',
+		price7: 0,
+
+		modal8: false,
+		stock8: true,
+		product8Sets: '',
+		price8: 0,
+
+		modal9: false,
+		stock9: true,
+		product9Sets: '',
+		price9: 0
 	}
 
 	componentDidMount = async () => {
@@ -62,6 +77,18 @@ class Products extends Component {
 
 		firebase.database().ref('products').child('P6').on('value', snapshot => {
 			this.setState({ stock6: snapshot.val().Stock })
+		})
+
+		firebase.database().ref('products').child('P7').on('value', snapshot => {
+			this.setState({ stock7: snapshot.val().Stock })
+		})
+
+		firebase.database().ref('products').child('P8').on('value', snapshot => {
+			this.setState({ stock8: snapshot.val().Stock })
+		})
+
+		firebase.database().ref('products').child('P9').on('value', snapshot => {
+			this.setState({ stock9: snapshot.val().Stock })
 		})
 	}
 
@@ -203,6 +230,72 @@ class Products extends Component {
 				alert("This item has been added to your cart!")
 
 				this.setState({ product6Sets: '', price6: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
+	addP7ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product7Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P7', Sets: this.state.product7Sets, Price: this.state.price7 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product7Sets: '', price7: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
+	addP8ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product8Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P8', Sets: this.state.product8Sets, Price: this.state.price8 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product8Sets: '', price8: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
+	addP9ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product9Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P9', Sets: this.state.product9Sets, Price: this.state.price9 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product9Sets: '', price9: 0 })
 				
 				if (window.confirm("Go to Cart?")) { this.props.goCart() }
 				else { return }
@@ -360,6 +453,78 @@ class Products extends Component {
 		} else if (this.state.product6Sets === '10') {
 			this.setState({ price6: 7750 })
 		}
+
+		if (this.state.product7Sets === '') {
+			this.setState({ price7: 0 })
+		} else if (this.state.product7Sets === '1') {
+			this.setState({ price7: 775 })
+		} else if (this.state.product7Sets === '2') {
+			this.setState({ price7: 1550 })
+		} else if (this.state.product7Sets === '3') {
+			this.setState({ price7: 2325 })
+		} else if (this.state.product7Sets === '4') {
+			this.setState({ price7: 3100 })
+		} else if (this.state.product7Sets === '5') {
+			this.setState({ price7: 3875 })
+		} else if (this.state.product7Sets === '6') {
+			this.setState({ price7: 4650 })
+		} else if (this.state.product7Sets === '7') {
+			this.setState({ price7: 5425 })
+		} else if (this.state.product7Sets === '8') {
+			this.setState({ price7: 6200 })
+		} else if (this.state.product7Sets === '9') {
+			this.setState({ price7: 6975 })
+		} else if (this.state.product7Sets === '10') {
+			this.setState({ price7: 7750 })
+		}
+
+		if (this.state.product8Sets === '') {
+			this.setState({ price8: 0 })
+		} else if (this.state.product8Sets === '1') {
+			this.setState({ price8: 850 })
+		} else if (this.state.product8Sets === '2') {
+			this.setState({ price8: 1700 })
+		} else if (this.state.product8Sets === '3') {
+			this.setState({ price8: 2550 })
+		} else if (this.state.product8Sets === '4') {
+			this.setState({ price8: 3400 })
+		} else if (this.state.product8Sets === '5') {
+			this.setState({ price8: 4250 })
+		} else if (this.state.product8Sets === '6') {
+			this.setState({ price8: 5100 })
+		} else if (this.state.product8Sets === '7') {
+			this.setState({ price8: 5950 })
+		} else if (this.state.product8Sets === '8') {
+			this.setState({ price8: 6800 })
+		} else if (this.state.product8Sets === '9') {
+			this.setState({ price8: 7650 })
+		} else if (this.state.product8Sets === '10') {
+			this.setState({ price8: 8500 })
+		}
+
+		if (this.state.product9Sets === '') {
+			this.setState({ price9: 0 })
+		} else if (this.state.product9Sets === '1') {
+			this.setState({ price9: 850 })
+		} else if (this.state.product9Sets === '2') {
+			this.setState({ price9: 1700 })
+		} else if (this.state.product9Sets === '3') {
+			this.setState({ price9: 2550 })
+		} else if (this.state.product9Sets === '4') {
+			this.setState({ price9: 3400 })
+		} else if (this.state.product9Sets === '5') {
+			this.setState({ price9: 4250 })
+		} else if (this.state.product9Sets === '6') {
+			this.setState({ price9: 5100 })
+		} else if (this.state.product9Sets === '7') {
+			this.setState({ price9: 5950 })
+		} else if (this.state.product9Sets === '8') {
+			this.setState({ price9: 6800 })
+		} else if (this.state.product9Sets === '9') {
+			this.setState({ price9: 7650 })
+		} else if (this.state.product9Sets === '10') {
+			this.setState({ price9: 8500 })
+		}
 	}
 
 	stopPropagation = (event) => event.stopPropagation()
@@ -419,6 +584,30 @@ class Products extends Component {
 								<div class="productItem">
 									<h2>Caramel Pecan Rolls: 12pcs</h2>
 									<p>P775.00</p>
+								</div>
+							</button>
+
+							<button onClick={() => this.setState({ modal7: true })}>
+						    	<img src="/images/p7.jpg" width="100%;" />
+								<div class="productItem">
+									<h2>Classic Cinnacake</h2>
+									<p>P775.00</p>
+								</div>
+							</button>
+
+							<button onClick={() => this.setState({ modal8: true })}>
+						    	<img src="/images/p8.jpg" width="100%;" />
+								<div class="productItem">
+									<h2>Chocolate Cinnacake</h2>
+									<p>P850.00</p>
+								</div>
+							</button>
+
+							<button onClick={() => this.setState({ modal9: true })}>
+						    	<img src="/images/p9.jpg" width="100%;" />
+								<div class="productItem">
+									<h2>Caramel Pecan Cinnacake</h2>
+									<p>P850.00</p>
 								</div>
 							</button>
 
@@ -620,6 +809,108 @@ class Products extends Component {
 													<option value="10">10</option>
 												</select>
 			      								<button onClick={this.addP6ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
+
+					{this.state.modal7 ?
+						<div id="modal" onClick={() => this.setState({ modal7: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p7.jpg" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>Classic Cinnacake</h2>
+				        				<p>Our Classic Cinnamon Rolls, but in CAKE form. No better way to celebrate with a giant cinnamon roll!</p>
+			      						{this.state.stock7 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product7Sets} name="product7Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP7ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
+
+					{this.state.modal8 ?
+						<div id="modal" onClick={() => this.setState({ modal8: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p8.jpg" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>Chocolate Cinnacake</h2>
+				        				<p>Giant Choco Rolls topped with rich and luscious Malagos Chocolate.</p>
+			      						{this.state.stock8 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product8Sets} name="product8Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP8ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
+
+					{this.state.modal9 ?
+						<div id="modal" onClick={() => this.setState({ modal9: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p9.jpg" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>Caramel Pecan Cinnacake</h2>
+				        				<p>Ooey and gooey, but most importantly BIG!!!</p>
+			      						{this.state.stock9 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product9Sets} name="product9Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP9ToCart}>Add To Cart</button>
 			      							</div>
 			      						: <p>(Out of Stock)</p>}
 			      					</div>

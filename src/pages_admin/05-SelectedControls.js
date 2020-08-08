@@ -102,6 +102,11 @@ class AuthorizedControls extends Component {
 														{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
 														{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
 														{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+														{item.Product === 'P5' ? <p>6pcs Pecan ({item.Sets})</p> : null}
+														{item.Product === 'P6' ? <p>12pcs Pecan ({item.Sets})</p> : null}
+														{item.Product === 'P7' ? <p>Classic Cake ({item.Sets})</p> : null}
+														{item.Product === 'P8' ? <p>Choco Cake ({item.Sets})</p> : null}
+														{item.Product === 'P9' ? <p>Pecan Cake ({item.Sets})</p> : null}
 													</div>
 												)
 											}
@@ -124,6 +129,11 @@ class AuthorizedControls extends Component {
 														{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
 														{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
 														{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+														{item.Product === 'P5' ? <p>6pcs Pecan ({item.Sets})</p> : null}
+														{item.Product === 'P6' ? <p>12pcs Pecan ({item.Sets})</p> : null}
+														{item.Product === 'P7' ? <p>Classic Cake ({item.Sets})</p> : null}
+														{item.Product === 'P8' ? <p>Choco Cake ({item.Sets})</p> : null}
+														{item.Product === 'P9' ? <p>Pecan Cake ({item.Sets})</p> : null}
 													</div>
 												)
 											}
@@ -151,6 +161,11 @@ class AuthorizedControls extends Component {
 														{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
 														{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
 														{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+														{item.Product === 'P5' ? <p>6pcs Pecan ({item.Sets})</p> : null}
+														{item.Product === 'P6' ? <p>12pcs Pecan ({item.Sets})</p> : null}
+														{item.Product === 'P7' ? <p>Classic Cake ({item.Sets})</p> : null}
+														{item.Product === 'P8' ? <p>Choco Cake ({item.Sets})</p> : null}
+														{item.Product === 'P9' ? <p>Pecan Cake ({item.Sets})</p> : null}
 													</div>
 												)
 											}
@@ -173,6 +188,11 @@ class AuthorizedControls extends Component {
 														{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
 														{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
 														{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+														{item.Product === 'P5' ? <p>6pcs Pecan ({item.Sets})</p> : null}
+														{item.Product === 'P6' ? <p>12pcs Pecan ({item.Sets})</p> : null}
+														{item.Product === 'P7' ? <p>Classic Cake ({item.Sets})</p> : null}
+														{item.Product === 'P8' ? <p>Choco Cake ({item.Sets})</p> : null}
+														{item.Product === 'P9' ? <p>Pecan Cake ({item.Sets})</p> : null}
 													</div>
 												)
 											}
@@ -201,6 +221,11 @@ class AuthorizedControls extends Component {
 													{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
 													{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
 													{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+													{item.Product === 'P5' ? <p>6pcs Pecan ({item.Sets})</p> : null}
+													{item.Product === 'P6' ? <p>12pcs Pecan ({item.Sets})</p> : null}
+													{item.Product === 'P7' ? <p>Classic Cake ({item.Sets})</p> : null}
+													{item.Product === 'P8' ? <p>Choco Cake ({item.Sets})</p> : null}
+													{item.Product === 'P9' ? <p>Pecan Cake ({item.Sets})</p> : null}
 												</div>
 											)
 										}
@@ -223,6 +248,11 @@ class AuthorizedControls extends Component {
 													{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
 													{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
 													{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+													{item.Product === 'P5' ? <p>6pcs Pecan ({item.Sets})</p> : null}
+													{item.Product === 'P6' ? <p>12pcs Pecan ({item.Sets})</p> : null}
+													{item.Product === 'P7' ? <p>Classic Cake ({item.Sets})</p> : null}
+													{item.Product === 'P8' ? <p>Choco Cake ({item.Sets})</p> : null}
+													{item.Product === 'P9' ? <p>Pecan Cake ({item.Sets})</p> : null}
 												</div>
 											)
 										}
@@ -321,6 +351,11 @@ class AuthorizedControls extends Component {
 													{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
 													{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
 													{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+													{item.Product === 'P5' ? <p>6pcs Pecan ({item.Sets})</p> : null}
+													{item.Product === 'P6' ? <p>12pcs Pecan ({item.Sets})</p> : null}
+													{item.Product === 'P7' ? <p>Classic Cake ({item.Sets})</p> : null}
+													{item.Product === 'P8' ? <p>Choco Cake ({item.Sets})</p> : null}
+													{item.Product === 'P9' ? <p>Pecan Cake ({item.Sets})</p> : null}
 												</div>
 											)
 										}
@@ -349,6 +384,11 @@ class AuthorizedControls extends Component {
 													{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
 													{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
 													{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+													{item.Product === 'P5' ? <p>6pcs Pecan ({item.Sets})</p> : null}
+													{item.Product === 'P6' ? <p>12pcs Pecan ({item.Sets})</p> : null}
+													{item.Product === 'P7' ? <p>Classic Cake ({item.Sets})</p> : null}
+													{item.Product === 'P8' ? <p>Choco Cake ({item.Sets})</p> : null}
+													{item.Product === 'P9' ? <p>Pecan Cake ({item.Sets})</p> : null}
 												</div>
 											)
 										}
@@ -430,6 +470,11 @@ class AuthorizedControls extends Component {
 													{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
 													{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
 													{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+													{item.Product === 'P5' ? <p>6pcs Pecan ({item.Sets})</p> : null}
+													{item.Product === 'P6' ? <p>12pcs Pecan ({item.Sets})</p> : null}
+													{item.Product === 'P7' ? <p>Classic Cake ({item.Sets})</p> : null}
+													{item.Product === 'P8' ? <p>Choco Cake ({item.Sets})</p> : null}
+													{item.Product === 'P9' ? <p>Pecan Cake ({item.Sets})</p> : null}
 												</div>
 											)
 										}
@@ -458,6 +503,11 @@ class AuthorizedControls extends Component {
 													{item.Product === 'P2' ? <p>12pcs Classic ({item.Sets})</p> : null}
 													{item.Product === 'P3' ? <p>6pcs Chocolate ({item.Sets})</p> : null}
 													{item.Product === 'P4' ? <p>12pcs Chocolate ({item.Sets})</p> : null}
+													{item.Product === 'P5' ? <p>6pcs Pecan ({item.Sets})</p> : null}
+													{item.Product === 'P6' ? <p>12pcs Pecan ({item.Sets})</p> : null}
+													{item.Product === 'P7' ? <p>Classic Cake ({item.Sets})</p> : null}
+													{item.Product === 'P8' ? <p>Choco Cake ({item.Sets})</p> : null}
+													{item.Product === 'P9' ? <p>Pecan Cake ({item.Sets})</p> : null}
 												</div>
 											)
 										}
