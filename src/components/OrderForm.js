@@ -775,7 +775,7 @@ class Order extends Component {
 
 									<select onChange={this.handleChange} value={this.state.dPayment} name="dPayment">
 										<option value="">--Payment Method--</option>
-										<option value="cod">Cash on Delivery</option>
+										{/* <option value="cod">Cash on Delivery</option> */}
 										<option value="D_transfer">BDO Bank Transfer</option>
 									</select>
 					
