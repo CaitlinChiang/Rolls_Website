@@ -282,7 +282,9 @@ class View extends Component {
 				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
-				{mode === 'P_transfer' ? <td>BDO Transfer</td> : <td>Payment on Pickup</td>}
+				{mode === 'P_transfer' ? <td>BDO Transfer</td> : null}
+				{mode === 'P_GCash' ? <td>GCash</td> : null}
+				{mode === 'payOnPickup' ? <td>Payment on Pickup</td> : null}
 				<td>{date}</td>
 				<td>-</td>
 				<td>-</td>
@@ -306,7 +308,9 @@ class View extends Component {
 				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
-				{mode === 'D_transfer' ? <td>BDO Transfer</td> : <td>Cash on Delivery</td>}
+				{mode === 'D_transfer' ? <td>BDO Transfer</td> : null}
+				{mode === 'D_GCash' ? <td>GCash</td> : null}
+				{mode === 'cod' ? <td>Cash on Delivery</td> : null}
 				<td>{date}</td>
 				<td>{address}</td>
 				<td>{city}</td>
@@ -431,7 +435,9 @@ class View extends Component {
 				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
-				{mode === 'P_transfer' ? <td>BDO Transfer</td> : <td>Payment on Pickup</td>}
+				{mode === 'P_transfer' ? <td>BDO Transfer</td> : null}
+				{mode === 'P_GCash' ? <td>GCash</td> : null}
+				{mode === 'payOnPickup' ? <td>Payment on Pickup</td> : null}
 				<td>{date}</td>
 				<td>-</td>
 				<td>-</td>
@@ -556,7 +562,9 @@ class View extends Component {
 				<td>{order}<br /><br />{created}</td>
 				<td>{products}</td>
 				<td>P{amount}.00</td>
-				{mode === 'D_transfer' ? <td>BDO Transfer</td> : <td>Cash on Delivery</td>}
+				{mode === 'D_transfer' ? <td>BDO Transfer</td> : null}
+				{mode === 'D_GCash' ? <td>GCash</td> : null}
+				{mode === 'cod' ? <td>Cash on Delivery</td> : null}
 				<td>{date}</td>
 				<td>{address}</td>
 				<td>{city}</td>

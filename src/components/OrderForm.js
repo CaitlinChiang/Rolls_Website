@@ -623,6 +623,13 @@ class Order extends Component {
 				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }
 			}
 		}
+		else if (this.state.pPayment === 'P_GCash') {
+			const inform = window.confirm('GCash Transfer To Account: 0917 811 6888. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
+			if (inform) {
+				const confirm = window.confirm('Confirm your purchase?')
+				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }
+			}
+		}
 		else if (this.state.pPayment === 'payOnPickup') {
 			const inform = window.confirm('The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
 			if (inform) {
@@ -640,9 +647,16 @@ class Order extends Component {
 				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }		
 			}
 		}
-		else if (this.state.dPayment === 'cod') {
-			const confirm = window.confirm('Confirm your purchase?')
-			if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }		
+		// else if (this.state.dPayment === 'cod') {
+		// 	const confirm = window.confirm('Confirm your purchase?')
+		// 	if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }		
+		// }
+		else if (this.state.dPayment === 'D_GCash') {
+			const inform = window.confirm('GCash Transfer To Account: 0917 811 6888. Proceed?')
+			if (inform) {
+				const confirm = window.confirm('Confirm your purchase?')
+				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }		
+			}
 		}
 	}
 
@@ -743,6 +757,7 @@ class Order extends Component {
 										<option value="">--Payment Method--</option>
 										<option value="payOnPickup">Pay on Pickup</option>
 										<option value="P_transfer">BDO Bank Transfer</option>
+										<option value="P_GCash">GCash</option>
 									</select>
 	
 									<Select isMulti options={this.state.options} onChange={this.handlePickupSelectChange} id="instructions" placeholder="Additional Instructions" isSearchable={ false } inputProps={{readOnly:true}} />
@@ -777,6 +792,7 @@ class Order extends Component {
 										<option value="">--Payment Method--</option>
 										{/* <option value="cod">Cash on Delivery</option> */}
 										<option value="D_transfer">BDO Bank Transfer</option>
+										<option value="D_GCash">GCash</option>
 									</select>
 					
 									<select onChange={this.handleCityChange} value={this.state.city} name="city">
@@ -872,6 +888,7 @@ class Order extends Component {
 				<div class="informDetails">
 					<p>Pickup Location: #25 8th St., New Manila, Mariana Quezon City</p>
 					<p>BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion</p>
+					<p>GCash Account: 0917 811 6888</p>
 					<p>Send Your Proof of Payment To: 0917 535 0923 (Viber)</p>
 				</div>
 			</section>
