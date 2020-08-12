@@ -141,7 +141,9 @@ class Cart extends Component {
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
 				{paymentStat === 'Payment Pending' ? <td>Not Paid</td> : <td>Paid</td>}
-				{mode === 'P_transfer' ? <td>Payment Method: BDO Transfer <br /> Date of Pickup: {date} </td> : <td>Payment Method: Payment on Pickup <br /> Date of Pickup: {date} </td>}	
+				{mode === 'P_transfer' ? <td>Payment Method: BDO Transfer <br /> Date of Pickup: {date} </td> : null }	
+				{mode === 'P_GCash' ? <td>Payment Method: GCash <br /> Date of Pickup: {date} </td> : null }
+				{mode === 'payOnPickup' ? <td>Payment Method: Payment on Pickup <br /> Date of Pickup: {date} </td> : null}
 			</tr>
 		)
 		this.setState({ orders: row })
@@ -155,7 +157,9 @@ class Cart extends Component {
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
 				{paymentStat === 'Payment Pending' ? <td>Not Paid</td> : <td>Paid</td>}
-				{mode === 'D_transfer' ? <td>Payment Method: BDO Transfer <br /> Address: {address} <br /> Date of Delivery: {date} </td> : <td>Payment Method: Cash on Delivery  <br /> Address: {address} <br /> Date of Delivery: {date} </td>}
+				{mode === 'D_transfer' ? <td>Payment Method: BDO Transfer <br /> Address: {address} <br /> Date of Delivery: {date} </td> : null}
+				{mode === 'cod' ? <td>Payment Method: Cash on Delivery  <br /> Address: {address} <br /> Date of Delivery: {date} </td> : null}
+				{mode === 'D_GCash' ? <td>Payment Method: GCash <br /> Address: {address} <br /> Date of Delivery: {date} </td> : null}
 			</tr>
 		)
 		this.setState({ orders: row })
@@ -237,7 +241,9 @@ class Cart extends Component {
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
 				{paymentStat === 'Payment Pending' ? <td>Not Paid</td> : <td>Paid</td>}
-				{mode === 'P_transfer' ? <td>Payment Method: BDO Transfer <br /> Date of Pickup: {date} </td> : <td>Payment Method: Payment on Pickup <br /> Date of Pickup: {date} </td>}	
+				{mode === 'P_transfer' ? <td>Payment Method: BDO Transfer <br /> Date of Pickup: {date} </td> : null }	
+				{mode === 'P_GCash' ? <td>Payment Method: GCash <br /> Date of Pickup: {date} </td> : null }
+				{mode === 'payOnPickup' ? <td>Payment Method: Payment on Pickup <br /> Date of Pickup: {date} </td> : null}	
 			</tr>
 		)
 		this.setState({ doneOrders: row })
@@ -251,7 +257,9 @@ class Cart extends Component {
 				<td>P{price}.00</td>
 				<td>{orderStatus}</td>
 				{paymentStat === 'Payment Pending' ? <td>Not Paid</td> : <td>Paid</td>}
-				{mode === 'D_transfer' ? <td>Payment Method: BDO Transfer <br /> Address: {address} <br /> Date of Delivery: {date} </td> : <td>Payment Method: Cash on Delivery  <br /> Address: {address} <br /> Date of Delivery: {date} </td>}
+				{mode === 'D_transfer' ? <td>Payment Method: BDO Transfer <br /> Address: {address} <br /> Date of Delivery: {date} </td> : null}
+				{mode === 'cod' ? <td>Payment Method: Cash on Delivery  <br /> Address: {address} <br /> Date of Delivery: {date} </td> : null}
+				{mode === 'D_GCash' ? <td>Payment Method: GCash <br /> Address: {address} <br /> Date of Delivery: {date} </td> : null}
 			</tr>
 		)
 		this.setState({ doneOrders: row })

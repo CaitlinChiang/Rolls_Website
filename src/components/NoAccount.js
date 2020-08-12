@@ -742,10 +742,13 @@ freeCityFee = () => {
 				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields() }		
 			}
 		}
-		// else if (this.state.dPayment === 'cod') {
-		// 	const confirm = window.confirm('Confirm your purchase?')
-		// 	if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }		
-		// }
+		else if (this.state.dPayment === 'cod') {	
+			const inform = window.confirm('The final amount previously displayed remains an estimate, as we will be texting you the final price via mobile.')
+			if (inform) {
+				const confirm = window.confirm('Confirm your purchase?')
+				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }		
+			}
+		}
 		else if (this.state.dPayment === 'D_GCash') {
 			const inform = window.confirm('GCash Transfer To Account: 0917 811 6888. Proceed?')
 			if (inform) {
@@ -885,7 +888,7 @@ freeCityFee = () => {
 
 									<select onChange={this.handleChange} value={this.state.dPayment} name="dPayment">
 										<option value="">--Payment Method--</option>
-										{/* <option value="cod">Cash on Delivery</option> */}
+										<option value="cod">Cash on Delivery</option>
 										<option value="D_transfer">BDO Bank Transfer</option>
 										<option value="D_GCash">GCash</option>
 									</select>
@@ -985,6 +988,7 @@ freeCityFee = () => {
 					<p>BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion</p>
 					<p>GCash Account: 0917 811 6888</p>
 					<p>Send Your Proof of Payment To: 0917 535 0923</p>
+					<p>***Total prices for orders under cash on delivery are estimates.***</p>
 				</div>
 			</section>
 		)
