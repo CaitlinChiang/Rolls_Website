@@ -26,7 +26,7 @@ class Order extends Component {
 		options: [
 		 	{ value: 'None', label: 'None' },
 		  	{ value: 'Personalized', label: 'Personalized Note (+ P20)' },
-		  	{ value: 'extraFrosting', label: 'Extra Cream Cheese Frosting 100ml (+ P50)' }
+			{ value: 'extraFrosting', label: 'Extra Cream Cheese Frosting 100ml (+ P50)' }
 		],
 
 		pDate: '',
@@ -891,7 +891,7 @@ class Order extends Component {
 				<div class="informDetails">
 					<p>Pickup Location: #25 8th St., New Manila, Mariana Quezon City</p>
 					<p>BDO Transfer To: BDO S/A 011090012568 Patrice Raphaelle S. Bendicion</p>
-					<p>GCash Account: 0917 811 6888</p>
+					<p>GCash Account: 0917 535 0923</p>
 					<p>Send Your Proof of Payment To: 0917 535 0923 (Viber)</p>
 					<p>***Total prices for orders under cash on delivery are estimates.***</p>
 				</div>
