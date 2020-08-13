@@ -11,6 +11,16 @@ function Articles() {
 				<div id="displayArticles">
 					<div id="showArticles" class="fade-in">	
 
+						<a href="https://www.wheninmanila.com/sinfully-good-cinnamon-rolls-with-a-twist/">
+						    <button>
+						    	<img src="/images/p6.jpg" width="100%" />
+								<div class="article">
+						    		<h2>19 Sinfully Good Cinnamon Rolls with a Twist that Even Non-Cinnamon Lovers will Enjoy</h2>
+									<p>By: wheninmanila</p>
+							    </div>
+							</button>
+						</a>
+
 						<a href="https://www.yummy.ph/news-trends/cinnamon-rolls-delivery-metro-manila-a3284-lfrm-a1808-20200628-src-spot-lfrm2?ref=site_search">
 						    <button>
 						    	<img src="https://images.summitmedia-digital.com/yummyph/images/2020/06/26/rolls-kitchen.jpg" width="100%" />
