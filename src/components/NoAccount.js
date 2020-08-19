@@ -119,9 +119,10 @@ class Order_NoAccount extends Component {
 		mode: '',
 
 		options: [
-		 	{ value: 'None', label: 'None' },
-		  	{ value: 'Personalized', label: 'Personalized Note (+ P20)' },
-		  	{ value: 'extraFrosting', label: 'Extra Cream Cheese Frosting 100ml (+ P50)' }
+		 	{ value: 'None',          label: 'None' },
+		  	{ value: 'Personalized',  label: 'Personalized Note (+ P20)' },
+		  	{ value: 'extraFrosting', label: 'Extra Cream Cheese Frosting 100ml (+ P50)' },
+			{ value: 'BirthdaySet',   label: 'Birthday Set - Candles, Special Note & Cake Topper (+ P100)' }
 		],
 
 		pDate: '',
@@ -374,6 +375,10 @@ freeCityFee = () => {
 			if (this.state.pInstructions.includes('extraFrosting')) {
 				this.extraFrostingFeePickup()
 			}
+
+			if (this.state.pInstructions.includes('BirthdaySet')) {
+				this.setState(prevState => ({ price: prevState.price + 100 }))
+			}
 		}
 		else if (this.state.mode === 'Delivery') {
 			if (this.state.dInstructions.length < 1 || this.state.dInstructions.length === 1 && this.state.dInstructions.includes('None')) {
@@ -386,6 +391,10 @@ freeCityFee = () => {
 
 			if (this.state.dInstructions.includes('extraFrosting')) {
 				this.extraFrostingFeeDelivery()
+			}
+
+			if (this.state.dInstructions.includes('BirthdaySet')) {
+				this.setState(prevState => ({ price: prevState.price + 100 }))
 			}
 		}
 	}
@@ -512,41 +521,45 @@ freeCityFee = () => {
 	datePickupFilter = (date) => {
 		// var exception = new Date('July 30, 2020')
 
-		const day = getDay(date)
-		// const specificDate = date.getDate()
-		// const specificMonth = date.getMonth()
+		// const day = getDay(date)
+		// // const specificDate = date.getDate()
+		// // const specificMonth = date.getMonth()
 
-		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		// return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		return date
 	}
 
 	dateFilterRoute1 = (date) => {
-		// var exception = new Date('July 31, 2020')
+		// // var exception = new Date('July 31, 2020')
 
-		const day = getDay(date)
-		// const specificDate = date.getDate()
-		// const specificMonth = date.getMonth()
+		// const day = getDay(date)
+		// // const specificDate = date.getDate()
+		// // const specificMonth = date.getMonth()
 
-		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		// return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		return date
 	}
 
 	dateFilterRoute2 = (date) => {
-		// var exception = new Date('July 30, 2020')
+		// // var exception = new Date('July 30, 2020')
 
-		const day = getDay(date)
-		// const specificDate = date.getDate()
-		// const specificMonth = date.getMonth()
+		// const day = getDay(date)
+		// // const specificDate = date.getDate()
+		// // const specificMonth = date.getMonth()
 
-		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		// return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		return date
 	}
 
 	dateFilterRoute3 = (date) => {
-		// var exception = new Date('July 30, 2020')
+		// // var exception = new Date('July 30, 2020')
 
-		const day = getDay(date)
-		// const specificDate = date.getDate()
-		// const specificMonth = date.getMonth()
+		// const day = getDay(date)
+		// // const specificDate = date.getDate()
+		// // const specificMonth = date.getMonth()
 		
-		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		// return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		return date
 	}
 
 	dateFilter = () => {
@@ -777,14 +790,14 @@ freeCityFee = () => {
 								alert("Kindly remove any other additional instruction if you wish to proceed with None.")
 							}
 							else {
-								if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') || this.state.pInstructions.includes('extraFrosting')) {
+								if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') || this.state.pInstructions.includes('BirthdaySet') || this.state.pInstructions.includes('extraFrosting')) {
 									if (this.state.pInstructions.includes('extraFrosting') && this.state.pInstructions.length === 1) {
 										{ this.state.pAmount.trim() !== '' ? this.orderPickup() : alert("Please fill in all input fields.") }
 									}
 									else if (this.state.pInstructions.includes('extraFrosting') && this.state.pInstructions.length > 1) {
 										{ this.state.pNote.trim() !== '' && this.state.pAmount.trim() !== '' ? this.orderPickup() : alert("Please fill in all the input fields.") }
 									}
-									else if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle')) {
+									else if (this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') || this.state.pInstructions.includes('BirthdaySet')) {
 										{ this.state.pNote.trim() !== '' ? this.orderPickup() : alert("Please fill in all the input fields.") }
 									}
 								}
@@ -802,14 +815,14 @@ freeCityFee = () => {
 								alert("Kindly remove any other additional instruction if you wish to proceed with None.")
 							}
 							else {
-								if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('extraFrosting')) {
+								if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('BirthdaySet') || this.state.dInstructions.includes('extraFrosting')) {
 									if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length === 1) {
 										{ this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all input fields.") }
 									}
 									else if (this.state.dInstructions.includes('extraFrosting') && this.state.dInstructions.length > 1) {
 										{ this.state.dNote.trim() !== '' && this.state.dAmount.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
 									}
-									else if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle')) {
+									else if (this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('BirthdaySet')) {
 										{ this.state.dNote.trim() !== '' ? this.orderDelivery() : alert("Please fill in all the input fields.") }
 									}						
 								}
@@ -862,9 +875,13 @@ freeCityFee = () => {
 										<option value="P_GCash">GCash</option>
 									</select>
 	
-									<Select isMulti options={this.state.options} onChange={this.handlePickupSelectChange} id="instructions" placeholder="Additional Instructions" isSearchable={ false } inputProps={{readOnly:true}} />
+									{ this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ?
+										<Select isMulti options={this.state.options.filter(option => option.value !== "BirthdaySet")} onChange={this.handlePickupSelectChange} id="instructions" placeholder="Additional Instructions" isSearchable={ false } inputProps={{readOnly:true}} />
+									:
+										<Select isMulti options={this.state.options} onChange={this.handlePickupSelectChange} id="instructions" placeholder="Additional Instructions" isSearchable={ false } inputProps={{readOnly:true}} />
+									}
 
-									{this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') ? 
+									{this.state.pInstructions.includes('Personalized') || this.state.pInstructions.includes('Candle') || this.state.pInstructions.includes('BirthdaySet') ? 
 											<input class="slideLeft" onChange={this.handleChange} value={this.state.pNote} name="pNote" type="text" placeholder="Instructions Description" /> 
 									: null}
 
@@ -948,9 +965,13 @@ freeCityFee = () => {
 										</div>
 									: null}
 
-									<Select isMulti options={this.state.options} onChange={this.handleDeliverySelectChange} id="instructions" placeholder="Additional Instructions" isSearchable={ false } inputProps={{readOnly:true}} />
+									{ this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ?
+										<Select isMulti options={this.state.options.filter(option => option.value !== 'BirthdaySet')} onChange={this.handleDeliverySelectChange} id="instructions" placeholder="Additional Instructions" isSearchable={ false } inputProps={{readOnly:true}} />
+										:
+										<Select isMulti options={this.state.options} onChange={this.handleDeliverySelectChange} id="instructions" placeholder="Additional Instructions" isSearchable={ false } inputProps={{readOnly:true}} />
+									}
 
-									{this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') ? 
+									{this.state.dInstructions.includes('Personalized') || this.state.dInstructions.includes('Candle') || this.state.dInstructions.includes('BirthdaySet') ? 
 										<input class="slideLeft" onChange={this.handleChange} value={this.state.dNote} name="dNote" type="text" placeholder="Instructions Description" /> 
 									: null}
 

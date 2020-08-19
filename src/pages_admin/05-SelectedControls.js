@@ -114,6 +114,7 @@ class AuthorizedControls extends Component {
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
+											else if (item === 'BirthdaySet') { return <p>BirthdaySet</p> }
 											else if (item === 'Frosting') { return <p>Separate Frosting</p> }
 											else if (item === 'None') { return <p>None</p> }
 										}))
@@ -141,6 +142,7 @@ class AuthorizedControls extends Component {
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
+											else if (item === 'BirthdaySet') { return <p>BirthdaySet</p> }
 											else if (item === 'Frosting') { return <p>Separate Frosting</p> }
 											else if (item === 'None') { return <p>None</p> }
 										}))
@@ -173,6 +175,7 @@ class AuthorizedControls extends Component {
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
+											else if (item === 'BirthdaySet') { return <p>BirthdaySet</p> }
 											else if (item === 'Frosting') { return <p>Separate Frosting</p> }
 											else if (item === 'None') { return <p>None</p> }
 										}))
@@ -200,6 +203,7 @@ class AuthorizedControls extends Component {
 											if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 											else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 											else if (item === 'Candle') { return <p>Candle</p> }
+											else if (item === 'BirthdaySet') { return <p>BirthdaySet</p> }
 											else if (item === 'Frosting') { return <p>Separate Frosting</p> }
 											else if (item === 'None') { return <p>None</p> }
 										}))
@@ -233,6 +237,7 @@ class AuthorizedControls extends Component {
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'BirthdaySet') { return <p>BirthdaySet</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
 										else if (item === 'None') { return <p>None</p> }
 									}))
@@ -260,6 +265,7 @@ class AuthorizedControls extends Component {
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'BirthdaySet') { return <p>BirthdaySet</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
 										else if (item === 'None') { return <p>None</p> }
 									}))
@@ -367,6 +373,7 @@ class AuthorizedControls extends Component {
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'BirthdaySet') { return <p>BirthdaySet</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
 										else if (item === 'None') { return <p>None</p> }
 									}))
@@ -400,6 +407,7 @@ class AuthorizedControls extends Component {
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'BirthdaySet') { return <p>BirthdaySet</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
 										else if (item === 'None') { return <p>None</p> }
 									}))
@@ -488,6 +496,7 @@ class AuthorizedControls extends Component {
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'BirthdaySet') { return <p>BirthdaySet</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
 										else if (item === 'None') { return <p>None</p> }
 									}))
@@ -521,6 +530,7 @@ class AuthorizedControls extends Component {
 										if (item === 'extraFrosting') { return <p>Extra Frosting</p>}
 										else if (item === 'Personalized') { return <p>Personalized Writing</p> }
 										else if (item === 'Candle') { return <p>Candle</p> }
+										else if (item === 'BirthdaySet') { return <p>BirthdaySet</p> }
 										else if (item === 'Frosting') { return <p>Separate Frosting</p> }
 										else if (item === 'None') { return <p>None</p> }
 									}))
