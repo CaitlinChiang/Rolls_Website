@@ -415,43 +415,49 @@ class Order extends Component {
 	}
 
 	datePickupFilter = (date) => {
-		// var exception = new Date('July 30, 2020')
+		// const tomorrow = new Date(date + 1)
+		// // const specificMonth = date.getMonth() + 1
+		// // const specificYear = date.getYear()
 
-		const day = getDay(date)
-		// const specificDate = date.getDate()
-		// const specificMonth = date.getMonth()
-
-		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		// return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? date && !tomorrow : new Date())
+		return date
 	}
 
 	dateFilterRoute1 = (date) => {
-		// var exception = new Date('July 31, 2020')
+		// // var exception = new Date('July 31, 2020')
 
-		const day = getDay(date)
-		// const specificDate = date.getDate()
-		// const specificMonth = date.getMonth()
+		// const day = getDay(date)
+		// // const specificDate = date.getDate()
+		// // const specificMonth = date.getMonth()
 
-		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		// return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		return date
 	}
 
 	dateFilterRoute2 = (date) => {
-		// var exception = new Date('July 30, 2020')
+		// // var exception = new Date('July 30, 2020')
 
-		const day = getDay(date)
-		// const specificDate = date.getDate()
-		// const specificMonth = date.getMonth()
+		// const day = getDay(date)
+		// // const specificDate = date.getDate()
+		// // const specificMonth = date.getMonth()
 
-		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		// return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		return date
 	}
 
 	dateFilterRoute3 = (date) => {
 		// var exception = new Date('July 30, 2020')
 
-		const day = getDay(date)
-		// const specificDate = date.getDate()
-		// const specificMonth = date.getMonth()
+		// const day = getDay(date)
+		// // const specificDate = date.getDate()
+		// // const specificMonth = date.getMonth()
 		
-		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		// return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? day !== 0 && day !== 1 && day !== 3 && day !== 4 && day !== 5 : new Date())
+		return date
+	}
+
+	dateFilter = () => {
+		return (this.state.orderContent.includes('P7') || this.state.orderContent.includes('P8') || this.state.orderContent.includes('P9') ? 2 : 1)
 	}
 
 	//handle changes
@@ -753,7 +759,7 @@ class Order extends Component {
 									
 									<div class="datepicker">
 										<h1>Pickup Date</h1>
-										<DatePicker inline selected={this.state.pDate} onChange={date => this.setState({ pDate: date })} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.datePickupFilter} format='MM-dd-yyyy' placeholderText="Date of Pickup" id="pickupPicker" />
+										<DatePicker inline selected={this.state.pDate} onChange={date => this.setState({ pDate: date })} minDate={addDays(new Date(), this.dateFilter())} maxDate={addMonths(new Date(), 2)} filterDate={this.datePickupFilter} format='MM-dd-yyyy' placeholderText="Date of Pickup" id="pickupPicker" />
 									</div>
 
 									<select onChange={this.handleChange} value={this.state.pPayment} name="pPayment">
@@ -827,25 +833,25 @@ class Order extends Component {
 									{this.state.route === '' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), this.dateFilter())} maxDate={addMonths(new Date(), 2)} />
 										</div>
 									: null}
 									{this.state.route !== '' && this.state.route === 'Route1' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), this.dateFilter())} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute1} />
 										</div>
 									: null}
 									{this.state.route !== '' && this.state.route === 'Route2' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute2} />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), this.dateFilter())} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute2} />
 										</div>									
 									: null}
 									{this.state.route !== '' && this.state.route === 'Route3' ?
 										<div class="datepicker">
 											<h1>Delivery Date</h1>
-											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), 1)} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} />
+											<DatePicker inline selected={this.state.dDate} onChange={date => this.setDate(date)} minDate={addDays(new Date(), this.dateFilter())} maxDate={addMonths(new Date(), 2)} filterDate={this.dateFilterRoute3} />
 										</div>
 									: null}
 
