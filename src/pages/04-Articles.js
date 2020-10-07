@@ -9,7 +9,17 @@ function Articles() {
 				<div id="articlesHeader"> <h1>Features</h1> </div>
 
 				<div id="displayArticles">
-					<div id="showArticles" class="fade-in">	
+					<div id="showArticles" class="fade-in">
+
+						<a href="https://www.yummy.ph/news-trends/the-rolls-kitchen-cinnacake-a00351-20200816">
+						    <button>
+						    	<img src="https://images.summitmedia-digital.com/yummyph/images/2020/08/14/rollsph1.jpg" width="100%" />
+								<div class="article">
+						    		<h2>Treat Yourself: This Giant Cinnamon Roll Is The Cake You Deserve This Weekend</h2>
+									<p>By: yummy.ph</p>
+							    </div>
+							</button>
+						</a>
 
 						<a href="https://www.wheninmanila.com/sinfully-good-cinnamon-rolls-with-a-twist/">
 						    <button>
