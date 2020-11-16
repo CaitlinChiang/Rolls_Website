@@ -49,7 +49,17 @@ class Products extends Component {
 		modal9: false,
 		stock9: true,
 		product9Sets: '',
-		price9: 0
+		price9: 0,
+
+		modal10: false,
+		stock10: true,
+		product10Sets: '',
+		price10: 0,
+
+		modal11: false,
+		stock11: true,
+		product11Sets: '',
+		price11: 0
 	}
 
 	componentDidMount = async () => {
@@ -89,6 +99,14 @@ class Products extends Component {
 
 		firebase.database().ref('products').child('P9').on('value', snapshot => {
 			this.setState({ stock9: snapshot.val().Stock })
+		})
+
+		firebase.database().ref('products').child('P10').on('value', snapshot => {
+			this.setState({ stock10: snapshot.val().Stock })
+		})
+
+		firebase.database().ref('products').child('P11').on('value', snapshot => {
+			this.setState({ stock11: snapshot.val().Stock })
 		})
 	}
 
@@ -296,6 +314,50 @@ class Products extends Component {
 				alert("This item has been added to your cart!")
 
 				this.setState({ product9Sets: '', price9: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
+	addP10ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product10Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P10', Sets: this.state.product10Sets, Price: this.state.price10 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product10Sets: '', price10: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
+	addP11ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product11Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P11', Sets: this.state.product11Sets, Price: this.state.price11 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product11Sets: '', price11: 0 })
 				
 				if (window.confirm("Go to Cart?")) { this.props.goCart() }
 				else { return }
@@ -525,6 +587,54 @@ class Products extends Component {
 		} else if (this.state.product9Sets === '10') {
 			this.setState({ price9: 8500 })
 		}
+
+		if (this.state.product10Sets === '') {
+			this.setState({ price10: 0 })
+		} else if (this.state.product10Sets === '1') {
+			this.setState({ price10: 450 })
+		} else if (this.state.product10Sets === '2') {
+			this.setState({ price10: 900 })
+		} else if (this.state.product10Sets === '3') {
+			this.setState({ price10: 1350 })
+		} else if (this.state.product10Sets === '4') {
+			this.setState({ price10: 1800 })
+		} else if (this.state.product10Sets === '5') {
+			this.setState({ price10: 2250 })
+		} else if (this.state.product10Sets === '6') {
+			this.setState({ price10: 2700 })
+		} else if (this.state.product10Sets === '7') {
+			this.setState({ price10: 3150 })
+		} else if (this.state.product10Sets === '8') {
+			this.setState({ price10: 3600 })
+		} else if (this.state.product10Sets === '9') {
+			this.setState({ price10: 4050 })
+		} else if (this.state.product10Sets === '10') {
+			this.setState({ price10: 4500 })
+		}
+
+		if (this.state.product11Sets === '') {
+			this.setState({ price11: 0 })
+		} else if (this.state.product11Sets === '1') {
+			this.setState({ price11: 850 })
+		} else if (this.state.product11Sets === '2') {
+			this.setState({ price11: 1700 })
+		} else if (this.state.product11Sets === '3') {
+			this.setState({ price11: 2550 })
+		} else if (this.state.product11Sets === '4') {
+			this.setState({ price11: 3400 })
+		} else if (this.state.product11Sets === '5') {
+			this.setState({ price11: 4250 })
+		} else if (this.state.product11Sets === '6') {
+			this.setState({ price11: 5100 })
+		} else if (this.state.product11Sets === '7') {
+			this.setState({ price11: 5950 })
+		} else if (this.state.product11Sets === '8') {
+			this.setState({ price11: 6800 })
+		} else if (this.state.product11Sets === '9') {
+			this.setState({ price11: 7650 })
+		} else if (this.state.product11Sets === '10') {
+			this.setState({ price11: 8500 })
+		}
 	}
 
 	stopPropagation = (event) => event.stopPropagation()
@@ -607,6 +717,22 @@ class Products extends Component {
 						    	<img src="/images/p9.jpg" width="100%;" />
 								<div class="productItem">
 									<h2>Caramel Pecan Cinnacake</h2>
+									<p>P850.00</p>
+								</div>
+							</button>
+
+							<button onClick={() => this.setState({ modal10: true })}>
+						    	<img src="/images/p10.jpg" width="100%;" />
+								<div class="productItem">
+									<h2>Matcha Rolls: 6pcs</h2>
+									<p>P450.00</p>
+								</div>
+							</button>
+
+							<button onClick={() => this.setState({ modal11: true })}>
+						    	<img src="/images/p11.jpg" width="100%;" />
+								<div class="productItem">
+									<h2>Matcha Cinnacake</h2>
 									<p>P850.00</p>
 								</div>
 							</button>
@@ -911,6 +1037,74 @@ class Products extends Component {
 													<option value="10">10</option>
 												</select>
 			      								<button onClick={this.addP9ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
+
+					{this.state.modal10 ?
+						<div id="modal" onClick={() => this.setState({ modal10: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p10.jpg" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>Matcha Rolls: 6pcs</h2>
+				        				<p>Bitter matcha and sweet white chocolate ganache - the perfect balance! Get your box of 6, good for 2-3 people or for one hungry person!</p>
+			      						{this.state.stock10 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product10Sets} name="product10Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP10ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
+
+					{this.state.modal11 ?
+						<div id="modal" onClick={() => this.setState({ modal11: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p11.jpg" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>Matcha Cinnacake</h2>
+				        				<p>Matcha lover? This cake is for you! Get your bitter matcha and sweet white chocolate ganache all in one cake!</p>
+			      						{this.state.stock11 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product11Sets} name="product11Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP11ToCart}>Add To Cart</button>
 			      							</div>
 			      						: <p>(Out of Stock)</p>}
 			      					</div>

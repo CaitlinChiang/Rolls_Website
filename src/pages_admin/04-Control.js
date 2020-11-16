@@ -49,6 +49,12 @@ class Controls extends Component {
 	p9Stock = (event) => firebase.database().ref('products').child('P9').update({ Stock: true })
 	p9NoStock = (event) => firebase.database().ref('products').child('P9').update({ Stock: false })
 
+	p10Stock = (event) => firebase.database().ref('products').child('P10').update({ Stock: true })
+	p10NoStock = (event) => firebase.database().ref('products').child('P10').update({ Stock: false })
+
+	p11Stock = (event) => firebase.database().ref('products').child('P11').update({ Stock: true })
+	p11NoStock = (event) => firebase.database().ref('products').child('P11').update({ Stock: false })
+
 	//change maximum delivery number
 	changeDeliveryNumber = (event) => {
 		if (this.state.maxDeliveries >= 0) { firebase.database().ref('products').child('Delivery Number').update({ MaxDelivery: this.state.maxDeliveries }) }
@@ -127,6 +133,14 @@ class Controls extends Component {
 							<p>Caramel Pecan Cinnacake</p>
 							<button onClick={this.p9Stock}>In Stock</button>
 							<button onClick={this.p9NoStock}>Out of Stock</button>
+
+							<p>Matcha Rolls - 6pcs</p>
+							<button onClick={this.p10Stock}>In Stock</button>
+							<button onClick={this.p10NoStock}>Out of Stock</button>
+
+							<p>Matcha Cinnacake</p>
+							<button onClick={this.p11Stock}>In Stock</button>
+							<button onClick={this.p11NoStock}>Out of Stock</button>
 						</div>
 						
 					</div>

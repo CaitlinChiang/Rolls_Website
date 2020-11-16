@@ -49,6 +49,8 @@ class Cart extends Component {
 				{products === 'P7' ? <td>Classic Cinnacake</td> : null}
 				{products === 'P8' ? <td>Chocolate Cinnacake</td> : null}
 				{products === 'P9' ? <td>Caramel Pecan Cinnacake</td> : null}
+				{products === 'P10' ? <td>6pcs Matcha Cinammon Rolls</td> : null}
+				{products === 'P11' ? <td>Matcha Cinnacake</td> : null}
 				<td>{quantity}</td>
 				<td>P{price}.00</td>
 				<td><button onClick={() => this.remove(id_Num)}>Remove</button></td>
@@ -98,6 +100,8 @@ class Cart extends Component {
 													{item.Product === 'P7' ? <p>Classic Cinnacake (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P8' ? <p>Chocolate Cinnacake (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P9' ? <p>Caramel Pecan Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P10' ? <p>6pcs Matcha Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P11' ? <p>Matcha Cinnacake (Quantity: {item.Sets})</p> : null}
 												</div>
 											)
 										}
@@ -119,6 +123,8 @@ class Cart extends Component {
 													{item.Product === 'P7' ? <p>Classic Cinnacake (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P8' ? <p>Chocolate Cinnacake (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P9' ? <p>Caramel Pecan Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P10' ? <p>6pcs Matcha Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P11' ? <p>Matcha Cinnacake (Quantity: {item.Sets})</p> : null}
 												</div>
 											)
 										}
@@ -198,6 +204,8 @@ class Cart extends Component {
 													{item.Product === 'P7' ? <p>Classic Cinnacake (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P8' ? <p>Chocolate Cinnacake (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P9' ? <p>Caramel Pecan Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P10' ? <p>6pcs Matcha Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P11' ? <p>Matcha Cinnacake (Quantity: {item.Sets})</p> : null}
 												</div>
 											)
 										}
@@ -219,6 +227,8 @@ class Cart extends Component {
 													{item.Product === 'P7' ? <p>Classic Cinnacake (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P8' ? <p>Chocolate Cinnacake (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P9' ? <p>Caramel Pecan Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P10' ? <p>6pcs Matcha Rolls (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P11' ? <p>Matcha Cinnacake (Quantity: {item.Sets})</p> : null}
 												</div>
 											)
 										}

@@ -44,6 +44,8 @@ class NoAccount extends Component {
 				{products === 'P7' ? <td>Classic Cinnacake</td> : null}
 				{products === 'P8' ? <td>Chocolate Cinnacake</td> : null}
 				{products === 'P9' ? <td>Caramel Pecan Cinnacake</td> : null}
+				{products === 'P10' ? <td>6pcs Matcha Cinammon Rolls</td> : null}
+				{products === 'P11' ? <td>Matcha Cinnacake</td> : null}
 				<td>{quantity}</td>
 				<td>P{price}.00</td>
 				<td><button onClick={() => this.remove(id_Num)}>Remove</button></td>
