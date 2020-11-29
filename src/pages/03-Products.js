@@ -59,7 +59,37 @@ class Products extends Component {
 		modal11: false,
 		stock11: true,
 		product11Sets: '',
-		price11: 0
+		price11: 0,
+
+		modal12: false,
+		stock12: true,
+		product12Sets: '',
+		price12: 0,
+
+		modal13: false,
+		stock13: true,
+		product13Sets: '',
+		price13: 0,
+
+		modal14: false,
+		stock14: true,
+		product14Sets: '',
+		price14: 0,
+
+		modal15: false,
+		stock15: true,
+		product15Sets: '',
+		price15: 0,
+
+		modal16: false,
+		stock16: true,
+		product16Sets: '',
+		price16: 0,
+
+		modal17: false,
+		stock17: true,
+		product17Sets: '',
+		price17: 0
 	}
 
 	componentDidMount = async () => {
@@ -107,6 +137,30 @@ class Products extends Component {
 
 		firebase.database().ref('products').child('P11').on('value', snapshot => {
 			this.setState({ stock11: snapshot.val().Stock })
+		})
+
+		firebase.database().ref('products').child('P12').on('value', snapshot => {
+			this.setState({ stock12: snapshot.val().Stock })
+		})
+
+		firebase.database().ref('products').child('P13').on('value', snapshot => {
+			this.setState({ stock13: snapshot.val().Stock })
+		})
+
+		firebase.database().ref('products').child('P14').on('value', snapshot => {
+			this.setState({ stock14: snapshot.val().Stock })
+		})
+
+		firebase.database().ref('products').child('P15').on('value', snapshot => {
+			this.setState({ stock15: snapshot.val().Stock })
+		})
+
+		firebase.database().ref('products').child('P16').on('value', snapshot => {
+			this.setState({ stock16: snapshot.val().Stock })
+		})
+
+		firebase.database().ref('products').child('P17').on('value', snapshot => {
+			this.setState({ stock17: snapshot.val().Stock })
 		})
 	}
 
@@ -358,6 +412,138 @@ class Products extends Component {
 				alert("This item has been added to your cart!")
 
 				this.setState({ product11Sets: '', price11: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
+	addP12ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product12Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P12', Sets: this.state.product12Sets, Price: this.state.price12 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product12Sets: '', price12: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
+	addP13ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product13Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P13', Sets: this.state.product13Sets, Price: this.state.price13 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product13Sets: '', price13: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
+	addP14ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product14Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P14', Sets: this.state.product14Sets, Price: this.state.price14 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product14Sets: '', price14: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
+	addP15ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product15Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P15', Sets: this.state.product15Sets, Price: this.state.price15 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product15Sets: '', price15: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
+	addP16ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product16Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P16', Sets: this.state.product16Sets, Price: this.state.price16 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product16Sets: '', price16: 0 })
+				
+				if (window.confirm("Go to Cart?")) { this.props.goCart() }
+				else { return }
+			}
+			else {
+				alert("Kindly input the quantity you wish of this order.")
+			}
+		}
+		else {
+			alert("Kindly register an account before adding to cart!")
+		}
+	}
+
+	addP17ToCart = async (event) => {
+		if (this.props.consumer.trim() !== "") {
+			if (this.state.product17Sets.trim() !== "") {
+				let id_num = this.timestamp()
+
+				firebase.database().ref(`users/${this.props.consumer}`).child('Pending Orders').child(`${id_num}`).update({ Product: 'P17', Sets: this.state.product17Sets, Price: this.state.price17 })
+				alert("This item has been added to your cart!")
+
+				this.setState({ product17Sets: '', price17: 0 })
 				
 				if (window.confirm("Go to Cart?")) { this.props.goCart() }
 				else { return }
@@ -635,6 +821,150 @@ class Products extends Component {
 		} else if (this.state.product11Sets === '10') {
 			this.setState({ price11: 8500 })
 		}
+
+		if (this.state.product12Sets === '') {
+			this.setState({ price12: 0 })
+		} else if (this.state.product12Sets === '1') {
+			this.setState({ price12: 850 })
+		} else if (this.state.product12Sets === '2') {
+			this.setState({ price12: 1700 })
+		} else if (this.state.product12Sets === '3') {
+			this.setState({ price12: 2550 })
+		} else if (this.state.product12Sets === '4') {
+			this.setState({ price12: 3400 })
+		} else if (this.state.product12Sets === '5') {
+			this.setState({ price12: 4250 })
+		} else if (this.state.product12Sets === '6') {
+			this.setState({ price12: 5100 })
+		} else if (this.state.product12Sets === '7') {
+			this.setState({ price12: 5950 })
+		} else if (this.state.product12Sets === '8') {
+			this.setState({ price12: 6800 })
+		} else if (this.state.product12Sets === '9') {
+			this.setState({ price12: 7650 })
+		} else if (this.state.product12Sets === '10') {
+			this.setState({ price12: 8500 })
+		}
+
+		if (this.state.product13Sets === '') {
+			this.setState({ price13: 0 })
+		} else if (this.state.product13Sets === '1') {
+			this.setState({ price13: 450 })
+		} else if (this.state.product13Sets === '2') {
+			this.setState({ price13: 900 })
+		} else if (this.state.product13Sets === '3') {
+			this.setState({ price13: 1350 })
+		} else if (this.state.product13Sets === '4') {
+			this.setState({ price13: 1800 })
+		} else if (this.state.product13Sets === '5') {
+			this.setState({ price13: 2250 })
+		} else if (this.state.product13Sets === '6') {
+			this.setState({ price13: 2700 })
+		} else if (this.state.product13Sets === '7') {
+			this.setState({ price13: 3150 })
+		} else if (this.state.product13Sets === '8') {
+			this.setState({ price13: 3600 })
+		} else if (this.state.product13Sets === '9') {
+			this.setState({ price13: 4050 })
+		} else if (this.state.product13Sets === '10') {
+			this.setState({ price13: 4500 })
+		}
+
+		if (this.state.product14Sets === '') {
+			this.setState({ price14: 0 })
+		} else if (this.state.product14Sets === '1') {
+			this.setState({ price14: 850 })
+		} else if (this.state.product14Sets === '2') {
+			this.setState({ price14: 1700 })
+		} else if (this.state.product14Sets === '3') {
+			this.setState({ price14: 2550 })
+		} else if (this.state.product14Sets === '4') {
+			this.setState({ price14: 3400 })
+		} else if (this.state.product14Sets === '5') {
+			this.setState({ price14: 4250 })
+		} else if (this.state.product14Sets === '6') {
+			this.setState({ price14: 5100 })
+		} else if (this.state.product14Sets === '7') {
+			this.setState({ price14: 5950 })
+		} else if (this.state.product14Sets === '8') {
+			this.setState({ price14: 6800 })
+		} else if (this.state.product14Sets === '9') {
+			this.setState({ price14: 7650 })
+		} else if (this.state.product14Sets === '10') {
+			this.setState({ price14: 8500 })
+		}
+
+		if (this.state.product15Sets === '') {
+			this.setState({ price15: 0 })
+		} else if (this.state.product15Sets === '1') {
+			this.setState({ price15: 450 })
+		} else if (this.state.product15Sets === '2') {
+			this.setState({ price15: 900 })
+		} else if (this.state.product15Sets === '3') {
+			this.setState({ price15: 1350 })
+		} else if (this.state.product15Sets === '4') {
+			this.setState({ price15: 1800 })
+		} else if (this.state.product15Sets === '5') {
+			this.setState({ price15: 2250 })
+		} else if (this.state.product15Sets === '6') {
+			this.setState({ price15: 2700 })
+		} else if (this.state.product15Sets === '7') {
+			this.setState({ price15: 3150 })
+		} else if (this.state.product15Sets === '8') {
+			this.setState({ price15: 3600 })
+		} else if (this.state.product15Sets === '9') {
+			this.setState({ price15: 4050 })
+		} else if (this.state.product15Sets === '10') {
+			this.setState({ price15: 4500 })
+		}
+
+		if (this.state.product16Sets === '') {
+			this.setState({ price16: 0 })
+		} else if (this.state.product16Sets === '1') {
+			this.setState({ price16: 850 })
+		} else if (this.state.product16Sets === '2') {
+			this.setState({ price16: 1700 })
+		} else if (this.state.product16Sets === '3') {
+			this.setState({ price16: 2550 })
+		} else if (this.state.product16Sets === '4') {
+			this.setState({ price16: 3400 })
+		} else if (this.state.product16Sets === '5') {
+			this.setState({ price16: 4250 })
+		} else if (this.state.product16Sets === '6') {
+			this.setState({ price16: 5100 })
+		} else if (this.state.product16Sets === '7') {
+			this.setState({ price16: 5950 })
+		} else if (this.state.product16Sets === '8') {
+			this.setState({ price16: 6800 })
+		} else if (this.state.product16Sets === '9') {
+			this.setState({ price16: 7650 })
+		} else if (this.state.product16Sets === '10') {
+			this.setState({ price16: 8500 })
+		}
+
+		if (this.state.product17Sets === '') {
+			this.setState({ price17: 0 })
+		} else if (this.state.product17Sets === '1') {
+			this.setState({ price17: 450 })
+		} else if (this.state.product17Sets === '2') {
+			this.setState({ price17: 900 })
+		} else if (this.state.product17Sets === '3') {
+			this.setState({ price17: 1350 })
+		} else if (this.state.product17Sets === '4') {
+			this.setState({ price17: 1800 })
+		} else if (this.state.product17Sets === '5') {
+			this.setState({ price17: 2250 })
+		} else if (this.state.product17Sets === '6') {
+			this.setState({ price17: 2700 })
+		} else if (this.state.product17Sets === '7') {
+			this.setState({ price17: 3150 })
+		} else if (this.state.product17Sets === '8') {
+			this.setState({ price17: 3600 })
+		} else if (this.state.product17Sets === '9') {
+			this.setState({ price17: 4050 })
+		} else if (this.state.product17Sets === '10') {
+			this.setState({ price17: 4500 })
+		}
 	}
 
 	stopPropagation = (event) => event.stopPropagation()
@@ -734,6 +1064,54 @@ class Products extends Component {
 								<div class="productItem">
 									<h2>Matcha Cinnacake</h2>
 									<p>P850.00</p>
+								</div>
+							</button>
+
+							<button onClick={() => this.setState({ modal12: true })}>
+						    	<img src="/images/p12.jpg" width="100%;" />
+								<div class="productItem">
+									<h2>PB&J: 12pcs</h2>
+									<p>P850.00</p>
+								</div>
+							</button>
+
+							<button onClick={() => this.setState({ modal13: true })}>
+						    	<img src="/images/p13.png" width="100%;" />
+								<div class="productItem">
+									<h2>PB&J: 6pcs</h2>
+									<p>P450.00</p>
+								</div>
+							</button>
+
+							<button onClick={() => this.setState({ modal14: true })}>
+						    	<img src="/images/p14.jpg" width="100%;" />
+								<div class="productItem">
+									<h2>Double Strawberry: 12pcs</h2>
+									<p>P850.00</p>
+								</div>
+							</button>
+
+							<button onClick={() => this.setState({ modal15: true })}>
+						    	<img src="/images/p15.jpg" width="100%;" />
+								<div class="productItem">
+									<h2>Double Strawberry: 6pcs</h2>
+									<p>P450.00</p>
+								</div>
+							</button>
+
+							<button onClick={() => this.setState({ modal16: true })}>
+						    	<img src="/images/p16.jpg" width="100%;" />
+								<div class="productItem">
+									<h2>Strawberries and Cream Cheese: 12pcs</h2>
+									<p>P850.00</p>
+								</div>
+							</button>
+
+							<button onClick={() => this.setState({ modal17: true })}>
+						    	<img src="/images/p17.jpg" width="100%;" />
+								<div class="productItem">
+									<h2>Strawberries and Cream Cheese: 6pcs</h2>
+									<p>P450.00</p>
 								</div>
 							</button>
 
@@ -1105,6 +1483,210 @@ class Products extends Component {
 													<option value="10">10</option>
 												</select>
 			      								<button onClick={this.addP11ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
+
+					{this.state.modal12 ?
+						<div id="modal" onClick={() => this.setState({ modal12: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p12.jpg" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>PB&J: 12pcs</h2>
+				        				<p>A sweet strawberry reduction, topped with creamy peanut butter, and all over a glorious roll!</p>
+			      						{this.state.stock12 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product12Sets} name="product12Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP12ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
+
+					{this.state.modal13 ?
+						<div id="modal" onClick={() => this.setState({ modal13: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p13.png" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>PB&J: 6pcs</h2>
+				        				<p>What’s better than a peanut butter and jelly sandwich? A peanut butter and jelly roll! Made with homemade jam and topped with creamy peanut butter, you’ll surely want another bite!</p>
+			      						{this.state.stock13 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product13Sets} name="product13Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP13ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
+
+					{this.state.modal14 ?
+						<div id="modal" onClick={() => this.setState({ modal14: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p14.jpg" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>Double Strawberry: 12pcs</h2>
+				        				<p>Strawberries on strawberries! This roll is not only filled with our special jam but also topped with our homemade frosting! Perfect for over a cup of coffee.</p>
+			      						{this.state.stock14 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product14Sets} name="product14Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP14ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
+
+					{this.state.modal15 ?
+						<div id="modal" onClick={() => this.setState({ modal15: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p15.jpg" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>Double Strawberry: 6pcs</h2>
+				        				<p>Who couldn’t get enough of strawberries? This roll is filled with our homemade jam and topped with our special ganache! Each bite is a strawberry overload!</p>
+			      						{this.state.stock15 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product15Sets} name="product15Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP15ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
+
+					{this.state.modal16 ?
+						<div id="modal" onClick={() => this.setState({ modal16: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p16.jpg" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>Strawberries and Cream Cheese: 12pcs</h2>
+				        				<p>Our classic frosting, but this time topped on our newest strawberry roll! It’s filled with strawberries and has a hint of lemon for that extra zing!</p>
+			      						{this.state.stock16 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product16Sets} name="product16Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP16ToCart}>Add To Cart</button>
+			      							</div>
+			      						: <p>(Out of Stock)</p>}
+			      					</div>
+			      				</div>
+			      				<div id="modal-footer"></div>
+			    			</div>
+			 			</div>
+			 		: null}
+
+					{this.state.modal17 ?
+						<div id="modal" onClick={() => this.setState({ modal17: false })}>
+		    				<div id="modal-content" onClick={this.stopPropagation}>
+		     					<div id="modal-header"></div>
+			      				<div id="modal-body">
+			      					<img src="/images/p17.jpg" width="45%;"/>
+			      					<div id="modalDescription">
+			      						<h2>Strawberries and Cream Cheese: 6pcs</h2>
+				        				<p>Ever heard of strawberries and cream? We took it a step further and our rolls with cream cheese! The perfect combination for a warm afternoon. </p>
+			      						{this.state.stock17 ? 
+			      							<div>
+			      								<select class="modalSets" onChange={this.handleChange} value={this.state.product17Sets} name="product17Sets">
+													<option value="">--Quantity of Order--</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+												</select>
+			      								<button onClick={this.addP17ToCart}>Add To Cart</button>
 			      							</div>
 			      						: <p>(Out of Stock)</p>}
 			      					</div>

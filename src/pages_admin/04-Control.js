@@ -55,6 +55,24 @@ class Controls extends Component {
 	p11Stock = (event) => firebase.database().ref('products').child('P11').update({ Stock: true })
 	p11NoStock = (event) => firebase.database().ref('products').child('P11').update({ Stock: false })
 
+	p12Stock = (event) => firebase.database().ref('products').child('P12').update({ Stock: true })
+	p12NoStock = (event) => firebase.database().ref('products').child('P12').update({ Stock: false })
+
+	p13Stock = (event) => firebase.database().ref('products').child('P13').update({ Stock: true })
+	p13NoStock = (event) => firebase.database().ref('products').child('P13').update({ Stock: false })
+
+	p14Stock = (event) => firebase.database().ref('products').child('P14').update({ Stock: true })
+	p14NoStock = (event) => firebase.database().ref('products').child('P14').update({ Stock: false })
+
+	p15Stock = (event) => firebase.database().ref('products').child('P15').update({ Stock: true })
+	p15NoStock = (event) => firebase.database().ref('products').child('P15').update({ Stock: false })
+
+	p16Stock = (event) => firebase.database().ref('products').child('P16').update({ Stock: true })
+	p16NoStock = (event) => firebase.database().ref('products').child('P16').update({ Stock: false })
+
+	p17Stock = (event) => firebase.database().ref('products').child('P17').update({ Stock: true })
+	p17NoStock = (event) => firebase.database().ref('products').child('P17').update({ Stock: false })
+
 	//change maximum delivery number
 	changeDeliveryNumber = (event) => {
 		if (this.state.maxDeliveries >= 0) { firebase.database().ref('products').child('Delivery Number').update({ MaxDelivery: this.state.maxDeliveries }) }
@@ -141,6 +159,30 @@ class Controls extends Component {
 							<p>Matcha Cinnacake</p>
 							<button onClick={this.p11Stock}>In Stock</button>
 							<button onClick={this.p11NoStock}>Out of Stock</button>
+
+							<p>PB&J - 12pcs</p>
+							<button onClick={this.p12Stock}>In Stock</button>
+							<button onClick={this.p12NoStock}>Out of Stock</button>
+
+							<p>PB&J - 6pcs</p>
+							<button onClick={this.p13Stock}>In Stock</button>
+							<button onClick={this.p13NoStock}>Out of Stock</button>
+
+							<p>Double Strawberry - 12pcs</p>
+							<button onClick={this.p14Stock}>In Stock</button>
+							<button onClick={this.p14NoStock}>Out of Stock</button>
+
+							<p>Double Strawberry - 6pcs</p>
+							<button onClick={this.p15Stock}>In Stock</button>
+							<button onClick={this.p15NoStock}>Out of Stock</button>
+
+							<p>Strawberries and Cream Cheese - 12pcs</p>
+							<button onClick={this.p16Stock}>In Stock</button>
+							<button onClick={this.p16NoStock}>Out of Stock</button>
+
+							<p>Strawberries and Cream Cheese - 6pcs</p>
+							<button onClick={this.p17Stock}>In Stock</button>
+							<button onClick={this.p17NoStock}>Out of Stock</button>
 						</div>
 						
 					</div>

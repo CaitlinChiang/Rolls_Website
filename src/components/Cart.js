@@ -51,6 +51,12 @@ class Cart extends Component {
 				{products === 'P9' ? <td>Caramel Pecan Cinnacake</td> : null}
 				{products === 'P10' ? <td>6pcs Matcha Cinammon Rolls</td> : null}
 				{products === 'P11' ? <td>Matcha Cinnacake</td> : null}
+				{products === 'P12' ? <td>12pcs PB&J</td> : null}
+				{products === 'P13' ? <td>6pcs PB&J</td> : null}
+				{products === 'P14' ? <td>12pcs Double Strawberry</td> : null}
+				{products === 'P15' ? <td>6pcs Double Strawberry</td> : null}
+				{products === 'P16' ? <td>12pcs Strawberries and Cream Cheese</td> : null}
+				{products === 'P17' ? <td>6pcs Strawberries and Cream Cheese</td> : null}
 				<td>{quantity}</td>
 				<td>P{price}.00</td>
 				<td><button onClick={() => this.remove(id_Num)}>Remove</button></td>
@@ -102,6 +108,12 @@ class Cart extends Component {
 													{item.Product === 'P9' ? <p>Caramel Pecan Cinnacake (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P10' ? <p>6pcs Matcha Rolls (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P11' ? <p>Matcha Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P12' ? <td>12pcs PB&J (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P13' ? <td>6pcs PB&J (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P14' ? <td>12pcs Double Strawberry (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P15' ? <td>6pcs Double Strawberry (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P16' ? <td>12pcs Strawberries and Cream Cheese (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P17' ? <td>6pcs Strawberries and Cream Cheese (Quantity: {item.Sets})</td> : null}
 												</div>
 											)
 										}
@@ -125,6 +137,12 @@ class Cart extends Component {
 													{item.Product === 'P9' ? <p>Caramel Pecan Cinnacake (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P10' ? <p>6pcs Matcha Rolls (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P11' ? <p>Matcha Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P12' ? <td>12pcs PB&J (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P13' ? <td>6pcs PB&J (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P14' ? <td>12pcs Double Strawberry (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P15' ? <td>6pcs Double Strawberry (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P16' ? <td>12pcs Strawberries and Cream Cheese (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P17' ? <td>6pcs Strawberries and Cream Cheese (Quantity: {item.Sets})</td> : null}
 												</div>
 											)
 										}
@@ -206,6 +224,12 @@ class Cart extends Component {
 													{item.Product === 'P9' ? <p>Caramel Pecan Cinnacake (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P10' ? <p>6pcs Matcha Rolls (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P11' ? <p>Matcha Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P12' ? <td>12pcs PB&J (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P13' ? <td>6pcs PB&J (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P14' ? <td>12pcs Double Strawberry (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P15' ? <td>6pcs Double Strawberry (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P16' ? <td>12pcs Strawberries and Cream Cheese (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P17' ? <td>6pcs Strawberries and Cream Cheese (Quantity: {item.Sets})</td> : null}
 												</div>
 											)
 										}
@@ -229,6 +253,12 @@ class Cart extends Component {
 													{item.Product === 'P9' ? <p>Caramel Pecan Cinnacake (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P10' ? <p>6pcs Matcha Rolls (Quantity: {item.Sets})</p> : null}
 													{item.Product === 'P11' ? <p>Matcha Cinnacake (Quantity: {item.Sets})</p> : null}
+													{item.Product === 'P12' ? <td>12pcs PB&J (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P13' ? <td>6pcs PB&J (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P14' ? <td>12pcs Double Strawberry (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P15' ? <td>6pcs Double Strawberry (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P16' ? <td>12pcs Strawberries and Cream Cheese (Quantity: {item.Sets})</td> : null}
+													{item.Product === 'P17' ? <td>6pcs Strawberries and Cream Cheese (Quantity: {item.Sets})</td> : null}
 												</div>
 											)
 										}
