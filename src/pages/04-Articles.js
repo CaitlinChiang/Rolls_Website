@@ -11,6 +11,16 @@ function Articles() {
 				<div id="displayArticles">
 					<div id="showArticles" class="fade-in">
 
+						<a href="https://ph.phonebooky.com/blog/flavored-cinnamon-rolls/?amp">
+						    <button>
+						    	<img src="https://cdn.phonebooky.com/blog/wp-content/uploads/2020/09/01095300/118304086_644555072846698_664118634976748603_n-800x571.jpg" width="100%" />
+								<div class="article">
+						    		<h2>Here’s Where You Can Order Unique Flavored Cinnamon Rolls in the Metro</h2>
+									<p>By: Booky Guide</p>
+							    </div>
+							</button>
+						</a>
+
 						<a href="https://www.yummy.ph/news-trends/the-rolls-kitchen-cinnacake-a00351-20200816">
 						    <button>
 						    	<img src="https://images.summitmedia-digital.com/yummyph/images/2020/08/14/rollsph1.jpg" width="100%" />
