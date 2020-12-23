@@ -13,7 +13,7 @@ function Slider() {
 			</figure>
 		</div>
 	)
-}
+} 
 
 function Home(props) {
 	return (
