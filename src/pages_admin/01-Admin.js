@@ -18,7 +18,7 @@ class Admin extends Component {
                 <ControlsNavbar goOrders={this.goOrders} goControls={this.goControls} />
                 {this.state.DisplayView ? <View /> : null}
                 {this.state.DisplayControls ? <Controls /> : null}
-            </div>
+            </div> 
         )
     }
 }
