@@ -639,7 +639,7 @@ class Order extends Component {
 			}
 		}
 		else if (this.state.pPayment === 'P_GCash') {
-			const inform = window.confirm('GCash Transfer To Account: 0917 811 6888. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
+			const inform = window.confirm('GCash Transfer To Account: 0917 535 0923. The pickup place will be at: #25 8th St., New Manila, Mariana Quezon City. Proceed?')
 			if (inform) {
 				const confirm = window.confirm('Confirm your purchase?')
 				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }
@@ -670,7 +670,7 @@ class Order extends Component {
 			}
 		}
 		else if (this.state.dPayment === 'D_GCash') {
-			const inform = window.confirm('GCash Transfer To Account: 0917 811 6888. Proceed?')
+			const inform = window.confirm('GCash Transfer To Account: 0917 535 0923. Proceed?')
 			if (inform) {
 				const confirm = window.confirm('Confirm your purchase?')
 				if (confirm) { this.moveOrderRecord(); this.updateRolls(); this.clearFields(); this.props.displayPendingOrders() }		
